@@ -13,16 +13,16 @@
     <meta property="og:title" content="Posts" />
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="/posts/" />
+    <meta property="og:url" content="/posts.html" />
     <title>Reflected XSS and HTML injection on netlife.no - Waseem Akram</title>
-    <link rel="canonical" href="/posts/">
+    <link rel="canonical" href="/posts.html">
     <link rel="preload" href="/fonts/forkawesome-webfont.woff2v=1.1.7" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/normalize.css"/>
-    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
-    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/normalize.css"/>
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="alternate" type="application/rss+xml" href="/posts/index.xml" title="Waseem Akram" />
     <script defer src="https://twemoji.maxcdn.com/v/13.0.1/twemoji.min.js"></script>
@@ -37,14 +37,14 @@
     <main class="wrapper">
         <nav class="navigation">
             <section class="container">
-                <a class="navigation-title" href="/">Waseem Akram</a>
+                <a class="navigation-title" href="/Blog">Waseem Akram</a>
                 <input type="checkbox" id="menu-toggle" />
                 <label class="menu-button float-right" for="menu-toggle">
                     <i class='bx bx-menu'></i>
                 </label>
                 <ul class="navigation-list">
                     <li class="navigation-item">
-                        <a class="navigation-link" href="/posts.html">Blog</a>
+                        <a class="navigation-link" href="posts.html">Blog</a>
                     </li>
                 </ul>
             </section>
@@ -55,7 +55,7 @@
                     <header>
                         <div class="post-title">
                             <h1 class="title">
-                                <a class="title-link" href="/posts/netlife.html">
+                                <a class="title-link" href="posts/netlife.html">
                                     Reflected XSS and HTML injection on netlife.no
                                 </a>
                             </h1>
@@ -86,11 +86,11 @@
                             to fotonorden.no where we had to put in a code and then could see our images
                             and Foto Norden used Netlife’s service to show and sell the photos to us.</p>
                         <p>After typing the code and logging in, I was greeted with this page:</p>
-                        <p><img src="/images/fotonorden_shop.png" alt="I turned off the images so that you guys cant see my handsome school photos"></p>
+                        <p><img src="images/fotonorden_shop.png" alt="I turned off the images so that you guys cant see my handsome school photos"></p>
                         <!-- raw HTML omitted -->
                         <p>The first thing I did was to drag one of my photos onto a new tab and was able
                             to see the direct URL to the image.</p>
-                        <p><img src="/images/direct_url.png"
+                        <p><img src="images/direct_url.png"
                                 alt="The photo is not shown because of the same reason as I mentioned earlier"></p>
                         <!-- raw HTML omitted -->
                         <p>I saw that there was a parameter with the name <code>uuid</code>. So what did I do? Well I
@@ -101,7 +101,7 @@
 </code></pre>
                         </div>
                         <p>Which surprisingly gave me this:</p>
-                        <p><img src="/images/xss_success.png" alt="Yay, it's worked! 👻🎉"></p>
+                        <p><img src="images/xss_success.png" alt="Yay, it's worked! 👻🎉"></p>
                         <!-- raw HTML omitted -->
                         <p>Now I knew that knew that it was vulnerable to reflected XSS. Since I was able
                             to inject JavaScript code, would it possible to inject HTML code? Yup! I just
@@ -112,7 +112,7 @@
 </code></pre>
                         </div>
                         <p>Which gave me this:</p>
-                        <p><img src="/images/html_injection.png" alt="Yes, I like unicorns 🦄"></p>
+                        <p><img src="images/html_injection.png" alt="Yes, I like unicorns 🦄"></p>
                         <!-- raw HTML omitted -->
                         <p>And there, I was able to conclude that Netlife, which was the service which
                             Foto Norden was using, was vulnerable to reflected XSS and HTML injection.</p>
@@ -165,6 +165,6 @@
             </section>
         </div>
     </main>
-    <script src="/js/dark-mode.js"></script>
+    <script src="js/dark-mode.js"></script>
 </body>
 </html>
