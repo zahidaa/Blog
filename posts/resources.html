@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="author" content="Waseem Akram">
+    <meta name="description" content="">
+    <meta name="keywords" content="Researcher, Pentest, dev">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Posts" />
+    <meta name="twitter:description" content="" />
+    <meta property="og:title" content="Posts" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/posts/" />
+    <title>how to hack instagram account using bruteforce - Waseem Akram</title>
+    <link rel="canonical" href="/posts.html">
+    <link rel="preload" href="../fonts/forkawesome-webfont.woff2v=1.1.7" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="icon" type="image/png" href="../images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="../images/favicon-16x16.png" sizes="16x16">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="alternate" type="application/rss+xml" href="../posts/index.xml" title="Waseem Akram" />
+    <script defer src="https://twemoji.maxcdn.com/v/13.0.1/twemoji.min.js"></script>
+</head>
+
+<body class="colorscheme-auto" onload=" twemoji.parse(document.body); ">
+    <div class="float-container">
+        <a id="dark-mode-toggle" class="colorscheme-toggle">
+            <i class='bx bx-adjust'></i>
+        </a>
+    </div>
+    <main class="wrapper">
+        <nav class="navigation">
+            <section class="container">
+                <a class="navigation-title" href="/">Waseem Akram</a>
+                <input type="checkbox" id="menu-toggle" />
+                <label class="menu-button float-right" for="menu-toggle">
+                    <i class='bx bx-menu'></i>
+                </label>
+                <ul class="navigation-list">
+                    <li class="navigation-item">
+                        <a class="navigation-link" href="../whoami">About</a>
+                    </li>
+
+                    <li class="navigation-item">
+                        <a class="navigation-link" href="../posts.html">Blog</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+        <div class="content">
+            <section class="container post">
+                <article>
+                    <header>
+                        <div class="post-title">
+                            <h1 class="title">
+                                <a class="title-link" href="../posts/resources">
+                                    Cybersecurity Resources 🚀
+                                </a>
+                            </h1>
+                        </div>
+                        <div class="post-meta">
+                            <div class="date">
+                                <span class="posted-on">
+                                    <i class='bx bxs-calendar'></i>
+                                    <time datetime='2022-07-25T12:06:55&#43;01:00'>
+                                        July 22, 2022
+                                    </time>
+                                </span>
+                                <span class="reading-time">
+                                    <i class='bx bx-time-five'></i>
+                                    2-minute read
+                                </span>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="post-meta">
+
+
+
+
+
+
+                    </div>
+
+
+
+
+
+                    <div class="post-content">
+
+
+                        <h2>Table of Contents</h2>
+                        <aside class="table-of-contents">
+                            <nav id="TableOfContents">
+                                <ul>
+                                    <li><a href="#enumeration">Enumeration</a></li>
+                                    <li><a href="#network-pentesting">Network Pentesting</a></li>
+                                    <li><a href="#web-applications-pentesting">Web Applications Pentesting</a></li>
+                                    <li><a href="#buffer-overflows">Buffer Overflows</a>
+                                        <ul>
+                                            <li><a href="#buffer-overflow-labs">Buffer Overflow Labs</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#metasploit-usage">Metasploit Usage</a></li>
+                                    <li><a href="#active-directory-pentesting">Active Directory Pentesting</a>
+                                        <ul>
+                                            <li><a href="#active-directory-labs">Active Directory Labs</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#password-cracking--brute-forcing">Password Cracking &amp; Brute
+                                            Forcing</a></li>
+                                    <li><a href="#exploit-development">Exploit Development</a></li>
+                                    <li><a href="#exploition--post-exploition">Exploition &amp; Post-Exploition</a></li>
+                                    <li><a href="#privilege-escalation">Privilege Escalation</a>
+                                        <ul>
+                                            <li><a href="#privilege-escalation-labs">Privilege Escalation Labs</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#lateral-movement">Lateral Movement</a></li>
+                                    <li><a href="#pivoting">Pivoting</a></li>
+                                    <li><a href="#courses">Courses</a></li>
+                                    <li><a href="#books">Books</a></li>
+                                </ul>
+                            </nav>
+                        </aside>
+
+
+                        <p>Collection of some great resources to become a Pentester / Red Teamer. Keep these resources
+                            handy if you are preparing for certifications like OSCP, eCPPT, CRTP, CRTO etc.</p>
+                        <p>Note: 💲 means paid resources.</p>
+                        <h2 id="enumeration">Enumeration</h2>
+                        <ul>
+                            <li>
+                                <p><a href="https://www.youtube.com/watch?v=WvSEkPU1n0I">Introduction To Pentesting -
+                                        Enumeration</a> - HackerSploit</p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/watch?v=947o1ySWU2w">Ethical Hacking Practical -
+                                        Enumeration</a> - Semi Yulianto</p>
+                            </li>
+                        </ul>
+                        <h2 id="network-pentesting">Network Pentesting</h2>
+                        <ul>
+                            <li>
+                                <p><a href="https://youtu.be/WnN6dbos5u8">Beginner Network Penetration Testing</a> -
+                                    Heath Adams (The Cyber Mentor)</p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://book.hacktricks.xyz/pentesting/pentesting-network">https://book.hacktricks.xyz/pentesting/pentesting-network</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/watch?v=3Kq1MIfTWCE">Network Penetration Testing for
+                                        Beginners</a> - FreeCodeCamp</p>
+                            </li>
+                        </ul>
+                        <h2 id="web-applications-pentesting">Web Applications Pentesting</h2>
+                        <ul>
+                            <li>
+                                <p><a
+                                        href="https://owasp.org/www-project-web-security-testing-guide/latest/">https://owasp.org/www-project-web-security-testing-guide/latest/</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://owasp.org/www-project-top-ten/">https://owasp.org/www-project-top-ten/</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/watch?v=X4eRbHgRawI">Web Application Ethical Hacking
+                                        - Penetration Testing Course for Beginners</a> - FreeCodeCamp, Heath Adams (The
+                                    Cyber Mentor)</p>
+                            </li>
+                        </ul>
+                        <h2 id="buffer-overflows">Buffer Overflows</h2>
+                        <ul>
+                            <li>
+                                <p><a href="https://www.youtube.com/watch?v=1S0aBV-Waeo">Buffer Overflows Made Easy
+                                        (2022 Edition)</a> - Heath Adams (The Cyber Mentor)</p>
+                            </li>
+                            <li>
+                                <p><a href="https://youtu.be/1S0aBV-Waeo">Running a Buffer Overflow Attack</a> -
+                                    Computerphile</p>
+                            </li>
+                        </ul>
+                        <h3 id="buffer-overflow-labs">Buffer Overflow Labs</h3>
+                        <ul>
+                            <li>
+                                <p><a
+                                        href="https://github.com/Gallopsled/pwntools-tutorial">https://github.com/Gallopsled/pwntools-tutorial</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="http://overthewire.org/wargames/narnia/">http://overthewire.org/wargames/narnia/</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://tryhackme.com/room/bufferoverflowprep">https://tryhackme.com/room/bufferoverflowprep</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a href="https://tryhackme.com/room/brainpan">https://tryhackme.com/room/brainpan</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://tryhackme.com/room/brainstorm">https://tryhackme.com/room/brainstorm</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a href="https://tryhackme.com/room/bof1">https://tryhackme.com/room/bof1</a></p>
+                            </li>
+                            <li>
+                                <p>Sneaky (Medium) - <a href="https://app.hackthebox.com/machines/19">Machine</a>, <a
+                                        href="https://www.youtube.com/watch?v=1UGxjqTnuyo">Walkthrough</a></p>
+                            </li>
+                            <li>
+                                <p>Enterprise (Medium) - <a href="https://app.hackthebox.com/machines/112">Machine</a>,
+                                    <a href="https://www.youtube.com/watch?v=NWVJ2b0D1r8">Walkthrough</a></p>
+                            </li>
+                            <li>
+                                <p>October (Medium) - <a href="https://app.hackthebox.com/machines/15">Machine</a>, <a
+                                        href="https://www.youtube.com/watch?v=K05mJazHhF4">Walkthrough</a></p>
+                            </li>
+                            <li>
+                                <p>Jail (Insane) - 💲 <a href="https://app.hackthebox.com/machines/45">Machine</a>, <a
+                                        href="https://www.youtube.com/watch?v=80-73OYcrrk">Walkthrough</a></p>
+                            </li>
+                            <li>
+                                <p>Node (Medium) - 💲 <a href="https://app.hackthebox.com/machines/110">Machine</a>, <a
+                                        href="https://youtu.be/sW10TlZF62w">Walkthrough</a></p>
+                            </li>
+                        </ul>
+                        <h2 id="metasploit-usage">Metasploit Usage</h2>
+                        <ul>
+                            <li>
+                                <p><a href="https://youtube.com/playlist?list=PL7-g2-mnZwSEFhqybJFEPZYhNFqqbCe9_">Metasploit
+                                        Minute</a> - Hak5</p>
+                            </li>
+                            <li>
+                                <p><a href="https://youtu.be/8lR27r8Y_ik">Metasploit For Beginners</a> - HackerSploit
+                                </p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/watch?v=ES2P2hWuzDo">Metasploit</a> - David Bombal
+                                </p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/watch?v=_C7nRJ6WsmI">Complete Metasploit System
+                                        Hacking Tutorial!</a> - Joseph Delgadillo</p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://karol-mazurek95.medium.com/solid-metasploit-b1e043470b8c">https://karol-mazurek95.medium.com/solid-metasploit-b1e043470b8c</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://www.offensive-security.com/metasploit-unleashed/meterpreter-basics/">https://www.offensive-security.com/metasploit-unleashed/meterpreter-basics/</a>
+                                </p>
+                            </li>
+                        </ul>
+                        <h2 id="active-directory-pentesting">Active Directory Pentesting</h2>
+                        <ul>
+                            <li>
+                                <p><a href="https://www.youtube.com/playlist?list=PLAC2CBE898D01029E">Active Directory
+                                        Basics</a></p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/playlist?list=PLCLxMnnAnGinh7JKcV3dBnTDW8dhNG96N">Active
+                                        Directory Pentesting</a></p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/playlist?list=PLziMzyAZFGMf8rGjtpV6gYbx5hozUNeSZ">Active
+                                        Directory Pentesting - Red Team</a> - I.T &amp; Security</p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/playlist?list=PLDrNMcTNhhYoEjHYs0ZBfcSE7Hw46BeTA">Building
+                                        Home AD Lab</a> - Conda</p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/playlist?list=PLDrNMcTNhhYqZj7WZt2GfNhBDqBnhW6AT">Attacking
+                                        Active Directory</a> - Conda</p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://www.hackingarticles.in/red-teaming/">https://www.hackingarticles.in/red-teaming/</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.ired.team">https://www.ired.team</a></p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://zer1t0.gitlab.io/posts/attacking_ad/">https://zer1t0.gitlab.io/posts/attacking_ad/</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a href="https://adsecurity.org/">https://adsecurity.org/</a></p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://book.hacktricks.xyz/windows/active-directory-methodology">https://book.hacktricks.xyz/windows/active-directory-methodology</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet">https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://github.com/infosecn1nja/AD-Attack-Defense">https://github.com/infosecn1nja/AD-Attack-Defense</a>
+                                </p>
+                            </li>
+                        </ul>
+                        <h3 id="active-directory-labs">Active Directory Labs</h3>
+                        <ul>
+                            <li>
+                                <p>Forest (Easy) - 💲 <a href="https://app.hackthebox.com/machines/212">Machine</a>, <a
+                                        href="https://www.youtube.com/watch?v=H9FcE_FMZio">Walkthrough</a></p>
+                            </li>
+                            <li>
+                                <p>Active (Easy) - 💲 <a href="https://app.hackthebox.com/machines/148">Machine</a>, <a
+                                        href="https://www.youtube.com/watch?v=jUc1J31DNdw">Walkthrough</a></p>
+                            </li>
+                            <li>
+                                <p>Fuse (Medium) - 💲 <a href="https://app.hackthebox.com/machines/256">Machine</a>, <a
+                                        href="https://www.youtube.com/watch?v=VxbC03xmS60">Walkthrough</a></p>
+                            </li>
+                            <li>
+                                <p>Cascade (Medium) - 💲 <a href="https://app.hackthebox.com/machines/235">Machine</a>,
+                                    <a href="https://www.youtube.com/watch?v=mr-fsVLoQGw">Walkthrough</a></p>
+                            </li>
+                            <li>
+                                <p>Monteverde (Medium) - 💲 <a
+                                        href="https://app.hackthebox.com/machines/223">Machine</a>, <a
+                                        href="https://www.youtube.com/watch?v=HTJjPZvOtJ4">Walkthrough</a></p>
+                            </li>
+                            <li>
+                                <p>Resolute (Medium) - 💲 <a href="https://app.hackthebox.com/machines/220">Machine</a>,
+                                    <a href="https://www.youtube.com/watch?v=8KJebvmd1Fk">Walkthrough</a></p>
+                            </li>
+                            <li>
+                                <p>Arkham (Medium)- 💲 <a href="https://app.hackthebox.com/machines/179">Machine</a>, <a
+                                        href="https://www.youtube.com/watch?v=krC5j1Ab44I">Walkthrough</a></p>
+                            </li>
+                            <li>
+                                <p>Mantis (Hard) - 💲 <a href="https://app.hackthebox.com/machines/98">Machine</a>, <a
+                                        href="https://www.youtube.com/watch?v=VVZZgqIyD0Q">Walkthrough</a></p>
+                            </li>
+                            <li>
+                                <p>APT (Insane) - 💲 <a href="https://app.hackthebox.com/machines/296">Machine</a>, <a
+                                        href="https://www.youtube.com/watch?v=eRnqtXwCZVs">Walkthrough</a></p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://tryhackme.com/room/activedirectorybasics">https://tryhackme.com/room/activedirectorybasics</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://tryhackme.com/room/postexploit">https://tryhackme.com/room/postexploit</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://tryhackme.com/room/vulnnetroasted">https://tryhackme.com/room/vulnnetroasted</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://tryhackme.com/room/attacktivedirectory">https://tryhackme.com/room/attacktivedirectory</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://tryhackme.com/room/raz0rblack">https://tryhackme.com/room/raz0rblack</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://tryhackme.com/room/enterprise">https://tryhackme.com/room/enterprise</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://tryhackme.com/room/vulnnetactive">https://tryhackme.com/room/vulnnetactive</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p>💲 <a
+                                        href="https://tryhackme.com/room/zer0logon">https://tryhackme.com/room/zer0logon</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p>💲 <a
+                                        href="https://tryhackme.com/room/hololive">https://tryhackme.com/room/hololive</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p>💲 <a
+                                        href="https://tryhackme.com/network/throwback">https://tryhackme.com/network/throwback</a>
+                                </p>
+                            </li>
+                        </ul>
+                        <h2 id="password-cracking--brute-forcing">Password Cracking &amp; Brute Forcing</h2>
+                        <ul>
+                            <li>
+                                <p><a href="https://www.youtube.com/watch?v=XjVYl1Ts6XI">Password Cracking With John The
+                                        Ripper - RAR/ZIP &amp; Linux Passwords</a> - HackerSploit</p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/watch?v=z4_oqTZJqCo">Password cracking with Kali
+                                        Linux and HashCat</a> - NetworkChuck</p>
+                            </li>
+                        </ul>
+                        <h2 id="exploit-development">Exploit Development</h2>
+                        <ul>
+                            <li>
+                                <p><a
+                                        href="https://github.com/gh0x0st/Buffer_Overflow">https://github.com/gh0x0st/Buffer_Overflow</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://www.youtube.com/watch?v=yJF0YPd8lDw">https://www.youtube.com/watch?v=yJF0YPd8lDw</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://hex-men.tech/vulnserver_buffer_overflow/">https://hex-men.tech/vulnserver_buffer_overflow/</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://www.ired.team/offensive-security/code-injection-process-injection/binary-exploitation/64-bit-stack-based-buffer-overflow">https://www.ired.team/offensive-security/code-injection-process-injection/binary-exploitation/64-bit-stack-based-buffer-overflow</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://www.coalfire.com/the-coalfire-blog/september-2020/the-basics-of-exploit-development-5-x86-64-buffer">https://www.coalfire.com/the-coalfire-blog/september-2020/the-basics-of-exploit-development-5-x86-64-buffer</a>
+                                </p>
+                            </li>
+                        </ul>
+                        <h2 id="exploition--post-exploition">Exploition &amp; Post-Exploition</h2>
+                        <ul>
+                            <li>
+                                <p><a href="https://www.youtube.com/watch?v=IJ4M2DDMjgY">Ethical Hacking Practical -
+                                        Exploitation</a> - Semi Yulianto</p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/watch?v=ELimzgVr3To">Ethical Hacking Practical -
+                                        Automated Exploitation</a> - Semi Yulianto</p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/watch?v=mcuNn7q8nuY">Ethical Hacking Practical -
+                                        Post Exploitation</a> - Semi Yulianto</p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://github.com/mubix/post-exploitation-wiki">https://github.com/mubix/post-exploitation-wiki</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://pentestlab.blog/category/post-exploitation/">https://pentestlab.blog/category/post-exploitation/</a>
+                                </p>
+                            </li>
+                        </ul>
+                        <h2 id="privilege-escalation">Privilege Escalation</h2>
+                        <ul>
+                            <li>
+                                <p><a href="https://www.youtube.com/playlist?list=PLjG9EfEtwbvIrGFTx4XctK8IxkUJkAEqP">Windows
+                                        Local Privilege Escalation</a> - Sagi Shahar</p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/playlist?list=PLDrNMcTNhhYrBNZ_FdtMq-gLFQeUZFzWV">Privilege
+                                        Escalation</a> - Conda</p>
+                            </li>
+                            <li>
+                                <p>💲 <a
+                                        href="https://academy.tcm-sec.com/p/windows-privilege-escalation-for-beginners">https://academy.tcm-sec.com/p/windows-privilege-escalation-for-beginners</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p>💲 <a
+                                        href="https://academy.tcm-sec.com/p/linux-privilege-escalation">https://academy.tcm-sec.com/p/linux-privilege-escalation</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p>💲 <a
+                                        href="https://www.udemy.com/course/windows-privilege-escalation/">https://www.udemy.com/course/windows-privilege-escalation/</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p>💲 <a
+                                        href="https://www.udemy.com/course/linux-privilege-escalation/">https://www.udemy.com/course/linux-privilege-escalation/</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://book.hacktricks.xyz/windows/windows-local-privilege-escalation">https://book.hacktricks.xyz/windows/windows-local-privilege-escalation</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://book.hacktricks.xyz/linux-unix/privilege-escalation">https://book.hacktricks.xyz/linux-unix/privilege-escalation</a>
+                                </p>
+                            </li>
+                        </ul>
+                        <h3 id="privilege-escalation-labs">Privilege Escalation Labs</h3>
+                        <ul>
+                            <li>
+                                <p><a
+                                        href="https://tryhackme.com/room/linuxprivesc">https://tryhackme.com/room/linuxprivesc</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://tryhackme.com/room/windows10privesc">https://tryhackme.com/room/windows10privesc</a>
+                                </p>
+                            </li>
+                        </ul>
+                        <h2 id="lateral-movement">Lateral Movement</h2>
+                        <ul>
+                            <li>
+                                <p><a
+                                        href="https://www.ired.team/offensive-security/lateral-movement">https://www.ired.team/offensive-security/lateral-movement</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://riccardoancarani.github.io/2019-10-04-lateral-movement-megaprimer/">https://riccardoancarani.github.io/2019-10-04-lateral-movement-megaprimer/</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://kjohn333.gitbook.io/offsec-journey/active-directory/lateral-movement">https://kjohn333.gitbook.io/offsec-journey/active-directory/lateral-movement</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://pentestlab.blog/2020/07/21/lateral-movement-services/">https://pentestlab.blog/2020/07/21/lateral-movement-services/</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://cheats.philkeeble.com/active-directory/lateral-movement">https://cheats.philkeeble.com/active-directory/lateral-movement</a>
+                                </p>
+                            </li>
+                        </ul>
+                        <h2 id="pivoting">Pivoting</h2>
+                        <ul>
+                            <li>
+                                <p><a
+                                        href="https://posts.specterops.io/offensive-security-guide-to-ssh-tunnels-and-proxies-b525cbd4d4c6">https://posts.specterops.io/offensive-security-guide-to-ssh-tunnels-and-proxies-b525cbd4d4c6</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://systemweakness.com/the-shades-of-tunneling-a8b6ce1d7fed">https://systemweakness.com/the-shades-of-tunneling-a8b6ce1d7fed</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://www.saintlad.com/nmap-with-proxychains/">https://www.saintlad.com/nmap-with-proxychains/</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://nullsweep.com/pivot-cheatsheet-for-pentesters/">https://nullsweep.com/pivot-cheatsheet-for-pentesters/</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://gitbook.seguranca-informatica.pt/cheat-sheet-1/stuff/pivoting">https://gitbook.seguranca-informatica.pt/cheat-sheet-1/stuff/pivoting</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a href="https://www.youtube.com/watch?v=S7oMiQw4kIM">Port Forwarding and Tunneling -
+                                        Network Pivoting</a> - Motasem Hamdan</p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://www.hackingarticles.in/port-forwarding-tunnelling-cheatsheet/">https://www.hackingarticles.in/port-forwarding-tunnelling-cheatsheet/</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://book.hacktricks.xyz/tunneling-and-port-forwarding">https://book.hacktricks.xyz/tunneling-and-port-forwarding</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://sushant747.gitbooks.io/total-oscp-guide/content/port_forwarding_and_tunneling.html">https://sushant747.gitbooks.io/total-oscp-guide/content/port_forwarding_and_tunneling.html</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://medium.com/axon-technologies/how-to-implement-pivoting-and-relaying-techniques-using-meterpreter-b6f5ec666795">https://medium.com/axon-technologies/how-to-implement-pivoting-and-relaying-techniques-using-meterpreter-b6f5ec666795</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p><a
+                                        href="https://www.onmsft.com/how-to/how-to-configure-port-forwarding-on-a-windows-10-pc">https://www.onmsft.com/how-to/how-to-configure-port-forwarding-on-a-windows-10-pc</a>
+                                </p>
+                            </li>
+                        </ul>
+                        <h2 id="courses">Courses</h2>
+                        <ul>
+                            <li>
+                                <p><a href="https://youtu.be/fNzpcB7ODxQ">Ethical Hacking in 12 Hours</a> - Heath Adams
+                                    (The Cyber Mentor)</p>
+                            </li>
+                            <li>
+                                <p>💲 <a
+                                        href="https://academy.tcm-sec.com/p/practical-ethical-hacking-the-complete-course">Practical
+                                        Ethical Hacking</a> - Heath Adams (The Cyber Mentor)</p>
+                            </li>
+                            <li>
+                                <p>💲 <a href="https://www.udemy.com/course/windows-privilege-escalation/">Windows
+                                        Privilege Escalation for OSCP &amp; Beyond!</a> - Tib3rius</p>
+                            </li>
+                            <li>
+                                <p>💲 <a
+                                        href="https://academy.tcm-sec.com/p/windows-privilege-escalation-for-beginners">Windows
+                                        Privilege Escalation for Beginners</a> - Heath Adams (The Cyber Mentor)</p>
+                            </li>
+                            <li>
+                                <p>💲 <a href="https://www.udemy.com/course/linux-privilege-escalation/">Linux Privilege
+                                        Escalation for OSCP &amp; Beyond!</a> - Tib3rius</p>
+                            </li>
+                            <li>
+                                <p>💲 <a href="https://academy.tcm-sec.com/p/linux-privilege-escalation">Linux Privilege
+                                        Escalation for Beginners</a> - Heath Adams (The Cyber Mentor)</p>
+                            </li>
+                            <li>
+                                <p>💲 <a
+                                        href="https://academy.tcm-sec.com/p/movement-pivoting-and-persistence-for-pentesters-and-ethical-hackers">Movement,
+                                        Pivoting, and Persistence For Pentesters and Ethical Hackers</a> - Joe Helle</p>
+                            </li>
+                            <li>
+                                <p>💲 <a href="https://www.udemy.com/course/active-directory-red-team-hacking/">Active
+                                        Directory Pentesting Full Course - Red Team Hacking</a> - Security Gurus</p>
+                            </li>
+                        </ul>
+                        <h2 id="books">Books</h2>
+                        <ul>
+                            <li>
+                                <p>💲 <a
+                                        href="https://www.amazon.ca/Penetration-Testing-Hands-Introduction-Hacking-ebook/dp/B00KME7GN8">Penetration
+                                        Testing: A Hands-On Introduction to Hacking</a> - Georgia Weidman</p>
+                            </li>
+                            <li>
+                                <p>💲 <a
+                                        href="https://www.amazon.ca/Hacker-Playbook-Practical-Penetration-Testing-ebook/dp/B07CSPFYZ2">The
+                                        Hacker Playbook 3: Practical Guide To Penetration Testing</a> - Peter Kim</p>
+                            </li>
+                        </ul>
+
+                    </div>
+
+
+
+
+
+        </div>
+
+        </div>
+        </article>
+        </section>
+        </div>
+    </main>
+</body>
+
+</html>
