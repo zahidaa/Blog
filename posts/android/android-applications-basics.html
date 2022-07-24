@@ -78,7 +78,7 @@
                         <div class="post-title">
                             <h1 class="title">
                                 <a class="title-link" href="/posts/android/android-applications-basics">
-                                    Android Applications Basics
+                                    📱 Android Applications Basics
                                 </a>
                             </h1>
                         </div>
@@ -115,7 +115,47 @@
                             </div>
                         </div>
                     </header>
-                    
+                    <div>
+                        <p>
+                            <h2 id="android-security-model">Android Security Model</h2>
+                            <h4>There are two layers:</h4>
+                            <ul>
+                                <li>The <strong>OS</strong>, which keeps installed applications isolated from one
+                                    another.</li>
+                                <li>The <strong>application itself</strong>, which allows developers to <strong>expose
+                                        certain functionalities</strong> and configures application capabilities.</li>
+                            </ul>
+                            <h2 id="uid-separation">UID Separation</h2>
+                            <strong>Each application is assigned a specific User ID</strong>. This is done during the
+                            installation of the
+                            app so <strong>the app can only interact with files owned by its User ID or shared
+                                files</strong>. Therefore,
+                            only the app itself, certain components of the OS and the root user can access the apps
+                            data.
+                        </p>
+                        <h2 id="uid-sharing">UID Sharing</h2>
+                        <p>
+                            <strong>Two applications can be configured to use the same UID</strong>. This can be useful
+                            to share
+                            information, but if one of them is compromised the data of both applications will be
+                            compromised. This is why this behaviour is <strong>discourage.
+                                To share the same UID, applications must define the same
+                                <code>android:sharedUserId</code> value in their
+                                manifests</strong>
+                        </p>
+                        <h2 class="sand-boxing">Sandboxing</h2>
+                        <p>
+                            The <strong>Android Application Sandbox</strong> allows to run <strong>each
+                                application</strong> as a<strong> separate process under a
+                                separate user ID</strong>. Each process has its own virtual machine, so an app’s code
+                            runs in
+                            isolation from other apps.
+                            From Android 5.0(L) <strong>SELinux</strong> is enforced. Basically, SELinux denied all
+                            process interactions
+                            and then created policies to <strong>allow only the expected interactions between
+                                them.</strong>
+                        </p>
+                    </div>
                 </article>
             </section>
         </div>
