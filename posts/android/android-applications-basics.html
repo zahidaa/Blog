@@ -227,6 +227,67 @@
                             binary and <strong>process requests for root access</strong> like <strong>Superuser</strong>
                             and <strong>SuperSU</strong> (available in Google
                             Play store).
+                            <details><span style="color: rgb(86, 22, 196); font-weight: bold;">Note that the
+                                    rooting process is very dangerous and can damage severely the device</span>
+                            </details>
+                        </p>
+                        <h2 class="roms">ROMs</h2>
+                        <p>
+                            It's possible to <strong>replace the OS installing a custom firmware</strong>. Doing this
+                            it's possible to
+                            extend the usefulness of an old device, bypass software restrictions or gain access to the
+                            latest Android code.
+                            <strong>OmniROM</strong> and <strong>LineageOS</strong> are two of the most popular
+                            firmwares to use.
+                            <br>
+                            <span style="color: rgb(86, 22, 196); font-weight: bold;">Note that not always is necessary
+                                to root the device to install a custom firmware. Some
+                                manufacturers allow the unlocking of their bootloaders in a well-documented and safe
+                                manner.</span>
+                        </p>
+                        <h2 class="implications">Implications</h2>
+                        <p>
+                            Once a device is rooted, any app could request access as root. If a malicious application
+                            gets it, it can will have access to almost everything and it will be able to damage the
+                            phone.
+                        </p>
+                        <hr>
+                        <h2 id="android-application-fundamentals">Android Application Fundamentals</h2>
+                        <p>
+                            <h3><strong>Fundamentals Review</strong></h3>
+                            <ul>
+                                <li>Android applications are in the APK file format. <strong>APK is basically a ZIP
+                                        file</strong>. (You can rename the file extension to .zip and use unzip to open
+                                    and see its contents.)</li>
+                                <li>APK Contents (Not exhaustive)</li>
+                                <ul>
+                                    <li><strong>AndroidManifest.xml</strong></li>
+                                    <li>resources.arsc/strings.xml</li>
+                                    <li>resources.arsc: a file containing precompiled resources, such as binary XML for
+                                        example.</li>
+                                    <ul>
+                                        <li>res/xml/files_paths.xml</li>
+                                    </ul>
+                                    <li>META-INF/</li>
+                                    <ul>
+                                        <li>Certificate lives here!</li>
+                                    </ul>
+                                    <li><strong>classes.dex</strong></li>
+                                    <ul>
+                                        <li>Dalvik bytecode for application in the DEX file format. <strong>This is the
+                                                Java (or Kotlin) code</strong>compiled that the application will run by
+                                            default.</li>
+                                    </ul>
+                                    <li>lib/</li>
+                                    <ul>
+                                        <li>Native libraries for the application, by default, live here! Under the lib/
+                                            directory, there are the cpu-specific directories.</li>
+                                        <ul>
+                                            <li><code>armeabi:</code> compiled code for all ARM based processors only</li>
+                                        </ul>
+                                    </ul>                        
+                                </ul>
+                            </ul>
                         </p>
                     </div>
                 </article>
