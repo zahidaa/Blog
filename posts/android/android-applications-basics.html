@@ -155,6 +155,79 @@
                             and then created policies to <strong>allow only the expected interactions between
                                 them.</strong>
                         </p>
+                        <h2 class="permissions">Permissions</h2>
+                        <p>
+                            When you installs an <strong>app and it ask for permissions</strong>, the app is asking for
+                            the permissions
+                            configured in the <strong><code>uses-permission</code></strong> elements in the
+                            <strong>AndroidManifest.xml</strong> file. The
+                            uses-permission element indicates the name of the requested permission inside the
+                            <strong>name
+                                attribute</strong>. It also has the <strong>maxSdkVersion</strong> attribute which stops
+                            asking for permissions on
+                            versions higher than the one specified.
+                            Note that android applications don't need to ask for all the permissions at the beginning,
+                            they can also ask for <strong>permissions dynamically</strong> but all the permissions must
+                            be declared in
+                            the <strong>manifest.</strong>
+                            When an app exposes functionality it can limit the <strong>access to only apps that have a
+                                specified
+                                permission.</strong>
+                            A permission element has three attributes:
+                            <ul>
+                                <li>The <strong>name</strong> of the permission.</li>
+                                <li>The <strong>permission-group</strong> attribute, which allows for grouping related
+                                    permissions.</li>
+                                <li>The <strong>protection-level</strong> which indicates how the permissions are
+                                    granted. There are four types:</li>
+                                <ul>
+                                    <li><strong>Normal:</strong> Used when there are no known threats to the app. The
+                                        user is <strong> not required to approve it.</strong></li>
+                                    <li><strong>Dangerous:</strong> Indicates the permission grants the requesting
+                                        application some <strong>elevated access. Users are requested to approve
+                                            them.</strong></li>
+                                    <li><strong>Signature:</strong> Only <strong>apps signed by the same certificate as
+                                            the one</strong> exporting the component can be granted permission. This is
+                                        the strongest type of protection.</li>
+                                    <li><strong>SignatureOrSystem:</strong> Only <strong>apps signed by the same
+                                            certificate as the one</strong> exporting the component or <strong>apps
+                                            running with system-level access</strong> can be granted permissions</li>
+                                </ul>
+                            </ul>
+                        </p>
+                        <hr>
+                        <h2 class="pre-installed-applications">Pre-Installed Applications</h2>
+                        <p>
+                            These apps are generally found in the <code>/system/app</code> or
+                            <code>/system/priv-app</code> directories and some
+                            of them are <strong>optimised</strong> (you may not even find the <code>classes.dex</code>
+                            file). Theses applications are
+                            worth checking because some times they are <strong>running with too many
+                                permissions</strong>(as root).
+                            <ul>
+                                <li>The ones shipped with the <strong>AOSP</strong>(Android OpenSource
+                                    Project)<strong>ROM</strong></li>
+                                <li>Added by the device <strong>manufacturer</strong></li>
+                                <li>Added by the cell <strong>phone provider</strong> (if purchased from them)</li>
+                            </ul>
+                        </p>
+                        <hr>
+                        <h2 class="rooting">Rooting</h2>
+                        <p>
+                            In order to obtain root access into a physical android device you generally need to
+                            <strong>exploit</strong>
+                            1 or 2 <strong>vulnerabilities</strong> which use to be <strong>specific</strong> for the
+                            <strong>device</strong> and <strong>version.</strong>
+                            Once the exploit has worked, usually the Linux <code>su</code> binary is copied into a
+                            location specified
+                            in the user's PATH env variable like <code>/system/xbin.</code>
+                            <br>
+                            Once the <code>su</code> binary is configured, another Android app is used to interface with
+                            the su
+                            binary and <strong>process requests for root access</strong> like <strong>Superuser</strong>
+                            and <strong>SuperSU</strong> (available in Google
+                            Play store).
+                        </p>
                     </div>
                 </article>
             </section>
