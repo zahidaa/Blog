@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/web-manifest-combined.json",
   "name": "Hacker wasii",
-  "short_name": "wasii",
-  "start_url": ".",
+  "short_name": "Hacker wasii",
+  "start_url": "https://blog.hackerwasii.com",
   "display": "standalone",
   "background_color": "#fff",
   "description": "A blog that provides you the hacking articles and resources.",
