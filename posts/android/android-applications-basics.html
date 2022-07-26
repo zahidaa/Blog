@@ -339,6 +339,27 @@
                             computer architecture on compiled C/C++ code. SMALI is like the assembly language: between
                             the higher level source code and the bytecode.
                         </p>
+                        <hr>
+                        <h2 id="intents">Intents</h2>
+                        <p>
+                            Intents are the primary means by which Android apps communicate between their components or
+                            with other apps. These message objects can also carry data between apps or component,
+                            similar to how GET/POST requests are used in HTTP communications.
+                            <br>
+                            So an Intent is basically a message that is passed between components. Intents can be
+                            directed to specific components or apps, or can be sent without a specific recipient.
+                            To be simple Intent can be used:
+                            <ul>
+                                <li>To start an Activity, typically opening a user interface for an app</li>
+                                <li>As broadcasts to inform the system and apps of changes</li>
+                                <li>To start, stop, and communicate with a background service</li>
+                                <li>To access data via ContentProviders</li>
+                                <li>As callbacks to handle events</li>
+                            </ul>
+                            <br>
+                            Improper implementation could result in data leakage, restricted functions being called and
+                            program flow being manipulated.
+                        </p>
                     </div>
                 </article>
             </section>
