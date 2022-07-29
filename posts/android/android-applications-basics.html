@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Language" content="en">
     <meta name="author" content="Waseem Akram">
     <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="Researcher, Pentest, dev">
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Posts" />
@@ -89,7 +90,7 @@
                         <div class="post-title">
                             <h1 class="title">
                                 <a class="title-link" href="/posts/android-applications-basics">
-                                    andorid applications basics
+                                    Andorid Applications Basics
                                 </a>
                             </h1>
                         </div>
@@ -125,6 +126,46 @@
                         </div>
                     </header>
                     <div>
+                        <h2>Table of Contents</h2>
+                        <aside class="table-of-contents">
+                            <nav id="TableOfContents">
+                                <ul>
+                                    <li><a href="#android-security-model">Android Security Model</a></li>
+                                    <li><a href="#uid-separation">UID Separation</a></li>
+                                    <li><a href="#uid-sharing">UID Sharing</a></li>
+                                    <li><a href="#sand-boxing">Sandboxing</a>
+                                        <ul>
+                                            <li><a href="#permissions">Permissions</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#pre-installed-applications">Pre-Installed Applications</a></li>
+                                    <li><a href="#rooting">Rooting</a>
+                                        <ul>
+                                            <li><a href="#roms">ROMs</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#implications">Implications</a></li>
+                                    <li><a href="#android-application-fundamentals">Android Application Fundamentals</a>
+                                    </li>
+                                    <li><a href="#dalvik-smali">Dalvik & Smali</a></li>
+                                    <li><a href="#intents">Intents</a>
+                                        <ul>
+                                            <li><a href="#intent-filter">Intent-Filter</a></li>
+                                            <li><a href="#implicit-intents">Implicit Intents</a></li>
+                                            <li><a href="#explicit-intents">Explicit Intents</a></li>
+                                            <li><a href="#pending-intents">Pending Intents</a></li>
+                                            <li><a href="#broadcast-intents">Broadcast Intents</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#sticky-broadcasts">Sticky Broadcasts</a></li>
+                                    <li><a href="#deep-links-url-schemes">Deep links / URL schemes</a></li>
+                                    <li><a href="#aidl">AIDL - Android Interface Definition Language</a></li>
+                                    <li><a href="#messenger">Messenger</a></li>
+                                    <li><a href="#components">Components</a></li>
+                                    <li><a href="#app-subclass">Application Subclass</a></li>
+                                </ul>
+                            </nav>
+                        </aside>
                         <p>
                             <h2 id="android-security-model">Android Security Model</h2>
                             <h4>There are two layers:</h4>
@@ -142,6 +183,7 @@
                             only the app itself, certain components of the OS and the root user can access the apps
                             data.
                         </p>
+                        <hr>
                         <h2 id="uid-sharing">UID Sharing</h2>
                         <p>
                             <strong>Two applications can be configured to use the same UID</strong>. This can be useful
@@ -152,7 +194,8 @@
                                 <code>android:sharedUserId</code> value in their
                                 manifests</strong>
                         </p>
-                        <h2 class="sand-boxing">Sandboxing</h2>
+                        <hr>
+                        <h2 id="sand-boxing">Sandboxing</h2>
                         <p>
                             The <strong>Android Application Sandbox</strong> allows to run <strong>each
                                 application</strong> as a<strong> separate process under a
@@ -164,7 +207,8 @@
                             and then created policies to <strong>allow only the expected interactions between
                                 them.</strong>
                         </p>
-                        <h2 class="permissions">Permissions</h2>
+                        <hr>
+                        <h2 id="permissions">Permissions</h2>
                         <p>
                             When you installs an <strong>app and it ask for permissions</strong>, the app is asking for
                             the permissions
@@ -205,7 +249,7 @@
                             </ul>
                         </p>
                         <hr>
-                        <h2 class="pre-installed-applications">Pre-Installed Applications</h2>
+                        <h2 id="pre-installed-applications">Pre-Installed Applications</h2>
                         <p>
                             These apps are generally found in the <code>/system/app</code> or
                             <code>/system/priv-app</code> directories and some
@@ -221,7 +265,7 @@
                             </ul>
                         </p>
                         <hr>
-                        <h2 class="rooting">Rooting</h2>
+                        <h2 id="rooting">Rooting</h2>
                         <p>
                             In order to obtain root access into a physical android device you generally need to
                             <strong>exploit</strong>
@@ -240,7 +284,8 @@
                                     rooting process is very dangerous and can damage severely the device</span>
                             </details>
                         </p>
-                        <h2 class="roms">ROMs</h2>
+                        <hr>
+                        <h2 id="roms">ROMs</h2>
                         <p>
                             It's possible to <strong>replace the OS installing a custom firmware</strong>. Doing this
                             it's possible to
@@ -254,7 +299,7 @@
                                 manufacturers allow the unlocking of their bootloaders in a well-documented and safe
                                 manner.</span>
                         </p>
-                        <h2 class="implications">Implications</h2>
+                        <h2 id="implications">Implications</h2>
                         <p>
                             Once a device is rooted, any app could request access as root. If a malicious application
                             gets it, it can will have access to almost everything and it will be able to damage the
@@ -360,6 +405,244 @@
                             Improper implementation could result in data leakage, restricted functions being called and
                             program flow being manipulated.
                         </p>
+                        <hr>
+                        <h2 id="intent-filter">Intent-Filter</h2>
+                        <p>
+                            An Intent Filter specify the <strong>types of Intent that an activity, service, or Broadcast
+                                Receiver can respond to.</strong> It specifies what an activity or service can do and
+                            what types of
+                            broadcasts a Receiver can handle. It allows the corresponding component to receive Intents
+                            of the declared type. Intent Filters are typically <strong>defined via the
+                                AndroidManifest.xml file.</strong>
+                            For <strong>Broadcast Receiver</strong> it is also possible to define them in
+                            <strong>coding.</strong> An Intent Filter is
+                            defined by its category, action and data filters. It can also contain additional metadata.br
+                            <br>
+                            <p>
+                                In Android, an activity/service/content provider/broadcast receiver is
+                                <strong>public</strong> when
+                                <code>exported</code> is set to <code>true</code> but a component is <strong>also
+                                    public</strong> if the </strong>manifest specifies an
+                                Intent filter</strong> for it. However,
+                                developers can explicitly make components private (regardless of any intent filters)
+                                by setting the ** <code>exported</code> attribute to <code>false</code>** for each
+                                component in the manifest file.
+                                Developers can also set the <code>permission</code> attribute to <code>require a certain
+                                    permission to
+                                    access</code> the component, thereby restricting access to the component.
+                            </p>
+                        </p>
+                        <hr>
+                        <h2 id="implicit-intents">Implicit Intents</h2>
+                        <p>
+                            Intents are programatically created using an Intent constructor:
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"><span style="color: #87623F;">Intent</span> email <span style="color: #87623F;">=</span> <span style="color: #499C78;">new</span> <span style="color: #87623F;">Intent</span>(</code><span style="color: #87623F;">Intent</span>.ACTION_SEND, <span style="color: #87623F;">Uri</span>.<span style="color: #803336;">parse</span>(<span style="color: #477dd4">"mailto:"</span>));</pre>
+                            </div>
+                            The <strong>Action</strong> of the previously declared intent is
+                            <strong>ACTION_SEND</strong> and the Extra is a mailto <strong>Uri</strong>
+                            (the Extra if the extra information the intent is expecting).
+                            <br>
+                            This intent should be declared inside the manifest as in the following example:
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;<span style="color: #477dd4">activity</span> <span style="color: #b47234">android:</span><span style="color: #da8735;">name</span>="<span style="color: #5cbe99;">ShareActivity</span>"&gt; <br>     &lt;<span style="color: #477dd4">intent-filter</span>&gt;<br>        &lt;<span style="color: #477dd4">action </span><span style="color: #b47234">android:</span><span style="color: #da8735;">name</span>="<span style="color: #5cbe99;">android.intent.action.SEND</span>" /&gt;<br>        &lt;<span style="color: #477dd4">category </span><span style="color: #b47234">android:</span><span style="color: #da8735;">name</span>="<span style="color: #5cbe99;">android.intent.category.DEFAULT</span>"/&gt;<br>     &lt;/<span style="color: #477dd4">intent-filter</span>&gt;<br>&lt;/<span style="color: #477dd4">activity</span>&gt;</code></pre>
+                            </div>
+                            An intent-filter needs to match the <strong>action</strong>, <strong>data</strong> and
+                            <strong>category</strong> to receive a message.
+                            <br><br>
+                            The "Intent resolution" process determine which app should receive each message. This
+                            process considers the priority attribute, which can be set in the intent-filter declaration,
+                            and the one with the higher priority will be selected. This priority can be set between
+                            -1000 and 1000 and applications can use the SYSTEM_HIGH_PRIORITY value. If a conflict
+                            arises, a "choser" Window appears so the user can decide.
+                        </p>
+                        <hr>
+                        <h2 id="explicit-intents">Explicit Intents</h2>
+                        <p>
+                            An explicit intent specifies the class name it's targeting:
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"><span style="color: #da8735;">Intent</span> downloadIntent <span style="color: #da8735;">=</span> <span style="color: #56c597;">new</span>(<span style="color: #56c597;">this</span>, <span style="color: #da8735;">DownloadService</span>.<span style="color: #56c597;">class</span>)<span style="color: #da8735;">:</span></code></pre>
+                            </div>
+                            In other applications in order to access to the previously declared intent you can use:
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"><span style="color: #da8735;">Intent</span> intent <span style="color: #da8735;">=</span> <span style="color: #56c597;">new</span> <span style="color: #da8735;">Intent</span>();<br>intent.<span style="color: #ca3b49;">setClassName</span>(<span style="color: #477dd4;">"com.other.app"</span>,<span style="color: #477dd4;"> "com.other.app.ServiceName"</span>);<br>context.<span style="color: #ca3b49;">startService</span>(intent);</code></pre>
+                            </div>
+                        </p>
+                        <hr>
+                        <h2 id="pending-intents">Pending Intents</h2>
+                        <p>
+                            These allow other applications to take actions on behalf of your application, using your
+                            app's identity and permissions. Constructing a Pending Intent it should be specified an
+                            intent and the action to perform. If the declared intent isn't Explicit (doesn't declare
+                            which intent can call it) a malicious application could perform the declared action on
+                            behalf of the victim app. Moreover, if an action isn't specified, the malicious app will be
+                            able to do any action on behalf the victim.
+                        </p>
+                        <hr>
+                        <h2 id="broadcast-intents">Broadcast Intents</h2>
+                        <p>
+                            Unlike the previous intents, which are only received by one app, broadcast intents can be
+                            received by multiple apps. However, from API version 14, it's possible to specify the app
+                            that should receive the message using Intent.set Package. <br>
+                            Alternatively it's also possible to specify a permission when sending the broadcast. The
+                            receiver app will need to have that permission.
+                            <br>
+                            There are two types of Broadcasts: Normal (asynchronous) and Ordered (synchronous). The
+                            order is base on the configured priority within the receiver element. Each app can process,
+                            relay or drop the Broadcast. <br>
+                            It's possible to send a broadcast using the function **sendBroadcast(intent,
+                            receiverPermission) ** from the Context class. <br>
+                            You could also use the function sendBroadcast from the LocalBroadCastManager ensures the
+                            message never leaves the app. Using this you won't even need to export a receiver component.
+                        </p>
+                        <hr>
+                        <h2 id="sticky-broadcasts">Sticky Broadcasts</h2>
+                        <p>
+                            This kind of Broadcasts can be accessed long after they were sent. <br>
+                            These were deprecated in API level 21 and it's recommended to not use them. <br>
+                            They allow any application to sniff the data, but also to modify it. <br><br>
+                            If you find functions containing the word "sticky" like sendStickyBroadcast or
+                            sendStickyBroadcastAsUser, check the impact and try to remove them.
+                        </p>
+                        <hr>
+                        <h2 id="deep-links-url-schemes">Deep links / URL schemes</h2>
+                        <p>
+                            <strong>Deep links allow to trigger an Intent via URL.</strong> An application can declare
+                            an URL schema inside and activity so every time the Android device try to <strong>access an
+                                address using that schema</strong> the applications activity will be called:
+                            <p><img src="/images/url-scheme.png" alt="deep-links-url-schemes"></p>
+                            In this case the scheme in <code><strong>myapp://</strong></code> (note also the
+                            <code><strong>category BROWSABLE</strong></code>)
+                            <p>If inside the <strong><code>intent-filter</strong></code> you find something like this:
+                            </p>
+                            <p><img src="/images/url-scheme-example.png" alt="url-scheme-example"></p>
+                            <p>Then, it's expecting something like
+                                <strong><code>http://www.example.com/gizmos</strong></code></p>
+                            <p>
+                                In this case you could try to abuse the functionality creating a web with the following
+                                payloads. It will try to navigate to arbitrary pages and try to execute JS:
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;<span style="color: #477dd4;">a</span> <span style="color: #da8735;">href</span>="<span style="color: #56c597;">example://gizmos/https://google.com</span>"&gt;click here&lt;/<span style="color: #477dd4;">a</span>&gt;<br>&lt;<span style="color: #477dd4;">a</span> <span style="color: #da8735;">href</span>="<span style="color: #56c597;">example://gizmos/javascript://%250dalert(1)</span>"&gt;click here&lt;/<span style="color: #477dd4;">a</span>&gt;</code></pre>
+                                </div>
+                                <p>
+                                    In order to find the <strong>code that will be executed in the App</strong>, go to
+                                    the activity called by the deeplink and search the function
+                                    <code><strong>onNewIntent.</strong></code>
+                                    <p><img src="/images/new-intent.png" alt="new-intent"></p>
+                                    <p>Learn how to <a href="/posts/android/android-app-pentesting" target="_blank"
+                                            style="color: #1fc3f5; text-decoration: none;">call deep links without using
+                                            HTML pages</a></p>
+                                    <hr>
+                                </p>
+                            </p>
+                        </p>
+                        <h2 id="aidl">AIDL - Android Interface Definition Language</h2>
+                        <p>
+                            The Android Interface Definition Language (AIDL) allows you to define the programming
+                            interface that both the client and service agree upon in order to communicate with each
+                            other using interprocess communication (IPC). On Android, one process cannot normally access
+                            the memory of another process. So to talk, they need to decompose their objects into
+                            primitives that the operating system can understand, and marshall the objects across that
+                            boundary for you. The code to do that marshalling is tedious to write, so Android handles it
+                            for you with AIDL.).
+                        </p>
+                        <p>
+                            Services using AIDL are referred to as Bound Services. In the Service's class you will find
+                            the onBind method. This is where the interaction begins so it's initial part of the code to
+                            review looking for potential vulnerabilities.
+                        </p>
+                        <p>
+                            A bound service is the server in a client-server interface. It allows components (such as
+                            activities) to bind to the service, send requests, receive responses, and perform
+                            interprocess communication (IPC). A bound service typically lives only while it serves
+                            another application component and does not run in the background indefinitely.
+                        </p>
+                        <h2 id="messenger">Messenger</h2>
+                        <p>
+                            A Messenger is another type of IPC mechanism. Since the Messenger is also a "Bound Service",
+                            the data passed from the client app is also processed through the onBind method. So, the
+                            code review should start on this method and you should look for the invocation of sensitive
+                            functionality or unsafe handling of data.
+                        </p>
+                        <h2 id="binder">Binder</h2>
+                        <p>
+                            It's weird to find a Binder class directly invoked as it's much easier to use AIDL (which
+                            abstracts the Binder class). However, it's good to know that Binder is a kernel-level driver
+                            which moves data from one process's memory to another's (<a
+                                href="https://www.youtube.com/watch?v=O-UHvFjxwZ8"
+                                target="_blank">https://www.youtube.com/watch?v=O-UHvFjxwZ8</a>)
+                        </p>
+                        <hr>
+                        <h2 id="components">Components</h2>
+                        <p>These include: <strong>Activities, Services, Broadcast Receivers and Providers.</strong></p>
+                        <h2>Launcher Activity and other activities</h2>
+                        <p>
+                            An Android activity is one screen of the Android app's user interface. In that way an
+                            Android activity is very similar to windows in a desktop application. An Android app may
+                            contain one or more activities, meaning one or more screens.
+                        </p>
+                        <p>
+                            The launcher activity is what most people think of as the entry point to an Android
+                            application. The launcher activity is the activity that is started when a user clicks on the
+                            icon for an application. You can determine the launcher activity by looking at the
+                            application’s manifest. The launcher activity will have the following MAIN and LAUNCHER
+                            intents listed.
+                        </p>
+                        <p>
+                            Keep in mind that not every application will have a launcher activity, especially apps
+                            without a UI. Examples of applications without a UI (and thus a launcher activity) are
+                            pre-installed applications that perform services in the background, such as voicemail.
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;<span style="color: #477dd4">activity</span> <span style="color: #b47234">android:</span><span style="color: #da8735;">name</span>="<span style="color: #5cbe99;">.LauncherActivity</span>"&gt; <br>     &lt;<span style="color: #477dd4">intent-filter</span>&gt;<br>        &lt;<span style="color: #477dd4">action </span><span style="color: #b47234">android:</span><span style="color: #da8735;">name</span>="<span style="color: #5cbe99;">android.intent.action.MAIN</span>" /&gt;<br>        &lt;<span style="color: #477dd4">category </span><span style="color: #b47234">android:</span><span style="color: #da8735;">name</span>="<span style="color: #5cbe99;">android.intent.category.LAUNCHER</span>"/&gt;<br>     &lt;/<span style="color: #477dd4">intent-filter</span>&gt;<br>&lt;/<span style="color: #477dd4">activity</span>&gt;</code></pre>
+                            </div>
+                            <p>
+                                Activities can be exported allowing other processes on the device to launch the
+                                activity. By default, they aren't exported but you can export them setting:
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;<span style="color: #477dd4;">service</span><span style="color: #b47234"> android:</span><span style="color: #da8735;">name</span>="<span style="color: #56c597;">.ExampleExportedService</span><span style="color: #b47234"> android:</span><span style="color: #da8735;">exported</span>="<span style="color: #56c597;">true</span></span>"/&gt;</code></pre>
+                                </div>
+                                <p>
+                                    Note that the ability to <strong>bypass activity protections isn't always a
+                                        vulnerability</strong>,
+                                    you need to check to which data you have obtained access.
+                                </p>
+                                <p>
+                                    Also, <strong>some activities returns data to a caller</strong>. In these scenarios
+                                    you need to
+                                    search for the <strong><code>setResult</code></strong> method and check the data
+                                    that is passed into the Intent
+                                    parameter. <strong>If it's sensitive data you may have an information leakage
+                                        vulnerability</strong>
+                                    and it's exploitable with apps capable of communicating with the Activity.
+                                </p>
+                                <p>
+                                    <strong>The code of an activity starts with the <code>onCreate</code>
+                                        method.</strong>
+                                </p>
+                            </p>
+                        </p>
+                        <hr>
+                        <h2 id="app-subclass">Application Subclass</h2>
+                        <p>
+                            Android applications can define a <strong>subclass</strong> of <a
+                                href="https://developer.android.com/reference/android/app/Application"
+                                target="_blank">Application</a>. Applications can, but do not have to define a custom
+                            subclass of Application. If an Android app defines an Application subclass, <strong>this
+                                class is instantiated prior to any other class in the application.</strong>
+                            <p>
+                                If the <strong><code>attachBaseContext</code></strong> method is defined in the
+                                Application subclass, it is called first, before the
+                                <strong><code>onCreate</code></strong> method.
+                            </p>
+                        </p>
+                        <hr>
                     </div>
                 </article>
             </section>
