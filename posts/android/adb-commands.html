@@ -7,9 +7,9 @@
     <meta http-equiv="Content-Language" content="en">
     <meta name="author" content="Waseem Akram">
     <meta name="description" content="">
-    <meta name="keywords" content="Researcher, Pentest, dev">
+    <meta name="keywords" content="adb commands, adb basic commands, how to use adb, how to hack androidusing adb">
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Posts" />
+    <meta name="twitter:title" content="ADB Commands" />
     <meta name="twitter:description" content="" />
     <meta property="og:title" content="Posts" />
     <meta property="og:description" content="" />
@@ -117,47 +117,29 @@
                         </div>
                     </header>
                     <div>
-                        <!-- <h2>Table of Contents</h2>
+                        <h2>Table of Contents</h2>
                         <aside class="table-of-contents">
                             <nav id="TableOfContents">
                                 <ul>
-                                    <li><a href="#android-security-model">Android Security Model</a></li>
-                                    <li><a href="#uid-separation">UID Separation</a></li>
-                                    <li><a href="#uid-sharing">UID Sharing</a></li>
-                                    <li><a href="#sand-boxing">Sandboxing</a>
-                                        <ul>
-                                            <li><a href="#permissions">Permissions</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#pre-installed-applications">Pre-Installed Applications</a></li>
-                                    <li><a href="#rooting">Rooting</a>
-                                        <ul>
-                                            <li><a href="#roms">ROMs</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#implications">Implications</a></li>
-                                    <li><a href="#android-application-fundamentals">Android Application Fundamentals</a>
-                                    </li>
-                                    <li><a href="#dalvik-smali">Dalvik & Smali</a></li>
-                                    <li><a href="#intents">Intents</a>
-                                        <ul>
-                                            <li><a href="#intent-filter">Intent-Filter</a></li>
-                                            <li><a href="#implicit-intents">Implicit Intents</a></li>
-                                            <li><a href="#explicit-intents">Explicit Intents</a></li>
-                                            <li><a href="#pending-intents">Pending Intents</a></li>
-                                            <li><a href="#broadcast-intents">Broadcast Intents</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#sticky-broadcasts">Sticky Broadcasts</a></li>
-                                    <li><a href="#deep-links-url-schemes">Deep links / URL schemes</a></li>
-                                    <li><a href="#aidl">AIDL - Android Interface Definition Language</a></li>
-                                    <li><a href="#messenger">Messenger</a></li>
-                                    <li><a href="#components">Components</a></li>
-                                    <li><a href="#app-subclass">Application Subclass</a></li>
+                                    <li><a href="#adb-path">ADB Path</a></li>
+                                    <li><a href="#connection">Connection</a></li>
+                                    <li><a href="#several-devices">Several devices</a></li>
+                                    <li><a href="#port-tunnelig">Port Tunnelig</a></li>
+                                    <li><a href="#packet-manager">Packet Manager</a></li>
+                                    <li><a href="#packages">Packages</a></li>
+                                    <li><a href="#file-manager">File Manager</a></li>
+                                    <li><a href="#screen-cap">Screencapture/Screenrecord</a></li>
+                                    <li><a href="#shell">Shell</a></li>
+                                    <li><a href="#packages">Packages</a></li>
+                                    <li><a href="#processes">Processes</a></li>
+                                    <li><a href="#system">System</a></li>
+                                    <li><a href="#logs">Logs</a></li>
+                                    <li><a href="#dumpsys">dumpsys</a></li>
+                                    <li><a href="#backup">Backup</a></li>
                                 </ul>
                             </nav>
-                        </aside> -->
-                        <h4>Adb is usually located in:</h4>
+                        </aside>
+                        <h4 id="adb-path">Adb is usually located in:</h4>
                         <p>
                             <div class="highlight">
                                 <pre tabindex="0"
@@ -224,7 +206,397 @@
                             In case the <strong>adb port</strong> is only <strong>accessible</strong> from
                             <strong>localhost</strong> in the android device but <strong>you have access via
                                 SSH</strong> you can <strong>forward the port 5555</strong> and connect via adb:
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"><span style="color: #803336;">ssh</span> -i ssh_key username@10.10.10.10 -L<span style="color: #da8735;"> 5555</span>:127.0.0.1:5555 -p <span style="color: #da8735;">2222</span><br>adb connect<span style="color: #da8735;"> 127.0.0.1</span>:5555</code></pre>
+                            </div>
                         </p>
+                        <hr>
+                        <h2 id="packet-manager">Packet Manager</h2>
+                        <p>
+                            <h3><strong>Install/Uninstall</strong></h3>
+                            <p>
+                                <strong>adb install [option] &lt;path&gt;</strong>
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb install test.apk</code></pre>
+                                </div>
+
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb install -l test.apk forward lock application</code></pre>
+                                </div>
+
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb install -r test.apk replace existing application</code></pre>
+                                </div>
+
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb install -t test.apk allow test packages</code></pre>
+                                </div>
+
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb install -s test.apk install application on sdcard</code></pre>
+                                </div>
+
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb install -d test.apk allow version code downgrade</code></pre>
+                                </div>
+
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb install -p test.apk partial application install</code></pre>
+                                </div>
+                                <p>
+                                    <strong>adb install [option] &lt;PACKAGE&gt;</strong>
+                                </p>
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb uninstall com.test.app</code></pre>
+                                </div>
+
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb uninstall -k com.test.app Keep the data and cache directories around after package removal.</code></pre>
+                                </div>
+                                <p>
+                                    <strong>adb uninstall [option] &lt;PACKAGE&gt;</strong>
+                                </p>
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb uninstall com.test.app</code></pre>
+                                </div>
+
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb uninstall -k com.test.app Keep the data and cache directories around after package removal.</code></pre>
+                                </div>
+                            </p>
+                        </p>
+                        <h2 id="packages">Packages</h2>
+                        <p>
+                            Prints all packages, optionally only those whose package name contains the text in
+                            &lt;FILTER&gt;
+                            <p>
+                                <strong>adb shell pm list packages [options] &lt;FILTER-STR&gt;</strong>
+                            </p>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell pm list packages &lt;FILTER-STR&gt;</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell pm list packages -f &lt;FILTER-STR&gt; #See their associated file.</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell pm list packages -d &lt;FILTER-STR&gt; #Filter to only show disabled packages.</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell pm list packages -e &lt;FILTER-STR&gt; #Filter to only show enabled packages.</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell pm list packages -s &lt;FILTER-STR&gt; #Filter to only show system packages.</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell pm list packages -3 &lt;FILTER-STR&gt; #Filter to only show third party packages.</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell pm list packages -i &lt;FILTER-STR&gt; #See the installer for the packages.</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell pm list packages -u &lt;FILTER-STR&gt; #Also include uninstalled packages.</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell pm list packages --user &lt;USER_ID&gt; &lt;FILTER-STR&gt; #The user space to query.</code></pre>
+                            </div>
+                            <p>
+                                <strong>adb shell pm path &lt;PACKAGE&gt;</strong>
+                                <p>
+                                    Print the path to the APK of the given .
+                                </p>
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell pm path com.android.phone</code></pre>
+                                </div>
+                            </p>
+                            <p>
+                                <strong>adb shell pm clear &lt;PACKAGE&gt;</strong>
+                                <p>
+                                    Delete all data associated with a package.
+                                </p>
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell pm clear com.test.abc</code></pre>
+                                </div>
+                            </p>
+                        </p>
+                        <hr>
+                        <h2 id="file-manager">File Manager</h2>
+                        <p>
+                            <strong>adb pull &lt;remote&gt; [local]</strong>
+                            <p>
+                                Download a specified file from an emulator/device to your computer.
+                            </p>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb pull /sdcard/demo.mp4 ./</code></pre>
+                            </div>
+                        </p>
+                        <p>
+                            <strong>adb push &lt;local&gt; &lt;remote&gt;</strong>
+                            <p>
+                                Upload a specified file from your computer to an emulator/device.
+                            </p>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb push test.apk /sdcard</code></pre>
+                            </div>
+                        </p>
+                        <hr>
+                        <h2 id="screen-cap">Screencapture/Screenrecord</h2>
+                        <p>
+                            <strong>adb shell screencap &lt;filename&gt;</strong>
+                            <p>
+                                Taking a screenshot of a device display.
+                            </p>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell screencap /sdcard/screen.png</code></pre>
+                            </div>
+                        </p>
+                        <p>
+                            <strong>adb shell screenrecord [options] &lt;filename&gt;</strong>
+                            <p>
+                                Recording the display of devices running Android 4.4 (API level 19) and higher.
+                            </p>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell screenrecord /sdcard/demo.mp4<br>adb shell screenrecord --size &lt;WIDTHxHEIGHT&gt;<br>adb shell screenrecord --bit-rate &lt;RATE&gt;<br>adb shell screenrecord --time-limit &lt;TIME&gt; #Sets the maximum recording time, in seconds. The default and maximum value is 180 (3 minutes).<br>adb shell screenrecord --rotate # Rotates 90 degrees <br>adb shell screenrecord --verbose</code></pre>
+                            </div>
+                            (press Ctrl-C to stop recording)
+                            <p>
+                                <strong>You can download the files (images and videos) using _adb pull_</strong>
+                            </p>
+                        </p>
+                        <hr>
+                        <h2 id="shell">Shell</h2>
+                        <p>
+                            <strong>adb shell</strong>
+                            <p>
+                                Get a shell inside the device
+                            </p>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell</code></pre>
+                            </div>
+                        </p>
+                        <p>
+                            <strong>adb shell &lt;cmd&gt;</strong>
+                            <p>
+                                Execute a command inside the device
+                            </p>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell ls</code></pre>
+                            </div>
+                        </p>
+                        <p>
+                            <strong>Pm</strong>
+                            <p>
+                                The following commands are executed inside of a shell
+                            </p>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">pm list packages #List installed packages<br>pm path &lt;package name&gt; #Get the path to the apk file of tha package<br>am start [&lt;options&gt;] #Start an activity. Whiout options you can see the help menu<br>am startservice [&lt;options&gt;] #Start a service. Whiout options you can see the help menu<br>am broadcast [&lt;options&gt;] #Send a broadcast. Whiout options you can see the help menu <br>input [text|keyevent] #Send keystrokes to device</code></pre>
+                            </div>
+                        </p>
+                        <hr>
+                        <h2 id="processes">Processes</h2>
+                        <p>
+                            <p>
+                                If you want to get the PID of the process of your application you can execute:
+                            </p>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell ps</code></pre>
+                            </div>
+                        </p>
+                        <p>
+                            And search for your application
+                            <p>
+                                Or you can do
+                            </p>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell pidof com.your.application</code></pre>
+                            </div>
+                            And it will print the PID of the application
+                        </p>
+                        <hr>
+                        <h2 id="system">System</h2>
+                        <p>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb root</code></pre>
+                            </div>
+                            Restarts the adbd daemon with root permissions. Then, you have to conenct again to the ADB
+                            server and you will be root (if available)
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb sideload &lt;update.zip&gt;</code></pre>
+                            </div>
+                            flashing/restoring Android update.zip packages.
+                        </p>
+                        <hr>
+                        <h2 id="logs">Logs</h2>
+                        <p>
+                            <strong>
+                                <h4>Logcat</h4>
+                            </strong>
+                            To <strong>filter the messages of only one application,</strong>get the PID of the
+                            application
+                            and use grep (linux/macos) or findstr (windows) to filter the output of logcat:
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat | grep 4526 <br>adb logcat | findstr 4526</code></pre>
+                            </div>
+                            <strong>adb logcat [option] [filter-specs]</strong>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat</code></pre>
+                            </div>
+                            Notes: press Ctrl-C to stop monitor
+
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat *:V #lowest priority, filter to only show Verbose level</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat *:D #filter to only show Debug level</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat *:I #filter to only show Info level</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat *:W #filter to only show Warning level</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat *:E #filter to only show Error level</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat *:F #filter to only show Fatal level</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat *:S #Silent, highest priority, on which nothing is ever printed</code></pre>
+                            </div>
+                            <br>
+                            <strong>adb logcat -b &lt;Buffer&gt;</strong>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat -b radio View the buffer that contains radio/telephony related messages.</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat -b event View the buffer containing events-related messages.</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat -b main default</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat -c Clears the entire log and exits.</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat -d Dumps the log to the screen and exits.</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat -f test.logs Writes log message output to test.logs .</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat -g Prints the size of the specified log buffer and exits.</code></pre>
+                            </div>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb logcat -n &lt;count&gt; Sets the maximum number of rotated logs to &lt;count&gt;. </code></pre>
+                            </div>
+                        </p>
+                        <h2 id="dumpsys">dumpsys</h2>
+                        <p>
+                            dumps system data
+                            <strong>
+                                <h5>adb shell dumpsys [options]</h5>
+                            </strong>
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell dumpsys</code></pre>
+                            </div>
+                            adb shell dumpsys meminfo
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell dumpsys battery</code></pre>
+                            </div>
+                            Notes: A mobile device with Developer Options enabled running Android 5.0 or higher.
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell dumpsys batterystats collects battery data from your device</code></pre>
+                            </div>
+                            <p>
+                                Notes: <a href="https://github.com/google/battery-historian" style="color: #181B58;"
+                                    target="_blank">Battery Historian</a> converts that data into an HTML visualization.
+                                <strong>STEP 1</strong> adb shell dumpsys batterystats > batterystats.txt <strong>STEP
+                                    2</strong> python
+                                historian.py batterystats.txt > batterystats.html
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb shell dumpsys batterystats --reset erases old collection data</code></pre>
+                                </div>
+                                adb shell dumpsys activity
+                            </p>
+                        </p>
+                        <hr>
+                        <h2 id="backup">Backup</h2>
+                        <p>
+                            Backup an android device from adb.
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adb backup [-apk] [-shared] [-system] [-all] -f file.backup <br># -apk -- Include APK from Third partie's applications <br># -shared -- Include removable storage <br># -system -- Include system Applciations <br># -all -- Include all the applications <br><br>adb shell pm list packages -f -3      #List packages <br>adb backup -f myapp_backup.ab -apk com.myapp # backup on one device <br>adb restore myapp_backup.ab                  # restore to the same or any other device</code></pre>
+                            </div>
+                            If you want to inspect the content of the backup:
+                            <div class="highlight">
+                                <pre tabindex="0"
+                                    style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">( <span style="color: #da8735;">printf</span><span style="color: #225ebd;"> "\x1f\x8b\x08\x00\x00\x00\x00\x00"</span> ; <span style="color: #bd1419;">tail</span> -c +25 myapp_backup.ab ) <span style="color: #da8735;">|</span> <span style="color: #bd1419;">tar</span> xfvz -</code></pre>
+                            </div>
+                        </p>
+                        <hr>
+                        <div class="pagination">
+                            <div class="pagination__buttons">
+                                <span class="button__next">
+                                    <a href="/posts/android/android-applications-basics" style="text-decoration: none;">
+                                        <span class="button-text" title="previous post">Previous : Android App Baiscs →</span>
+                                    </a>
+                                </span>
+                            </div>
                     </div>
                 </article>
             </section>

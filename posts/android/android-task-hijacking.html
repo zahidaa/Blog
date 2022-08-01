@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="author" content="Waseem Akram">
+    <meta name="description" content="">
+    <meta name="keywords" content="Android Task Hijacking">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Posts" />
+    <meta name="twitter:description" content="" />
+    <meta property="og:title" content="Posts" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/posts/" />
+    <title>Android Task Hijacking - Waseem Akram</title>
+    <link rel="canonical" href="/blog">
+    <link rel="preload" href="/fonts/forkawesome-webfont.woff2v=1.1.7" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="manifest" href="/js/manifest.json">
+    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="alternate" type="application/rss+xml" href="/posts/index.xml" title="Waseem Akram" />
+    <script defer src="https://twemoji.maxcdn.com/v/13.0.1/twemoji.min.js"></script>
+    <!-- google Ads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9670252621494000"
+        crossorigin="anonymous"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PCVFG8BNK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-0PCVFG8BNK');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9670252621494000"
+        crossorigin="anonymous"></script>
+    <!-- hackerwasii -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9670252621494000" data-ad-slot="1081579313"
+        data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</head>
+
+<body class="colorscheme-auto" onload=" twemoji.parse(document.body); ">
+    <div class="float-container">
+        <a id="dark-mode-toggle" class="colorscheme-toggle">
+            <i class='bx bx-adjust'></i>
+        </a>
+    </div>
+    <main class="wrapper">
+        <nav class="navigation">
+            <section class="container">
+                <a class="navigation-title" href="/">Waseem Akram</a>
+                <input type="checkbox" id="menu-toggle" />
+                <label class="menu-button float-right" for="menu-toggle">
+                    <i class='bx bx-menu'></i>
+                </label>
+                <ul class="navigation-list">
+                    <li class="navigation-item">
+                        <a class="navigation-link" href="/whoami">🔎 About</a>
+                    </li>
+
+                    <li class="navigation-item">
+                        <a class="navigation-link" href="/posts/resources">🎉 Resources</a>
+                    </li>
+
+                    <li class="navigation-item">
+                        <a class="navigation-link" href="/blog">📚 Blog</a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+        <div class="content">
+            <section class="container post">
+                <article>
+                    <header>
+                        <div class="post-title">
+                            <h1 class="title">
+                                <a class="title-link" href="/posts/android/android-task-hijacking">
+                                    Android Task Hijacking
+                                </a>
+                            </h1>
+                        </div>
+                        <div class="post-meta">
+                            <div class="date">
+                                <span class="posted-on">
+                                    <i class='bx bxs-calendar'></i>
+                                    <time datetime='2022-07-25T12:06:55&#43;01:00'>
+                                        August 1, 2022
+                                    </time>
+                                </span>
+                                <span class="reading-time">
+                                    <i class='bx bx-time-five'></i>
+                                    2-minute read
+                                </span>
+                            </div>
+                            <div class="categories">
+                                <i class='bx bxs-folder'></i>
+                                <a href="/categories/themes/">hacking</a>
+                                <span class="separator">•</span>
+                                <a href="/categories/syntax/">kali Linux</a>
+                            </div>
+                            <div class="tags">
+                                <i class='bx bxs-purchase-tag'></i>
+                                <span class="tag">
+                                    <a href="/tags/markdown/">android</a>
+                                </span>
+                                <span class="separator">•</span>
+                                <span class="tag">
+                                    <a href="/tags/css/">pentesting</a>
+                                </span>
+                            </div>
+                        </div>
+                    </header>
+                    <div>
+                        <h2 id="task-back-stack"><strong>Task, Back Stack and Foreground Activities</strong></h2>
+                        <p>
+                            A task is a collection of activities that users interact with when performing a certain job.
+                            The activities are arranged in a stack—the <strong style="font-style: italic;">back
+                                stack</strong>)—in the order in which each activity is opened.
+                            <p>
+                                The activity that is <strong>displayed</strong> on the screen is called a
+                                <strong>foreground activity</strong> and its <strong>task</strong> is called the
+                                <strong>foreground task.</strong> At a time, only <strong>one foreground task is visible
+                                    on the screen.</strong>
+                                <p>
+                                    This is some simple activity flow:
+                                    <ul>
+                                        <li>There's only Activity 1 in the foreground.</li>
+                                        <li>Activity 2 is started which pushes Activity 1 to the Back Stack. Now
+                                            Activity 2 is in the foreground.</li>
+                                        <li>Activity 3 is started which pushes both Activity 1 and 2 to the Back Stack.
+                                        </li>
+                                        <li>Now when Activity 3 is closed. The previous activity i.e., 2 is brought
+                                            automatically to the foreground. This is how task navigation works in
+                                            Android.</li>
+                                    </ul>
+                                    <img class="post__img" src="/images/task-back-stack.png"
+                                        alt="flowchart of Android task">
+                                </p>
+                            </p>
+                        </p>
+                        <h2 id="android-multi-task"><strong>Android Multi-tasking - One Task</strong></h2>
+                        <p>
+                            One task is composed by several activities
+                            <p>
+                                <img class="post__img" src="/images/android-multi-tasking.png"
+                                    alt="Android Multi-tasking">
+                            </p>
+                        </p>
+                        <h2 id="several-tasks"><strong>Android Multi-tasking - Several Tasks</strong></h2>
+                        <p>
+                            Android usually manages several tasks
+                            <p>
+                                <img class="post__img" src="/images/android-multi-tasking2.png"
+                                    alt="android-multi-tasking2">
+                            </p>
+                        </p>
+                        <hr>
+                        <h2 id="task-control-knobs"><strong>Task Control Knobs</strong></h2>
+                        <p>
+                            <img src="/images/task-control.png" alt="task-control-knobs" class="post__img">
+                        </p>
+                        <hr>
+                        <h2 id="task-infinity-attack"><strong>Task affinity attack</strong></h2>
+                        <p>
+                            <h3><strong>Task affinity and Launch Modes</strong></h3>
+                            <p>
+                                <strong>Task affinity</strong> is an attribute that is defined in each
+                                <code><strong>&lt;activity&gt;</strong></code> tag in the
+                                <code><strong>AndroidManifest.xml</strong></code>file. It describes which Task an
+                                Activity prefers to join.
+                            </p>
+                            <p>
+                                By default, every activity has the same affinity as the <strong>package</strong> name.
+                            </p>
+                            <p>
+                                We'll be using this when creating our PoC app.
+                                <div class="highlight">
+                                    <pre tabindex="0"
+                                        style="color:#e5e5e5;background-color: #22272E;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;<span style="color: #477dd4">activity</span> <span style="color: #b47234">android:</span><span style="color: #da8735;">taskAffinity</span>="<span style="color: #5cbe99;"></span>"&gt;</code></pre>
+                                </div>
+                                <strong>Launch modes</strong> allow you to define how a new instance of an activity is
+                                associated with the current task. The <a style="text-decoration: none;"
+                                    href="https://developer.android.com/guide/topics/manifest/activity-element#lmode"
+                                    target="_blank"><code>launchMode</code></a>attribute specifies an instruction on how
+                                the activity should be launched into a task. <br> There are four different Launch Modes:
+                                <ul>
+                                    <li>standard (Default)</li>
+                                    <li>singleTop</li>
+                                    <li>singleTask</li>
+                                    <li>singleInstance</li>
+                                </ul>
+                            </p>
+                        </p>
+                    </div>
+                </article>
+            </section>
+        </div>
+        <footer class="footer">
+            <section class="container">
+                ©2021 - 2022 <strong>Waseem Akram</strong> · Made with <a href="https://github.com/evildevill/"
+                    target="_blank">💖</a>
+            </section>
+        </footer>
+    </main>
+    <script src="/js/dark-mode.js"></script>
+</body>
+
+</html>
