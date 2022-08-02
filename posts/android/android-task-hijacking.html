@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Language" content="en">
     <meta name="author" content="Waseem Akram">
-    <meta name="description" content="">
-    <meta name="keywords" content="Android Task Hijacking">
+    <meta name="description"
+        content="A task is a collection of activities that users interact with when performing a certain job. The activities are arranged in a stack—the back stack)—in the order in which each activity is opened.">
+    <meta name="keywords" content="Android Task Hijacking, hijack android, hack android">
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Posts" />
     <meta name="twitter:description" content="" />
-    <meta property="og:title" content="Posts" />
-    <meta property="og:description" content="" />
+    <meta property="og:title" content="Android Task Hijacking" />
+    <meta property="og:description"
+        content="A task is a collection of activities that users interact with when performing a certain job. The activities are arranged in a stack—the back stack)—in the order in which each activity is opened." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="/posts/" />
+    <meta property="og:url" content="/posts/android/android-task-hijacking" />
     <title>Android Task Hijacking - Waseem Akram</title>
     <link rel="canonical" href="/blog">
     <link rel="preload" href="/fonts/forkawesome-webfont.woff2v=1.1.7" as="font" type="font/woff2" crossorigin>
@@ -98,7 +100,7 @@
                                 <span class="posted-on">
                                     <i class='bx bxs-calendar'></i>
                                     <time datetime='2022-07-25T12:06:55&#43;01:00'>
-                                        August 1, 2022
+                                        August 2, 2022
                                     </time>
                                 </span>
                                 <span class="reading-time">
@@ -125,6 +127,19 @@
                         </div>
                     </header>
                     <div>
+                        <h2><strong>Table of Contents</strong></h2>
+                        <aside class="table-of-contents">
+                            <nav id="TableOfContents">
+                                <ul>
+                                    <li><a href="#task-back-stack">Task, Back Stack and Foreground Activities</a></li>
+                                    <li><a href="#android-multi-task">Android Multi-tasking - One Task</a></li>
+                                    <li><a href="#several-tasks">Android Multi-tasking - Several Tasks</a></li>
+                                    <li><a href="#task-control-knobs">Task Control Knobs</a></li>
+                                    <li><a href="#attack">Attack</a></li>
+                                    <li><a href="#prevent-task-hijacking">Preventing task hijacking</a></li>
+                                </ul>
+                            </nav>
+                        </aside>
                         <h2 id="task-back-stack"><strong>Task, Back Stack and Foreground Activities</strong></h2>
                         <p>
                             A task is a collection of activities that users interact with when performing a certain job.
@@ -198,13 +213,76 @@
                                     target="_blank"><code>launchMode</code></a>attribute specifies an instruction on how
                                 the activity should be launched into a task. <br> There are four different Launch Modes:
                                 <ul>
-                                    <li>standard (Default)</li>
-                                    <li>singleTop</li>
-                                    <li>singleTask</li>
-                                    <li>singleInstance</li>
+                                    <li><strong>standard</strong> (Default)</li>
+                                    <li><strong>singleTop</strong></li>
+                                    <li><strong>singleTask</strong></li>
+                                    <li><strong>singleInstance</strong></li>
+                                </ul>
+                                When the launchMode is set to <code><strong>singleTask</strong></code>, the Android
+                                system evaluates three
+                                possibilities and one of them is the reason why our attack is possible. Here they are -
+                                <ul>
+                                    <li><strong>If the Activity instance already exists:</strong></li>
+                                    Android resumes the existing instance instead of creating a new one. It means that
+                                    there is at most one activity instance in the system under this mode.
+                                </ul>
+                                <ul>
+                                    <li><strong>If creating a new activity instance is necessary:</strong></li>
+                                    The Activity Manager Service (AMS) selects a task to host the newly created instance
+                                    by finding a <strong>“matching”</strong> one in all existing tasks. <strong>An
+                                        activity “matches” a task if
+                                        they have the same task affinity</strong>. This is the reason why we can
+                                    <strong>specify the same
+                                        task affinity as the vulnerable app in our malware/attacker's app so it launches
+                                        in
+                                        their task instead of creating it's own.</strong>
                                 </ul>
                             </p>
                         </p>
+                        <h2 id="attack"><strong>Attack</strong></h2>
+                        <p>
+                            The victim needs to have the <strong>malicious app installed</strong> in his device. Then,
+                            he needs to <strong>open
+                                it before</strong> opening the <strong>vulnerable application.</strong> Then, when the
+                            <strong>vulnerable</strong> application is
+                            <strong>opened</strong>, the <strong>malicious application</strong> will be <strong>opened
+                                instead</strong>. If this malicious application
+                            presents the <strong>same login</strong> as the vulnerable application the <strong>user
+                                won't have any means to know
+                                that he is putting his credentials in a malicious application.</strong>
+                            <p>
+                                <strong>You can find an attack implemented here:</strong> <a
+                                    style="text-decoration: none;"
+                                    href="https://github.com/az0mb13/Task_Hijacking_Strandhogg" target="_blank">Click
+                                    here to see</a>
+                            </p>
+                        </p>
+                        <hr>
+                        <h2 id="prevent-task-hijacking"><strong>Preventing task hijacking</strong></h2>
+                        <p>
+                            Setting <code><strong>taskAffinity=""</strong></code> can be a quick fix for this issue. The
+                            launch mode can also be set
+                            to <strong>singleInstance</strong> if the app does not want other activities to join tasks
+                            belonging to it. A
+                            custom <strong>onBackPressed()</strong> function can also be added, to override the default
+                            behaviour.
+                        </p>
+                        <hr>
+                        <div class="pagination">
+                            <div class="pagination__buttons">
+                                <span class="button__next">
+                                    <a href="/posts/android/apk-decompilers" target="_blank" style="text-decoration: none;">
+                                        <span class="button-text">← APK decompilers</span>
+                                    </a>
+                                </span>
+
+                                <span class="button__next">
+                                    <a href="/posts/android/adb-commands" target="_blank" style="text-decoration: none;">
+                                        <span class="button-text">ADB Commands →</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </article>
             </section>
