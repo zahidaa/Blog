@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://www.hackerwasii.com/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/resume/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/whoami/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/resources/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/archive/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/newsletter/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/page/2/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/resources/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/spring4shell/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/ejpt-cheatsheet/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/steel-mountain/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/active-directory-resources/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/intro-to-azure-pentesting/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/boom-bashed/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/shellshock/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/buff-freefloatftp/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/php-deserialization/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/mssql-rce/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/steganography-beginners/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/pewdiepie-printerhack/</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/page/3/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/ejpt-cheatsheet/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/steel-mountain/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/intro-to-azure-pentesting/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/boom-bashed/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/shellshock/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/buff-freefloatftp/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/php-deserialization/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/mssql-rce/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/steganography-beginners/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/posts/pewdiepie-printerhack/index.html</loc>
+  <lastmod>2022-08-05T07:02:31+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>
