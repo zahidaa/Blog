@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>smb on bhavsec</title>
+    
+    
+    
+    <link>https://bhavsec.com/tags/smb/</link>
+    <description>Recent content in smb on bhavsec</description>
+    <generator>bhavsec.com</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 10 May 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://bhavsec.com/tags/smb/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>From MSSQL to RCE 🚀</title>
+      <link>https://bhavsec.com/posts/mssql-rce/</link>
+      <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/mssql-rce/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Microsoft SQL Server is a relational database management system developed by Microsoft. As a database server, it is a software product with the primary function of storing and retrieving data as requested by other software applications—which may run either on the same computer or on another computer across a network (including the Internet). In this blog we&amp;rsquo;ll try to get remote code execution by exploiting MSSQL.
+Enumeration Nmap Scan nmap -sC -sV -oA nmap/archetype 10.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

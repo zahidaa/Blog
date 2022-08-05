@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>infosec on bhavsec</title>
+    
+    
+    
+    <link>https://bhavsec.com/tags/infosec/</link>
+    <description>Recent content in infosec on bhavsec</description>
+    <generator>bhavsec.com</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 30 Jan 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://bhavsec.com/tags/infosec/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>eJPT Cheatsheet 🎓</title>
+      <link>https://bhavsec.com/posts/ejpt-cheatsheet/</link>
+      <pubDate>Sun, 30 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/ejpt-cheatsheet/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          This post contains commands to prepare for eLearnSecurity eJPT exam.
+nmap hosts discovery nmap:
+nmap -sn 10.10.10.0/24 &amp;gt; hosts.txt nmap -sn -T4 10.10.30.0/24 -oG - | awk &#39;/Up$/{print $2}&#39; open ports scan (save to file):
+nmap -Pn -sV -T4 -A -oN ports.txt -p- -iL hosts.txt --open UDP port scan:
+nmap -sU -sV 10.10.10.0/24 nmap vuln scan example:
+nmap --script vuln --script-args=unsafe=1 -iL hosts.txt nmap SYN flood example:
+watch -n 10 &amp;quot;nmap -e wlan0 -Pn -T5 -S 192.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Steel Mountain 🏔</title>
+      <link>https://bhavsec.com/posts/steel-mountain/</link>
+      <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/steel-mountain/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.
+Nmap nmap -sC -sV -Pn 10.10.100.168 130 ⨯ Starting Nmap 7.92 ( https://nmap.org ) at 2022-01-24 23:29 EST Nmap scan report for 10.10.100.168 Host is up (0.21s latency). Not shown: 988 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 8.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Active Directory Pentesting Resources 📚</title>
+      <link>https://bhavsec.com/posts/active-directory-resources/</link>
+      <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/active-directory-resources/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          This post contains Active Directory Pentesting resources to prepare for new OSCP (2022) exam.
+Youtube/Twitch Videos Active Directory madness and the Esoteric Cult of Domain Admin! - alh4zr3d
+TryHackMe - Advent of Cyber + Active Directory - tib3rius
+Common Active Directory Attacks: Back to the Basics of Security Practices - TrustedSec
+How to build an Active Directory Lab - The Cyber Mentor
+Zero to Hero (Episode 8,9,10) - The Cyber Mentor
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

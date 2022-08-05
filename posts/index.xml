@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on bhavsec</title>
+    
+    
+    
+    <link>https://bhavsec.com/posts/</link>
+    <description>Recent content in Posts on bhavsec</description>
+    <generator>bhavsec.com</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 30 Mar 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://bhavsec.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Spring4Shell 🍃</title>
+      <link>https://bhavsec.com/posts/spring4shell/</link>
+      <pubDate>Wed, 30 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/spring4shell/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          A new zero-day vulnerability in the Spring Core Java framework called &amp;lsquo;Spring4Shell&amp;rsquo; has been publicly disclosed, allowing unauthenticated remote code execution on applications.
+Spring is a very popular application framework that allows software developers to quickly and easily develop Java applications with enterprise-level features. These applications can then be deployed on servers, such as Apache Tomcat, as stand-alone packages with all the required dependencies.
+Today, an exploit for this zero-day vulnerability was briefly leaked and then removed but not before cybersecurity researchers could download the code.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>eJPT Cheatsheet 🎓</title>
+      <link>https://bhavsec.com/posts/ejpt-cheatsheet/</link>
+      <pubDate>Sun, 30 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/ejpt-cheatsheet/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          This post contains commands to prepare for eLearnSecurity eJPT exam.
+nmap hosts discovery nmap:
+nmap -sn 10.10.10.0/24 &amp;gt; hosts.txt nmap -sn -T4 10.10.30.0/24 -oG - | awk &#39;/Up$/{print $2}&#39; open ports scan (save to file):
+nmap -Pn -sV -T4 -A -oN ports.txt -p- -iL hosts.txt --open UDP port scan:
+nmap -sU -sV 10.10.10.0/24 nmap vuln scan example:
+nmap --script vuln --script-args=unsafe=1 -iL hosts.txt nmap SYN flood example:
+watch -n 10 &amp;quot;nmap -e wlan0 -Pn -T5 -S 192.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Steel Mountain 🏔</title>
+      <link>https://bhavsec.com/posts/steel-mountain/</link>
+      <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/steel-mountain/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.
+Nmap nmap -sC -sV -Pn 10.10.100.168 130 ⨯ Starting Nmap 7.92 ( https://nmap.org ) at 2022-01-24 23:29 EST Nmap scan report for 10.10.100.168 Host is up (0.21s latency). Not shown: 988 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 8.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Active Directory Pentesting Resources 📚</title>
+      <link>https://bhavsec.com/posts/active-directory-resources/</link>
+      <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/active-directory-resources/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          This post contains Active Directory Pentesting resources to prepare for new OSCP (2022) exam.
+Youtube/Twitch Videos Active Directory madness and the Esoteric Cult of Domain Admin! - alh4zr3d
+TryHackMe - Advent of Cyber + Active Directory - tib3rius
+Common Active Directory Attacks: Back to the Basics of Security Practices - TrustedSec
+How to build an Active Directory Lab - The Cyber Mentor
+Zero to Hero (Episode 8,9,10) - The Cyber Mentor
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Introduction to Azure Pentesting ☁️</title>
+      <link>https://bhavsec.com/posts/intro-to-azure-pentesting/</link>
+      <pubDate>Thu, 06 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/intro-to-azure-pentesting/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          More than 95 percent of Fortune 500 companies use Azure! Azure AD is one of world&amp;rsquo;s largest web-based identity provider. Having the ability to understand and hack (thus securing) Azure is a skill that is in huge demand.
+This blog covers the lab work done in Introduction to Azure Penetration Testing labs &amp;amp; training provided by Nikhil Mittal and Altered Security.
+Course Video : https://youtu.be/5dVSHuCEG2w
+Free Labs: https://azure.enterprisesecurity.io
+Discovery We just know the name of the target organization - EvilCorp.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Boom Bashed 🧨💥</title>
+      <link>https://bhavsec.com/posts/boom-bashed/</link>
+      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/boom-bashed/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Bashed is a retired HackTheBox machine, rated easy and rightfully. We&amp;rsquo;ll start by finding a hidden web shell to quickly gaining root level access due to misconfigured permissions to users.
+Reconnaissance nmap scan Starting the reconnaissance with an initial Nmap scan.
+nmap -sC -sV -oA nmap/bashed 10.129.183.146 -sC: run default nmap scripts
+-sV: detect service version
+-oA: output all formats and store in file nmap/bashed
+Nmap scan report for 10.129.183.146 Host is up (0.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Bash and the Shellshock ⚡️</title>
+      <link>https://bhavsec.com/posts/shellshock/</link>
+      <pubDate>Wed, 14 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/shellshock/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Introduction to ShellShock ShellShock Vulnerability [CVE-2014-6271], also known as Bashdoor, is a family of security bugs in the Unix Bash shell, the first of which was disclosed on 24 September 2014. Shellshock could enable an attacker to cause Bash to execute arbitrary commands and gain unauthorized access to many Internet-facing services, such as web servers, that use Bash to process requests.
+Shellshock is a privilege escalation vulnerability that offers a way for users of a system to execute commands that should be unavailable to them.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>FreeFloat FTP Buffer Overflow 🪣💦</title>
+      <link>https://bhavsec.com/posts/buff-freefloatftp/</link>
+      <pubDate>Thu, 01 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/buff-freefloatftp/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          In this writeup i&amp;rsquo;ll demonstrate how to exploit Buffer Overflow in FreeFloat FTP Server on windows. The vulnerable application is can be downloaded from Here.
+The Freefloat FTP Server has many vulnerable parameters which can be useful to practice and we will choose one of them here to do a full exercise.
+ Lab details Victim Machine: Windows XP SP1 x64 2003
+Application: FreeFloat Ftp Server (Version 1.00)
+Attacker Machine: Kali Linux 2021.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Exploiting PHP deserialization 🔐</title>
+      <link>https://bhavsec.com/posts/php-deserialization/</link>
+      <pubDate>Wed, 26 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/php-deserialization/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Intro to Insecure deserialization Serialization is when an object in a programming language (say, a Java or PHP object) is converted into a format that can be stored or transferred. Whereas deserialization refers to the opposite: it’s when the serialized object is read from a file or the network and converted back into an object.
+Insecure deserialization vulnerabilities happen when applications deserialize objects without proper sanitization. An attacker can then manipulate serialized objects to change the program’s flow.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>From MSSQL to RCE 🚀</title>
+      <link>https://bhavsec.com/posts/mssql-rce/</link>
+      <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/mssql-rce/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Microsoft SQL Server is a relational database management system developed by Microsoft. As a database server, it is a software product with the primary function of storing and retrieving data as requested by other software applications—which may run either on the same computer or on another computer across a network (including the Internet). In this blog we&amp;rsquo;ll try to get remote code execution by exploiting MSSQL.
+Enumeration Nmap Scan nmap -sC -sV -oA nmap/archetype 10.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Steganography for beginners 🔏</title>
+      <link>https://bhavsec.com/posts/steganography-beginners/</link>
+      <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/steganography-beginners/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Steganography is the technique of hiding secret data within an ordinary, non-secret, file or message in order to avoid detection; the secret data is then extracted at its destination. &amp;hellip; The word steganography is derived from the Greek words steganos (meaning hidden or covered) and the Greek root graph (meaning to write) - Wikipedia.
+In this post, we are going to describe solutions to the KRACK-JIIT CTF 2019 Organized by JIIT Open Dev Circle (jodc).
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Mass Printer Hacking Case Study 🖨</title>
+      <link>https://bhavsec.com/posts/pewdiepie-printerhack/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/pewdiepie-printerhack/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Introduction to battle for getting YouTube crown. A battle for who owns the YouTube crown for top channel has been waged over the past few months between fans of Swedish video game commentary celebrity Felix Kjellberg “PewDiePie” and of the Bollywood label T-Series.
+As The Hacker News reports, TheHackerGiraffe hacked printers worldwide to print pro-PewDiePie propaganda. Here are some images showing the message that printers were forced to spit out:
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

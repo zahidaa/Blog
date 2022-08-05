@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Steganography for beginners 🔏 ::
+        bhavsec — portfolio &amp; blog
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Steganography is the technique of hiding secret data within an ordinary, non-secret, file or message in order to avoid detection; the secret data is then extracted at its destination. &amp;hellip; The word steganography is derived from the Greek words steganos (meaning hidden or covered) and the Greek root graph (meaning to write) - Wikipedia.
+In this post, we are going to describe solutions to the KRACK-JIIT CTF 2019 Organized by JIIT Open Dev Circle (jodc)."
+/>
+<meta
+  name="keywords"
+  content="bhavsec, cybersecurity, penetration testing"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://bhavsec.com/posts/steganography-beginners/" />
+
+
+
+
+
+<link rel="stylesheet" href="../../assets/style.css" />
+
+<link rel="stylesheet" href="../../style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="../../img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="../../img/favicon.png" />
+
+
+<link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://bhavsec.com/img/cover.png"/>
+
+<meta name="twitter:title" content="Steganography for beginners 🔏"/>
+<meta name="twitter:description" content="Steganography is the technique of hiding secret data within an ordinary, non-secret, file or message in order to avoid detection; the secret data is then extracted at its destination. &hellip; The word steganography is derived from the Greek words steganos (meaning hidden or covered) and the Greek root graph (meaning to write) - Wikipedia.
+In this post, we are going to describe solutions to the KRACK-JIIT CTF 2019 Organized by JIIT Open Dev Circle (jodc)."/>
+
+
+
+<meta property="og:title" content="Steganography for beginners 🔏" />
+<meta property="og:description" content="Steganography is the technique of hiding secret data within an ordinary, non-secret, file or message in order to avoid detection; the secret data is then extracted at its destination. &hellip; The word steganography is derived from the Greek words steganos (meaning hidden or covered) and the Greek root graph (meaning to write) - Wikipedia.
+In this post, we are going to describe solutions to the KRACK-JIIT CTF 2019 Organized by JIIT Open Dev Circle (jodc)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bhavsec.com/posts/steganography-beginners/" /><meta property="og:image" content="https://bhavsec.com/img/cover.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-02-07T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2019-02-07T00:00:00&#43;00:00" /><meta property="og:site_name" content="bhavsec" />
+
+
+
+
+
+
+
+  </head>
+  <body class="">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="http://bhavsec.com/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text">
+      bhavsec/</span>
+    <span class="logo__text" style="color:red">posts/</span>
+    <span class="logo__cursor"></span>
+
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="../../resume">📄 resume</a></li>
+        
+      
+        
+          <li><a href="../../posts">📚 blog</a></li>
+        
+      
+        
+          <li><a href="../../whoami">🔎 whoami </a></li>
+        
+      
+        
+          <li><a href="../../resources">🚀 resources</a></li>
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="../../resume">📄 resume</a></li>
+      
+    
+      
+        <li><a href="../../posts">📚 blog</a></li>
+      
+    
+      
+        <li><a href="../../whoami">🔎 whoami </a></li>
+      
+    
+      
+        <li><a href="../../resources">🚀 resources</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Steganography for beginners 🔏</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2019-02-07
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="../../tags/ctf/index.html">#ctf</a>&nbsp;
+        
+          <a href="../../tags/linux/index.html">#linux</a>&nbsp;
+        
+          <a href="../../tags/steganography/index.html">#steganography</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+        
+        <h2>Table of Contents</h2>
+        <aside class="table-of-contents"><nav id="TableOfContents">
+  <ul>
+    <li><a href="index.html#capture_vietnam--packets">capture_Vietnam — Packets</a></li>
+    <li><a href="index.html#capture_romania--amnesic">capture_Romania — Amnesic</a></li>
+    <li><a href="index.html#capture_poland--hexadecimal">capture_Poland — Hexadecimal</a></li>
+    <li><a href="index.html#capture_mali--bang-bang">capture_Mali — Bang Bang!</a></li>
+    <li><a href="index.html#capture_greece--decipher">capture_Greece — Decipher</a></li>
+    <li><a href="index.html#capture_croatia--last-challenge">capture_Croatia — Last Challenge</a></li>
+    <li><a href="index.html#capture_chile--decode-it">capture_Chile — Decode it</a></li>
+    <li><a href="index.html#capture_azerbaijan--in-the-front-of-you">capture_Azerbaijan — In the front of you.</a></li>
+    <li><a href="index.html#capture_egypt--read-it-again">capture_Egypt — Read it again</a></li>
+    <li><a href="index.html#capture_turkmenistan--i-am-not-what-i-look-like">capture_Turkmenistan — I am not what i look like</a></li>
+    <li><a href="index.html#capture_bolivia--gotta-catch-em-all">capture_Bolivia — Gotta Catch ’Em All!</a></li>
+    <li><a href="index.html#capture_portugal--can-you-krack-it">capture_Portugal — “Can you krack it?”</a></li>
+    <li><a href="index.html#capture_madagascar--youtube">capture_Madagascar — “YouTube”</a></li>
+    <li><a href="index.html#capture_honduras-recognize-me">capture_Honduras: “Recognize Me!”</a></li>
+  </ul>
+</nav></aside>
+        
+      
+      <p>Steganography is the technique of hiding secret data within an ordinary, non-secret, file or message in order to avoid detection; the secret data is then extracted at its destination. &hellip; The word steganography is derived from the Greek words steganos (meaning hidden or covered) and the Greek root graph (meaning to write) - Wikipedia.</p>
+<p>In this post, we are going to describe solutions to the KRACK-JIIT CTF 2019 Organized by <strong>JIIT Open Dev Circle (jodc)</strong>. This was a very interesting and beginner friendly capture-the-flag event.</p>
+<p> </p>
+<h2 id="capture_vietnam--packets">capture_Vietnam — Packets</h2>
+<p>Challenge Description: We sniffed some packets on the traffic. Who knows what you’ll find.</p>
+<p>Type: flag</p>
+<p>Category: Easy</p>
+<p>Point: 50</p>
+<p>Solution: Provided with the captured packets, we can check for the flag in pcap dumps.
+Opening the packet dump in Wireshark, we found 31 packets captured and we don’t mind to go packet by packet to get flag within 31 packets only.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/1.png" alt=""></p>
+<p>After 4–5 packets the count, we see a username logging in with username as Jerry and password as saymynameheisenberg</p>
+<p>Thus! the password is our flag</p>
+<pre><code>Flag: KJ_CTF{saymynameheisenberg}
+</code></pre><p> </p>
+<h2 id="capture_romania--amnesic">capture_Romania — Amnesic</h2>
+<p>Challenge Description: Information privacy, or data privacy, is the relationship between the collection and dissemination of data, technology, the public expectation of privacy, and the legal and political issues surrounding them.</p>
+<p>Type: flag</p>
+<p>Category: Easy</p>
+<p>Point: 50</p>
+<p>Solution: Given was an amnesic.txt which we were unable to open with a text editor taking us to first challenge that it was not a text file.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/2.png" alt=""></p>
+<p>with “file amnesic.txt” we came to know that it was an Image file.
+Renaming it with amnesic.jpeg gives us an image.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/3.png" alt=""></p>
+<p>Binwalk the image to get tor/secret.txt embedded inside the image.
+with binwalk -e amnesic.jpeg to extract known filetype embedded in the image, we got a secret.txt with the file.</p>
+<pre><code>FLAG: KJ_FLAG{3984G43GF43873897875GF4UI5ERIUVB7GVIGBIVBIUEB7GEV487}
+</code></pre><p> </p>
+<h2 id="capture_poland--hexadecimal">capture_Poland — Hexadecimal</h2>
+<p>Challenge Description: This will be really fun for you as well You have hex encoded string XOR’d against a single character. Find the key, decrypt the message.</p>
+<p>NOTE Flag looks like KJ_CTF{ here-is-your-key }</p>
+<p>Type: flag</p>
+<p>Category: Easy</p>
+<p>Point: 50</p>
+<p>Ciphertext:</p>
+<pre><code>2e2f3a2631231e1c2a10450d241320452445022a0a2145210c06112c0a0b24171c18
+</code></pre><p>Solution: Consider this as an example:</p>
+<p>The ciphertext was hex encoded string to be decrypted</p>
+<p>With the Description, we came to know that it is a Single byte XOR which was encrypted using a key</p>
+<p>plaintext</p>
+<pre><code>53454352455420444154412057452057414e5420544f20454e4352595054
+</code></pre><p>xor</p>
+<pre><code>4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b4b
+</code></pre><p>ciphertext</p>
+<pre><code>180e08190e1f6b0f0a1f0a6b1c0e6b1c0a051f6b1f046b0e050819121b1f
+</code></pre><p>Hence get K thus receiving the key and the same key is used to decrypt rest of string.</p>
+<p>exploit.py</p>
+<pre><code>import binascii
+print(“ENTER THE STRING”)
+input_string = raw_input()
+str1 = binascii.unhexlify(input_string)
+for i in range(0,255):
+str2=&quot;&quot;
+for j in range(len(str1)):
+str2 += chr(ord( str1[j] ) ^ i)
+if &quot;KJ_CTF{&quot; in str2:
+print(str2)
+</code></pre><p><img src="http://bhavsec.com/img/posts/krack-jiit/4.png" alt=""></p>
+<pre><code>Flag: KJ_CTF{yOu hAvE A gOoD DictIonAry}
+</code></pre><p> </p>
+<h2 id="capture_mali--bang-bang">capture_Mali — Bang Bang!</h2>
+<p>Challenge Description: NOTE Flag looks like KJ_CTF{ here-is-your-key }</p>
+<p>Type: flag</p>
+<p>Category: Easy</p>
+<p>Point: 50</p>
+<p>Solution: The URL in the description of challenge took us to a website which was a login portal for routers.</p>
+<p>Cracking password always taught us to try default credentials for the fields.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/5.png" alt=""></p>
+<pre><code>user: admin
+password: admin
+</code></pre><p><img src="http://bhavsec.com/img/posts/krack-jiit/6.png" alt=""></p>
+<p>we got the flag</p>
+<pre><code>Flag: KJ_CTF{gG_wP_so_thiCcK}
+</code></pre><p> </p>
+<h2 id="capture_greece--decipher">capture_Greece — Decipher</h2>
+<p>Challenge Description: NOTE Flag looks like KJ_CTF{ here-is-your-key }</p>
+<p>Type: flag</p>
+<p>Category: Easy</p>
+<p>Point: 50</p>
+<p>Solution: The ciphertext in enc.txt was only provided with jumbled text, neither of the keys was available to us nor the algorithm was known.</p>
+<p>Which makes us conclude it maybe Base64 encoding, Caeser cipher or Rot13 encoding.</p>
+<p>The cipher text was not having alphanumeric characters and the = padding at end of the string was also missing which makes base64 out of guess.</p>
+<p>Caesar cipher was tested with all possible 26 keys but none of the outcomes were meaningless, not fruitful.</p>
+<p>Coming to Rot13, when we decode the ciphertext, we get another set of meaningless ciphertext but when you search for KJ_CTF, you can find the flag in the decoded text.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/7.png" alt=""></p>
+<pre><code>Flag — KJ_CTF{crypto_first_flag}
+</code></pre><p> </p>
+<h2 id="capture_croatia--last-challenge">capture_Croatia — Last Challenge</h2>
+<p>Challenge Description:</p>
+<pre><code>Cipher1: TGFzdCBjaGFsbGVuZ2Ugb2YgS1JBQ0stSklJVC0xLjAg
+Plain1: Last challenge of KRACK-JIIT-1.0
+Cipher2: VEhBTksgWU9VIEZPUiBQTEFZSU5H
+Plain2: THANK YOU FOR PLAYING
+Cipher3: S0otQ1RGe0tJTkRMWU1BSUxZT1VSRkVFREJBQ0tUT0FOS0s5OEBHTUFJTC5DT019
+</code></pre><p>Plain: flag</p>
+<p>Note: It is the easiest challenge.</p>
+<p>Type: flag</p>
+<p>Category: Easy</p>
+<p>Point: 50</p>
+<p>Solution: Mentioned that it was the easiest challenge for KJ CTF, we decoded the base64 to plain text.</p>
+<p>*PS: all the base64 encoding doesn’t have = padding at the end.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/8.png" alt=""></p>
+<pre><code>Flag: KJ-CTF{KINDLYMAILYOURFEEDBACKTOANKK98@GMAIL.COM}
+</code></pre><p> </p>
+<h2 id="capture_chile--decode-it">capture_Chile — Decode it</h2>
+<p>Challenge Description: The author who made this Question Hates JS.</p>
+<p>NOTE Flag looks like KJ_CTF{ here-is-your-key }</p>
+<p>Type: flag</p>
+<p>Category: Easy</p>
+<p>Point: 50</p>
+<p>Solution: Given is the ciphertext which is base64 encoded(padding with = at the end)</p>
+<p>Decoding that gives us another program which was a jsfuck program as the author hates JS.</p>
+<p>jsfuck_code.png</p>
+<p>PS: Figured out JS Fuck by google search “[][(![]+[]) JS”</p>
+<p>You can further run the code in JS console or on jsfuck.com to get an alert for the flag.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/9.png" alt=""></p>
+<pre><code>Flag: KJ_JIIT{well_js_really_sucks}
+</code></pre><p> </p>
+<h2 id="capture_azerbaijan--in-the-front-of-you">capture_Azerbaijan — In the front of you.</h2>
+<p>Challenge Description: Find the flag out of the image herewith</p>
+<p>Type: flag</p>
+<p>Category: Medium</p>
+<p>Point: 100</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/10.jpeg" alt=""></p>
+<p>BBB.jpg
+Solution: Viewing the image gave no hits all red.</p>
+<p>Converting a string of image resulted in nothing.</p>
+<p>Binwalking image gave no flag either.</p>
+<p>Finally checking the metadata of the image, we got the flag.</p>
+<p>Metadata of image can be checked with exiftool in Linux or there are various online web applications to check the metadata of files.</p>
+<p>Here the website I used to get metadata. <a href="http://metapicz.com/#landing">http://metapicz.com/#landing</a></p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/11.png" alt=""></p>
+<pre><code>Flag — KJ_CTF{h3R3_1_4M}
+</code></pre><p> </p>
+<h2 id="capture_egypt--read-it-again">capture_Egypt — Read it again</h2>
+<p>Type: flag</p>
+<p>Category: Easy</p>
+<p>Point: 50</p>
+<p>Solution: After opening the flag.pdf file, we noticed “Can you krack it?” was written in text.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/12.png" alt=""></p>
+<p>After converting that flag.pdf into text format we noticed this:</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/13.png" alt=""></p>
+<p>which gave us a hint that some type of file is embedded inside this pdf.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/14.png" alt=""></p>
+<p>we tried a very popular steghide tool but no success.</p>
+<p>After a few minutes, a tool name qpdf got into my mind. This tool is mostly used by CTF players for pdf-related challenges.</p>
+<pre><code>qpdf — qdf — object-streams=disable flag.pdf out.pdf
+binwalk -Me out.pdf
+</code></pre><p><img src="http://bhavsec.com/img/posts/krack-jiit/15.png" alt=""></p>
+<pre><code>Flag: KJ_CTF{THISISKRACKJIIT}
+</code></pre><p> </p>
+<h2 id="capture_turkmenistan--i-am-not-what-i-look-like">capture_Turkmenistan — I am not what i look like</h2>
+<p>Type: flag</p>
+<p>Category: Medium</p>
+<p>Point: 100</p>
+<p>Solution: After opening this challenge link we got a .gif format file.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/16.gif" alt=""></p>
+<p>iamnotwhatilooklike.gif
+This image was looking like a QR code but colorful.</p>
+<p>This challenge took us less than 1 minute to crack.</p>
+<p>I don’t know why this challenge was in Medium Category. It was super easy.</p>
+<p>Just open images.google.com and upload that image.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/17.png" alt=""></p>
+<p>And after uploading that image we got the flag. SERIOUSLY WTF!!!!!!!!</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/18.png" alt=""></p>
+<p>It was written “Hello, world!” in Piet programming language</p>
+<pre><code>Flag: KJ_CTF{Hello, world!}
+</code></pre><p> </p>
+<h2 id="capture_bolivia--gotta-catch-em-all">capture_Bolivia — Gotta Catch ’Em All!</h2>
+<p>Type: flag</p>
+<p>Category: Medium</p>
+<p>Point: 100</p>
+<p>Solution: After opening the link we noticed that a sound was playing</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/19.png" alt=""></p>
+<p>checked source code of the page and got this sound file</p>
+<p>I have solved a lot of these type of challenges before.</p>
+<p>That sound was “morse code”.</p>
+<p>I remember when I was a kid, I visit the police station where my dad works and they showed me the machine which exactly creates a sound like that for communication between departments.</p>
+<p>So searched on google: “Morse sound to text converter” and uploaded that file on <a href="https://morsecode.scphillips.com/labs/audio-decoder-adaptive/">https://morsecode.scphillips.com/labs/audio-decoder-adaptive/</a></p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/20.png" alt=""></p>
+<pre><code>Result: PIKAPIKACHUU
+</code></pre><p>Got the result from that sound file, But that was not a flag and value adminwas not editable. So tried to intercepting the request with Burp Suite.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/21.png" alt=""></p>
+<p>Entered the output of morse code in pass= parameter and forward the request.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/22.png" alt=""></p>
+<p>Achieved flag on the next page.</p>
+<pre><code>Flag: KJ_CTF{truST_iS_daNgeRs_G@me}
+</code></pre><p> </p>
+<h2 id="capture_portugal--can-you-krack-it">capture_Portugal — “Can you krack it?”</h2>
+<p>Challenge Description: In this challenge, a zip file was given with named “Krack-it.zip” which was locked with a password.</p>
+<p>Challenge URL: <a href="https://drive.google.com/file/d/18znNYcX5-4KYdewTR3IC6_5KnctkOYr_/view?usp=sharing">https://drive.google.com/file/d/18znNYcX5-4KYdewTR3IC6_5KnctkOYr_/view?usp=sharing</a></p>
+<p>Type: flag</p>
+<p>Category: Easy</p>
+<p>Points: 50</p>
+<p>Solution: So seeing that the challenge is categorized as easy there is nothing much to think after reading the name of the challenge and the name of the zip file, it was sure that we have to crack the zip file to reveal the flag, now the thing was how to do it?? For this, we used a tool called “fcrackzip” and used rockyou.txt as our wordlist as its most common wordlist being used in CTFs,</p>
+<p>SYNTAX:</p>
+<pre><code>fcrackzip -u -D -p ‘rockyou.txt’ ‘krack-it.zip’
+</code></pre><p>After which we got our flag!!!!</p>
+<pre><code>Flag: KJ_CTF{OWEI843TYINFO8HVNWR8Y43FIN3W48FINV3W89Y4FV43INV384V34WH983NO}
+</code></pre><p> </p>
+<h2 id="capture_madagascar--youtube">capture_Madagascar — “YouTube”</h2>
+<p>Challenge Description: In this challenge, we were provided a link and nothing more than that.</p>
+<p>Type: flag</p>
+<p>Category: Easy</p>
+<p>Points: 50</p>
+<p>Solution: The first thing done was visiting the link provided to us, it was a basic webpage with a link given Watch Me! of a youtube video.</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/23.jpeg" alt=""></p>
+<p>But since we were playing the CTF I thought why not see the source code of the website before enjoying some youtube videos? And voila!!! we got our flag!!!</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/24.jpeg" alt=""></p>
+<p>After that, I opened the video and guess what?? the link was of the trailer of the movie “Source Code”.</p>
+<pre><code>Flag: KJ_CTF{n00bs_lOvees_b00}
+</code></pre><p> </p>
+<h2 id="capture_honduras-recognize-me">capture_Honduras: “Recognize Me!”</h2>
+<p>Challenge Description: This challenge was categorized under Cryptography, the description provided was nothing but what is the meaning of cryptography? Other than that an image was provided (can we call it a cipher?).</p>
+<p><img src="http://bhavsec.com/img/posts/krack-jiit/25.jpeg" alt=""></p>
+<p>Link of the image: <a href="https://drive.google.com/file/d/1AvVJLzJUx1BAuoN1vEAyjcsLEKntpHS4/view?usp=sharing">https://drive.google.com/file/d/1AvVJLzJUx1BAuoN1vEAyjcsLEKntpHS4/view?usp=sharing</a></p>
+<p>Type: flag</p>
+<p>Category: Easy</p>
+<p>Points: 50</p>
+<p>Solution: The solution was easy as f@#k but the thing is, it was a tricky one (kind of!), after wasting my time trying to decode it, understanding the cipher, trying all sort of steganography on the image, analyzing the image for some compressed data nothing worked!? the reason was that the text displayed in the image was not the cipher!! But it was the flag (-_-) (answer to my question was, hell no!!! it can’t be called a ciphertext).</p>
+<pre><code>Flag:KJ_CTF{aima0AiwahsidupaiToehoong1PhieruqueivahphieKah7uceetair9aiGae1eSsaedoo4becooShohhu8eifahXi7EJoh2gaephechei5chiP9}
+</code></pre><p> </p>
+<p>Thanks for reading this post, if you like my work you can support by <a href="https://www.buymeacoffee.com/bhavsec">buying me a coffee</a>. ☕️</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="https://bhavsec.com/posts/mssql-rce/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">From MSSQL to RCE 🚀</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="https://bhavsec.com/posts/pewdiepie-printerhack/">
+                  <span class="button__text">Mass Printer Hacking Case Study 🖨</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      
+      <div class="copyright">
+        <span> 
+          © 2018-2022
+        </span>
+      </div>
+      <div>
+        <span>    
+        <span>
+        <a href="../../archive">archive</a>
+        &nbsp; 
+        </span>
+          <a href="../../newsletter">newsletter</a>
+        </span>   
+        &nbsp;      
+        <span>
+          <a href="https://creativecommons.org/licenses/by-nc/4.0/" target=”_blank”>license</a>
+        </span>
+        &nbsp;      
+        <span>
+          <a href="http://bhavsec.com/posts/index.xml" target=”_blank”>rss feed</a>
+        </span>
+
+      </div>
+
+    
+  </div>
+</footer>
+
+<script src="../../assets/main.js"></script>
+<script src="../../assets/prism.js"></script>
+
+      
+    </div>
+
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VY7WJZSQD0"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-VY7WJZSQD0', { 'anonymize_ip': false });
+}
+</script>
+
+    
+  </body>
+</html>

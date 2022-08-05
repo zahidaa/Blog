@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cloudsecurity on bhavsec</title>
+    
+    
+    
+    <link>https://bhavsec.com/tags/cloudsecurity/</link>
+    <description>Recent content in cloudsecurity on bhavsec</description>
+    <generator>bhavsec.com</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 06 Jan 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://bhavsec.com/tags/cloudsecurity/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Introduction to Azure Pentesting ☁️</title>
+      <link>https://bhavsec.com/posts/intro-to-azure-pentesting/</link>
+      <pubDate>Thu, 06 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/intro-to-azure-pentesting/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          More than 95 percent of Fortune 500 companies use Azure! Azure AD is one of world&amp;rsquo;s largest web-based identity provider. Having the ability to understand and hack (thus securing) Azure is a skill that is in huge demand.
+This blog covers the lab work done in Introduction to Azure Penetration Testing labs &amp;amp; training provided by Nikhil Mittal and Altered Security.
+Course Video : https://youtu.be/5dVSHuCEG2w
+Free Labs: https://azure.enterprisesecurity.io
+Discovery We just know the name of the target organization - EvilCorp.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tryhackme on bhavsec</title>
+    
+    
+    
+    <link>https://bhavsec.com/tags/tryhackme/</link>
+    <description>Recent content in tryhackme on bhavsec</description>
+    <generator>bhavsec.com</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 27 Jan 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://bhavsec.com/tags/tryhackme/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Steel Mountain 🏔</title>
+      <link>https://bhavsec.com/posts/steel-mountain/</link>
+      <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/steel-mountain/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.
+Nmap nmap -sC -sV -Pn 10.10.100.168 130 ⨯ Starting Nmap 7.92 ( https://nmap.org ) at 2022-01-24 23:29 EST Nmap scan report for 10.10.100.168 Host is up (0.21s latency). Not shown: 988 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 8.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

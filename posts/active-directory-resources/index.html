@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Active Directory Pentesting Resources 📚 ::
+        bhavsec — portfolio &amp; blog
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="This post contains Active Directory Pentesting resources to prepare for new OSCP (2022) exam.
+Youtube/Twitch Videos Active Directory madness and the Esoteric Cult of Domain Admin! - alh4zr3d
+TryHackMe - Advent of Cyber &#43; Active Directory - tib3rius
+Common Active Directory Attacks: Back to the Basics of Security Practices - TrustedSec
+How to build an Active Directory Lab - The Cyber Mentor
+Zero to Hero (Episode 8,9,10) - The Cyber Mentor"
+/>
+<meta
+  name="keywords"
+  content="bhavsec, cybersecurity, penetration testing"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://bhavsec.com/posts/active-directory-resources/" />
+
+
+
+
+
+<link rel="stylesheet" href="../../assets/style.css" />
+
+<link rel="stylesheet" href="../../style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="../../img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="../../img/favicon.png" />
+
+
+<link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://bhavsec.com/img/cover.png"/>
+
+<meta name="twitter:title" content="Active Directory Pentesting Resources 📚"/>
+<meta name="twitter:description" content="This post contains Active Directory Pentesting resources to prepare for new OSCP (2022) exam.
+Youtube/Twitch Videos Active Directory madness and the Esoteric Cult of Domain Admin! - alh4zr3d
+TryHackMe - Advent of Cyber &#43; Active Directory - tib3rius
+Common Active Directory Attacks: Back to the Basics of Security Practices - TrustedSec
+How to build an Active Directory Lab - The Cyber Mentor
+Zero to Hero (Episode 8,9,10) - The Cyber Mentor"/>
+
+
+
+<meta property="og:title" content="Active Directory Pentesting Resources 📚" />
+<meta property="og:description" content="This post contains Active Directory Pentesting resources to prepare for new OSCP (2022) exam.
+Youtube/Twitch Videos Active Directory madness and the Esoteric Cult of Domain Admin! - alh4zr3d
+TryHackMe - Advent of Cyber &#43; Active Directory - tib3rius
+Common Active Directory Attacks: Back to the Basics of Security Practices - TrustedSec
+How to build an Active Directory Lab - The Cyber Mentor
+Zero to Hero (Episode 8,9,10) - The Cyber Mentor" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bhavsec.com/posts/active-directory-resources/" /><meta property="og:image" content="https://bhavsec.com/img/cover.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-09T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-01-09T00:00:00&#43;00:00" /><meta property="og:site_name" content="bhavsec" />
+
+
+
+
+
+
+
+  </head>
+  <body class="">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="http://bhavsec.com/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text">
+      bhavsec/</span>
+    <span class="logo__text" style="color:red">posts/</span>
+    <span class="logo__cursor"></span>
+
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="../../resume">📄 resume</a></li>
+        
+      
+        
+          <li><a href="../../posts">📚 blog</a></li>
+        
+      
+        
+          <li><a href="../../whoami">🔎 whoami </a></li>
+        
+      
+        
+          <li><a href="../../resources">🚀 resources</a></li>
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="../../resume">📄 resume</a></li>
+      
+    
+      
+        <li><a href="../../posts">📚 blog</a></li>
+      
+    
+      
+        <li><a href="../../whoami">🔎 whoami </a></li>
+      
+    
+      
+        <li><a href="../../resources">🚀 resources</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Active Directory Pentesting Resources 📚</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2022-01-09
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="../../tags/active-directory/index.html">#active directory</a>&nbsp;
+        
+          <a href="../../tags/pentesting/index.html">#pentesting</a>&nbsp;
+        
+          <a href="../../tags/labs/index.html">#labs</a>&nbsp;
+        
+          <a href="../../tags/infosec/index.html">#infosec</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <p>This post contains Active Directory Pentesting resources to prepare for new OSCP (2022) exam.</p>
+<h2 id="youtubetwitch-videos">Youtube/Twitch Videos</h2>
+<p><a href="https://www.twitch.tv/videos/1226939236">Active Directory madness and the Esoteric Cult of Domain Admin!</a> - alh4zr3d</p>
+<p><a href="https://www.twitch.tv/0xtib3rius/video/1229881105">TryHackMe - Advent of Cyber + Active Directory</a> - tib3rius</p>
+<p><a href="https://www.youtube.com/watch?v=vga7A2tYejE">Common Active Directory Attacks: Back to the Basics of Security Practices</a> - TrustedSec</p>
+<p><a href="https://www.youtube.com/watch?v=xftEuVQ7kY0">How to build an Active Directory Lab</a> - The Cyber Mentor</p>
+<p><a href="https://www.youtube.com/playlist?list=PLLKT__MCUeiwBa7d7F_vN1GUwz_2TmVQj">Zero to Hero</a> (Episode 8,9,10) - The Cyber Mentor</p>
+<h2 id="blogs">Blogs</h2>
+<p><a href="https://adam-toscher.medium.com/top-five-ways-i-got-domain-admin-on-your-internal-network-before-lunch-2018-edition-82259ab73aaa">Top Five Ways I Got Domain Admin on Your Internal Network before Lunch</a></p>
+<p><a href="https://medium.com/@Dmitriy_Area51/active-directory-penetration-testing-d9180bff24a1">https://medium.com/@Dmitriy_Area51/active-directory-penetration-testing-d9180bff24a1</a></p>
+<p><a href="https://book.hacktricks.xyz/windows/active-directory-methodology">https://book.hacktricks.xyz/windows/active-directory-methodology</a></p>
+<p><a href="https://zer1t0.gitlab.io/posts/attacking_ad/">https://zer1t0.gitlab.io/posts/attacking_ad/</a></p>
+<h2 id="cheatsheets">Cheatsheets</h2>
+<p><a href="https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet">https://github.com/S1ckB0y1337/Active-Directory-Exploitation-Cheat-Sheet</a></p>
+<p><a href="https://infosecwriteups.com/active-directory-penetration-testing-cheatsheet-5f45aa5b44ff">https://infosecwriteups.com/active-directory-penetration-testing-cheatsheet-5f45aa5b44ff</a></p>
+<h2 id="tryhackme-vipfree-labs">TryHackMe VIP/Free Labs</h2>
+<p><a href="https://tryhackme.com/room/activedirectorybasics">Active Directory Basics</a> - Easy</p>
+<p><a href="https://tryhackme.com/room/postexploit">Post-Exploitation Basics</a> - Easy</p>
+<p><a href="https://tryhackme.com/room/vulnnetroasted">Vulnnet Roasted</a> - Easy</p>
+<p><a href="https://tryhackme.com/room/attacktivedirectory">Attacktive Directory</a> - Medium</p>
+<p><a href="https://tryhackme.com/room/raz0rblack">raz0r black</a> - Medium</p>
+<p><a href="https://tryhackme.com/room/enterprise">Enterprise</a> - Medium</p>
+<p><a href="https://tryhackme.com/room/vulnnetactive">Vulnnet Active</a> - Medium</p>
+<p><a href="https://tryhackme.com/room/zer0logon">Zero Logon</a> - Hard</p>
+<h2 id="tryhackme-paid-labs-10---60--month">TryHackMe Paid Labs ($10 - $60 / month)</h2>
+<p><a href="https://tryhackme.com/room/hololive">Holo</a> - Hard</p>
+<p><a href="https://tryhackme.com/network/throwback">Throwback</a> - Easy</p>
+<h2 id="hackthebox-subscriptionfree-labs">HackTheBox Subscription/Free Labs</h2>
+<p><a href="https://app.hackthebox.com/machines/212">Forest</a> - Easy</p>
+<p><a href="https://app.hackthebox.com/machines/148">Active</a> - Easy</p>
+<p><a href="https://app.hackthebox.com/machines/256">Fuse</a> - Medium</p>
+<p><a href="https://app.hackthebox.com/machines/235">Cascade</a> - Medium</p>
+<p><a href="https://app.hackthebox.com/machines/223">Monteverde</a> - Medium</p>
+<p><a href="https://app.hackthebox.com/machines/220">Resolute</a> - Medium</p>
+<p><a href="https://app.hackthebox.com/machines/179">Arkham</a> - Medium</p>
+<p><a href="https://app.hackthebox.com/machines/98">Mantis</a> - Hard</p>
+<p><a href="https://app.hackthebox.com/machines/296">APT</a> - Insane</p>
+<h2 id="hackthebox-pro-labs-95--27month">HackTheBox Pro Labs ($95 + $27/month)</h2>
+<p><a href="https://app.hackthebox.com/prolabs/overview/dante">Dante</a> - Beginner</p>
+<p><a href="https://app.hackthebox.com/prolabs/overview/offshore">Offshore</a> - Intermediate</p>
+<p><a href="https://app.hackthebox.com/prolabs/overview/rastalabs">RastaLabs</a> - Intermediate</p>
+<p><a href="https://app.hackthebox.com/prolabs/overview/cybernetics">Cybernetics</a> - Advanced</p>
+<p><a href="https://app.hackthebox.com/prolabs/overview/aptlabs">APT Labs</a> - Advanced</p>
+<h2 id="hackthebox-academy-paid">HackTheBox Academy (Paid)</h2>
+<p><a href="https://academy.hackthebox.com/course/preview/active-directory-ldap">ActiveDirectory LDAP</a> - Medium</p>
+<p><a href="https://academy.hackthebox.com/course/preview/active-directory-powerview">ActiveDirectory Powerview</a> - Medium</p>
+<p><a href="https://academy.hackthebox.com/course/preview/active-directory-bloodhound">ActiveDirectory BloodHound</a> - Medium</p>
+<h2 id="cyberseclabs-walkthrough">CyberSecLabs Walkthrough</h2>
+<p><a href="https://youtu.be/i4bc0N0dMx4">Secret</a></p>
+<p><a href="https://youtu.be/AqYLF4JavfE">Zero</a></p>
+<p><a href="https://youtu.be/dO3UwMbV6-A">Brute</a></p>
+<p><a href="https://youtu.be/yUtgruE664g">Dictionary</a></p>
+<p><a href="https://youtu.be/_VG1g_XRw4U">Roast</a></p>
+<p><a href="https://youtu.be/pmaeQlFkFV0">Spray</a></p>
+<p><a href="https://youtu.be/ndBZSWKo54c">Sync</a></p>
+<p><a href="https://youtu.be/CndMDvjX8dg">Toast</a></p>
+<h2 id="certifications">Certifications</h2>
+<p><a href="https://www.offensive-security.com/pwk-oscp/">OSCP - Offensive Security Certified Professional - Offsec</a> - Intermediate</p>
+<p><a href="https://www.pentesteracademy.com/activedirectorylab">CRTP - Certified Red Team Professional - Pentester Academy</a> - Beginner</p>
+<p><a href="https://www.pentesteracademy.com/redteamlab">CRTE - Certified Red Team Expert - Pentester Academy</a> - Expert</p>
+<p><a href="https://www.zeropointsecurity.co.uk/red-team-ops/overview">CRTO - Certified Red Team Operator - Zeropoint Security</a> - Intermediate</p>
+<h2 id="courses">Courses</h2>
+<p><a href="https://academy.tcm-sec.com/p/practical-ethical-hacking-the-complete-course">Practical Ethical Hacking - TCM Security</a></p>
+<p><a href="https://www.udemy.com/course/active-directory-red-team-hacking/">Active Directory Pentesting Full Course - Red Team Hacking</a></p>
+<p><a href="https://www.udemy.com/course/red-team-post-exploitation-beginner/">Red Team Ethical Hacking - Beginner</a></p>
+<p><a href="https://www.udemy.com/course/red-team-ethical-hacking-intermediate/">Red Team Ethical Hacking - Intermediate</a></p>
+<h2 id="tools-and-repositories">Tools and Repositories</h2>
+<p><a href="https://github.com/samratashok/nishang">Nishang</a></p>
+<p><a href="https://github.com/gentilkiwi/mimikatz">Mimikatz</a></p>
+<p><a href="https://github.com/gentilkiwi/kekeo">Kekeo</a></p>
+<p><a href="https://github.com/GhostPack/Rubeus">Rubeus</a></p>
+<p><a href="https://github.com/PowerShellMafia/PowerSploit">Powersploit</a></p>
+<p><a href="https://github.com/besimorhino/powercat">Powercat</a></p>
+<p><a href="https://github.com/NetSPI/PowerUpSQL">PowerUpSQL</a></p>
+<p><a href="https://www.heidisql.com/">HeidiSQL</a></p>
+<h2 id="proving-grounds-playground---offensive-security">Proving Grounds Playground - Offensive Security</h2>
+<p>Hutch, Heist &amp; Vault</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="https://bhavsec.com/posts/steel-mountain/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">Steel Mountain 🏔</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="https://bhavsec.com/posts/intro-to-azure-pentesting/">
+                  <span class="button__text">Introduction to Azure Pentesting ☁️</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      
+      <div class="copyright">
+        <span> 
+          © 2018-2022
+        </span>
+      </div>
+      <div>
+        <span>    
+        <span>
+        <a href="../../archive">archive</a>
+        &nbsp; 
+        </span>
+          <a href="../../newsletter">newsletter</a>
+        </span>   
+        &nbsp;      
+        <span>
+          <a href="https://creativecommons.org/licenses/by-nc/4.0/" target=”_blank”>license</a>
+        </span>
+        &nbsp;      
+        <span>
+          <a href="http://bhavsec.com/posts/index.xml" target=”_blank”>rss feed</a>
+        </span>
+
+      </div>
+
+    
+  </div>
+</footer>
+
+<script src="../../assets/main.js"></script>
+<script src="../../assets/prism.js"></script>
+
+      
+    </div>
+
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VY7WJZSQD0"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-VY7WJZSQD0', { 'anonymize_ip': false });
+}
+</script>
+
+    
+  </body>
+</html>

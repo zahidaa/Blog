@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>appsec on bhavsec</title>
+    
+    
+    
+    <link>https://bhavsec.com/tags/appsec/</link>
+    <description>Recent content in appsec on bhavsec</description>
+    <generator>bhavsec.com</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 30 Mar 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://bhavsec.com/tags/appsec/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Spring4Shell 🍃</title>
+      <link>https://bhavsec.com/posts/spring4shell/</link>
+      <pubDate>Wed, 30 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/spring4shell/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          A new zero-day vulnerability in the Spring Core Java framework called &amp;lsquo;Spring4Shell&amp;rsquo; has been publicly disclosed, allowing unauthenticated remote code execution on applications.
+Spring is a very popular application framework that allows software developers to quickly and easily develop Java applications with enterprise-level features. These applications can then be deployed on servers, such as Apache Tomcat, as stand-alone packages with all the required dependencies.
+Today, an exploit for this zero-day vulnerability was briefly leaked and then removed but not before cybersecurity researchers could download the code.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

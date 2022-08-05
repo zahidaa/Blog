@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>burp on bhavsec</title>
+    
+    
+    
+    <link>https://bhavsec.com/tags/burp/</link>
+    <description>Recent content in burp on bhavsec</description>
+    <generator>bhavsec.com</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 14 Jul 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://bhavsec.com/tags/burp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bash and the Shellshock ⚡️</title>
+      <link>https://bhavsec.com/posts/shellshock/</link>
+      <pubDate>Wed, 14 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/shellshock/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Introduction to ShellShock ShellShock Vulnerability [CVE-2014-6271], also known as Bashdoor, is a family of security bugs in the Unix Bash shell, the first of which was disclosed on 24 September 2014. Shellshock could enable an attacker to cause Bash to execute arbitrary commands and gain unauthorized access to many Internet-facing services, such as web servers, that use Bash to process requests.
+Shellshock is a privilege escalation vulnerability that offers a way for users of a system to execute commands that should be unavailable to them.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

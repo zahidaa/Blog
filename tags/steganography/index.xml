@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>steganography on bhavsec</title>
+    
+    
+    
+    <link>https://bhavsec.com/tags/steganography/</link>
+    <description>Recent content in steganography on bhavsec</description>
+    <generator>bhavsec.com</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 07 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://bhavsec.com/tags/steganography/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Steganography for beginners 🔏</title>
+      <link>https://bhavsec.com/posts/steganography-beginners/</link>
+      <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/steganography-beginners/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Steganography is the technique of hiding secret data within an ordinary, non-secret, file or message in order to avoid detection; the secret data is then extracted at its destination. &amp;hellip; The word steganography is derived from the Greek words steganos (meaning hidden or covered) and the Greek root graph (meaning to write) - Wikipedia.
+In this post, we are going to describe solutions to the KRACK-JIIT CTF 2019 Organized by JIIT Open Dev Circle (jodc).
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

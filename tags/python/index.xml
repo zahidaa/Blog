@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on bhavsec</title>
+    
+    
+    
+    <link>https://bhavsec.com/tags/python/</link>
+    <description>Recent content in python on bhavsec</description>
+    <generator>bhavsec.com</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 16 Jul 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://bhavsec.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Boom Bashed 🧨💥</title>
+      <link>https://bhavsec.com/posts/boom-bashed/</link>
+      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/boom-bashed/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Bashed is a retired HackTheBox machine, rated easy and rightfully. We&amp;rsquo;ll start by finding a hidden web shell to quickly gaining root level access due to misconfigured permissions to users.
+Reconnaissance nmap scan Starting the reconnaissance with an initial Nmap scan.
+nmap -sC -sV -oA nmap/bashed 10.129.183.146 -sC: run default nmap scripts
+-sV: detect service version
+-oA: output all formats and store in file nmap/bashed
+Nmap scan report for 10.129.183.146 Host is up (0.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>FreeFloat FTP Buffer Overflow 🪣💦</title>
+      <link>https://bhavsec.com/posts/buff-freefloatftp/</link>
+      <pubDate>Thu, 01 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/buff-freefloatftp/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          In this writeup i&amp;rsquo;ll demonstrate how to exploit Buffer Overflow in FreeFloat FTP Server on windows. The vulnerable application is can be downloaded from Here.
+The Freefloat FTP Server has many vulnerable parameters which can be useful to practice and we will choose one of them here to do a full exercise.
+ Lab details Victim Machine: Windows XP SP1 x64 2003
+Application: FreeFloat Ftp Server (Version 1.00)
+Attacker Machine: Kali Linux 2021.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

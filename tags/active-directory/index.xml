@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>active directory on bhavsec</title>
+    
+    
+    
+    <link>https://bhavsec.com/tags/active-directory/</link>
+    <description>Recent content in active directory on bhavsec</description>
+    <generator>bhavsec.com</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Jan 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://bhavsec.com/tags/active-directory/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Active Directory Pentesting Resources 📚</title>
+      <link>https://bhavsec.com/posts/active-directory-resources/</link>
+      <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://bhavsec.com/posts/active-directory-resources/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          This post contains Active Directory Pentesting resources to prepare for new OSCP (2022) exam.
+Youtube/Twitch Videos Active Directory madness and the Esoteric Cult of Domain Admin! - alh4zr3d
+TryHackMe - Advent of Cyber + Active Directory - tib3rius
+Common Active Directory Attacks: Back to the Basics of Security Practices - TrustedSec
+How to build an Active Directory Lab - The Cyber Mentor
+Zero to Hero (Episode 8,9,10) - The Cyber Mentor
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>
