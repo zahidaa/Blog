@@ -110,12 +110,21 @@ No Spam, I promise!" />
         <div class="post-meta">
         </div>
         <div class="post-content">
-          <img style="width:330px" src="../img/newsletter.gif" />
           <p>Sign up for the <a href="https://tinyletter.com/hackerwasii">newsletter</a> or use this <a
               href="../posts/index.xml">RSS feed</a> with any of these <a
               href="https://feedly.com/apps.html#popular">News Reader Apps</a> to get notified of new blog posts.</p>
           <p>No Spam, I promise!</p>
-          <form style="border:1px solid #ccc;padding:3px;text-align:center;" action="https://tinyletter.com/hackerwasii" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/hackerwasii', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Enter your email address</label></p><p><input type="text" style="width:140px" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" /><p><a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a></p></form>
+          <form id="EmailVal" style="padding:4px; text-align:center;" action="https://tinyletter.com/hackerwasii" method="post"
+            target="popupwindow"
+            onsubmit="window.open('https://tinyletter.com/hackerwasii', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+            <div class="field">
+              <input id="inputem" type="email" class="email" name="email" placeholder="Enter Your Email Address" onkeydown="validation()" required>
+            </div>
+            <div class="field btn">
+              <div class="layer"></div>
+              <button id="textfor" type="submit" name="subscribe">Subscribe Now</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

