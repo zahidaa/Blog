@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>infosec on bhavsec</title>
+    <title>infosec on hackerwasii</title>
     
     
     
-    <link>https://bhavsec.com/tags/infosec/</link>
-    <description>Recent content in infosec on bhavsec</description>
-    <generator>bhavsec.com</generator>
+    <link>https://hackerwasii.com/tags/infosec/</link>
+    <description>Recent content in infosec on hackerwasii</description>
+    <generator>hackerwasii.com</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 30 Jan 2022 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://bhavsec.com/tags/infosec/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hackerwasii.com/tags/infosec/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>eJPT Cheatsheet 🎓</title>
-      <link>https://bhavsec.com/posts/ejpt-cheatsheet/</link>
+      <link>https://hackerwasii.com/posts/ejpt-cheatsheet/</link>
       <pubDate>Sun, 30 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://bhavsec.com/posts/ejpt-cheatsheet/</guid>
+      <guid>https://hackerwasii.com/posts/ejpt-cheatsheet/</guid>
       <description>
         
           
@@ -42,10 +42,10 @@ watch -n 10 &amp;quot;nmap -e wlan0 -Pn -T5 -S 192.
     
     <item>
       <title>Steel Mountain 🏔</title>
-      <link>https://bhavsec.com/posts/steel-mountain/</link>
+      <link>https://hackerwasii.com/posts/steel-mountain/</link>
       <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://bhavsec.com/posts/steel-mountain/</guid>
+      <guid>https://hackerwasii.com/posts/steel-mountain/</guid>
       <description>
         
           
@@ -63,10 +63,10 @@ Nmap nmap -sC -sV -Pn 10.10.100.168 130 ⨯ Starting Nmap 7.92 ( https://nmap.or
     
     <item>
       <title>Active Directory Pentesting Resources 📚</title>
-      <link>https://bhavsec.com/posts/active-directory-resources/</link>
+      <link>https://hackerwasii.com/posts/active-directory-resources/</link>
       <pubDate>Sun, 09 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://bhavsec.com/posts/active-directory-resources/</guid>
+      <guid>https://hackerwasii.com/posts/active-directory-resources/</guid>
       <description>
         
           

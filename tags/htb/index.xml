@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>htb on bhavsec</title>
+    <title>htb on hackerwasii</title>
     
     
     
-    <link>https://bhavsec.com/tags/htb/</link>
-    <description>Recent content in htb on bhavsec</description>
-    <generator>bhavsec.com</generator>
+    <link>https://hackerwasii.com/tags/htb/</link>
+    <description>Recent content in htb on hackerwasii</description>
+    <generator>hackerwasii.com</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 16 Jul 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://bhavsec.com/tags/htb/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hackerwasii.com/tags/htb/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Boom Bashed 🧨💥</title>
-      <link>https://bhavsec.com/posts/boom-bashed/</link>
+      <link>https://hackerwasii.com/posts/boom-bashed/</link>
       <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://bhavsec.com/posts/boom-bashed/</guid>
+      <guid>https://hackerwasii.com/posts/boom-bashed/</guid>
       <description>
         
           
@@ -41,10 +41,10 @@ Nmap scan report for 10.129.183.146 Host is up (0.
     
     <item>
       <title>Bash and the Shellshock ⚡️</title>
-      <link>https://bhavsec.com/posts/shellshock/</link>
+      <link>https://hackerwasii.com/posts/shellshock/</link>
       <pubDate>Wed, 14 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://bhavsec.com/posts/shellshock/</guid>
+      <guid>https://hackerwasii.com/posts/shellshock/</guid>
       <description>
         
           
@@ -62,10 +62,10 @@ Shellshock is a privilege escalation vulnerability that offers a way for users o
     
     <item>
       <title>Exploiting PHP deserialization 🔐</title>
-      <link>https://bhavsec.com/posts/php-deserialization/</link>
+      <link>https://hackerwasii.com/posts/php-deserialization/</link>
       <pubDate>Wed, 26 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://bhavsec.com/posts/php-deserialization/</guid>
+      <guid>https://hackerwasii.com/posts/php-deserialization/</guid>
       <description>
         
           
@@ -83,10 +83,10 @@ Insecure deserialization vulnerabilities happen when applications deserialize ob
     
     <item>
       <title>From MSSQL to RCE 🚀</title>
-      <link>https://bhavsec.com/posts/mssql-rce/</link>
+      <link>https://hackerwasii.com/posts/mssql-rce/</link>
       <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://bhavsec.com/posts/mssql-rce/</guid>
+      <guid>https://hackerwasii.com/posts/mssql-rce/</guid>
       <description>
         
           

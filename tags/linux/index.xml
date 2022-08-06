@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>linux on bhavsec</title>
+    <title>linux on hackerwasii</title>
     
     
     
-    <link>https://bhavsec.com/tags/linux/</link>
-    <description>Recent content in linux on bhavsec</description>
-    <generator>bhavsec.com</generator>
+    <link>https://hackerwasii.com/tags/linux/</link>
+    <description>Recent content in linux on hackerwasii</description>
+    <generator>hackerwasii.com</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 16 Jul 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://bhavsec.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hackerwasii.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Boom Bashed 🧨💥</title>
-      <link>https://bhavsec.com/posts/boom-bashed/</link>
+      <link>https://hackerwasii.com/posts/boom-bashed/</link>
       <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://bhavsec.com/posts/boom-bashed/</guid>
+      <guid>https://hackerwasii.com/posts/boom-bashed/</guid>
       <description>
         
           
@@ -41,10 +41,10 @@ Nmap scan report for 10.129.183.146 Host is up (0.
     
     <item>
       <title>Steganography for beginners 🔏</title>
-      <link>https://bhavsec.com/posts/steganography-beginners/</link>
+      <link>https://hackerwasii.com/posts/steganography-beginners/</link>
       <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://bhavsec.com/posts/steganography-beginners/</guid>
+      <guid>https://hackerwasii.com/posts/steganography-beginners/</guid>
       <description>
         
           

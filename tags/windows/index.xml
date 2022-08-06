@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>windows on bhavsec</title>
+    <title>windows on hackerwasii</title>
     
     
     
-    <link>https://bhavsec.com/tags/windows/</link>
-    <description>Recent content in windows on bhavsec</description>
-    <generator>bhavsec.com</generator>
+    <link>https://hackerwasii.com/tags/windows/</link>
+    <description>Recent content in windows on hackerwasii</description>
+    <generator>hackerwasii.com</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 27 Jan 2022 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://bhavsec.com/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hackerwasii.com/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Steel Mountain 🏔</title>
-      <link>https://bhavsec.com/posts/steel-mountain/</link>
+      <link>https://hackerwasii.com/posts/steel-mountain/</link>
       <pubDate>Thu, 27 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://bhavsec.com/posts/steel-mountain/</guid>
+      <guid>https://hackerwasii.com/posts/steel-mountain/</guid>
       <description>
         
           
@@ -37,10 +37,10 @@ Nmap nmap -sC -sV -Pn 10.10.100.168 130 ⨯ Starting Nmap 7.92 ( https://nmap.or
     
     <item>
       <title>FreeFloat FTP Buffer Overflow 🪣💦</title>
-      <link>https://bhavsec.com/posts/buff-freefloatftp/</link>
+      <link>https://hackerwasii.com/posts/buff-freefloatftp/</link>
       <pubDate>Thu, 01 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://bhavsec.com/posts/buff-freefloatftp/</guid>
+      <guid>https://hackerwasii.com/posts/buff-freefloatftp/</guid>
       <description>
         
           
@@ -61,10 +61,10 @@ Attacker Machine: Kali Linux 2021.
     
     <item>
       <title>Exploiting PHP deserialization 🔐</title>
-      <link>https://bhavsec.com/posts/php-deserialization/</link>
+      <link>https://hackerwasii.com/posts/php-deserialization/</link>
       <pubDate>Wed, 26 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://bhavsec.com/posts/php-deserialization/</guid>
+      <guid>https://hackerwasii.com/posts/php-deserialization/</guid>
       <description>
         
           
@@ -82,10 +82,10 @@ Insecure deserialization vulnerabilities happen when applications deserialize ob
     
     <item>
       <title>From MSSQL to RCE 🚀</title>
-      <link>https://bhavsec.com/posts/mssql-rce/</link>
+      <link>https://hackerwasii.com/posts/mssql-rce/</link>
       <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://bhavsec.com/posts/mssql-rce/</guid>
+      <guid>https://hackerwasii.com/posts/mssql-rce/</guid>
       <description>
         
           
