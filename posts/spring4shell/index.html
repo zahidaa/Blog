@@ -1,348 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    
-      <title>
-        Spring4Shell 🍃 ::
-        bhavsec — portfolio &amp; blog
-      </title>
-    
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta
-  name="description"
-  content="A new zero-day vulnerability in the Spring Core Java framework called &amp;lsquo;Spring4Shell&amp;rsquo; has been publicly disclosed, allowing unauthenticated remote code execution on applications.
-Spring is a very popular application framework that allows software developers to quickly and easily develop Java applications with enterprise-level features. These applications can then be deployed on servers, such as Apache Tomcat, as stand-alone packages with all the required dependencies.
-Today, an exploit for this zero-day vulnerability was briefly leaked and then removed but not before cybersecurity researchers could download the code."
-/>
-<meta
-  name="keywords"
-  content="bhavsec, cybersecurity, penetration testing"
-/>
-<meta name="robots" content="noodp" />
-<link rel="canonical" href="https://bhavsec.com/posts/spring4shell/" />
 
-
-
-
-
-<link rel="stylesheet" href="../../assets/style.css" />
-
-<link rel="stylesheet" href="../../style.css" />
-
-
-<link
-  rel="apple-touch-icon-precomposed"
-  sizes="144x144"
-  href="../../img/apple-touch-icon-144-precomposed.png"
-/>
-<link rel="shortcut icon" href="../../img/favicon.png" />
-
-
-<link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://bhavsec.com/img/cover.png"/>
-
-<meta name="twitter:title" content="Spring4Shell 🍃"/>
-<meta name="twitter:description" content="A new zero-day vulnerability in the Spring Core Java framework called &lsquo;Spring4Shell&rsquo; has been publicly disclosed, allowing unauthenticated remote code execution on applications.
-Spring is a very popular application framework that allows software developers to quickly and easily develop Java applications with enterprise-level features. These applications can then be deployed on servers, such as Apache Tomcat, as stand-alone packages with all the required dependencies.
-Today, an exploit for this zero-day vulnerability was briefly leaked and then removed but not before cybersecurity researchers could download the code."/>
-
-
-
-<meta property="og:title" content="Spring4Shell 🍃" />
-<meta property="og:description" content="A new zero-day vulnerability in the Spring Core Java framework called &lsquo;Spring4Shell&rsquo; has been publicly disclosed, allowing unauthenticated remote code execution on applications.
+<head>
+  <title>Spring4Shell 🍃 — Waseem Akram</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="A new zero-day vulnerability in the Spring Core Java framework called &amp;lsquo;Spring4Shell&amp;rsquo; has been publicly disclosed, allowing unauthenticated remote code execution on applications.
 Spring is a very popular application framework that allows software developers to quickly and easily develop Java applications with enterprise-level features. These applications can then be deployed on servers, such as Apache Tomcat, as stand-alone packages with all the required dependencies.
 Today, an exploit for this zero-day vulnerability was briefly leaked and then removed but not before cybersecurity researchers could download the code." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://bhavsec.com/posts/spring4shell/" /><meta property="og:image" content="https://bhavsec.com/img/cover.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-03-30T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2022-03-30T00:00:00&#43;00:00" /><meta property="og:site_name" content="bhavsec" />
+  <meta name="keywords" content="hackerwasii, cybersecurity, penetration testing" />
+  <meta name="robots" content="noodp" />
+  <link rel="canonical" href="https://www.hackerwasii.com/posts/spring4shell/" />
 
+  <link rel="stylesheet" href="../../assets/style.css" />
 
+  <link rel="stylesheet" href="../../style.css" />
 
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../img/apple-touch-icon-144-precomposed.png" />
+  <link rel="shortcut icon" href="../../img/favicon.png" />
 
+  <link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
 
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.hackerwasii.com/img/cover.png" />
 
+  <meta name="twitter:title" content="Spring4Shell 🍃" />
+  <meta name="twitter:description"
+    content="A new zero-day vulnerability in the Spring Core Java framework called &lsquo;Spring4Shell&rsquo; has been publicly disclosed, allowing unauthenticated remote code execution on applications.
+Spring is a very popular application framework that allows software developers to quickly and easily develop Java applications with enterprise-level features. These applications can then be deployed on servers, such as Apache Tomcat, as stand-alone packages with all the required dependencies.
+Today, an exploit for this zero-day vulnerability was briefly leaked and then removed but not before cybersecurity researchers could download the code." />
 
-  </head>
-  <body class="">
-    <div class="container">
-      <header class="header">
-  <span class="header__inner">
-    <a
-  href="http://bhavsec.com/"
-  class="logo"
-  style="text-decoration: none;"
->
-  
-    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
-  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
-</svg>
-</span>
-    <span class="logo__text">
-      bhavsec/</span>
-    <span class="logo__text" style="color:red">posts/</span>
-    <span class="logo__cursor"></span>
+  <meta property="og:title" content="Spring4Shell 🍃" />
+  <meta property="og:description"
+    content="A new zero-day vulnerability in the Spring Core Java framework called &lsquo;Spring4Shell&rsquo; has been publicly disclosed, allowing unauthenticated remote code execution on applications.
+Spring is a very popular application framework that allows software developers to quickly and easily develop Java applications with enterprise-level features. These applications can then be deployed on servers, such as Apache Tomcat, as stand-alone packages with all the required dependencies.
+Today, an exploit for this zero-day vulnerability was briefly leaked and then removed but not before cybersecurity researchers could download the code." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.hackerwasii.com/posts/spring4shell/" />
+  <meta property="og:image" content="https://www.hackerwasii.com/img/cover.png" />
+  <meta property="article:section" content="posts" />
+  <meta property="article:published_time" content="2022-03-30T00:00:00&#43;00:00" />
+  <meta property="article:modified_time" content="2022-03-30T00:00:00&#43;00:00" />
+  <meta property="og:site_name" content="hackerwasii" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PCVFG8BNK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-  
-</a>
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
-    <span class="header__right">
-      
-        <nav class="menu">
-  <ul class="menu__inner menu__inner--desktop">
-    
-      
-        
-          <li><a href="../../resume">📄 resume</a></li>
-        
-      
-        
-          <li><a href="../../posts">📚 blog</a></li>
-        
-      
-        
-          <li><a href="../../whoami">🔎 whoami </a></li>
-        
-      
-        
-          <li><a href="../../resources">🚀 resources</a></li>
-        
-      
-      
-      
-  </ul>
+    gtag('config', 'G-0PCVFG8BNK');
+  </script>
+</head>
 
-  <ul class="menu__inner menu__inner--mobile">
-    
-      
-        <li><a href="../../resume">📄 resume</a></li>
-      
-    
-      
-        <li><a href="../../posts">📚 blog</a></li>
-      
-    
-      
-        <li><a href="../../whoami">🔎 whoami </a></li>
-      
-    
-      
-        <li><a href="../../resources">🚀 resources</a></li>
-      
-    
-  </ul>
-</nav>
+<body class="">
+  <div class="container">
+    <header class="header">
+      <span class="header__inner">
+        <a href="https://www.hackerwasii.com/" class="logo" style="text-decoration: none">
+          <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+              <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+            </svg>
+          </span>
+          <span class="logo__text"> wasii/</span>
+          <span class="logo__text" style="color: red">posts/</span>
+          <span class="logo__cursor"></span>
+        </a>
 
-        <span class="menu-trigger">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-          </svg>
-        </span>
-      
-      <span class="theme-toggle">
-        <svg
-  class="theme-toggler"
-  width="24"
-  height="24"
-  viewBox="0 0 48 48"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <path
-    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+        <span class="header__right">
+          <nav class="menu">
+            <ul class="menu__inner menu__inner--desktop">
+              <li><a href="../../resume">📄 resume</a></li>
+
+              <li><a href="../../posts">📚 blog</a></li>
+
+              <li><a href="../../whoami">🔎 whoami </a></li>
+
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+
+            <ul class="menu__inner menu__inner--mobile">
+              <li><a href="../../resume">📄 resume</a></li>
+
+              <li><a href="../../posts">📚 blog</a></li>
+
+              <li><a href="../../whoami">🔎 whoami </a></li>
+
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+          </nav>
+
+          <span class="menu-trigger">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+            </svg>
+          </span>
+
+          <span class="theme-toggle">
+            <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
-  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
-  />
-</svg>
-
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z" />
+            </svg>
+          </span>
+        </span>
       </span>
-    </span>
-  </span>
-</header>
+    </header>
 
+    <div class="content">
+      <div class="post">
+        <h1 class="post-title">Spring4Shell 🍃</h1>
+        <div class="post-meta">
+          <span class="post-date"> 2022-03-30 </span>
+        </div>
 
-      <div class="content">
-        
-  
-  
+        <span class="post-tags">
+          <a href="../../tags/cve/index.html">#cve</a>&nbsp;
 
-  <div class="post">
-    <h1 class="post-title">Spring4Shell 🍃</h1>
-    <div class="post-meta">
-      
-        <span class="post-date">
-          2022-03-30
+          <a href="../../tags/0day/index.html">#0day</a>&nbsp;
+
+          <a href="../../tags/appsec/index.html">#appsec</a>&nbsp;
+
+          <a href="../../tags/vulnerability/index.html">#vulnerability</a>&nbsp;
         </span>
 
-        
-          
-        
-      
+        <div class="post-content">
+          <p>
+            A new zero-day vulnerability in the Spring Core Java framework
+            called &lsquo;Spring4Shell&rsquo; has been publicly disclosed,
+            allowing unauthenticated remote code execution on applications.
+          </p>
+          <p>
+            Spring is a very popular application framework that allows
+            software developers to quickly and easily develop Java
+            applications with enterprise-level features. These applications
+            can then be deployed on servers, such as Apache Tomcat, as
+            stand-alone packages with all the required dependencies.
+          </p>
+          <p>
+            Today, an exploit for this zero-day vulnerability was
+            <a href="https://archive.ph/DIbrv">briefly leaked</a> and then
+            removed but not before cybersecurity researchers could download
+            the code.
+          </p>
+          <p>
+            Since then, numerous cybersecurity researchers and security firms
+            have confirmed that the vulnerability is valid and of significant
+            concern.
+          </p>
+          <blockquote class="twitter-tweet">
+            <p lang="en" dir="ltr">
+              Can confirm! The
+              <a href="https://twitter.com/hashtag/Spring4Shell?src=hash&amp;ref_src=twsrc%5Etfw">#Spring4Shell</a>
+              exploit in the wild appears to work against the stock
+              &quot;Handling Form Submission&quot; sample code from
+              <a href="https://t.co/dt05rTPbGQ">https://t.co/dt05rTPbGQ</a><br />If the sample code is vulnerable, then
+              I suspect there
+              are indeed real-world apps out there that are vulnerable to
+              RCE...
+              <a href="https://t.co/PFXoIusFcT">https://t.co/PFXoIusFcT</a>
+              <a href="https://t.co/2gydOJk10Y">pic.twitter.com/2gydOJk10Y</a>
+            </p>
+            &mdash; Will Dormann (@wdormann)
+            <a href="https://twitter.com/wdormann/status/1509372145394200579?ref_src=twsrc%5Etfw">March 31, 2022</a>
+          </blockquote>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-      
-
-
-      
-    </div>
-
-    
-      <span class="post-tags">
-        
-          <a href="../../tags/cve/index.html">#cve</a>&nbsp;
-        
-          <a href="../../tags/0day/index.html">#0day</a>&nbsp;
-        
-          <a href="../../tags/appsec/index.html">#appsec</a>&nbsp;
-        
-          <a href="../../tags/vulnerability/index.html">#vulnerability</a>&nbsp;
-        
-      </span>
-    
-
-    
-
-    <div class="post-content">
-      
-      <p>A new zero-day vulnerability in the Spring Core Java framework called &lsquo;Spring4Shell&rsquo; has been publicly disclosed, allowing unauthenticated remote code execution on applications.</p>
-<p>Spring is a very popular application framework that allows software developers to quickly and easily develop Java applications with enterprise-level features. These applications can then be deployed on servers, such as Apache Tomcat, as stand-alone packages with all the required dependencies.</p>
-<p>Today, an exploit for this zero-day vulnerability was <a href="https://archive.ph/DIbrv">briefly leaked</a> and then removed but not before cybersecurity researchers could download the code.</p>
-<p>Since then, numerous cybersecurity researchers and security firms have confirmed that the vulnerability is valid and of significant concern.</p>
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Can confirm!  The <a href="https://twitter.com/hashtag/Spring4Shell?src=hash&amp;ref_src=twsrc%5Etfw">#Spring4Shell</a> exploit in the wild appears to work against the stock &quot;Handling Form Submission&quot; sample code from <a href="https://t.co/dt05rTPbGQ">https://t.co/dt05rTPbGQ</a><br>If the sample code is vulnerable, then I suspect there are indeed real-world apps out there that are vulnerable to RCE... <a href="https://t.co/PFXoIusFcT">https://t.co/PFXoIusFcT</a> <a href="https://t.co/2gydOJk10Y">pic.twitter.com/2gydOJk10Y</a></p>&mdash; Will Dormann (@wdormann) <a href="https://twitter.com/wdormann/status/1509372145394200579?ref_src=twsrc%5Etfw">March 31, 2022</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<h1 id="proof-of-concept">Proof of Concept</h1>
-<p>This is a dockerized application that is vulnerable to the Spring4Shell vulnerability. Full Java source for the war is provided and modifiable, the war will get re-built whenever the docker image is built. There is nothing special about this application, it&rsquo;s a simple hello world that&rsquo;s based off Spring tutorials.</p>
-<p>Exploit: <a href="https://github.com/reznok/Spring4Shell-POC/blob/master/exploit.py">https://github.com/reznok/Spring4Shell-POC/blob/master/exploit.py</a></p>
-<p>Vulnerability Details: <a href="https://www.lunasec.io/docs/blog/spring-rce-vulnerabilities/">https://www.lunasec.io/docs/blog/spring-rce-vulnerabilities/</a></p>
-<h2 id="requirements">Requirements</h2>
-<ol>
-<li>Docker + Docker-Compose</li>
-<li>Python3 + requests library</li>
-</ol>
-<h2 id="instructions">Instructions</h2>
-<ol>
-<li>Clone the repository</li>
-<li>Run the container: docker-compose up &ndash;build</li>
-<li>App should now be available at <a href="http://localhost:8080/helloworld/greeting">http://localhost:8080/helloworld/greeting</a></li>
-</ol>
-<p><img src="http://bhavsec.com/img/posts/spring4shell/image-20220331104318901.png" alt=""></p>
-<ol start="4">
-<li>Install requests library in python</li>
-</ol>
-<pre><code>pip3 install requests
-</code></pre><ol start="5">
-<li>Run the exploit.py script: `</li>
-</ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">python3 exploit<span style="color:#f92672">.</span>py <span style="color:#f92672">-</span>url <span style="color:#e6db74">&#34;http://localhost:8080/helloworld/greeting&#34;</span> <span style="color:#f92672">-</span>f shell
-</code></pre></div><pre><code>[+] Exploit completed
+          <h1 id="proof-of-concept">Proof of Concept</h1>
+          <p>
+            This is a dockerized application that is vulnerable to the
+            Spring4Shell vulnerability. Full Java source for the war is
+            provided and modifiable, the war will get re-built whenever the
+            docker image is built. There is nothing special about this
+            application, it&rsquo;s a simple hello world that&rsquo;s based
+            off Spring tutorials.
+          </p>
+          <p>
+            Exploit:
+            <a
+              href="https://github.com/reznok/Spring4Shell-POC/blob/master/exploit.py">https://github.com/reznok/Spring4Shell-POC/blob/master/exploit.py</a>
+          </p>
+          <p>
+            Vulnerability Details:
+            <a
+              href="https://www.lunasec.io/docs/blog/spring-rce-vulnerabilities/">https://www.lunasec.io/docs/blog/spring-rce-vulnerabilities/</a>
+          </p>
+          <h2 id="requirements">Requirements</h2>
+          <ol>
+            <li>Docker + Docker-Compose</li>
+            <li>Python3 + requests library</li>
+          </ol>
+          <h2 id="instructions">Instructions</h2>
+          <ol>
+            <li>Clone the repository</li>
+            <li>Run the container: docker-compose up &ndash;build</li>
+            <li>
+              App should now be available at
+              <a href="http://localhost:8080/helloworld/greeting">http://localhost:8080/helloworld/greeting</a>
+            </li>
+          </ol>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/spring4shell/image-20220331104318901.png" alt="" />
+          </p>
+          <ol start="4">
+            <li>Install requests library in python</li>
+          </ol>
+          <pre><code>pip3 install requests
+</code></pre>
+          <ol start="5">
+            <li>Run the exploit.py script: `</li>
+          </ol>
+          <div class="highlight">
+            <pre style="
+                  color: #f8f8f2;
+                  background-color: #272822;
+                  -moz-tab-size: 4;
+                  -o-tab-size: 4;
+                  tab-size: 4;
+                "><code class="language-python" data-lang="python">python3 exploit<span style="color:#f92672">.</span>py <span style="color:#f92672">-</span>url <span style="color:#e6db74">&#34;http://localhost:8080/helloworld/greeting&#34;</span> <span style="color:#f92672">-</span>f shell
+</code></pre>
+          </div>
+          <pre><code>[+] Exploit completed
 [+] Check your target for a shell
 [+] File: shell.jsp
 [+] Shell should be at: http://localhost:8080/shell.jsp?cmd=id
-</code></pre><ol start="6">
-<li>Visit the created webshell! Modify the <code>cmd</code> GET parameter for your commands. (<code>http://localhost:8080/shell.jsp</code> by default)</li>
-</ol>
-<p><img src="http://bhavsec.com/img/posts/spring4shell/image-20220331104510337.png" alt=""></p>
-<h1 id="remediation">Remediation</h1>
-<p>Spring Framework versions 5.3.18 and 5.2.20, which address the vulnerability, are now available. The release process for Spring Boot is in progress.</p>
-<p><a href="https://spring.io/blog/2022/03/31/spring-framework-rce-early-announcement">https://spring.io/blog/2022/03/31/spring-framework-rce-early-announcement</a></p>
+</code></pre>
+          <ol start="6">
+            <li>
+              Visit the created webshell! Modify the <code>cmd</code> GET
+              parameter for your commands. (<code>http://localhost:8080/shell.jsp</code>
+              by default)
+            </li>
+          </ol>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/spring4shell/image-20220331104510337.png" alt="" />
+          </p>
+          <h1 id="remediation">Remediation</h1>
+          <p>
+            Spring Framework versions 5.3.18 and 5.2.20, which address the
+            vulnerability, are now available. The release process for Spring
+            Boot is in progress.
+          </p>
+          <p>
+            <a
+              href="https://spring.io/blog/2022/03/31/spring-framework-rce-early-announcement">https://spring.io/blog/2022/03/31/spring-framework-rce-early-announcement</a>
+          </p>
+        </div>
 
-    </div>
-    
-      
         <div class="pagination">
           <div class="pagination__title">
-            <span class="pagination__title-h"
-              >Read other posts</span
-            >
+            <span class="pagination__title-h">Read other posts</span>
             <hr />
           </div>
           <div class="pagination__buttons">
-            
-            
-              <span class="button next">
-                <a href="https://bhavsec.com/posts/ejpt-cheatsheet/">
-                  <span class="button__text">eJPT Cheatsheet 🎓</span>
-                  <span class="button__icon">→</span>
-                </a>
-              </span>
-            
+            <span class="button next">
+              <a href="https://www.hackerwasii.com/posts/ejpt-cheatsheet/">
+                <span class="button__text">eJPT Cheatsheet 🎓</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
           </div>
         </div>
-      
-    
-
-    
-      
-        
-
-      
-    
-  </div>
-
       </div>
-
-      
-        <footer class="footer">
-  <div class="footer__inner">
-    
-      
-      <div class="copyright">
-        <span> 
-          © 2018-2022
-        </span>
-      </div>
-      <div>
-        <span>    
-        <span>
-        <a href="../../archive">archive</a>
-        &nbsp; 
-        </span>
-          <a href="../../newsletter">newsletter</a>
-        </span>   
-        &nbsp;      
-        <span>
-          <a href="https://creativecommons.org/licenses/by-nc/4.0/" target=”_blank”>license</a>
-        </span>
-        &nbsp;      
-        <span>
-          <a href="http://bhavsec.com/posts/index.xml" target=”_blank”>rss feed</a>
-        </span>
-
-      </div>
-
-    
-  </div>
-</footer>
-
-<script src="../../assets/main.js"></script>
-<script src="../../assets/prism.js"></script>
-
-      
     </div>
+    <!-- hackerwasii -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9670252621494000" data-ad-slot="1081579313"
+      data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="copyright">
+          <span> © 2020-2022 Waseem Akram</span>
+        </div>
+        <div>
+          <span>
+            <span>
+              <a href="../../archive">archive</a>
+              &nbsp;
+            </span>
+            <a href="../../newsletter">newsletter</a>
+          </span>
+          &nbsp;
+          <span>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="”_blank”">license</a>
+          </span>
+          &nbsp;
+          <span>
+            <a href="https://www.hackerwasii.com/posts/index.xml" target="”_blank”">rss feed</a>
+          </span>
+        </div>
+      </div>
+    </footer>
 
-    
-      
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VY7WJZSQD0"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-VY7WJZSQD0', { 'anonymize_ip': false });
-}
-</script>
+    <script src="../../assets/main.js"></script>
+    <script src="../../assets/prism.js"></script>
+  </div>
+</body>
 
-    
-  </body>
 </html>

