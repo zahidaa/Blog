@@ -273,77 +273,50 @@ Today, an exploit for this zero-day vulnerability was briefly leaked and then re
                     <!-- PayPal Payment Button -->
                     <h2 id="buy-now">Buy Now</h2>
                     <div id="smart-button-container">
-                        <div style="text-align: center;" id="buy-now">
-                            <div id="paypal-button-container"></div>
+                        <div style="text-align: center;">
+                          <div id="paypal-button-container"></div>
                         </div>
-                    </div>
-                    <script
-                        src="https://www.paypal.com/sdk/js?client-id=ARdE5NWz3nr-sqzSAv1z-5ma_NZ4RkcYnSz_eyJb9-f7INVDJM3pAgn-RYtwDUXLnoBC_W8eAzayGQwJ&enable-funding=venmo&currency=USD"
-                        data-sdk-integration-source="button-factory"></script>
+                      </div>
+                    <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
                     <script>
-                        function initPayPalButton() {
-                            paypal.Buttons({
-                                style: {
-                                    shape: 'rect',
-                                    color: 'black',
-                                    layout: 'vertical',
-                                    label: 'buynow',
-
-                                },
-
-                                createOrder: function (data, actions) {
-                                    return actions.order.create({
-                                        purchase_units: [{
-                                            "description": "License",
-                                            "amount": {
-                                                "currency_code": "USD",
-                                                "value": 25.15,
-                                                "breakdown": {
-                                                    "item_total": {
-                                                        "currency_code": "USD",
-                                                        "value": 23
-                                                    },
-                                                    "shipping": {
-                                                        "currency_code": "USD",
-                                                        "value": 1
-                                                    },
-                                                    "tax_total": {
-                                                        "currency_code": "USD",
-                                                        "value": 1.50
-                                                    }
-                                                }
-                                            }
-                                        }]
-                                    });
-                                },
-
-                                onApprove: function (data, actions) {
-                                    return actions.order.capture().then(function (orderData) {
-
-                                        // Full available details
-                                        console.log('Capture result', orderData, JSON.stringify(
-                                            orderData,
-                                            null,
-                                            2));
-
-                                        // Show a success message within this page, e.g.
-                                        const element = document.getElementById(
-                                            'paypal-button-container');
-                                        element.innerHTML = '';
-                                        element.innerHTML =
-                                            '<h3>Thanks For Purchasing Instaahack..!! We will contact You Soon</h3>';
-
-                                        // Or go to another URL:  actions.redirect('thank_you.html');
-
-                                    });
-                                },
-
-                                onError: function (err) {
-                                    console.log(err);
-                                }
-                            }).render('#paypal-button-container');
-                        }
-                        initPayPalButton();
+                      function initPayPalButton() {
+                        paypal.Buttons({
+                          style: {
+                            shape: 'rect',
+                            color: 'black',
+                            layout: 'vertical',
+                            label: 'paypal',
+                            
+                          },
+                  
+                          createOrder: function(data, actions) {
+                            return actions.order.create({
+                              purchase_units: [{"description":"License","amount":{"currency_code":"USD","value":25.36,"breakdown":{"item_total":{"currency_code":"USD","value":24},"shipping":{"currency_code":"USD","value":1},"tax_total":{"currency_code":"USD","value":0.36}}}}]
+                            });
+                          },
+                  
+                          onApprove: function(data, actions) {
+                            return actions.order.capture().then(function(orderData) {
+                              
+                              // Full available details
+                              console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                  
+                              // Show a success message within this page, e.g.
+                              const element = document.getElementById('paypal-button-container');
+                              element.innerHTML = '';
+                              element.innerHTML = '<h3>Thanks for purchasing Instahack!</h3>';
+                  
+                              // Or go to another URL:  actions.redirect('thank_you.html');
+                              
+                            });
+                          },
+                  
+                          onError: function(err) {
+                            console.log(err);
+                          }
+                        }).render('#paypal-button-container');
+                      }
+                      initPayPalButton();
                     </script>
                 </div>
             </div>
