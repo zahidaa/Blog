@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Instahack - A Massive instagram Bruteforce tool — Waseem Akram</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="A new zero-day vulnerability in the Spring Core Java framework called &amp;lsquo;Spring4Shell&amp;rsquo; has been publicly disclosed, allowing unauthenticated remote code execution on applications.
+Spring is a very popular application framework that allows software developers to quickly and easily develop Java applications with enterprise-level features. These applications can then be deployed on servers, such as Apache Tomcat, as stand-alone packages with all the required dependencies.
+Today, an exploit for this zero-day vulnerability was briefly leaked and then removed but not before cybersecurity researchers could download the code." />
+    <meta name="keywords" content="hackerwasii, cybersecurity, penetration testing" />
+    <meta name="robots" content="noodp" />
+    <link rel="canonical" href="https://www.hackerwasii.com/posts/spring4shell/" />
+
+    <link rel="stylesheet" href="../../assets/style.css" />
+
+    <link rel="stylesheet" href="../../style.css" />
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../img/apple-touch-icon-144-precomposed.png" />
+    <link rel="shortcut icon" href="../../img/favicon.png" />
+
+    <link href="../../assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+    <link href="../../assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+    <link href="../../assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+    <link href="../../assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+    <link href="../../assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+    <link href="../../assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://www.hackerwasii.com/img/cover.png" />
+
+    <meta name="twitter:title" content="Spring4Shell 🍃" />
+    <meta name="twitter:description"
+        content="A new zero-day vulnerability in the Spring Core Java framework called &lsquo;Spring4Shell&rsquo; has been publicly disclosed, allowing unauthenticated remote code execution on applications.
+Spring is a very popular application framework that allows software developers to quickly and easily develop Java applications with enterprise-level features. These applications can then be deployed on servers, such as Apache Tomcat, as stand-alone packages with all the required dependencies.
+Today, an exploit for this zero-day vulnerability was briefly leaked and then removed but not before cybersecurity researchers could download the code." />
+
+    <meta property="og:title" content="Spring4Shell 🍃" />
+    <meta property="og:description"
+        content="A new zero-day vulnerability in the Spring Core Java framework called &lsquo;Spring4Shell&rsquo; has been publicly disclosed, allowing unauthenticated remote code execution on applications.
+Spring is a very popular application framework that allows software developers to quickly and easily develop Java applications with enterprise-level features. These applications can then be deployed on servers, such as Apache Tomcat, as stand-alone packages with all the required dependencies.
+Today, an exploit for this zero-day vulnerability was briefly leaked and then removed but not before cybersecurity researchers could download the code." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.hackerwasii.com/prduct/" />
+    <meta property="og:image" content="https://www.hackerwasii.com/img/cover.png" />
+    <meta property="article:section" content="posts" />
+    <meta property="article:published_time" content="2022-03-30T00:00:00&#43;00:00" />
+    <meta property="article:modified_time" content="2022-03-30T00:00:00&#43;00:00" />
+    <meta property="og:site_name" content="hackerwasii" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PCVFG8BNK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-0PCVFG8BNK');
+    </script>
+</head>
+
+<body class="">
+    <div class="container">
+        <header class="header">
+            <span class="header__inner">
+                <a href="https://www.hackerwasii.com/" class="logo" style="text-decoration: none">
+                    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon"
+                            viewBox="0 0 44 44">
+                            <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+                        </svg>
+                    </span>
+                    <span class="logo__text"> wasii/</span>
+                    <span class="logo__text" style="color: red">posts/</span>
+                    <span class="logo__cursor"></span>
+                </a>
+
+                <span class="header__right">
+                    <nav class="menu">
+                        <ul class="menu__inner menu__inner--desktop">
+                            <li><a href="../../resume">📄 resume</a></li>
+
+                            <li><a href="../../posts">📚 blog</a></li>
+
+                            <li><a href="../../whoami">🔎 whoami </a></li>
+
+                            <li><a href="../../resources">🚀 resources</a></li>
+                        </ul>
+
+                        <ul class="menu__inner menu__inner--mobile">
+                            <li><a href="../../resume">📄 resume</a></li>
+
+                            <li><a href="../../posts">📚 blog</a></li>
+
+                            <li><a href="../../whoami">🔎 whoami </a></li>
+
+                            <li><a href="../../resources">🚀 resources</a></li>
+                        </ul>
+                    </nav>
+
+                    <span class="menu-trigger">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                        </svg>
+                    </span>
+
+                    <span class="theme-toggle">
+                        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z" />
+                        </svg>
+                    </span>
+                </span>
+            </span>
+        </header>
+
+        <div class="content">
+            <div class="post">
+                <h1 class="post-title">Instahack - A Massive instagram Bruteforce tool</h1>
+                <span class="post-tags">
+                    <a href="../../tags/cve/index.html">#instahack</a>&nbsp;
+                    <a href="../../tags/cve/index.html">#instahack license</a>&nbsp;
+                    <a href="../../tags/cve/index.html">#instahack github</a>&nbsp;
+                    <a href="../../tags/cve/index.html">#hack instagram</a>&nbsp;
+                </span>
+                <div class="post-content">
+                    <h2>Table of Contents</h2>
+                    <aside class="table-of-contents">
+                        <nav id="TableOfContents">
+                            <ul>
+                                <a href="#buy-now">
+                                    <li>Buy Now</li>
+                                </a>
+                                <a href="#about-instahack">
+                                    <li>About instahack</li>
+                                </a>
+                                <a href="#how-instahack-works">
+                                    <li>How instahack works</li>
+                                </a>
+                                <a href="#features-of-instahack">
+                                    <li>Features of Instahack</li>
+                                </a>
+                                <a href="#requirements">
+                                    <li>Requirements</li>
+                                </a>
+                                <a href="#installation-on-termux">
+                                    <li>Installation on Termux</li>
+                                </a>
+                                <a href="#installation">
+                                    <li>Installation on Linux</li>
+                                </a>
+                                <a href="#tor">
+                                    <li>Tor Configuration</li>
+                                </a>
+                            </ul>
+                        </nav>
+                    </aside>
+                    <h2 id="about-instahack">About Instahack</h2>
+                    <p>
+                        instahack is a bash and python based script which is officially made to test password strength
+                        of Instagram account from termux and kali with bruteforce attack and. it based on tor This tool
+                        works on both rooted Android device and Non-rooted Android device. Best Tool For Instagram
+                        Bruteforce hacking Tool By Waseem Akram. Made in Bash and python.
+                    </p>
+                    <p><img src="/img/posts/instahack/instahack.png" alt="instahack"></p>
+                    <h2 id="how-instahack-works">How instahack works</h2>
+                    <p>
+                        <span style="color: rgb(86, 22, 196); font-weight: bold;">instahack</span> use, tor to
+                        change our ip. once ip blocked for many tries and continue attack. Since the
+                        official api is not a hacker wants, So we use the <span
+                            style="color: rgb(86, 22, 196); font-weight: bold;">InstagramAPK signature</span> to
+                        stay <span style="color: rgb(86, 22, 196); font-weight: bold;">anonymous!</span>
+                        And instahack also save the progress so that even in network interruption we can avoid
+                        breaking the computer!
+                    </p>
+                    <p>
+                        <span style="color: rgb(86, 22, 196); font-weight: bold;">Instahack</span> is a python and
+                        bash script to perform <span style="color: rgb(86, 22, 196); font-weight: bold;">brute
+                            force</span> attack
+                        against Instagram ,
+                        this script can bypass login limiting on wrong passwords , so basically it can test
+                        <span style="color: rgb(86, 22, 196); font-weight: bold;">infinite number of
+                            passwords</span>. Instahack is proved and can test over <span
+                            style="color: rgb(86, 22, 196); font-weight: bold;">6M passwords on a
+                            single instagram account</span> with less resource as possible. This script mimics the
+                        activities
+                        of the official instagram android app and sends request over <span
+                            style="color: rgb(86, 22, 196); font-weight: bold;">tor</span> so you are <span
+                            style="color: rgb(86, 22, 196); font-weight: bold;">secure</span>, but
+                        if your tor installation is <span
+                            style="color: rgb(86, 22, 196); font-weight: bold;">misconfigured</span> then the blame
+                        is on you.
+                    </p>
+                    <h2 id="features-of-instahack">Features of instahack</h2>
+                    <p>
+                        <ul>
+                            <li>instahack Scripting</li>
+                            <li>Insta OSINT</li>
+                            <li>Multi Thrading</li>
+                            <li>Phishing Attack</li>
+                            <li>Resumes Attacks when the same wordlist is used on the same Username</li>
+                            <li>Maximum Customization! ( This includes multiple attack vectors! )</li>
+                            <li>Fast and Clean Code , no ugly selenum drivers! ( Pure Requests )</li>
+                            <li>Elegant Tor Identity Change with Stem ( Tor's Official Library for Python )</li>
+                            <li>Dumps successfully cracked accounts in the dump</li>
+                        </ul>
+                    </p>
+                    <h2 id="requirements">Requirements</h2>
+                    <div class="highlight">
+                        <pre tabindex="0"
+                            style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">requests, requests[socks], stem, tor, terminaltables</code></pre>
+                    </div>
+                    <h2 id="installation-video">Watch a video</h2>
+                    <iframe allowfullscreen="" class="BLOG_video_class" height="266"
+                        src="https://www.youtube.com/embed/2JWLLKuicUo" width="495"
+                        youtube-src-id="2JWLLKuicUo"></iframe>
+                    <h2 id="installation-on-termux">Installation on Termux</h2>
+                    <p>
+                        <div class="highlight">
+                            <pre tabindex="0"
+                                style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">apt-get update -y<br>apt-get upgrade -y <br>apt-get install python -y <br>apt-get install python2 -y <br>apt-get install git -y <br>apt-get install wget -y <br>apt-get install curl -y <br>git clone https://github.com/evildevill/instahack.git <br>cd instahack <br>bash instahack.sh</code></pre>
+                    </p>
+                    <h2 id="installation">Installation on Linux</h2>
+                    <p>
+                        <div class="highlight">
+                            <pre tabindex="0"
+                                style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo apt-get update -y<br>sudo apt-get upgrade -y <br>sudo apt-get install python -y <br>sudo apt-get install python2 -y <br>sudo apt-get install git -y <br>sudo apt-get install wget -y <br>sudo apt-get install curl -y <br>git clone https://github.com/evildevill/instahack.git <br>cd instahack <br>bash instahack.sh</code></pre>
+                    </p>
+                    <h2 id="tor">Configuring Tor</h2>
+                    <p>
+                        open your tor configuration file usually located at /etc/tor/torrc
+                        <div class="highlight">
+                            <pre tabindex="0"
+                                style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo nano /etc/tor/torrc</code></pre>
+                        </div>
+                        <strong>#ControlPort 9051</strong> uncomment 'ControlPort' by deleting the
+                        <strong>#</strong> before 'ControlPort' , now save the file and restart your tor server
+                    </p>
+                    <p><img src="/img/posts/instahack/control-port.png" alt="tor control port"></p>
+                    <p>
+                        Now Save The file using <code><strong>CTRL + S</strong></code> and then exit using
+                        <code><strong>CTRL + X</strong></code><br>
+                        Now generate instahack configuration file using. now you are ready to crack any instagram
+                        account , make sure your tor configuration matched <strong>instahack-config.json</strong>
+                        <div class="highlight">
+                            <pre tabindex="0"
+                                style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"><span style="color: rgb(25, 232, 35);">instahack</span> -cc -dc</code></pre>
+                        </div>
+                        After creating configuration file then navigate to instahack directory then run the
+                        following command
+                        <div class="highlight">
+                            <pre tabindex="0"
+                                style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">bash <span style="color: rgb(25, 232, 35);">instahack</span>.sh</code></pre>
+                        </div>
+                        After executing this it will ask you to enter you license to continue.<br> You can buy this
+                        tool
+                        using Gumroad
+                        <a style="color: rgb(86, 22, 196); font-weight: bold;" href="#buy-now">Buy
+                            Now</a> After
+                        purchasing enter your license then select option according to your need. Enter target
+                        Username then chose wordlist then hit enter. Now it test all the passwords if instahack find
+                        password successfully then it will automatically stops and give you the password.👻😉
+                    </p>
+                    <p><img src="/img/posts/instahack/instahack-success.jpg" alt="instahack"></p>
+                    <p>
+                        Finally 😍😘, we have successfully hack the target account
+                    </p>
+                    <!-- PayPal Payment Button -->
+                    <h2 id="buy-now">Buy Now</h2>
+                    <div id="smart-button-container">
+                        <div style="text-align: center;" id="buy-now">
+                            <div id="paypal-button-container"></div>
+                        </div>
+                    </div>
+                    <script
+                        src="https://www.paypal.com/sdk/js?client-id=ARdE5NWz3nr-sqzSAv1z-5ma_NZ4RkcYnSz_eyJb9-f7INVDJM3pAgn-RYtwDUXLnoBC_W8eAzayGQwJ&enable-funding=venmo&currency=USD"
+                        data-sdk-integration-source="button-factory"></script>
+                    <script>
+                        function initPayPalButton() {
+                            paypal.Buttons({
+                                style: {
+                                    shape: 'rect',
+                                    color: 'black',
+                                    layout: 'vertical',
+                                    label: 'buynow',
+
+                                },
+
+                                createOrder: function (data, actions) {
+                                    return actions.order.create({
+                                        purchase_units: [{
+                                            "description": "License",
+                                            "amount": {
+                                                "currency_code": "USD",
+                                                "value": 25.15,
+                                                "breakdown": {
+                                                    "item_total": {
+                                                        "currency_code": "USD",
+                                                        "value": 23
+                                                    },
+                                                    "shipping": {
+                                                        "currency_code": "USD",
+                                                        "value": 1
+                                                    },
+                                                    "tax_total": {
+                                                        "currency_code": "USD",
+                                                        "value": 1.50
+                                                    }
+                                                }
+                                            }
+                                        }]
+                                    });
+                                },
+
+                                onApprove: function (data, actions) {
+                                    return actions.order.capture().then(function (orderData) {
+
+                                        // Full available details
+                                        console.log('Capture result', orderData, JSON.stringify(
+                                            orderData,
+                                            null,
+                                            2));
+
+                                        // Show a success message within this page, e.g.
+                                        const element = document.getElementById(
+                                            'paypal-button-container');
+                                        element.innerHTML = '';
+                                        element.innerHTML =
+                                            '<h3>Thanks For Purchasing Instaahack..!! We will contact You Soon</h3>';
+
+                                        // Or go to another URL:  actions.redirect('thank_you.html');
+
+                                    });
+                                },
+
+                                onError: function (err) {
+                                    console.log(err);
+                                }
+                            }).render('#paypal-button-container');
+                        }
+                        initPayPalButton();
+                    </script>
+                </div>
+            </div>
+            <!-- hackerwasii -->
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9670252621494000"
+                data-ad-slot="1081579313" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            <footer class="footer">
+                <div class="footer__inner">
+                    <div class="copyright">
+                        <span> © 2020-2022 Waseem Akram</span>
+                    </div>
+                    <div>
+                        <span>
+                            <span>
+                                <a href="../../archive">archive</a>
+                                &nbsp;
+                            </span>
+                            <a href="../../newsletter">newsletter</a>
+                        </span>
+                        &nbsp;
+                        <span>
+                            <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="”_blank”">license</a>
+                        </span>
+                        &nbsp;
+                        <span>
+                            <a href="https://www.hackerwasii.com/posts/index.xml" target="”_blank”">rss feed</a>
+                        </span>
+                    </div>
+                </div>
+            </footer>
+            <script src="../../assets/main.js"></script>
+            <script src="../../assets/prism.js"></script>
+        </div>
+</body>
+
+</html>
