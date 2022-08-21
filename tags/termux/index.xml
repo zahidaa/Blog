@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0"
+    xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>termux on hackerwasii</title>
+        <link>https://hackerwasii.com/tags/termux/</link>
+        <description>Recent content in termux on hackerwasii</description>
+        <generator>hackerwasii.com</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sunday, 21 August 2022 00:00:00 +0000</lastBuildDate>
+        <atom:link href="https://hackerwasii.com/tags/termux/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+            <title>how to hack instagram 2022</title>
+            <link>https://hackerwasii.com/product/</link>
+            <pubDate>Sunday, 21 August 2022 00:00:00 +0000</pubDate>
+            <guid>https://hackerwasii.com/product/</guid>
+            <description>
+      instahack is a bash and python based script which is officially made to test password strength of Instagram account from termux and kali with bruteforce attack and. it based on tor This tool works on both rooted Android device and Non-rooted Android device. Best Tool For Instagram Bruteforce hacking Tool By Waseem Akram. Made in Bash and python
+            </description>
+        </item>
+    </channel>
+</rss>
