@@ -5,6 +5,7 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "https://www.hackerwasii.com/posts",
+  "id": "/posts",
   "name": "Waseem Akram",
   "description": "cybersecurity, Hacking, Code and learn together Free of cost",
   "short_name": "Waseem",
