@@ -1,6 +1,6 @@
 {
-  "theme_color": "#913ed4",
-  "background_color": "#913ed4",
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
   "display_override": ["window-control-overlay", "minimal-ui"],
   "display": "standalone",
   "scope": "/",
