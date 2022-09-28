@@ -1305,3 +1305,14 @@ div.code-toolbar > .toolbar span:hover {
 .collapsable-code .code-toolbar {
   margin: 0;
 }
+/*========== SCROLL BAR ==========*/
+::-webkit-scrollbar{
+  width: .60rem;
+  background-color: hsl(250, 12%, 90%);
+  border-radius: .5rem;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: hsl(250, 12%, 80%);
+  border-radius: .5rem;
+}

