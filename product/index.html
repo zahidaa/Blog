@@ -132,7 +132,7 @@
                         <span style="color: rgb(86, 22, 196); font-weight: bold;">Bruteforce hacking</span>. This tool
                         is made By Waseem Akram. Made in Bash and python.
                     </p>
-                    <p><img src="/img/posts/instahack/instahack.png" alt="instahack"></p>
+                    <p><img src="/img/posts/instahack/instahack.png" title="instahack" alt="instahack"></p>
                     <h2 id="how-instahack-works">How instahack works</h2>
                     <p>
                         <span style="color: rgb(86, 22, 196); font-weight: bold;">instahack</span> use, tor to
@@ -228,7 +228,7 @@
                         <strong>#ControlPort 9051</strong> uncomment 'ControlPort' by deleting the
                         <strong>#</strong> before 'ControlPort' , now save the file and restart your tor server
                     </p>
-                    <p><img src="/img/posts/instahack/control-port.png" alt="tor control port"></p>
+                    <p><img src="/img/posts/instahack/control-port.png" title="control-port" alt="tor control port"></p>
                     <p>
                         Now Save The file using <code><strong>CTRL + S</strong></code> and then exit using
                         <code><strong>CTRL + X</strong></code><br>
@@ -255,7 +255,7 @@
                         Username then chose wordlist then hit enter. Now it test all the passwords if instahack find
                         password successfully then it will automatically stops and give you the password.👻😉
                     </p>
-                    <p><img src="/img/posts/instahack/instahack-success.jpg" alt="instahack"></p>
+                    <p><img src="/img/posts/instahack/instahack-success.jpg" title="instahack-success" alt="instahack"></p>
                     <p>
                         Finally 😍😘, we have successfully hack the target account
                     </p>
@@ -307,20 +307,16 @@
 
                                 onApprove: function (data, actions) {
                                     return actions.order.capture().then(function (orderData) {
-
                                         // Full available details
                                         console.log('Capture result', orderData, JSON.stringify(
                                             orderData, null, 2));
-
                                         // Show a success message within this page, e.g.
                                         const element = document.getElementById(
                                             'paypal-button-container');
                                         element.innerHTML = '';
                                         element.innerHTML =
                                             '<h3>Thanks for purchasing Instahack!</h3>';
-
                                         // Or go to another URL:  actions.redirect('thank_you.html');
-
                                     });
                                 },
 
