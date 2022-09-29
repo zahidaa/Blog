@@ -108,6 +108,7 @@
         </span>
         <div class="post-content">
           <p>This post contains Bugbounty Resources to find vulnerabilities in web applications.</p>
+          <hr/>
           <h2 id="account-takeover">Account Takeover Checklist</h2>
           <ul>
             <li>
@@ -231,6 +232,7 @@ xhttp.send(JSON.stringify(user_cookies));
               </ul>
             </li>
           </ul>
+          <hr/>
           <h2 id="remote-code-execution">Remote Code/Command Execution (RCE) Checklist</h2>
           <ul>
             <li>
@@ -316,6 +318,7 @@ xhttp.send(JSON.stringify(user_cookies));
               </ul>
             </li>
           </ul>
+          <hr/>
           <h2 id="webapp-fingerprinting-tools">Web Applications Fingerprinting tools</h2>
           <ul>
             <li>
@@ -451,11 +454,107 @@ ffuf -w http_headers_names.txt:NAME -w http_headers_values.txt:VALUE -w endpoint
               </div>
             </li>
           </ul>
-          <h2>403 - Bypass</h2>
-          <p>i will post it as soon as possible💙</p>
+          <hr/>
+          <h2 id="403-bypass">403 - Bypass</h2>
+          <ul>
+            <li><h3>FFUF</h3>
+              <ul>
+                <li>Path fuzzing</li>
+              </ul>
+              <div class="highlight">
+                <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="fallback">#bash
+ffuf -w 403_url_payloads.txt -u http://example.com/auth_pathFUZZ -fc 403,401,400
+</code></pre>
+              </div>
+              <ul>
+                <li>HTTP Header Fuzzing</li>
+              </ul>
+              <div class="highlight">
+                <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="fallback">#bash
+ffuf -w 403_bypass_header_names.txt:HEADER -w 403_bypass_header_values.txt:VALUE -u http://example.com/auth_path -H "HEADER:VALUE" -fc 403,401,400
+</code></pre>
+              </div>
+              <ul>
+                <li>Common HTTP Ports Fuzzing</li>
+              </ul>
+              <div class="highlight">
+                <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="fallback">#bash
+ffuf -w common-http-ports.txt:PORT -u http://example.com/auth_path -H "Host: example.com:PORT" -fc 403,401,400
+</code></pre>
+              </div>
+              <ul>
+                <li>HTTP Methods Fuzzing</li>
+              </ul>
+              <div class="highlight">
+                <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="fallback">#bash
+ffuf -w http-methods.txt:METHOD -u http://example.com/auth_path -X "METHOD" -fc 403,401,400
+</code></pre>
+              </div>
+              <ul>
+                <li>User Agent Fuzzing</li>
+              </ul>
+              <div class="highlight">
+                <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="fallback">#bash
+ffuf -w user-agents.txt:AGENT -u http://example.com/auth_path -H "User-Agent: AGENT" -fc 403,401,400
+</code></pre>
+              </div>
+            </li>
+          </ul>
+          <hr>
+          <h2 id="nuclei">nuclei</h2>
+          <div class="highlight">
+            <pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="fallback">#bash
+nuclei -u http://example.com/auth_path/ -t 403-bypass-nuclei-templates -tags fuzz -timeout 10 -c 200 -v
+</code></pre>
+          </div>
+          <p><b style="font-weight: bold; color: red;">Note</b> : Add the slash symbol after the path whether it is a directory or file</p>
+          <p>
+            <h3>Example:</h3>
+            <ul>
+              <li><a href="http://example.com/directory/">http://example.com/directory/</a></li>
+              <li><a href="http://example.com/directory/file.ext/">http://example.com/directory/file.ext/</a></li>
+            </ul>
+            <h3>Source:</h3>
+            <ul>
+              <li><a href="https://docs.google.com/presentation/d/1ek6DzXKBQd6xUiVNGRT33pMACs8M13CSoYCkgepDKZk/edit#slide=id.gaa5321e139_0_0">Presentation file, click here to see</a></li>
+              <li><a href="https://github.com/Karanxa/Bug-Bounty-Wordlists/blob/main/403_header_payloads.txt">403 Header payloads.</a></li>
+              <li><a href="https://github.com/Karanxa/Bug-Bounty-Wordlists/blob/main/403_url_payloads.txt">403 URL payloads</a></li>
+              <li><a href="https://github.com/iamthefrogy/frogy/blob/main/ports">github.com/iamthefrogy/frogy/blob/main/ports</a></li>
+              <li><a href="https://annevankesteren.nl/2007/10/http-methods">http methods</a></li>
+              <li><a href="https://github.com/danielmiessler/SecLists/blob/master/Fuzzing/User-Agents/UserAgents.fuzz.txt">User-Agents fuzz.txt</a></li>
+            </ul>
+          </p>
+        </div>
+          <p>
+            Thanks for reading this post, if you like my work you can support
+            by
+            <a href="https://www.buymeacoffee.com/hackerwasii">buying me a coffee</a>. ☕️
+          </p>
+        </div>
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h">Read other posts</span>
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            <span class="button previous">
+              <a href="https://www.hackerwasii.com/posts/mssql-rce/">
+                <span class="button__icon">←</span>
+                <span class="button__text">From MSSQL to RCE 🚀</span>
+              </a>
+            </span>
+
+            <span class="button next">
+              <a href="https://www.hackerwasii.com/posts/pewdiepie-printerhack/">
+                <span class="button__text">how to hack instagram</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          </div>
         </div>
       </div>
     </div>
+
     <!-- ================== Footer Section ================= -->
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9670252621494000"
