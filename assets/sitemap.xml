@@ -4,7 +4,6 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
 <url>
   <loc>https://www.hackerwasii.com/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
@@ -13,7 +12,7 @@
 <url>
   <loc>https://www.hackerwasii.com/posts/bugbounty-resources/</loc>
   <lastmod>2022-09-28T07:04:26+00:00</lastmod>
-  <priority>0.51</priority>
+  <priority>0.80</priority>
 </url>         
 <url>
   <loc>https://www.hackerwasii.com/product/</loc>
@@ -26,12 +25,12 @@
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/instahack/</loc>
+  <loc>https://www.hackerwasii.com/</loc>
   <lastmod>2022-08-21T08:56:31+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/index.html</loc>
+  <loc>https://www.hackerwasii.com/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
   <priority>0.80</priority>
 </url>
@@ -66,12 +65,12 @@
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/posts/page/2/index.html</loc>
+  <loc>https://www.hackerwasii.com/posts/page/2/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/resources/index.html</loc>
+  <loc>https://www.hackerwasii.com/resources/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
   <priority>0.64</priority>
 </url>
@@ -136,63 +135,68 @@
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/posts/index.html</loc>
+  <loc>https://www.hackerwasii.com/posts/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
-  <priority>0.51</priority>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/posts/page/3/index.html</loc>
+  <loc>https://www.hackerwasii.com/posts/page/3/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
-  <priority>0.51</priority>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/posts/ejpt-cheatsheet/index.html</loc>
+  <loc>https://www.hackerwasii.com/posts/ejpt-cheatsheet/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
-  <priority>0.51</priority>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/posts/steel-mountain/index.html</loc>
+  <loc>https://www.hackerwasii.com/posts/steel-mountain/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
-  <priority>0.51</priority>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/posts/intro-to-azure-pentesting/index.html</loc>
+  <loc>https://www.hackerwasii.com/posts/intro-to-azure-pentesting/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
-  <priority>0.51</priority>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/posts/boom-bashed/index.html</loc>
+  <loc>https://www.hackerwasii.com/posts/boom-bashed/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
-  <priority>0.51</priority>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/posts/shellshock/index.html</loc>
+  <loc>https://www.hackerwasii.com/posts/shellshock/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
-  <priority>0.51</priority>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/posts/buff-freefloatftp/index.html</loc>
+  <loc>https://www.hackerwasii.com/posts/buff-freefloatftp/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
-  <priority>0.51</priority>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/posts/php-deserialization/index.html</loc>
+  <loc>https://www.hackerwasii.com/posts/php-deserialization/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
-  <priority>0.51</priority>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/posts/mssql-rce/index.html</loc>
+  <loc>https://www.hackerwasii.com/posts/mssql-rce/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
-  <priority>0.51</priority>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/posts/steganography-beginners/index.html</loc>
+  <loc>https://www.hackerwasii.com/posts/steganography-beginners/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
-  <priority>0.51</priority>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.hackerwasii.com/posts/pewdiepie-printerhack/index.html</loc>
+  <loc>https://www.hackerwasii.com/posts/pewdiepie-printerhack/</loc>
   <lastmod>2022-08-05T07:02:31+00:00</lastmod>
-  <priority>0.51</priority>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.hackerwasii.com/404/</loc>
+  <lastmod>2022-09-29T07:02:31+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 </urlset>
